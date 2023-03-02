@@ -5,8 +5,8 @@ module.exports = {
     },
     output: {
       mode: "tags-split",
-      target: "../src/lib/data-access/generated/uitpas.ts",
-      schemas: "../src/lib/data-access/generated/model",
+      target: "../src/lib/dataAccess/generated/uitpas.ts",
+      schemas: "../src/lib/dataAccess/generated/model",
       client: "react-query",
       mock: false,
     },
