@@ -1,0 +1,11 @@
+# CODEOWNERS are automatically assigned as possible reviewers to new PRs.
+
+# Global owners (also need to be duplicated in later rules if they should also be owner of more specific patterns)
+# Uncomment the next line and replace @example1 and @example2 with actual GitHub users.
+# * @example1 @example2
+
+# Jenkins / deployment owners
+Gemfile* @willaerk @paulherbosch
+Jenkinsfile @willaerk @paulherbosch
+Rakefile @willaerk @paulherbosch
+lib/ @willaerk @paulherbosch
