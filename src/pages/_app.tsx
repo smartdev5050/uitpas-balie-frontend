@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import Head from "next/head";
 import { GlobalStyles, ThemeProvider } from "@mui/system";
 import { theme } from "@/lib/ui";
+import { Layout } from "@/layouts";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,7 +42,9 @@ const App = ({ Component, pageProps }: AppProps) => {
           }}
         />
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </QueryClientProvider>
       </ThemeProvider>
     </>
