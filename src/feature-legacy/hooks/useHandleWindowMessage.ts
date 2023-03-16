@@ -9,6 +9,8 @@ enum WindowMessageTypes {
   URL_CHANGED = "URL_CHANGED",
   URL_UNKNOWN = "URL_UNKNOWN",
   HTTP_ERROR_CODE = "HTTP_ERROR_CODE",
+  LOGIN = "LOGIN",
+  LOGOUT = "LOGOUT",
 }
 
 type TDataBase = {

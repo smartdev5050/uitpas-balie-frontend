@@ -6,6 +6,7 @@ import Head from "next/head";
 import { GlobalStyles, ThemeProvider } from "@mui/system";
 import { theme } from "@/lib/ui";
 import { Layout } from "@/layouts";
+import { AuthProvider } from "@/lib/auth";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,9 +43,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           }}
         />
         <QueryClientProvider client={queryClient}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <AuthProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </AuthProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </>
