@@ -5,7 +5,7 @@ import { addInterceptor, removeHeader, setHeaders } from "@/lib/dataAccess";
 
 const LS_KEY = "@uitpas-balie/token";
 
-export const AuthProvider: FC<PropsWithChildren> = () => {
+export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { push, pathname } = useRouter();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
 
@@ -57,6 +57,8 @@ export const AuthProvider: FC<PropsWithChildren> = () => {
         setAuthToken: initAuth,
         logout,
       }}
-    />
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
