@@ -1,4 +1,4 @@
-# uitpas-beheer
+# UiTPAS Balie
 
 ## Environment Variables
 
