@@ -50,7 +50,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         logout();
         push({
           pathname: LOGIN_PATH,
-          query: `next=${asPath}`,
+          query: `redirectTo=${asPath}`,
         });
       }
     });
@@ -63,7 +63,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     const redirectToLogin = () =>
       push({
         pathname: LOGIN_PATH,
-        query: `next=${asPath}`,
+        query: `redirectTo=${asPath}`,
       });
 
     if (isCurrentPathPrivate) {
