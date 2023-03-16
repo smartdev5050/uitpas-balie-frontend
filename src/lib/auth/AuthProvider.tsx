@@ -1,19 +1,24 @@
 import { FC, PropsWithChildren, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { AuthContext } from "./AuthContext";
 import { addInterceptor, removeHeader, setHeaders } from "@/lib/dataAccess";
+import { AuthContext } from "./AuthContext";
+import { useFetchToken } from "./useFetchToken";
 
-const LS_KEY = "@uitpas-balie/token";
+// const LS_KEY = "@uitpas-balie/token";
+const LOGIN_PATH = "/login";
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { push, pathname } = useRouter();
+  const { push, pathname, asPath } = useRouter();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
+  const { fetchToken } = useFetchToken();
+
+  const isCurrentPathPrivate = asPath !== LOGIN_PATH;
 
   const login = useCallback((token: string) => {
     // Init Axios
     setHeaders({ Authorization: `Bearer ${token}` });
     // Store token, so we're still logged in after refresh
-    localStorage.setItem(LS_KEY, token);
+    // localStorage.setItem(LS_KEY, token);
     // Let the app know we're ready to render
     setAuthTokenLoaded(true);
   }, []);
@@ -22,7 +27,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     // Reset Axios
     removeHeader("Authorization");
     // Remove from local storage
-    localStorage.removeItem(LS_KEY);
+    // localStorage.removeItem(LS_KEY);
     // Auth token is not available
     setAuthTokenLoaded(false);
   }, []);
@@ -43,13 +48,44 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     addInterceptor((status: number) => {
       if (status === 401) {
         logout();
-        // push({
-        //   pathname: LOGIN_PATH,
-        //   query: `next=${pathname}`,
-        // });
+        push({
+          pathname: LOGIN_PATH,
+          query: `next=${pathname}`,
+        });
       }
     });
   }, [pathname, push, logout]);
+
+  useEffect(() => {
+    // This is an initialization hook, if the token is already loaded, we can exit
+    if (authTokenLoaded) return;
+
+    const redirectToLogin = () =>
+      push({
+        pathname: LOGIN_PATH,
+        query: `next=${pathname}`,
+      });
+
+    if (isCurrentPathPrivate) {
+      fetchToken()
+        .then(({ data }) => {
+          if (data?.data.token) login(data?.data.token);
+          else redirectToLogin();
+        })
+        .catch(() => {
+          redirectToLogin();
+        });
+    }
+  }, [
+    authTokenLoaded,
+    isCurrentPathPrivate,
+    fetchToken,
+    login,
+    pathname,
+    push,
+  ]);
+
+  if (!authTokenLoaded && isCurrentPathPrivate) return null;
 
   return (
     <AuthContext.Provider

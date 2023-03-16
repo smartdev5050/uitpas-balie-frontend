@@ -2,31 +2,12 @@ import {
   useHandleWindowMessage,
   WindowMessageTypes,
 } from "@/feature-legacy/hooks/useHandleWindowMessage";
-import { useAuth } from "@/lib/auth";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useAuth, useFetchToken } from "@/lib/auth";
 import { useEffect } from "react";
 
 export const useAuthChanged = () => {
   const { setAuthToken, logout } = useAuth();
-  const { data, refetch } = useQuery<{ data: { token: string } }>(
-    ["token"],
-    () => {
-      const tokenEndpoint = process.env["NEXT_PUBLIC_LEGACY_TOKEN_ENDPOINT"];
-      if (!tokenEndpoint)
-        throw new Error(
-          'Required env variable "NEXT_PUBLIC_LEGACY_TOKEN_ENDPOINT" not set.'
-        );
-
-      return axios.get(tokenEndpoint, { withCredentials: true });
-    },
-    {
-      enabled: false,
-      cacheTime: 0,
-    }
-  );
-
-  const token = data?.data.token;
+  const { fetchToken, token } = useFetchToken();
 
   useEffect(() => {
     if (token) {
@@ -34,11 +15,11 @@ export const useAuthChanged = () => {
     } else {
       logout();
     }
-  }, [token]);
+  }, [token, logout, setAuthToken]);
 
   useHandleWindowMessage({
     [WindowMessageTypes.LOGIN]: () => {
-      refetch();
+      fetchToken();
     },
     [WindowMessageTypes.LOGOUT]: () => {
       logout();
