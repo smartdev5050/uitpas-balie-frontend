@@ -8,11 +8,11 @@ import { useFetchToken } from "./useFetchToken";
 const LOGIN_PATH = "/login";
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { push, pathname, asPath } = useRouter();
+  const { push, asPath } = useRouter();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
   const { fetchToken } = useFetchToken();
 
-  const isCurrentPathPrivate = asPath !== LOGIN_PATH;
+  const isCurrentPathPrivate = !asPath.startsWith(LOGIN_PATH);
 
   const login = useCallback((token: string) => {
     // Init Axios
@@ -50,11 +50,11 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         logout();
         push({
           pathname: LOGIN_PATH,
-          query: `next=${pathname}`,
+          query: `next=${asPath}`,
         });
       }
     });
-  }, [pathname, push, logout]);
+  }, [asPath, push, logout]);
 
   useEffect(() => {
     // This is an initialization hook, if the token is already loaded, we can exit
@@ -63,7 +63,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     const redirectToLogin = () =>
       push({
         pathname: LOGIN_PATH,
-        query: `next=${pathname}`,
+        query: `next=${asPath}`,
       });
 
     if (isCurrentPathPrivate) {
@@ -76,14 +76,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
           redirectToLogin();
         });
     }
-  }, [
-    authTokenLoaded,
-    isCurrentPathPrivate,
-    fetchToken,
-    login,
-    pathname,
-    push,
-  ]);
+  }, [authTokenLoaded, isCurrentPathPrivate, fetchToken, login, asPath, push]);
 
   if (!authTokenLoaded && isCurrentPathPrivate) return null;
 

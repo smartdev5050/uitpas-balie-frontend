@@ -1,7 +1,8 @@
 import { getApplicationServerSideProps } from "@/lib/pageUtils";
+import { SelectCounterPage } from "@/feature-counter";
 
 const Counters = () => {
-  return <div>Hello Counters</div>;
+  return <SelectCounterPage />;
 };
 
 export const getServerSideProps = getApplicationServerSideProps();

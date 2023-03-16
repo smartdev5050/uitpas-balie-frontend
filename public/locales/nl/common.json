@@ -1,3 +1,6 @@
 {
-  "hello": "Hello world"
+  "counter": {
+    "welcome": "Welkom {{name}}",
+    "selectCounter": "Selecteer je balie"
+  }
 }

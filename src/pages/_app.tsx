@@ -15,6 +15,7 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       retry: false,
+      cacheTime: 5 * 60 * 1000,
       staleTime: 5 * 60 * 1000,
     },
   },
@@ -28,6 +29,16 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="description" content="UiTPAS Beheer" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
       <ThemeProvider theme={theme}>
@@ -36,6 +47,9 @@ const App = ({ Component, pageProps }: AppProps) => {
             body: {
               padding: 0,
               margin: 0,
+              fontFamily: "'Open Sans', sans-serif",
+              color: "#333",
+              fontSize: "15px",
             },
             iframe: {
               border: 0,
