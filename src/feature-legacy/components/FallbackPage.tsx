@@ -1,8 +1,8 @@
 import { NoSsr } from "@mui/base";
-import { useLegacyPath } from "@/feature-legacy/hooks/useLegacyPath";
-import { IFrame } from "@/feature-legacy/components/IFrame";
-import { useNotFoundPaths } from "@/feature-legacy/hooks/useNotFoundPaths";
-import { useAuthChanged } from "@/feature-legacy/hooks/useAuthChanged";
+import { useLegacyPath } from "../hooks/useLegacyPath";
+import { useNotFoundPaths } from "../hooks/useNotFoundPaths";
+import { useAuthChanged } from "../hooks/useAuthChanged";
+import { IFrame } from "./IFrame";
 
 export const FallbackPage = () => {
   const legacyPath = useLegacyPath();

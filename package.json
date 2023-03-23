@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "prettify": "yarn prettier --write src",
-    "orval": "orval --config ./.config/orval.config.js"
+    "orval": "orval --config ./.config/orval.config.js",
+    "depcruise:archi": "depcruise --include-only \"^src|^@/\" --config ./.config/.dependency-cruiser.js -T archi src | dot -T svg | tee depgraphs/dependencygraph.svg | depcruise-wrap-stream-in-html > depgraphs/dependencygraph.html"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -31,6 +32,7 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
+    "dependency-cruiser": "^12.11.0",
     "orval": "^6.12.0",
     "prettier": "^2.8.4"
   }

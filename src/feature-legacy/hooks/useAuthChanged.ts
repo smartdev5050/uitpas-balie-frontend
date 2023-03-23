@@ -1,9 +1,9 @@
+import { useEffect } from "react";
+import { useAuth, useFetchToken } from "@/lib/auth";
 import {
   useHandleWindowMessage,
   WindowMessageTypes,
-} from "@/feature-legacy/hooks/useHandleWindowMessage";
-import { useAuth, useFetchToken } from "@/lib/auth";
-import { useEffect } from "react";
+} from "./useHandleWindowMessage";
 
 export const useAuthChanged = () => {
   const { setAuthToken, logout } = useAuth();
