@@ -6,3 +6,4 @@ export * from "./system/theme";
 export * from "./uitpas/Typography";
 export * from "./uitpas/Card";
 export * from "./uitpas/Link";
+export * from "./uitpas/Button";

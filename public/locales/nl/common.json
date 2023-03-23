@@ -1,4 +1,15 @@
 {
+  "appName": "BALIE",
+  "login": {
+    "intro": "Deze beheerapplicatie is gemaakt voor organisaties, verenigingen en balies om UiTPAS- en Paspartoe-leden te verwelkomen en te beheren.",
+    "loginBtn": "Aanmelden",
+    "moreInfoBtn": "Meer info",
+    "other": "Andere UiTPAS-tools",
+    "otherForSchools": "Voor scholen:",
+    "otherForSchoolsLinkText": "uitstappen invoeren",
+    "otherGroups": "Groepspas:",
+    "otherGroupsLinkText": "bekijk het saldo van je groepspas"
+  },
   "counter": {
     "welcome": "Welkom {{name}}",
     "selectCounter": "Selecteer je balie"

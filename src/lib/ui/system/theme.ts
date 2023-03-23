@@ -3,11 +3,13 @@ import { createTheme } from "@mui/system";
 export const theme = createTheme({
   palette: {
     primary: {
+      contrastText: "#fff",
       main: "#2a4b9c",
       darker: "#1a2e60",
     },
     grey: {
       400: "#ddd",
+      600: "#8a8a8d",
     },
   },
   typography: {
