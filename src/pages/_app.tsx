@@ -7,6 +7,7 @@ import { GlobalStyles, ThemeProvider } from "@mui/system";
 import { theme } from "@/lib/ui";
 import { Layout } from "@/layouts";
 import { AuthProvider } from "@/lib/auth";
+import { CounterProvider } from "@/feature-counter/context/CounterProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,16 +30,6 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="description" content="UiTPAS Beheer" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet"
-        />
       </Head>
 
       <ThemeProvider theme={theme}>
@@ -58,9 +49,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <CounterProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </CounterProvider>
           </AuthProvider>
         </QueryClientProvider>
       </ThemeProvider>

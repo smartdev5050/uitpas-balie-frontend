@@ -85,6 +85,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
       value={{
         setAuthToken: initAuth,
         logout,
+        isAuthenticated: authTokenLoaded,
       }}
     >
       {children}
