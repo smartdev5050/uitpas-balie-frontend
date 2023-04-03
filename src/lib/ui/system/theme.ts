@@ -10,6 +10,10 @@ export const theme = createTheme({
     grey: {
       400: "#ddd",
       600: "#8a8a8d",
+      900: "#2f3b4d",
+    },
+    text: {
+      contrastText: "#fff",
     },
   },
   typography: {

@@ -11,7 +11,6 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { push, asPath } = useRouter();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
   const { fetchToken } = useFetchToken();
-
   const isCurrentPathPrivate = !asPath.startsWith(LOGIN_PATH);
 
   const login = useCallback((token: string) => {
