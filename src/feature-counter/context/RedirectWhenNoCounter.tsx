@@ -7,8 +7,8 @@ const COUNTER_PATH = "/counters";
 const APP_PATH = "/";
 
 export const RedirectWhenNoCounter: FC<
-  PropsWithChildren<{ counter: Counter }>
-> = ({ children, counter }) => {
+  PropsWithChildren<{ counter: Counter; clearCounter: () => void }>
+> = ({ children, counter, clearCounter }) => {
   const isLoggedIn = useIsLoggedIn();
   const { push, asPath } = useRouter();
 
@@ -30,6 +30,10 @@ export const RedirectWhenNoCounter: FC<
       push(APP_PATH);
     }
   }, [shouldRedirectToApp]);
+
+  useEffect(() => {
+    if (!isLoggedIn) clearCounter();
+  }, [isLoggedIn]);
 
   return shouldRedirectToCounters || shouldRedirectToApp ? null : (
     <>{children}</>

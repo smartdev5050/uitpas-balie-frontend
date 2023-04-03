@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { isClient } from "@/lib/utils";
 
-enum WindowMessageSources {
+export enum WindowMessageSources {
   BALIE = "BALIE",
 }
 
-enum WindowMessageTypes {
+export enum WindowMessageTypes {
   URL_CHANGED = "URL_CHANGED",
   URL_UNKNOWN = "URL_UNKNOWN",
   HTTP_ERROR_CODE = "HTTP_ERROR_CODE",
   LOGIN = "LOGIN",
   LOGOUT = "LOGOUT",
+  GET_COUNTER = "GET_COUNTER",
+  SET_COUNTER = "SET_COUNTER",
 }
 
 type TDataBase = {
@@ -22,7 +24,7 @@ type EventsMap<TData extends TDataBase> = Partial<
   Record<WindowMessageTypes, (data: Omit<TData, "type" | "source">) => void>
 >;
 
-const useHandleWindowMessage = <TData extends TDataBase>(
+export const useHandleWindowMessage = <TData extends TDataBase>(
   eventsMap: EventsMap<TData>
 ) => {
   const isClientSide = isClient();
@@ -43,5 +45,3 @@ const useHandleWindowMessage = <TData extends TDataBase>(
     return () => window.removeEventListener("message", internalHandler);
   }, [isClientSide, internalHandler]);
 };
-
-export { useHandleWindowMessage, WindowMessageTypes };
