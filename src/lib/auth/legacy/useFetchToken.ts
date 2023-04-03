@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 export const useFetchToken = () => {
-  const { data, refetch } = useQuery<{ data: { token: string } }>(
+  const { data, refetch, remove } = useQuery<{ data: { token: string } }>(
     ["token"],
     () => {
       const tokenEndpoint = process.env["NEXT_PUBLIC_LEGACY_TOKEN_ENDPOINT"];
@@ -26,5 +26,6 @@ export const useFetchToken = () => {
   return {
     token,
     fetchToken: refetch,
+    removeToken: remove,
   };
 };

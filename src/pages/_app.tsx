@@ -8,6 +8,7 @@ import { theme } from "@/lib/ui";
 import { Layout } from "@/layouts";
 import { AuthProvider } from "@/lib/auth";
 import { CounterProvider } from "@/feature-counter/context/CounterProvider";
+import { UserProvider } from "@/feature-user";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,11 +50,13 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <CounterProvider>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </CounterProvider>
+            <UserProvider>
+              <CounterProvider>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </CounterProvider>
+            </UserProvider>
           </AuthProvider>
         </QueryClientProvider>
       </ThemeProvider>

@@ -2,7 +2,8 @@ import { FC, PropsWithChildren, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { addInterceptor, removeHeader, setHeaders } from "@/lib/dataAccess";
 import { AuthContext } from "./AuthContext";
-import { useFetchToken } from "./useFetchToken";
+import { useFetchToken } from "./legacy/useFetchToken";
+import { useSilexLogout } from "@/lib/auth/legacy/useSilexLogout";
 
 // const LS_KEY = "@uitpas-balie/token";
 const LOGIN_PATH = "/login";
@@ -10,7 +11,8 @@ const LOGIN_PATH = "/login";
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { push, asPath } = useRouter();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
-  const { fetchToken } = useFetchToken();
+  const { fetchToken, removeToken } = useFetchToken();
+  const logoutFromSilex = useSilexLogout();
   const isCurrentPathPrivate = !asPath.startsWith(LOGIN_PATH);
 
   const login = useCallback((token: string) => {
@@ -23,12 +25,15 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   const logout = useCallback(() => {
-    // Reset Axios
-    removeHeader("Authorization");
-    // Remove from local storage
-    // localStorage.removeItem(LS_KEY);
-    // Auth token is not available
-    setAuthTokenLoaded(false);
+    logoutFromSilex().finally(() => {
+      // Reset Axios
+      removeHeader("Authorization");
+      // Remove from local storage
+      // localStorage.removeItem(LS_KEY);
+      // Auth token is not available
+      setAuthTokenLoaded(false);
+      removeToken();
+    });
   }, []);
 
   const initAuth = useCallback(

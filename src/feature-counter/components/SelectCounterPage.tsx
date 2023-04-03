@@ -2,9 +2,11 @@ import { useTranslation } from "next-i18next";
 import { Box, Stack, Typography } from "@/lib/ui";
 import Image from "next/image";
 import { CounterPicker } from "./CounterPicker";
+import { useUserInfo } from "@/feature-user";
 
 export const SelectCounterPage = () => {
   const { t } = useTranslation();
+  const userInfo = useUserInfo();
 
   return (
     <Box sx={{ m: "40px auto;", pt: 12, maxWidth: 500 }}>
@@ -19,7 +21,9 @@ export const SelectCounterPage = () => {
         </Box>
 
         <Box>
-          <Typography variant="h1">{t("counter.welcome")}</Typography>
+          <Typography variant="h1">
+            {t("counter.welcome", { name: userInfo?.given_name })}
+          </Typography>
           <Typography variant="h2" sx={{ mt: "-.5em" }}>
             {t("counter.selectCounter")}
           </Typography>

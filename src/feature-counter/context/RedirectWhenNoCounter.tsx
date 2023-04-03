@@ -23,17 +23,17 @@ export const RedirectWhenNoCounter: FC<
     if (shouldRedirectToCounters) {
       push(COUNTER_PATH);
     }
-  }, [shouldRedirectToCounters]);
+  }, [shouldRedirectToCounters, push]);
 
   useEffect(() => {
     if (shouldRedirectToApp) {
       push(APP_PATH);
     }
-  }, [shouldRedirectToApp]);
+  }, [shouldRedirectToApp, push]);
 
   useEffect(() => {
     if (!isLoggedIn) clearCounter();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, clearCounter]);
 
   return shouldRedirectToCounters || shouldRedirectToApp ? null : (
     <>{children}</>
