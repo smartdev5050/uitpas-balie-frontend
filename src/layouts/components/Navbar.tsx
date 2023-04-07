@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { Stack, Typography, Button } from "@/lib/ui";
-import { useActiveCounter } from "@/feature-counter";
-import { useSetActiveCounter } from "@/feature-counter/context/useSetActiveCounter";
-import { useUserInfo } from "@/lib/user";
-import { Header, LogoLink, NavLink } from "./Navbar.Atoms";
 import { useTranslation } from "next-i18next";
+import { Stack, Typography, Button } from "@/lib/ui";
+import { useUserInfo } from "@/lib/user";
 import { useLogout } from "@/lib/auth";
+import { useActiveCounter, useSetActiveCounter } from "@/feature-counter";
+import { Header, LogoLink, NavLink } from "./Navbar.Atoms";
+import { CounterMenu } from "./CounterMenu";
 
 export const Navbar = () => {
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ export const Navbar = () => {
               alt="Logo UiTPAS"
             />
           </LogoLink>
-          <NavLink href="/">{counter.name}</NavLink>
+          <CounterMenu name={counter.name} />
           <NavLink
             href="/counters"
             onClick={(e) => {

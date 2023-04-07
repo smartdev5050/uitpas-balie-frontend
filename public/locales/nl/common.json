@@ -18,5 +18,13 @@
     "noCounterP1": "Je bent nog geen lid van een UiTPAS-balie. Om deze applicatie te kunnen gebruiken, moet je lid zijn van een UiTPAS-balie.",
     "noCounterP2": "Stuur je e-mailadres en de naam van je organisatie naar de verantwoordelijke.",
     "changeCounter": "Balie wijzigen"
+  },
+  "nav": {
+    "home": "Home",
+    "activities": "Activiteiten",
+    "counterMemberships":"Medewerkers",
+    "checkindevices":"Zuilen",
+    "expenseReport":"Onkostennota",
+    "counterStatistics":"Statistieken & inzichten"
   }
 }

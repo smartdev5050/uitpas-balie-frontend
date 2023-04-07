@@ -9,11 +9,15 @@ export const theme = createTheme({
     },
     grey: {
       200: "#f3f3f3",
+      300: "#f5f5f5",
       400: "#ddd",
       600: "#8a8a8d",
       900: "#2f3b4d",
+      A300: "#262626",
+      A700: "#090909",
     },
     text: {
+      primary: "#333333",
       contrastText: "#fff",
     },
   },
@@ -28,6 +32,9 @@ export const theme = createTheme({
       fontSize: 18,
       fontWeight: 700,
       lineHeight: 1.1,
+    },
+    body1: {
+      fontSize: 15,
     },
     body2: {
       fontSize: 13,
