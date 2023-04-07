@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next";
 import { Box, Stack, Typography } from "@/lib/ui";
 import Image from "next/image";
 import { CounterPicker } from "./CounterPicker";
-import { useUserInfo } from "@/feature-user";
+import { useUserInfo } from "@/lib/user";
 
 export const SelectCounterPage = () => {
   const { t } = useTranslation();

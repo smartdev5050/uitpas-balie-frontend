@@ -8,7 +8,7 @@ import { theme } from "@/lib/ui";
 import { Layout } from "@/layouts";
 import { AuthProvider } from "@/lib/auth";
 import { CounterProvider } from "@/feature-counter/context/CounterProvider";
-import { UserProvider } from "@/feature-user";
+import { UserProvider } from "@/lib/user";
 
 const queryClient = new QueryClient({
   defaultOptions: {

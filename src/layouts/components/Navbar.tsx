@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Stack, Typography, Button } from "@/lib/ui";
 import { useActiveCounter } from "@/feature-counter";
 import { useSetActiveCounter } from "@/feature-counter/context/useSetActiveCounter";
-import { useUserInfo } from "@/feature-user";
+import { useUserInfo } from "@/lib/user";
 import { Header, LogoLink, NavLink } from "./Navbar.Atoms";
 import { useTranslation } from "next-i18next";
 import { useLogout } from "@/lib/auth";
