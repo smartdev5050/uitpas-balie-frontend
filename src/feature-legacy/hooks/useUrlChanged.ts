@@ -13,18 +13,7 @@ export const useUrlChanged = () => {
         `${window.location.protocol}//${window.location.host}${payload?.path}`
       );
       const query = Object.fromEntries(url.searchParams.entries());
-      const hasPage = url.searchParams.has("page");
-      if (hasPage) {
-        window.history.pushState(
-          undefined,
-          "",
-          `${window.location.protocol}//${window.location.host}${payload?.path}`
-        );
-      } else {
-        if (url.pathname !== "/search") {
-          router.push({ pathname: url.pathname, query });
-        }
-      }
+      router.push({ pathname: url.pathname, query });
     },
     [WindowMessageTypes.HTTP_ERROR_CODE]: ({ payload }) => {
       if ([401, 403].includes(payload?.code as number)) {
