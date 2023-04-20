@@ -9,6 +9,7 @@ import { Layout } from "@/layouts";
 import { AuthProvider } from "@/lib/auth";
 import { CounterProvider } from "@/feature-counter/context/CounterProvider";
 import { UserProvider } from "@/lib/user";
+import { LegacyModeProvider } from "@/feature-legacy";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -53,7 +54,9 @@ const App = ({ Component, pageProps }: AppProps) => {
             <UserProvider>
               <CounterProvider>
                 <Layout>
-                  <Component {...pageProps} />
+                  <LegacyModeProvider>
+                    <Component {...pageProps} />
+                  </LegacyModeProvider>
                 </Layout>
               </CounterProvider>
             </UserProvider>

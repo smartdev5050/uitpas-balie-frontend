@@ -12,6 +12,12 @@
     "loggedInAs": "Aangemeld als {{name}}",
     "logoutBtn": "Afmelden"
   },
+  "legacyMode": {
+    "PREFER_NEXT": "Legacy mode: Next",
+    "SPLIT_X": "Legacy mode: Splits rij",
+    "SPLIT_Y": "Legacy mode: Splits kolom",
+    "PREFER_LEGACY": "Legacy mode: Legacy"
+  },
   "counter": {
     "welcome": "Welkom {{name}}",
     "selectCounter": "Selecteer je balie",
@@ -22,9 +28,9 @@
   "nav": {
     "home": "Home",
     "activities": "Activiteiten",
-    "counterMemberships":"Medewerkers",
-    "checkindevices":"Zuilen",
-    "expenseReport":"Onkostennota",
-    "counterStatistics":"Statistieken & inzichten"
+    "counterMemberships": "Medewerkers",
+    "checkindevices": "Zuilen",
+    "expenseReport": "Onkostennota",
+    "counterStatistics": "Statistieken & inzichten"
   }
 }
