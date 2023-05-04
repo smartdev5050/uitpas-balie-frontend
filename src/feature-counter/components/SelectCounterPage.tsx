@@ -21,10 +21,10 @@ export const SelectCounterPage = () => {
         </Box>
 
         <Box>
-          <Typography variant="h1">
+          <Typography level="h1">
             {t("counter.welcome", { name: userInfo?.given_name })}
           </Typography>
-          <Typography variant="h2" sx={{ mt: "-.5em" }}>
+          <Typography level="h2" sx={{ mt: "-.5em" }}>
             {t("counter.selectCounter")}
           </Typography>
         </Box>

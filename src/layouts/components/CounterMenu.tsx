@@ -2,11 +2,6 @@ import Icon from "@mdi/react";
 import { mdiMenuDown } from "@mdi/js";
 
 import MenuUnstyled from "@mui/base/MenuUnstyled";
-import MenuItemUnstyled, {
-  menuItemUnstyledClasses,
-} from "@mui/base/MenuItemUnstyled";
-import PopperUnstyled from "@mui/base/PopperUnstyled";
-import { styled } from "@mui/system";
 import { useMenu } from "@/lib/utils";
 import {
   Popper,
@@ -15,7 +10,6 @@ import {
   StyledMenuItem,
   TriggerButton,
 } from "@/layouts/components/Navbar.Atoms";
-import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
 const menuItems = [

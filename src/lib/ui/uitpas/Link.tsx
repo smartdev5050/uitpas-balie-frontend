@@ -1,4 +1,4 @@
-import { styled } from "@mui/system";
+import { styled } from "@mui/joy";
 
 export const Link = styled("a")(({ theme }) => ({
   transition:
@@ -6,9 +6,9 @@ export const Link = styled("a")(({ theme }) => ({
   cursor: "pointer",
   textDecoration: "underline",
   backgroundColor: "transparent",
-  color: theme.palette.primary.main,
+  color: theme.vars.palette.primary.mainChannel,
   "&:hover": {
-    color: theme.palette.primary.darker,
+    color: theme.vars.palette.primary.darkChannel,
     textDecoration: "none",
   },
 }));

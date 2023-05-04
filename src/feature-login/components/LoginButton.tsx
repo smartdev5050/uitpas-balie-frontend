@@ -10,12 +10,14 @@ export const LoginButton: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Button
-      as="a"
+      size="lg"
+      component="a"
       href={href}
-      sx={{
-        p: "10px 20px",
-        fontSize: "18px",
-      }}
+      variant="solid"
+      // sx={{
+      //   p: "10px 20px",
+      //   fontSize: "18px",
+      // }}
     >
       {children}
     </Button>

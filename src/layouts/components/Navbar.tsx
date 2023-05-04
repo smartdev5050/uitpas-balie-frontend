@@ -40,12 +40,17 @@ export const Navbar = () => {
           </NavLink>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <Typography variant="body2" sx={{ color: "grey.200" }}>
+          <Typography
+            level="body2"
+            sx={(theme) => ({ color: theme.vars.palette.neutral[200] })}
+          >
             {t("login.loggedInAs", { name: userInfo.nickname })}
           </Typography>
           <Button
             variant="outlined"
+            color="neutral"
             sx={{ py: "5px", px: "24px", fontSize: "13px" }}
+            size="sm"
             onClick={logout}
           >
             {t("login.logoutBtn")}

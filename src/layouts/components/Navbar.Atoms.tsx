@@ -1,4 +1,4 @@
-import { styled, Theme } from "@mui/system";
+import { styled, Theme } from "@mui/joy";
 import Link from "next/link";
 import {
   ButtonHTMLAttributes,
@@ -13,8 +13,8 @@ import PopperUnstyled from "@mui/base/PopperUnstyled";
 
 export const Header = styled("header")(({ theme }) => ({
   display: "flex",
-  backgroundColor: theme.palette.grey["900"],
-  color: theme.palette.text.contrastText,
+  backgroundColor: theme.vars.palette.neutral["600"],
+  color: theme.vars.palette.neutral[50],
   position: "fixed",
   width: "100%",
 }));
@@ -27,7 +27,7 @@ const navItemStyles = ({ theme }: { theme: Theme }) => ({
   cursor: "pointer",
   padding: "16px 10px",
   display: "block",
-  color: theme.palette.text.contrastText,
+  color: theme.vars.palette.neutral[50],
   // @ts-ignore
   fontSize: theme.typography.body1.fontSize,
   textDecoration: "underline",
@@ -62,7 +62,7 @@ export const TriggerButton = styled(
   alignItems: "center",
 
   ...(active && {
-    backgroundColor: theme.palette.grey["A700"],
+    backgroundColor: theme.vars.palette.neutral[800],
     textDecoration: "none",
   }),
 }));
@@ -94,8 +94,8 @@ export const StyledMenuItem = styled(MenuItemUnstyled)(
       
       &.${menuItemUnstyledClasses.focusVisible} a {
         text-decoration: none;
-        color: ${theme.palette.grey["A300"]};
-        background-color: ${theme.palette.grey[300]};
+        color: ${theme.vars.palette.neutral[800]};
+        background-color: ${theme.vars.palette.neutral[300]};
       }
   `
 );
@@ -112,8 +112,8 @@ export const StyledLink = styled(Link)(
     
     &:hover {
       text-decoration: none;
-      color: ${theme.palette.grey["A300"]};
-      background-color: ${theme.palette.grey[300]};
+      color: ${theme.vars.palette.neutral[800]};
+      background-color: ${theme.vars.palette.neutral[300]};
     }
 `
 );

@@ -1,3 +1,3 @@
-// https://mui.com/system/react-stack/
-export { default as Stack } from "@mui/system/Stack";
-export { type StackProps } from "@mui/system/Stack";
+// https://mui.com/joy-ui/react-stack/
+export { default as Stack } from "@mui/joy/Stack";
+export { type StackProps } from "@mui/joy/Stack";

@@ -3,13 +3,13 @@ import type { AppProps } from "next/app";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import Head from "next/head";
-import { GlobalStyles, ThemeProvider } from "@mui/system";
 import { theme } from "@/lib/ui";
 import { Layout } from "@/layouts";
 import { AuthProvider } from "@/lib/auth";
 import { CounterProvider } from "@/feature-counter/context/CounterProvider";
 import { UserProvider } from "@/lib/user";
 import { LegacyModeProvider } from "@/feature-legacy";
+import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/joy";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,12 +35,10 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
 
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <GlobalStyles
           styles={{
             body: {
-              padding: 0,
-              margin: 0,
-              fontFamily: "'Open Sans', sans-serif",
               color: "#333",
               fontSize: "15px",
             },

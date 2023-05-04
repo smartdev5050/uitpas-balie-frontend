@@ -1,9 +1,9 @@
-import { styled } from "@mui/system";
+import { styled } from "@mui/joy";
 
 export const Card = styled("div")(({ theme }) => ({
   marginBottom: theme.spacing(2.5),
   backgroundColor: "#fff",
-  border: `1px solid ${theme.palette.grey[400]}`,
+  border: `1px solid ${theme.vars.palette.neutral[400]}`,
   borderRadius: "0",
   width: "100%",
 }));

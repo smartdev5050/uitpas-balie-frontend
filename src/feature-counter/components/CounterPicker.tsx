@@ -18,10 +18,20 @@ export const CounterPicker = () => {
   if (finishedAndNoData)
     return (
       <>
-        <Typography sx={{ fontStyle: "italic", color: "grey.600" }}>
+        <Typography
+          sx={(theme) => ({
+            fontStyle: "italic",
+            color: theme.vars.palette.neutral[500],
+          })}
+        >
           {t("counter.noCounterP1")}
         </Typography>
-        <Typography sx={{ fontStyle: "italic", color: "grey.600" }}>
+        <Typography
+          sx={(theme) => ({
+            fontStyle: "italic",
+            color: theme.vars.palette.neutral[500],
+          })}
+        >
           {t("counter.noCounterP2")}
         </Typography>
       </>

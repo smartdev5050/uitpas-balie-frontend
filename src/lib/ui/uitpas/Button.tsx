@@ -3,13 +3,15 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
   ButtonUnstyledProps,
 } from "@mui/base/ButtonUnstyled";
-import { styled } from "@mui/system";
+import { styled, Button as JoyButton } from "@mui/joy";
 
 type ButtonOwnProps = {
   variant?: "contained" | "outlined";
 };
 
-export const Button = styled(
+export const Button = JoyButton;
+
+/*export const Button = styled(
   forwardRef(
     (
       { variant, ...props }: ButtonUnstyledProps & ButtonOwnProps,
@@ -46,16 +48,16 @@ export const Button = styled(
       
       &:hover {
         background-color: #fff;
-        color: ${theme.palette.primary.darker}
+        color: ${theme.vars.palette.primary.solidHoverBg}
       }
     `;
   }
 
   return `
     ${sharedCss}
-    background-color: ${theme.palette.primary.main};
-    border-color: ${theme.palette.primary.darker};
-    color: ${theme.palette.primary.contrastText};
+    background-color: ${theme.vars.palette.primary.solidBg};
+    border-color: ${theme.vars.palette.primary.solidHoverBg};
+    color: ${theme.vars.palette.primary.solidColor};
 
     &:hover {
       background-color: #1f3874;
@@ -72,3 +74,4 @@ export const Button = styled(
     }
   `;
 });
+*/
