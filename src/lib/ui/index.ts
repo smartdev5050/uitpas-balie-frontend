@@ -7,3 +7,4 @@ export * from "./uitpas/Typography";
 export * from "./uitpas/Card";
 export * from "./uitpas/Link";
 export * from "./uitpas/Button";
+export * from "./uitpas/PageWithSideBar";

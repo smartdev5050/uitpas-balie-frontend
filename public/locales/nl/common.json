@@ -25,8 +25,14 @@
     "noCounterP2": "Stuur je e-mailadres en de naam van je organisatie naar de verantwoordelijke.",
     "changeCounter": "Balie wijzigen"
   },
+  "expenseReport": {
+    "title": "Onkostennota",
+    "description": "Download hier je onkostennota van geregistreerde kortingstarieven per gemeente.",
+    "info": " Het maken van je onkostennota kan enkele minuten duren. Wanneer de onkostennota klaar is zal je het kunnen downloaden. Gelieve dit venster niet te sluiten."
+  },
   "nav": {
     "home": "Home",
+    "back": "Terug",
     "activities": "Activiteiten",
     "counterMemberships": "Medewerkers",
     "checkindevices": "Zuilen",
