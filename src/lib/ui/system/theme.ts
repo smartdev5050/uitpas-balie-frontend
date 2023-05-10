@@ -65,5 +65,15 @@ export const theme = extendTheme({
     body2: {
       fontSize: 13,
     },
+    
+  },
+   breakpoints: {
+    values: {
+      xs: 0,
+      sm: 660,
+      md: 820,
+      lg: 1200,
+      xl: 1536,
+    },
   },
 });
