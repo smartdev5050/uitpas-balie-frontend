@@ -25,12 +25,14 @@ export const PageWithSidebar = ({
     <Grid container sx={{ height: "100%", marginTop: "64px" }}>
       <SideBarContainer xs={12} sm={5} md={4} lg={3}>
         <Stack spacing={2}>
-          <>
+          {hasBackButton && <>
             <Link href={"/"}>
-              <FontAwesomeIcon icon={faArrowLeft} /> {t("Terug")}
+              <Stack direction="row">
+                <FontAwesomeIcon icon={faArrowLeft} /> {t("Terug")}
+              </Stack>
             </Link>
             <Divider />
-          </>
+          </>}
           {sideBarContent}
         </Stack>
       </SideBarContainer>
