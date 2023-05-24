@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import Head from "next/head";
-import { theme } from "@/lib/ui";
+import { theme, openSansFont } from "@/lib/ui";
 import { Layout } from "@/layouts";
 import { AuthProvider } from "@/lib/auth";
 import { CounterProvider } from "@/feature-counter/context/CounterProvider";
@@ -47,19 +47,21 @@ const App = ({ Component, pageProps }: AppProps) => {
             },
           }}
         />
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>
-            <UserProvider>
-              <CounterProvider>
-                <Layout>
-                  <LegacyModeProvider>
-                    <Component {...pageProps} />
-                  </LegacyModeProvider>
-                </Layout>
-              </CounterProvider>
-            </UserProvider>
-          </AuthProvider>
-        </QueryClientProvider>
+        <main className={openSansFont.className}>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <UserProvider>
+                <CounterProvider>
+                  <Layout>
+                    <LegacyModeProvider>
+                      <Component {...pageProps} />
+                    </LegacyModeProvider>
+                  </Layout>
+                </CounterProvider>
+              </UserProvider>
+            </AuthProvider>
+          </QueryClientProvider>
+        </main>
       </ThemeProvider>
     </>
   );
