@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { forwardRef, useRef } from "react";
 
 const StyledDateInput = styled(JoyInput)(({ theme }) => ({
+  paddingInline: 0,
   border: `${theme.vars.palette.neutral[500]} 1px solid`,
   borderRadius: 0,
   color: theme.vars.palette.neutral[500],
   ['> input[type="date"]']: {
-    padding: '4px 8px',
-    alignSelf:'center',
+    padding: "4px 8px",
+    alignSelf: "center",
   },
   ['> input[type="date"]::-webkit-calendar-picker-indicator']: {
     display: "none",
@@ -19,6 +20,7 @@ const StyledDateInputEndDecorator = styled(IconButton)(({ theme }) => ({
   padding:'4px',
   height: "100%",
   borderRadius: 0,
+  margin: 0,
   border:'none',
   borderLeft: `${theme.vars.palette.neutral[500]} 1px solid`,
 }));
@@ -42,6 +44,8 @@ const DateInputWithRef = forwardRef<HTMLInputElement | null>((props, ref) => {
           }
         }
       }}
+      onSelect={openDatePicker}
+      onClick={openDatePicker}
       endDecorator={
         <StyledDateInputEndDecorator
           variant="outlined"
