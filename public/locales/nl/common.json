@@ -28,7 +28,9 @@
   "expenseReport": {
     "title": "Onkostennota",
     "description": "Download hier je onkostennota van geregistreerde kortingstarieven per gemeente.",
-    "info": " Het maken van je onkostennota kan enkele minuten duren. Wanneer de onkostennota klaar is zal je het kunnen downloaden. Gelieve dit venster niet te sluiten."
+    "info": "Het maken van je onkostennota kan enkele minuten duren. Wanneer de onkostennota klaar is zal je het kunnen downloaden. Gelieve dit venster niet te sluiten.",
+    "summary":"Vul hier de start- en einddatum in van de periode waarbinnen je de gewenste kortingstarieven registreerde.",
+    "readyReports":"Je klaargezette onkostennota's"
   },
   "nav": {
     "home": "Home",
@@ -38,5 +40,10 @@
     "checkindevices": "Zuilen",
     "expenseReport": "Onkostennota",
     "counterStatistics": "Statistieken & inzichten"
+  },
+  "common": {
+    "startDate":"Startdatum",
+    "endDate":"Einddatum",
+    "create":"Maken"
   }
 }
