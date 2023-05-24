@@ -1,19 +1,45 @@
 import { useTranslation } from "next-i18next";
-import { PageWithSidebar, Stack, Typography,DateInput, Button } from "@/lib/ui";
+import {
+  PageWithSidebar,
+  Stack,
+  Typography,
+  DateInput,
+  Button,
+} from "@/lib/ui";
 import { useActiveCounter } from "@/feature-counter";
-import { useGetOrganizersFinancialReportsPeriods } from "@/lib/dataAccess";
+import {
+  useGetOrganizersFinancialReportsPeriods,
+} from "@/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
-import { Box, FormControl, FormLabel,  } from "@mui/joy";
+import { Box, FormControl, FormLabel } from "@mui/joy";
 import { AnchorButton } from "@/lib/ui/uitpas/AnchorButton";
 import { useState } from "react";
+import { useDownloadReport } from "../hooks/useDownloadReport";
 
 export const ExpenseReportPage = () => {
-  const [startDate,setStartDate] = useState<Date|null>(new Date())
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const { t } = useTranslation();
   const activeCounter = useActiveCounter();
-  const {data} = useGetOrganizersFinancialReportsPeriods(activeCounter?.id|| '');
-  const periods = data?.data;
+  const { data: reportsPeriodFetchData } =
+    useGetOrganizersFinancialReportsPeriods(activeCounter?.id || "");
+  const { startReportRequest, status } = useDownloadReport(
+    activeCounter?.id || ""
+  );
+console.log(status)
+  const periods = reportsPeriodFetchData?.data;
+
+  const createReport = (
+    selectedStartDate?: string,
+    selectedEndDate?: string
+  ) => {
+    if (activeCounter && startDate && endDate)
+      startReportRequest(activeCounter?.id, {
+        startDate: selectedStartDate || startDate.toISOString(),
+        endDate: selectedEndDate || endDate.toISOString(),
+      });
+  };
+
   return (
     <PageWithSidebar sideBarContent={<SidebarContent />} hasBackButton>
       <Stack m={2} gap={3} alignContent="flex-start">
@@ -37,7 +63,7 @@ export const ExpenseReportPage = () => {
           </FormControl>
         </Stack>
         <Box>
-          <Button>{t("common.create")}</Button>
+          <Button onClick={()=>createReport()}>{t("common.create")}</Button>
         </Box>
         <Typography level="h2" mb={0}>
           {t("expenseReport.readyReports")}
@@ -59,7 +85,7 @@ export const ExpenseReportPage = () => {
               <Typography level="body1" display="inline">
                 {period.endDate}
               </Typography>{" "}
-              <AnchorButton level="body3">Maak en download</AnchorButton>
+              <AnchorButton level="body3" onClick={()=>createReport(period.startDate,period.endDate)}>Maak en download</AnchorButton>
             </Stack>
           ))}
         </Stack>
