@@ -17,7 +17,7 @@ export const Navbar = () => {
   if (!userInfo || !counter) return null;
 
   return (
-    <Header>
+    <Header sx={{zIndex:1}}>
       <Stack direction="row" justifyContent="space-between" width="100%" px={1}>
         <Stack direction="row" alignItems="center" spacing={2}>
           <LogoLink href="/">
