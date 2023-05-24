@@ -8,15 +8,15 @@
 
 /**
  * * `UITPAS_ALREADY_LINKED` : the user cannot use this email address to register another UiTPAS
- * `UITID_UNREGISTERED` : the user can use this email address to register their UiTPAS but must register on UiTiD first
- * `UITID_REGISTERED` : the user can use this email address to register their UiTPAS but must login on UiTiD first
+* `UITID_UNREGISTERED` : the user can use this email address to register their UiTPAS but must register on UiTiD first
+* `UITID_REGISTERED` : the user can use this email address to register their UiTPAS but must login on UiTiD first
  */
-export type GetUitidEmail200State =
-  (typeof GetUitidEmail200State)[keyof typeof GetUitidEmail200State];
+export type GetUitidEmail200State = typeof GetUitidEmail200State[keyof typeof GetUitidEmail200State];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetUitidEmail200State = {
-  UITID_UNREGISTERED: "UITID_UNREGISTERED",
-  UITID_REGISTERED: "UITID_REGISTERED",
-  UITPAS_ALREADY_LINKED: "UITPAS_ALREADY_LINKED",
+  UITID_UNREGISTERED: 'UITID_UNREGISTERED',
+  UITID_REGISTERED: 'UITID_REGISTERED',
+  UITPAS_ALREADY_LINKED: 'UITPAS_ALREADY_LINKED',
 } as const;

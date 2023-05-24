@@ -90,3 +90,5 @@ export * from "./ticketSalesPaginatedResponse";
 export * from "./transaction";
 export * from "./transactionsPaginatedCollection";
 export * from "./unauthorizedResponse";
+export * from './getRewardsSortFeatured';
+export * from './permission';

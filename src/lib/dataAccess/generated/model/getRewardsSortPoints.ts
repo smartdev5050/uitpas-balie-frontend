@@ -6,11 +6,11 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetRewardsSortPoints =
-  (typeof GetRewardsSortPoints)[keyof typeof GetRewardsSortPoints];
+export type GetRewardsSortPoints = typeof GetRewardsSortPoints[keyof typeof GetRewardsSortPoints];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetRewardsSortPoints = {
-  asc: "asc",
-  desc: "desc",
+  asc: 'asc',
+  desc: 'desc',
 } as const;

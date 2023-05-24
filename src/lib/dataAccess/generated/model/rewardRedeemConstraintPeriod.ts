@@ -15,15 +15,15 @@
 - `QUARTER`: this constraint applies to the first day of the quarter to the last day: January-March, April-June, July-September, October-December.
 - `YEAR`: from the Jan 1st to Dec 31st
  */
-export type RewardRedeemConstraintPeriod =
-  (typeof RewardRedeemConstraintPeriod)[keyof typeof RewardRedeemConstraintPeriod];
+export type RewardRedeemConstraintPeriod = typeof RewardRedeemConstraintPeriod[keyof typeof RewardRedeemConstraintPeriod];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const RewardRedeemConstraintPeriod = {
-  ABSOLUTE: "ABSOLUTE",
-  DAY: "DAY",
-  WEEK: "WEEK",
-  MONTH: "MONTH",
-  QUARTER: "QUARTER",
-  YEAR: "YEAR",
+  ABSOLUTE: 'ABSOLUTE',
+  DAY: 'DAY',
+  WEEK: 'WEEK',
+  MONTH: 'MONTH',
+  QUARTER: 'QUARTER',
+  YEAR: 'YEAR',
 } as const;

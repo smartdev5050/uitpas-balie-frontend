@@ -6,13 +6,13 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetRewardsCategoriesItem =
-  (typeof GetRewardsCategoriesItem)[keyof typeof GetRewardsCategoriesItem];
+export type GetRewardsCategoriesItem = typeof GetRewardsCategoriesItem[keyof typeof GetRewardsCategoriesItem];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetRewardsCategoriesItem = {
-  Goede_doel: "Goede doel",
-  Eten_en_drinken: "Eten en drinken",
-  Doen: "Doen",
-  Gadget_of_item: "Gadget of item",
+  Goede_doel: 'Goede doel',
+  Eten_en_drinken: 'Eten en drinken',
+  Doen: 'Doen',
+  Gadget_of_item: 'Gadget of item',
 } as const;

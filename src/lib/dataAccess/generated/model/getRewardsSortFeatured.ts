@@ -6,14 +6,11 @@
  * OpenAPI spec version: 4.0
  */
 
-/**
- * Whether or not the passholder has a an UiTiD registered. This field is always available in responses.
- */
-export type PassholderUitidStatus = typeof PassholderUitidStatus[keyof typeof PassholderUitidStatus];
+export type GetRewardsSortFeatured = typeof GetRewardsSortFeatured[keyof typeof GetRewardsSortFeatured];
 
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const PassholderUitidStatus = {
-  REGISTERED: 'REGISTERED',
-  UNREGISTERED: 'UNREGISTERED',
+export const GetRewardsSortFeatured = {
+  asc: 'asc',
+  desc: 'desc',
 } as const;

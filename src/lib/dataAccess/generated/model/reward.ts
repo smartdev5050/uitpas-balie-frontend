@@ -5,13 +5,13 @@
  * With UiTPAS API 4.0 you can retrieve ticket prices and register ticket sales for passholders. You can also save UiTPAS points and exchange them for rewards for a passholder, and much more.
  * OpenAPI spec version: 4.0
  */
-import type { RewardType } from "./rewardType";
-import type { Period } from "./period";
-import type { RewardCategoriesItem } from "./rewardCategoriesItem";
-import type { CardSystem } from "./cardSystem";
-import type { Organizer } from "./organizer";
-import type { RewardStatus } from "./rewardStatus";
-import type { RewardRedeemConstraint } from "./rewardRedeemConstraint";
+import type { RewardType } from './rewardType';
+import type { Period } from './period';
+import type { RewardCategoriesItem } from './rewardCategoriesItem';
+import type { CardSystem } from './cardSystem';
+import type { Organizer } from './organizer';
+import type { RewardStatus } from './rewardStatus';
+import type { RewardRedeemConstraint } from './rewardRedeemConstraint';
 
 /**
  * Reward model
@@ -55,6 +55,8 @@ export interface Reward {
   forKids?: boolean;
   /** true if this is a sport reward */
   sport?: boolean;
+  /** true if this reward is currently set as 'featured' */
+  featured?: boolean;
   /** true if this reward can be redeemed online */
   online?: boolean;
   /** true if this rewards will not be redeemable anymore in the near future */

@@ -6,7 +6,4 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetPassholdersPassholderIdMembershipPricesParams = {
-  postalCode?: string;
-  dateOfBirth?: string;
-};
+export type GetPassholdersPassholderIdMembershipPricesParams = { postalCode?: string; dateOfBirth?: string };

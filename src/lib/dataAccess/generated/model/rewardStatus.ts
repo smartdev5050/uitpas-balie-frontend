@@ -9,11 +9,12 @@
 /**
  * Status of this reward.
  */
-export type RewardStatus = (typeof RewardStatus)[keyof typeof RewardStatus];
+export type RewardStatus = typeof RewardStatus[keyof typeof RewardStatus];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const RewardStatus = {
-  ACTIVE: "ACTIVE",
-  INACTIVE: "INACTIVE",
-  DELETED: "DELETED",
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  DELETED: 'DELETED',
 } as const;

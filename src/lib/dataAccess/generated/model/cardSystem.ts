@@ -5,9 +5,9 @@
  * With UiTPAS API 4.0 you can retrieve ticket prices and register ticket sales for passholders. You can also save UiTPAS points and exchange them for rewards for a passholder, and much more.
  * OpenAPI spec version: 4.0
  */
-import type { CardSystemBranding } from "./cardSystemBranding";
-import type { CardSystemLinks } from "./cardSystemLinks";
-import type { City } from "./city";
+import type { CardSystemBranding } from './cardSystemBranding';
+import type { CardSystemLinks } from './cardSystemLinks';
+import type { City } from './city';
 
 /**
  * A region, usually one or multiple municipalities in Belgium, that uses UiTPAS and provides discounts and/or rewards. For example "Paspartoe" (Brussels), UiTPAS Leuven, UiTPAS Hasselt, UiTPAS Gent, and so on.

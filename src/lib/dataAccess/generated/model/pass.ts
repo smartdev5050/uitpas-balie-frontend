@@ -5,11 +5,11 @@
  * With UiTPAS API 4.0 you can retrieve ticket prices and register ticket sales for passholders. You can also save UiTPAS points and exchange them for rewards for a passholder, and much more.
  * OpenAPI spec version: 4.0
  */
-import type { PassSocialTariff } from "./passSocialTariff";
-import type { PassMessagesItem } from "./passMessagesItem";
+import type { PassSocialTariff } from './passSocialTariff';
+import type { PassMessagesItem } from './passMessagesItem';
 
 /**
- * The `Pass` entity includes basic information about the UiTPAS and its related `Passholder`.
+ * The `Pass` entity includes basic information about the UiTPAS and its related `Passholder`.  
  */
 export interface Pass {
   /** ID of the passholder associated with this pass */

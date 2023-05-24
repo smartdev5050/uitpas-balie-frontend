@@ -6,11 +6,11 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetRewardsSortRedeemCount =
-  (typeof GetRewardsSortRedeemCount)[keyof typeof GetRewardsSortRedeemCount];
+export type GetRewardsSortRedeemCount = typeof GetRewardsSortRedeemCount[keyof typeof GetRewardsSortRedeemCount];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetRewardsSortRedeemCount = {
-  asc: "asc",
-  desc: "desc",
+  asc: 'asc',
+  desc: 'desc',
 } as const;

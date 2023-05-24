@@ -6,11 +6,11 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetPassholdersMeTransactionsSortCreationDate =
-  (typeof GetPassholdersMeTransactionsSortCreationDate)[keyof typeof GetPassholdersMeTransactionsSortCreationDate];
+export type GetPassholdersMeTransactionsSortCreationDate = typeof GetPassholdersMeTransactionsSortCreationDate[keyof typeof GetPassholdersMeTransactionsSortCreationDate];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetPassholdersMeTransactionsSortCreationDate = {
-  asc: "asc",
-  desc: "desc",
+  asc: 'asc',
+  desc: 'desc',
 } as const;

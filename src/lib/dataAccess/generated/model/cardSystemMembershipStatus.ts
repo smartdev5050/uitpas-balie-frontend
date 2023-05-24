@@ -9,11 +9,11 @@
 /**
  * Whether the membership is active or blocked.
  */
-export type CardSystemMembershipStatus =
-  (typeof CardSystemMembershipStatus)[keyof typeof CardSystemMembershipStatus];
+export type CardSystemMembershipStatus = typeof CardSystemMembershipStatus[keyof typeof CardSystemMembershipStatus];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CardSystemMembershipStatus = {
-  ACTIVE: "ACTIVE",
-  BLOCKED: "BLOCKED",
+  ACTIVE: 'ACTIVE',
+  BLOCKED: 'BLOCKED',
 } as const;

@@ -6,11 +6,11 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetRewardsSubset =
-  (typeof GetRewardsSubset)[keyof typeof GetRewardsSubset];
+export type GetRewardsSubset = typeof GetRewardsSubset[keyof typeof GetRewardsSubset];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetRewardsSubset = {
-  ALL: "ALL",
-  ENDUSERS: "ENDUSERS",
+  ALL: 'ALL',
+  ENDUSERS: 'ENDUSERS',
 } as const;

@@ -12,12 +12,12 @@
 - `EXPIRED`: the passholder is NOT entitled to social tariff anymore
 - `NONE`: the passholder is NOT entitled to social tariff
  */
-export type PassSocialTariffStatus =
-  (typeof PassSocialTariffStatus)[keyof typeof PassSocialTariffStatus];
+export type PassSocialTariffStatus = typeof PassSocialTariffStatus[keyof typeof PassSocialTariffStatus];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const PassSocialTariffStatus = {
-  ACTIVE: "ACTIVE",
-  EXPIRED: "EXPIRED",
-  NONE: "NONE",
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED',
+  NONE: 'NONE',
 } as const;

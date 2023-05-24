@@ -5,13 +5,13 @@
  * With UiTPAS API 4.0 you can retrieve ticket prices and register ticket sales for passholders. You can also save UiTPAS points and exchange them for rewards for a passholder, and much more.
  * OpenAPI spec version: 4.0
  */
-import type { Tariff } from "./tariff";
-import type { Passholder } from "./passholder";
+import type { Tariff } from './tariff';
+import type { Passholder } from './passholder';
 
 /**
  * Model used both for registering new ticket sales and when searching for past ticket sales.
 
-The `passholder` field is automatically included in responses if you have PASSHOLDER_SEARCH permission. It is not required for ticket sale registrations.
+The `passholder` field is automatically included in responses if you have PASSHOLDERS_SEARCH permission. It is not required for ticket sale registrations.
  */
 export interface TicketSale {
   /** Unique id of a registered ticket sale. Not required for new ticket sale registrations */

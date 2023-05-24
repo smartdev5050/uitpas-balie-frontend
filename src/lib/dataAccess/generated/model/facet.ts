@@ -5,16 +5,14 @@
  * With UiTPAS API 4.0 you can retrieve ticket prices and register ticket sales for passholders. You can also save UiTPAS points and exchange them for rewards for a passholder, and much more.
  * OpenAPI spec version: 4.0
  */
-import type { FacetName } from "./facetName";
+import type { FacetName } from './facetName';
 
 /**
  * Each property is a possible filter value, mapping to an object with a human-readable name and amount of results if the filter value is applied in combination with the other active filters.
  */
-export interface Facet {
-  [key: string]: {
-    /** Internationalized human-readable name for the filter value. */
-    name: FacetName;
-    /** Amount of results if the filter is applied in combination with the other active filters. */
-    count: number;
-  };
-}
+export interface Facet {[key: string]: {
+  /** Internationalized human-readable name for the filter value. */
+  name: FacetName;
+  /** Amount of results if the filter is applied in combination with the other active filters. */
+  count: number;
+}}

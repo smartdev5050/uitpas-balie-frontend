@@ -6,11 +6,11 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetRewardsSortCreationDate =
-  (typeof GetRewardsSortCreationDate)[keyof typeof GetRewardsSortCreationDate];
+export type GetRewardsSortCreationDate = typeof GetRewardsSortCreationDate[keyof typeof GetRewardsSortCreationDate];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetRewardsSortCreationDate = {
-  asc: "asc",
-  desc: "desc",
+  asc: 'asc',
+  desc: 'desc',
 } as const;

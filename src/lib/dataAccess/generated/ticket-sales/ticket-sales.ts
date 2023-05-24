@@ -5,17 +5,24 @@
  * With UiTPAS API 4.0 you can retrieve ticket prices and register ticket sales for passholders. You can also save UiTPAS points and exchange them for rewards for a passholder, and much more.
  * OpenAPI spec version: 4.0
  */
-import axios from "axios";
-import type { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import axios from 'axios'
+import type {
+  AxiosRequestConfig,
+  AxiosResponse,
+  AxiosError
+} from 'axios'
+import {
+  useQuery,
+  useMutation
+} from '@tanstack/react-query'
 import type {
   UseQueryOptions,
   UseMutationOptions,
   QueryFunction,
   MutationFunction,
   UseQueryResult,
-  QueryKey,
-} from "@tanstack/react-query";
+  QueryKey
+} from '@tanstack/react-query'
 import type {
   TariffsResponse,
   Error,
@@ -24,8 +31,9 @@ import type {
   GetTariffsParams,
   TicketSale,
   TicketSalesPaginatedResponse,
-  GetTicketSalesParams,
-} from ".././model";
+  GetTicketSalesParams
+} from '.././model'
+
 
 /**
  * Returns the possible UiTPAS discounted **tariffs for an event and a passholder**.
@@ -44,57 +52,45 @@ The caller of this request must have `TARIFFS_READ` permission for the organizer
  * @summary Get tariffs
  */
 export const getTariffs = (
-  params: GetTariffsParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<TariffsResponse>> => {
-  return axios.get(`/tariffs`, {
+    params: GetTariffsParams, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<TariffsResponse>> => {
+    return axios.get(
+      `/tariffs`,{
     ...options,
-    params: { ...params, ...options?.params },
-  });
-};
-
-export const getGetTariffsQueryKey = (params: GetTariffsParams) => [
-  `/tariffs`,
-  ...(params ? [params] : []),
-];
-
-export type GetTariffsQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getTariffs>>
->;
-export type GetTariffsQueryError = AxiosError<
-  Error | UnauthorizedResponse | ForbiddenResponse
->;
-
-export const useGetTariffs = <
-  TData = Awaited<ReturnType<typeof getTariffs>>,
-  TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>
->(
-  params: GetTariffsParams,
-  options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getTariffs>>,
-      TError,
-      TData
-    >;
-    axios?: AxiosRequestConfig;
+        params: {...params, ...options?.params},}
+    );
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const { query: queryOptions, axios: axiosOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetTariffsQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTariffs>>> = ({
-    signal,
-  }) => getTariffs(params, { signal, ...axiosOptions });
+export const getGetTariffsQueryKey = (params: GetTariffsParams,) => [`/tariffs`, ...(params ? [params]: [])];
 
-  const query = useQuery<Awaited<ReturnType<typeof getTariffs>>, TError, TData>(
-    { queryKey, queryFn, ...queryOptions }
-  ) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+    
+export type GetTariffsQueryResult = NonNullable<Awaited<ReturnType<typeof getTariffs>>>
+export type GetTariffsQueryError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>
+
+export const useGetTariffs = <TData = Awaited<ReturnType<typeof getTariffs>>, TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>>(
+ params: GetTariffsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getTariffs>>, TError, TData>, axios?: AxiosRequestConfig}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const {query: queryOptions, axios: axiosOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetTariffsQueryKey(params);
+
+  
+
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTariffs>>> = ({ signal }) => getTariffs(params, { signal, ...axiosOptions });
+
+
+  
+
+  const query = useQuery<Awaited<ReturnType<typeof getTariffs>>, TError, TData>({ queryKey, queryFn, ...queryOptions}) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 
   return query;
-};
+}
 
 /**
  * Registers one or more new ticket sales **with a discounted UiTPAS tariff**, so the UiTPAS organiser can get reimbursed for the discount.
@@ -114,7 +110,7 @@ categories, which can be useful in the financial reporting overview.
 
 If you want to register more than one ticket sale for the same passholder, for the same event, at the same tariff, use multiple `TicketSale` objects in this request. Do note this is only possible if `remaining` was higher than one in the `GET /tariffs` request.
 
-The `passholder` field of `TicketSale` is ignored in the request body. It is included in the response if applicable (passholder can be empty in some cases, e.g. for group passes), but only if the caller of this request has `PASSHOLDER_SEARCH` permission.
+The `passholder` field of `TicketSale` is ignored in the request body. It is included in the response if applicable (passholder can be empty in some cases, e.g. for group passes), but only if the caller of this request has `PASSHOLDERS_SEARCH` permission.
 
 <!-- theme: warning -->
 
@@ -126,163 +122,125 @@ The caller of this request must have `TICKETSALE_REGISTER`  permission for the o
  * @summary Register ticket sale(s)
  */
 export const postTicketSales = (
-  ticketSale: TicketSale[],
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<TicketSale[]>> => {
-  return axios.post(`/ticket-sales`, ticketSale, options);
-};
+    ticketSale: TicketSale[], options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<TicketSale[]>> => {
+    return axios.post(
+      `/ticket-sales`,
+      ticketSale,options
+    );
+  }
 
-export type PostTicketSalesMutationResult = NonNullable<
-  Awaited<ReturnType<typeof postTicketSales>>
->;
-export type PostTicketSalesMutationBody = TicketSale[];
-export type PostTicketSalesMutationError = AxiosError<
-  Error | UnauthorizedResponse | ForbiddenResponse
->;
 
-export const usePostTicketSales = <
-  TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postTicketSales>>,
-    TError,
-    { data: TicketSale[] },
-    TContext
-  >;
-  axios?: AxiosRequestConfig;
-}) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof postTicketSales>>,
-    { data: TicketSale[] }
-  > = (props) => {
-    const { data } = props ?? {};
+    export type PostTicketSalesMutationResult = NonNullable<Awaited<ReturnType<typeof postTicketSales>>>
+    export type PostTicketSalesMutationBody = TicketSale[]
+    export type PostTicketSalesMutationError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>
 
-    return postTicketSales(data, axiosOptions);
-  };
+    export const usePostTicketSales = <TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postTicketSales>>, TError,{data: TicketSale[]}, TContext>, axios?: AxiosRequestConfig}
+) => {
+      const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
-  return useMutation<
-    Awaited<ReturnType<typeof postTicketSales>>,
-    TError,
-    { data: TicketSale[] },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-/**
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postTicketSales>>, {data: TicketSale[]}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postTicketSales(data,axiosOptions)
+        }
+
+        
+
+      return useMutation<Awaited<ReturnType<typeof postTicketSales>>, TError, {data: TicketSale[]}, TContext>(mutationFn, mutationOptions);
+    }
+    /**
  * Retrieve ticket sales based on search parameters.
 
-The caller of this request must have `TICKETSALE_SEARCH` permission for the organizer of the given event.
+The caller of this request must have `TICKETSALES_SEARCH` permission for the organizer of the given event.
 
-The `passholder` is included in the response if applicable (passholder can be empty in some cases, e.g. for group passes), and only if the caller of this request has PASSHOLDER_SEARCH permission.
+The `passholder` is included in the response if applicable (passholder can be empty in some cases, e.g. for group passes), and only if the caller of this request has PASSHOLDERS_SEARCH permission.
  * @summary Retrieve existing ticket sales
  */
 export const getTicketSales = (
-  params: GetTicketSalesParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<TicketSalesPaginatedResponse>> => {
-  return axios.get(`/ticket-sales`, {
+    params: GetTicketSalesParams, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<TicketSalesPaginatedResponse>> => {
+    return axios.get(
+      `/ticket-sales`,{
     ...options,
-    params: { ...params, ...options?.params },
-  });
-};
-
-export const getGetTicketSalesQueryKey = (params: GetTicketSalesParams) => [
-  `/ticket-sales`,
-  ...(params ? [params] : []),
-];
-
-export type GetTicketSalesQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getTicketSales>>
->;
-export type GetTicketSalesQueryError = AxiosError<
-  UnauthorizedResponse | ForbiddenResponse
->;
-
-export const useGetTicketSales = <
-  TData = Awaited<ReturnType<typeof getTicketSales>>,
-  TError = AxiosError<UnauthorizedResponse | ForbiddenResponse>
->(
-  params: GetTicketSalesParams,
-  options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getTicketSales>>,
-      TError,
-      TData
-    >;
-    axios?: AxiosRequestConfig;
+        params: {...params, ...options?.params},}
+    );
   }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const { query: queryOptions, axios: axiosOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetTicketSalesQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTicketSales>>> = ({
-    signal,
-  }) => getTicketSales(params, { signal, ...axiosOptions });
+export const getGetTicketSalesQueryKey = (params: GetTicketSalesParams,) => [`/ticket-sales`, ...(params ? [params]: [])];
 
-  const query = useQuery<
-    Awaited<ReturnType<typeof getTicketSales>>,
-    TError,
-    TData
-  >({ queryKey, queryFn, ...queryOptions }) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
+    
+export type GetTicketSalesQueryResult = NonNullable<Awaited<ReturnType<typeof getTicketSales>>>
+export type GetTicketSalesQueryError = AxiosError<UnauthorizedResponse | ForbiddenResponse>
+
+export const useGetTicketSales = <TData = Awaited<ReturnType<typeof getTicketSales>>, TError = AxiosError<UnauthorizedResponse | ForbiddenResponse>>(
+ params: GetTicketSalesParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getTicketSales>>, TError, TData>, axios?: AxiosRequestConfig}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const {query: queryOptions, axios: axiosOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetTicketSalesQueryKey(params);
+
+  
+
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTicketSales>>> = ({ signal }) => getTicketSales(params, { signal, ...axiosOptions });
+
+
+  
+
+  const query = useQuery<Awaited<ReturnType<typeof getTicketSales>>, TError, TData>({ queryKey, queryFn, ...queryOptions}) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 
   return query;
-};
+}
 
 /**
  * Cancels a single ticket sale registration by its id. (Returned in the response of the ticket sale registration request.)
 
-The caller of this request must have `TICKETSALE_REGISTER` permission for the organizer of the event of the ticketsale.
+The caller of this request must have `TICKETSALES_REGISTER` permission for the organizer of the event of the ticketsale.
  * @summary Cancel a ticket sale registration
  */
 export const deleteTicketSales = (
-  ticketSaleId: string,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<void>> => {
-  return axios.delete(`/ticket-sales/${ticketSaleId}`, options);
-};
+    ticketSaleId: string, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<void>> => {
+    return axios.delete(
+      `/ticket-sales/${ticketSaleId}`,options
+    );
+  }
 
-export type DeleteTicketSalesMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteTicketSales>>
->;
 
-export type DeleteTicketSalesMutationError = AxiosError<
-  UnauthorizedResponse | ForbiddenResponse | Error
->;
 
-export const useDeleteTicketSales = <
-  TError = AxiosError<UnauthorizedResponse | ForbiddenResponse | Error>,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteTicketSales>>,
-    TError,
-    { ticketSaleId: string },
-    TContext
-  >;
-  axios?: AxiosRequestConfig;
-}) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
+    export type DeleteTicketSalesMutationResult = NonNullable<Awaited<ReturnType<typeof deleteTicketSales>>>
+    
+    export type DeleteTicketSalesMutationError = AxiosError<UnauthorizedResponse | ForbiddenResponse | Error>
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteTicketSales>>,
-    { ticketSaleId: string }
-  > = (props) => {
-    const { ticketSaleId } = props ?? {};
+    export const useDeleteTicketSales = <TError = AxiosError<UnauthorizedResponse | ForbiddenResponse | Error>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteTicketSales>>, TError,{ticketSaleId: string}, TContext>, axios?: AxiosRequestConfig}
+) => {
+      const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
-    return deleteTicketSales(ticketSaleId, axiosOptions);
-  };
+      
 
-  return useMutation<
-    Awaited<ReturnType<typeof deleteTicketSales>>,
-    TError,
-    { ticketSaleId: string },
-    TContext
-  >(mutationFn, mutationOptions);
-};
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteTicketSales>>, {ticketSaleId: string}> = (props) => {
+          const {ticketSaleId} = props ?? {};
+
+          return  deleteTicketSales(ticketSaleId,axiosOptions)
+        }
+
+        
+
+      return useMutation<Awaited<ReturnType<typeof deleteTicketSales>>, TError, {ticketSaleId: string}, TContext>(mutationFn, mutationOptions);
+    }
+    

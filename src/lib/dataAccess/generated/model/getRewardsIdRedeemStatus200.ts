@@ -5,7 +5,7 @@
  * With UiTPAS API 4.0 you can retrieve ticket prices and register ticket sales for passholders. You can also save UiTPAS points and exchange them for rewards for a passholder, and much more.
  * OpenAPI spec version: 4.0
  */
-import type { GetRewardsIdRedeemStatus200Reason } from "./getRewardsIdRedeemStatus200Reason";
+import type { GetRewardsIdRedeemStatus200Reason } from './getRewardsIdRedeemStatus200Reason';
 
 export type GetRewardsIdRedeemStatus200 = {
   /** Whether this reward can be redeemed by the given passholder. */
@@ -18,7 +18,6 @@ export type GetRewardsIdRedeemStatus200 = {
 - `REWARD_VOLUME`: maximum number of times this reward can be redeemed (in general) has been reached.
 - `PASSHOLDER_APPLICABLE_CARDSYSTEMS`: the passholder is not a member of one of the applicable card systems of this reward.
 - `PASSHOLDER_NO_ACTIVE_CARDSYSTEMS`: the passholder is not active or has no active card system memberships
-- `SOCIAL_TARIFF_EXPIRED`: the social tariff of this passholder expired.
  */
   reason?: GetRewardsIdRedeemStatus200Reason;
   /** User readable message of the reason (only if redeemable if false) */

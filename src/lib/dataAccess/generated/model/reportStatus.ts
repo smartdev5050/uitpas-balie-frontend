@@ -9,11 +9,12 @@
 /**
  * Whether the report has started (but not ready yet), is available for download, or failed to be created.
  */
-export type ReportStatus = (typeof ReportStatus)[keyof typeof ReportStatus];
+export type ReportStatus = typeof ReportStatus[keyof typeof ReportStatus];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ReportStatus = {
-  STARTED: "STARTED",
-  AVAILABLE: "AVAILABLE",
-  FAILED: "FAILED",
+  STARTED: 'STARTED',
+  AVAILABLE: 'AVAILABLE',
+  FAILED: 'FAILED',
 } as const;

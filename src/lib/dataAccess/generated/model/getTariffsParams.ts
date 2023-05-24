@@ -6,8 +6,4 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetTariffsParams = {
-  regularPrice: number;
-  eventId: string;
-  uitpasNumber: string;
-};
+export type GetTariffsParams = { regularPrice: number; eventId: string; uitpasNumber: string };

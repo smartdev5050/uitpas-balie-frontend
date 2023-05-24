@@ -9,12 +9,12 @@
 /**
  * Severity level of the message
  */
-export type PassMessagesItemLevel =
-  (typeof PassMessagesItemLevel)[keyof typeof PassMessagesItemLevel];
+export type PassMessagesItemLevel = typeof PassMessagesItemLevel[keyof typeof PassMessagesItemLevel];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const PassMessagesItemLevel = {
-  INFO: "INFO",
-  WARN: "WARN",
-  ERROR: "ERROR",
+  INFO: 'INFO',
+  WARN: 'WARN',
+  ERROR: 'ERROR',
 } as const;

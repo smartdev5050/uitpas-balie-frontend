@@ -6,11 +6,11 @@
  * OpenAPI spec version: 4.0
  */
 
-export type GetRewardsSortName =
-  (typeof GetRewardsSortName)[keyof typeof GetRewardsSortName];
+export type GetRewardsSortName = typeof GetRewardsSortName[keyof typeof GetRewardsSortName];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetRewardsSortName = {
-  asc: "asc",
-  desc: "desc",
+  asc: 'asc',
+  desc: 'desc',
 } as const;

@@ -15,20 +15,18 @@
 - `REWARD_VOLUME`: maximum number of times this reward can be redeemed (in general) has been reached.
 - `PASSHOLDER_APPLICABLE_CARDSYSTEMS`: the passholder is not a member of one of the applicable card systems of this reward.
 - `PASSHOLDER_NO_ACTIVE_CARDSYSTEMS`: the passholder is not active or has no active card system memberships
-- `SOCIAL_TARIFF_EXPIRED`: the social tariff of this passholder expired.
 
  */
-export type GetRewardsIdRedeemStatus200Reason =
-  (typeof GetRewardsIdRedeemStatus200Reason)[keyof typeof GetRewardsIdRedeemStatus200Reason];
+export type GetRewardsIdRedeemStatus200Reason = typeof GetRewardsIdRedeemStatus200Reason[keyof typeof GetRewardsIdRedeemStatus200Reason];
+
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetRewardsIdRedeemStatus200Reason = {
-  INVALID_CARD: "INVALID_CARD",
-  PASSHOLDER_VOLUME: "PASSHOLDER_VOLUME",
-  PASSHOLDER_POINTS: "PASSHOLDER_POINTS",
-  REWARD_PERIOD: "REWARD_PERIOD",
-  REWARD_VOLUME: "REWARD_VOLUME",
-  PASSHOLDER_APPLICABLE_CARDSYSTEMS: "PASSHOLDER_APPLICABLE_CARDSYSTEMS",
-  SOCIAL_TARIFF_EXPIRED: "SOCIAL_TARIFF_EXPIRED",
-  PASSHOLDER_NO_ACTIVE_CARDSYSTEM: "PASSHOLDER_NO_ACTIVE_CARDSYSTEM",
+  INVALID_CARD: 'INVALID_CARD',
+  PASSHOLDER_VOLUME: 'PASSHOLDER_VOLUME',
+  PASSHOLDER_POINTS: 'PASSHOLDER_POINTS',
+  REWARD_PERIOD: 'REWARD_PERIOD',
+  REWARD_VOLUME: 'REWARD_VOLUME',
+  PASSHOLDER_APPLICABLE_CARDSYSTEMS: 'PASSHOLDER_APPLICABLE_CARDSYSTEMS',
+  PASSHOLDER_NO_ACTIVE_CARDSYSTEM: 'PASSHOLDER_NO_ACTIVE_CARDSYSTEM',
 } as const;

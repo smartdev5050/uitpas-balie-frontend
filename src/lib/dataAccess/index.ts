@@ -1,9 +1,14 @@
-export * from "./generated/model";
 export * from "./generated/card-systems/card-systems";
-export * from "./generated/passholders/passholders";
 export * from "./generated/current-passholder/current-passholder";
+export * from './generated/events/events'
+export * from './generated/financial-reports/financial-reports'
+export * from "./generated/model";
+export * from './generated/organizers/organizers';
+export * from "./generated/passholders/passholders";
 export * from "./generated/permissions/permissions";
-
+export * from "./generated/rewards/rewards";
+export * from "./generated/schools/schools";
+export * from "./generated/ticket-sales/ticket-sales";
+export * from "./generated/ui-ti-d/ui-ti-d";
 export * from "./uitid/useGetUserInfo";
-
 export * from "./initAxios";
