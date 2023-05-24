@@ -35,8 +35,9 @@ console.log(status)
   ) => {
     if (activeCounter && startDate && endDate)
       startReportRequest(activeCounter?.id, {
-        startDate: selectedStartDate || startDate.toISOString(),
-        endDate: selectedEndDate || endDate.toISOString(),
+        startDate:
+          selectedStartDate || toISODateString(startDate.toISOString()),
+        endDate: selectedEndDate || toISODateString(endDate.toISOString()),
       });
   };
 
@@ -93,3 +94,8 @@ console.log(status)
     </PageWithSidebar>
   );
 };
+
+
+function toISODateString(ISOString:string){
+  return ISOString.split("T")[0]
+}
