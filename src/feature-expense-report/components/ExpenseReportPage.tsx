@@ -7,9 +7,7 @@ import {
   Button,
 } from "@/lib/ui";
 import { useActiveCounter } from "@/feature-counter";
-import {
-  useGetOrganizersFinancialReportsPeriods,
-} from "@/lib/dataAccess";
+import { useGetOrganizersFinancialReportsPeriods } from "@/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
 import { Box, FormControl, FormLabel } from "@mui/joy";
 import { AnchorButton } from "@/lib/ui/uitpas/AnchorButton";
@@ -26,7 +24,7 @@ export const ExpenseReportPage = () => {
   const { startReportRequest, status } = useDownloadReport(
     activeCounter?.id || ""
   );
-console.log(status)
+  console.log(status);
   const periods = reportsPeriodFetchData?.data;
 
   const createReport = (
@@ -45,17 +43,30 @@ console.log(status)
     <PageWithSidebar sideBarContent={<SidebarContent />} hasBackButton>
       <Stack m={2} gap={3} alignContent="flex-start">
         <Typography level="body1">{t("expenseReport.summary")}</Typography>
-        <Stack direction={"row"}>
-          <FormControl>
-            <FormLabel>{t("common.startDate")}</FormLabel>
+        <Stack
+          direction={"row"}
+          gap={3}
+          justifyContent={"space-between"}
+          width="66%"
+        >
+          <FormControl sx={{ flexGrow: 1 }}>
+            <FormLabel>
+              <Typography level="body2">
+                <strong> {t("common.startDate")}</strong>
+              </Typography>
+            </FormLabel>
             <DateInput
               placeholderText="Placeholder"
               onChange={(date) => setStartDate(date)}
               selected={startDate}
             />
           </FormControl>
-          <FormControl>
-            <FormLabel>{t("common.endDate")}</FormLabel>
+          <FormControl sx={{ flexGrow: 1 }}>
+            <FormLabel>
+              <Typography level="body2">
+                <strong> {t("common.endDate")}</strong>
+              </Typography>
+            </FormLabel>
             <DateInput
               placeholderText="Placeholder"
               onChange={(date) => setEndDate(date)}
@@ -64,7 +75,7 @@ console.log(status)
           </FormControl>
         </Stack>
         <Box>
-          <Button onClick={()=>createReport()}>{t("common.create")}</Button>
+          <Button onClick={() => createReport()}>{t("common.create")}</Button>
         </Box>
         <Typography level="h2" mb={0}>
           {t("expenseReport.readyReports")}
@@ -86,7 +97,12 @@ console.log(status)
               <Typography level="body1" display="inline">
                 {period.endDate}
               </Typography>{" "}
-              <AnchorButton level="body3" onClick={()=>createReport(period.startDate,period.endDate)}>Maak en download</AnchorButton>
+              <AnchorButton
+                level="body3"
+                onClick={() => createReport(period.startDate, period.endDate)}
+              >
+                Maak en download
+              </AnchorButton>
             </Stack>
           ))}
         </Stack>
@@ -95,7 +111,6 @@ console.log(status)
   );
 };
 
-
-function toISODateString(ISOString:string){
-  return ISOString.split("T")[0]
+function toISODateString(ISOString: string) {
+  return ISOString.split("T")[0];
 }

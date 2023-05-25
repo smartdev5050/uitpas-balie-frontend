@@ -13,9 +13,11 @@ const StyledInputContainer = styled(Stack)(({ theme }) => ({
   border: `${theme.vars.palette.neutral[400]} 1px solid`,
   padding: "0 0 0 8px",
   height: "40px",
+  width:"100%",
 }));
 const StyledDateInput = styled("input")(({ theme }) => ({
   height: "100%",
+  flexGrow: 1,
   border: "none",
   outline: "none",
   color: theme.vars.palette.neutral[700],
@@ -34,7 +36,7 @@ const StyledDateInputEndDecorator = styled(IconButton)(({ theme }) => ({
 }));
 
 const DateInputWithRef = forwardRef<HTMLInputElement>((props, ref) => {
-  const theme = useTheme()
+  const theme = useTheme();
   const openDatePicker = () => {
     props?.onClick?.();
   };
