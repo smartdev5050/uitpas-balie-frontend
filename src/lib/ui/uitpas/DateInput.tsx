@@ -4,17 +4,21 @@ import ReactDatePicker from "react-datepicker";
 import { ReactDatePickerProps } from "@types/react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTheme } from "@emotion/react";
 
 const StyledInputContainer = styled(Stack)(({ theme }) => ({
+  boxSizing: 'border-box',
   border: `${theme.vars.palette.neutral[400]} 1px solid`,
+  padding: "0 0 0 8px",
+  height: "40px",
 }));
 const StyledDateInput = styled("input")(({ theme }) => ({
-  //height: "100%",
-  height: "37px",
+  height: "100%",
   border: "none",
   outline: "none",
+  color: theme.vars.palette.neutral[700],
   [":focus-visible"]: {
     border: "none",
     outline: "none",
@@ -22,7 +26,6 @@ const StyledDateInput = styled("input")(({ theme }) => ({
 }));
 
 const StyledDateInputEndDecorator = styled(IconButton)(({ theme }) => ({
-  padding: "4px",
   height: "100%",
   borderRadius: 0,
   margin: 0,
@@ -31,6 +34,7 @@ const StyledDateInputEndDecorator = styled(IconButton)(({ theme }) => ({
 }));
 
 const DateInputWithRef = forwardRef<HTMLInputElement>((props, ref) => {
+  const theme = useTheme()
   const openDatePicker = () => {
     props?.onClick?.();
   };
@@ -38,7 +42,11 @@ const DateInputWithRef = forwardRef<HTMLInputElement>((props, ref) => {
     <StyledInputContainer direction="row">
       <StyledDateInput ref={ref} {...props} />
       <StyledDateInputEndDecorator variant="outlined" onClick={openDatePicker}>
-        <FontAwesomeIcon color="#000" fontSize={"sm"} icon={faCalendar} />
+        <FontAwesomeIcon
+          color={theme.vars.palette.neutral[700]}
+          fontSize={"xs"}
+          icon={faCalendarDays}
+        />
       </StyledDateInputEndDecorator>
     </StyledInputContainer>
   );
