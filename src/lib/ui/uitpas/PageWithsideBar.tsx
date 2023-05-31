@@ -4,6 +4,7 @@ import { Divider, styled } from "@mui/joy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { PropsWithChildren, ReactNode } from "react";
+import { Footer } from "./Footer";
 
 const SideBarContainer = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -27,7 +28,7 @@ export const PageWithSidebar = ({
         <Stack spacing={2}>
           {hasBackButton && <>
             <Link href={"/"}>
-              <Stack direction="row">
+              <Stack direction="row" alignItems="center">
                 <FontAwesomeIcon icon={faArrowLeft} /> {t("Terug")}
               </Stack>
             </Link>
@@ -38,6 +39,7 @@ export const PageWithSidebar = ({
       </SideBarContainer>
       <Grid xs={12} sm={7} md={8} lg={9}>
         {children}
+        <Footer/>
       </Grid>
     </Grid>
   );
