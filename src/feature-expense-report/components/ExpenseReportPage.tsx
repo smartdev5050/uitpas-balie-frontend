@@ -9,22 +9,24 @@ import {
 import { useActiveCounter } from "@/feature-counter";
 import { useGetOrganizersFinancialReportsPeriods } from "@/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
-import { Box, FormControl, FormLabel } from "@mui/joy";
+import { Alert, Box, FormControl, FormLabel } from "@mui/joy";
 import { AnchorButton } from "@/lib/ui/uitpas/AnchorButton";
 import { useState } from "react";
 import { useDownloadReport } from "../hooks/useDownloadReport";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 
 export const ExpenseReportPage = () => {
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [endDate, setEndDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [endDate, setEndDate] = useState<Date>(new Date());
   const { t } = useTranslation();
   const activeCounter = useActiveCounter();
   const { data: reportsPeriodFetchData } =
     useGetOrganizersFinancialReportsPeriods(activeCounter?.id || "");
-  const { startReportRequest, status } = useDownloadReport(
+  const { startReportRequest, isDownloading, hasFailed } = useDownloadReport(
     activeCounter?.id || ""
   );
-  console.log(status);
+
   const periods = reportsPeriodFetchData?.data;
 
   const createReport = (
@@ -38,11 +40,19 @@ export const ExpenseReportPage = () => {
         endDate: selectedEndDate || toISODateString(endDate.toISOString()),
       });
   };
+  const invalidDateRange =
+    new Date(`${endDate}T23:59:59.999Z`).getTime() <
+    new Date(`${startDate}T00:00:00.000Z`).getTime();
 
   return (
     <PageWithSidebar sideBarContent={<SidebarContent />} hasBackButton>
       <Stack m={2} gap={3} alignContent="flex-start">
         <Typography level="body1">{t("expenseReport.summary")}</Typography>
+        {hasFailed && (
+          <Alert color="danger">
+           {t("expenseReport.noReportsAvailable")}
+          </Alert>
+        )}
         <Stack
           direction={"row"}
           gap={3}
@@ -57,7 +67,7 @@ export const ExpenseReportPage = () => {
             </FormLabel>
             <DateInput
               placeholderText="Placeholder"
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) => setStartDate(date || new Date())}
               selected={startDate}
             />
           </FormControl>
@@ -69,13 +79,21 @@ export const ExpenseReportPage = () => {
             </FormLabel>
             <DateInput
               placeholderText="Placeholder"
-              onChange={(date) => setEndDate(date)}
+              onChange={(date) => setEndDate(date || new Date())}
               selected={endDate}
             />
           </FormControl>
         </Stack>
         <Box>
-          <Button onClick={() => createReport()}>{t("common.create")}</Button>
+          <Button
+            disabled={(isDownloading && !hasFailed) || invalidDateRange}
+            onClick={() => createReport()}
+          >
+            {isDownloading && !hasFailed && (
+              <FontAwesomeIcon icon={faRefresh} spin fontSize="xs" />
+            )}
+            {t("common.create")}
+          </Button>
         </Box>
         <Typography level="h2" mb={0}>
           {t("expenseReport.readyReports")}
@@ -85,18 +103,19 @@ export const ExpenseReportPage = () => {
             <Stack
               direction={"row"}
               key={`period-${index}`}
+              gap={1}
               sx={{ listStyle: "inside", display: "list-item" }}
               justifyContent="space-between"
             >
-              <Typography level="body1" display="inline-block">
+              <Typography level="body1" display="inline" mr={0.5}>
                 {period.startDate}
               </Typography>
-              <Typography level="body1" display="inline">
-                {"  "}-{"  "}
+              <Typography level="body1" display="inline" mr={0.5}>
+                -
               </Typography>
-              <Typography level="body1" display="inline">
+              <Typography level="body1" display="inline" mr={1}>
                 {period.endDate}
-              </Typography>{" "}
+              </Typography>
               <AnchorButton
                 level="body3"
                 onClick={() => createReport(period.startDate, period.endDate)}

@@ -30,7 +30,8 @@
     "description": "Download hier je onkostennota van geregistreerde kortingstarieven per gemeente.",
     "info": "Het maken van je onkostennota kan enkele minuten duren. Wanneer de onkostennota klaar is zal je het kunnen downloaden. Gelieve dit venster niet te sluiten.",
     "summary":"Vul hier de start- en einddatum in van de periode waarbinnen je de gewenste kortingstarieven registreerde.",
-    "readyReports":"Je klaargezette onkostennota's"
+    "readyReports":"Je klaargezette onkostennota's",
+    "noReportsAvailable":"In deze periode werden geen kortingen geregistreerd, er is dan ook geen financieel rapport beschikbaar."
   },
   "nav": {
     "home": "Home",

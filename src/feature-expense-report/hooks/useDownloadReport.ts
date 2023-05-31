@@ -4,16 +4,23 @@ import {
     useGetOrganizersFinancialReportsReportIdZip,
     usePostOrganizersFinancialReports,
 } from "@/lib/dataAccess";
-import { saveAs } from 'file-saver';
 import { useEffect, useState } from "react";
+import {saveAs} from 'file-saver'
+import JsZip from 'jszip';
+
+const zipUrl = (organizerId: string | number, reportId: string | number) => `${process.env.NEXT_PUBLIC_API_PATH}/organizers/${organizerId}/financial-reports/${reportId}.zip`
+
 type PeriodType = {
     startDate: string, endDate: string
 }
-type ReturnType = { startReportRequest: (organizerId: string, period: PeriodType) => void, status: ReportStatus, isLoading: boolean }
+
+type ReturnType = { startReportRequest: (organizerId: string, period: PeriodType) => void, status: ReportStatus, isDownloading: boolean, hasFailed: boolean }
 
 export const useDownloadReport = (organizerId: string): ReturnType => {
+    const [hasStarted, setHasStarted] = useState(false)
     const [reportId, setReportId] = useState(0)
     const [reportStatus, setReportStatus] = useState<ReportStatus>("STARTED")
+    const [periodToDownload,setPeriodToDownload] = useState<PeriodType|null>(null)
 
     const { mutate: postReports, data: createReportData, isLoading: isCreateLoading } = usePostOrganizersFinancialReports();
     const { data: reportStatusData, refetch: getReportStatus, isLoading: isStatusLoading } = useGetOrganizersFinancialReportsReportId(organizerId, reportId, { query: { enabled: false } })
@@ -22,6 +29,8 @@ export const useDownloadReport = (organizerId: string): ReturnType => {
     const startReportRequest = (organizerId: string, period: PeriodType) => {
         setReportId(0)
         setReportStatus("STARTED")
+        setHasStarted(true)
+        setPeriodToDownload(period)
         postReports({
             organizerId,
             data: period
@@ -57,18 +66,26 @@ export const useDownloadReport = (organizerId: string): ReturnType => {
         getReportZip()
 
     }, [reportStatus])
-
+    //check on status and download zip
     useEffect(() => {
-        if (!reportZipData) return
+        if (reportStatus !== ReportStatus.AVAILABLE || !reportZipData || !hasStarted) return
+        const zip = JsZip();
+        zip.loadAsync(reportZipData.data as Blob)
+        zip.generateAsync({ type: 'blob' }).then(zipFile => {
+            const fileName = `financialReport_${periodToDownload?.startDate}-${periodToDownload?.endDate}.zip`;
+            return saveAs(zipFile, fileName);
+        });
 
-        // save file = reportZipData.data
-        // no need to request zip data, just need url(?)
-        console.log(reportZipData.data)
-        //saveAs(reportZipData.data, "finance-reports.zip");
+        //should work in production?
+        window.location.href = zipUrl(organizerId, reportId)
+        window.open(zipUrl(organizerId,reportId),'_blank')
+       
 
+        setHasStarted(false)
     }, [reportZipData])
 
-    const isLoading = reportStatus === ReportStatus.STARTED || isCreateLoading || isStatusLoading || isZipLoading
+    const isDownloading = hasStarted && (reportStatus === ReportStatus.STARTED || isCreateLoading || isStatusLoading || isZipLoading)
+    const hasFailed = reportStatus === ReportStatus.FAILED
 
-    return { startReportRequest, status: reportStatus, isLoading }
+    return { startReportRequest, status: reportStatus, isDownloading, hasFailed }
 }
