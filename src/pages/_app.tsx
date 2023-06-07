@@ -46,7 +46,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               border: 0,
             },
             a:{
-              color: theme.palette.primary.solidBg
+              color: theme.palette.info[500]
             }
           }}
         />
