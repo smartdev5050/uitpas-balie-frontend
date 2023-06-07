@@ -5,6 +5,7 @@ import {
   Typography,
   DateInput,
   Button,
+  ListItem,
 } from "@/lib/ui";
 import { useActiveCounter } from "@/feature-counter";
 import { useGetOrganizersFinancialReportsPeriods } from "@/lib/dataAccess";
@@ -49,9 +50,7 @@ export const ExpenseReportPage = () => {
       <Stack m={2} gap={3} alignContent="flex-start">
         <Typography level="body1">{t("expenseReport.summary")}</Typography>
         {hasFailed && (
-          <Alert color="danger">
-           {t("expenseReport.noReportsAvailable")}
-          </Alert>
+          <Alert color="danger">{t("expenseReport.noReportsAvailable")}</Alert>
         )}
         <Stack
           direction={"row"}
@@ -100,29 +99,25 @@ export const ExpenseReportPage = () => {
         </Typography>
         <Stack gap={0.2} ml={3}>
           {periods?.map((period, index) => (
-            <Stack
-              direction={"row"}
-              key={`period-${index}`}
-              gap={1}
-              sx={{ listStyle: "inside", display: "list-item" }}
-              justifyContent="space-between"
-            >
-              <Typography level="body1" display="inline" mr={0.5}>
-                {period.startDate}
-              </Typography>
-              <Typography level="body1" display="inline" mr={0.5}>
-                -
-              </Typography>
-              <Typography level="body1" display="inline" mr={1}>
-                {period.endDate}
-              </Typography>
-              <AnchorButton
-                level="body3"
-                onClick={() => createReport(period.startDate, period.endDate)}
-              >
-                Maak en download
-              </AnchorButton>
-            </Stack>
+            <ListItem key={`period-${index}`}>
+              <Stack display={"inline"} direction={"row"} gap={1}>
+                <Typography level="body1" display="inline" mr={0.5}>
+                  {period.startDate}
+                </Typography>
+                <Typography level="body1" display="inline" mr={0.5}>
+                  -
+                </Typography>
+                <Typography level="body1" display="inline" mr={1}>
+                  {period.endDate}
+                </Typography>
+                <AnchorButton
+                  level="body3"
+                  onClick={() => createReport(period.startDate, period.endDate)}
+                >
+                  Maak en download
+                </AnchorButton>
+              </Stack>
+            </ListItem>
           ))}
         </Stack>
       </Stack>

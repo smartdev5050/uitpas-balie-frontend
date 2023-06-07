@@ -17,11 +17,9 @@ const footerLinks = [
 
 const StyledAnchor = styled.a`
   margin: 0 8px;
-  color: #2a4b9c;
 `;
 const StyledLink = styled(Link)`
   margin: 0 8px;
-  color: #2a4b9c;
 `;
 const StyledFooter = styled.footer`
   margin: 36px 16px 16px;
@@ -33,7 +31,7 @@ export const Footer = () => {
     <StyledFooter>
       <Stack direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" alignItems="flex-end">
-          <StyledLink replace href="/feedback">
+          <StyledLink  replace href="/feedback">
             {t("footer.submitIssue")}
           </StyledLink>
           <StyledLink replace href="/help">

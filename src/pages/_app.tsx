@@ -45,6 +45,9 @@ const App = ({ Component, pageProps }: AppProps) => {
             iframe: {
               border: 0,
             },
+            a:{
+              color: theme.palette.primary.solidBg
+            }
           }}
         />
         <main className={openSansFont.className}>
