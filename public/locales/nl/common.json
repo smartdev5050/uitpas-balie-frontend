@@ -34,6 +34,11 @@
     "noReportsAvailable":"In deze periode werden geen kortingen geregistreerd, er is dan ook geen financieel rapport beschikbaar.",
     "download":"Onkostennota downloaden"
   },
+  "help": {
+    "title": "Help",
+    "description": "Snel naar",
+    "subDescription": "Helpdesk"
+    },
   "nav": {
     "home": "Home",
     "back": "Terug",
