@@ -7,16 +7,21 @@ import {
 import { useEffect, useState } from "react";
 import { saveAs } from 'file-saver'
 import JsZip from 'jszip';
+import { PeriodType, isSamePeriod } from "@/lib/utils";
 //import { useGetOrganizersFinancialReportsReportIdZip } from "./useGetDownloadBlob";
 
 const zipUrl = (organizerId: string | number, reportId: string | number) => `${process.env.NEXT_PUBLIC_API_PATH}/organizers/${organizerId}/financial-reports/${reportId}.zip`
 //const zipUrl = (organizerId: string | number, reportId: string | number) => `https://balie-test.uitpas.be/counters/active/expense-reports/${reportId}.zip`
 
-type PeriodType = {
-    startDate: string, endDate: string
-}
 
-type ReturnType = { startReportRequest: (organizerId: string, period: PeriodType) => void, status: ReportStatus, isDownloading: boolean, hasFailed: boolean }
+
+type ReturnType = {
+    startReportRequest: (organizerId: string, period: PeriodType) => void,
+    status: ReportStatus,
+    isDownloading: boolean,
+    hasFailed: boolean,
+    period: PeriodType | null,
+}
 
 export const useDownloadReport = (organizerId: string): ReturnType => {
     const [hasStarted, setHasStarted] = useState(false)
@@ -29,9 +34,15 @@ export const useDownloadReport = (organizerId: string): ReturnType => {
     const { data: reportZipData, refetch: getReportZip, isLoading: isZipLoading } = useGetOrganizersFinancialReportsReportIdZip(organizerId, reportId, { query: { enabled: false } })
 
     const startReportRequest = (organizerId: string, period: PeriodType) => {
+        //if downloading same period as last time, skip creation
+        if (isSamePeriod(period, periodToDownload)) {
+            setHasStarted(true)
+            return;
+        }
         setReportId(0)
         setReportStatus("STARTED")
         setHasStarted(true)
+
         setPeriodToDownload(period)
         postReports({
             organizerId,
@@ -79,11 +90,11 @@ export const useDownloadReport = (organizerId: string): ReturnType => {
 
 
 
-        const element = document.createElement('a');
-        element.setAttribute('href', zipUrl(organizerId, reportId));
-        element.setAttribute('download', `financialReport_${periodToDownload?.startDate}-${periodToDownload?.endDate}.zip`);
-        console.log(element)
-        element.click();
+        // const element = document.createElement('a');
+        // element.setAttribute('href', zipUrl(organizerId, reportId));
+        // element.setAttribute('download', `financialReport_${periodToDownload?.startDate}-${periodToDownload?.endDate}.zip`);
+        // console.log(element)
+        // element.click();
 
         //         //should work in production?
         //window.location.href = zipUrl(organizerId, reportId)
@@ -91,10 +102,10 @@ export const useDownloadReport = (organizerId: string): ReturnType => {
 
 
         setHasStarted(false)
-    }, [reportZipData])
+    }, [reportZipData,reportStatus,hasStarted])
 
     const isDownloading = hasStarted && (reportStatus === ReportStatus.STARTED || isCreateLoading || isStatusLoading || isZipLoading)
     const hasFailed = reportStatus === ReportStatus.FAILED
 
-    return { startReportRequest, status: reportStatus, isDownloading, hasFailed }
+    return { startReportRequest, status: reportStatus, isDownloading, hasFailed, period: periodToDownload }
 }

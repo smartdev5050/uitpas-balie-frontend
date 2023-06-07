@@ -15,31 +15,44 @@ import { AnchorButton } from "@/lib/ui/uitpas/AnchorButton";
 import { useState } from "react";
 import { useDownloadReport } from "../hooks/useDownloadReport";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRefresh } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faRefresh } from "@fortawesome/free-solid-svg-icons";
+import { PeriodType, isSamePeriod } from "@/lib/utils";
 
 export const ExpenseReportPage = () => {
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>(new Date());
+  const [startDate, setStartDate] = useState<string>(dateToISODateString());
+  const [endDate, setEndDate] = useState<string>(dateToISODateString());
+  const [periodToDownload, setPeriodToDownload] = useState<PeriodType | null>();
+
   const { t } = useTranslation();
   const activeCounter = useActiveCounter();
   const { data: reportsPeriodFetchData } =
     useGetOrganizersFinancialReportsPeriods(activeCounter?.id || "");
-  const { startReportRequest, isDownloading, hasFailed } = useDownloadReport(
-    activeCounter?.id || ""
-  );
+  const {
+    startReportRequest,
+    isDownloading,
+    hasFailed,
+    period: isDownloadingPeriod,
+  } = useDownloadReport(activeCounter?.id || "");
 
   const periods = reportsPeriodFetchData?.data;
 
   const createReport = (
     selectedStartDate?: string,
     selectedEndDate?: string
-  ) => {
-    if (activeCounter && startDate && endDate)
-      startReportRequest(activeCounter?.id, {
-        startDate:
-          selectedStartDate || toISODateString(startDate.toISOString()),
-        endDate: selectedEndDate || toISODateString(endDate.toISOString()),
-      });
+  ) => {    
+    const startDateForReport = selectedStartDate || startDate
+    const endDateForReport = selectedEndDate || endDate
+
+    if (selectedStartDate) setStartDate(selectedStartDate);
+    if (selectedEndDate) setEndDate(selectedEndDate);
+    if (activeCounter && startDate && endDate) {
+      const p = {
+        startDate: startDateForReport,
+        endDate: endDateForReport,
+      };
+      startReportRequest(activeCounter?.id, p);
+      setPeriodToDownload(p);
+    }
   };
   const invalidDateRange =
     new Date(`${endDate}T23:59:59.999Z`).getTime() <
@@ -66,8 +79,8 @@ export const ExpenseReportPage = () => {
             </FormLabel>
             <DateInput
               placeholderText="Placeholder"
-              onChange={(date) => setStartDate(date || new Date())}
-              selected={startDate}
+              onChange={(date) => setStartDate(dateToISODateString(date))}
+              selected={new Date(startDate)}
             />
           </FormControl>
           <FormControl sx={{ flexGrow: 1 }}>
@@ -78,8 +91,8 @@ export const ExpenseReportPage = () => {
             </FormLabel>
             <DateInput
               placeholderText="Placeholder"
-              onChange={(date) => setEndDate(date || new Date())}
-              selected={endDate}
+              onChange={(date) => setEndDate(dateToISODateString(date))}
+              selected={new Date(endDate)}
             />
           </FormControl>
         </Stack>
@@ -88,10 +101,32 @@ export const ExpenseReportPage = () => {
             disabled={(isDownloading && !hasFailed) || invalidDateRange}
             onClick={() => createReport()}
           >
-            {isDownloading && !hasFailed && (
-              <FontAwesomeIcon icon={faRefresh} spin fontSize="xs" />
+            {isDownloading && !hasFailed ? (
+              <Typography textColor="common.white">
+                <FontAwesomeIcon
+                  icon={faRefresh}
+                  spin
+                  fontSize="xs"
+                  style={{ marginRight: "4px" }}
+                />
+                {t("common.creating")}
+              </Typography>
+            ) : periodToDownload &&
+              isSamePeriod(periodToDownload, isDownloadingPeriod) &&
+              !hasFailed ? (
+              <Typography textColor="common.white">
+                <FontAwesomeIcon
+                  icon={faDownload}
+                  fontSize="xs"
+                  style={{ marginRight: "4px" }}
+                />
+                {t("expenseReport.download")}
+              </Typography>
+            ) : (
+              <Typography textColor="common.white">
+                {t("common.create")}
+              </Typography>
             )}
-            {t("common.create")}
           </Button>
         </Box>
         <Typography level="h2" mb={0}>
@@ -115,6 +150,11 @@ export const ExpenseReportPage = () => {
                   onClick={() => createReport(period.startDate, period.endDate)}
                 >
                   Maak en download
+                  {isDownloading &&
+                    !hasFailed &&
+                    isSamePeriod(period, isDownloadingPeriod) && (
+                      <FontAwesomeIcon icon={faRefresh} spin fontSize="xs" />
+                    )}
                 </AnchorButton>
               </Stack>
             </ListItem>
@@ -125,6 +165,9 @@ export const ExpenseReportPage = () => {
   );
 };
 
-function toISODateString(ISOString: string) {
-  return ISOString.split("T")[0];
+function dateToISODateString(date?: Date | null): string {
+  return ISOStringtoISODateString((date||new Date()).toISOString());
+}
+function ISOStringtoISODateString(ISOString: string): string {
+  return (ISOString||new Date().toISOString()).split("T")[0];
 }

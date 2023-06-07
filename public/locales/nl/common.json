@@ -31,7 +31,8 @@
     "info": "Het maken van je onkostennota kan enkele minuten duren. Wanneer de onkostennota klaar is zal je het kunnen downloaden. Gelieve dit venster niet te sluiten.",
     "summary":"Vul hier de start- en einddatum in van de periode waarbinnen je de gewenste kortingstarieven registreerde.",
     "readyReports":"Je klaargezette onkostennota's",
-    "noReportsAvailable":"In deze periode werden geen kortingen geregistreerd, er is dan ook geen financieel rapport beschikbaar."
+    "noReportsAvailable":"In deze periode werden geen kortingen geregistreerd, er is dan ook geen financieel rapport beschikbaar.",
+    "download":"Onkostennota downloaden"
   },
   "nav": {
     "home": "Home",
@@ -45,7 +46,8 @@
   "common": {
     "startDate":"Startdatum",
     "endDate":"Einddatum",
-    "create":"Maken"
+    "create":"Maken",
+    "creating":"Onkostennota wordt aangemaakt"
   },
   "footer":{
     "help":"Help",
