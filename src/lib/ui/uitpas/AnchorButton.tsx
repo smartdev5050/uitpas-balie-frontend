@@ -3,7 +3,10 @@ import { Typography, TypographyProps } from "@mui/joy";
 import { PropsWithChildren } from "react";
 
 const StyledTypography = styled(Typography)`
-  color: ${({ theme }) => theme.palette.primary.solidBg};
+  color: ${({ theme }) =>
+    // @todo: fix ts-ignore
+    // @ts-ignore
+    theme.palette.primary.solidBg};
   text-decoration: underline;
   &:hover {
     cursor: pointer;

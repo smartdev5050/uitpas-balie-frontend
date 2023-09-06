@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import {
-  PageWithSidebar,
+  PageWithSideBarNew,
   Stack,
   Typography,
   DateInput,
@@ -39,9 +39,9 @@ export const ExpenseReportPage = () => {
   const createReport = (
     selectedStartDate?: string,
     selectedEndDate?: string
-  ) => {    
-    const startDateForReport = selectedStartDate || startDate
-    const endDateForReport = selectedEndDate || endDate
+  ) => {
+    const startDateForReport = selectedStartDate || startDate;
+    const endDateForReport = selectedEndDate || endDate;
 
     if (selectedStartDate) setStartDate(selectedStartDate);
     if (selectedEndDate) setEndDate(selectedEndDate);
@@ -59,7 +59,7 @@ export const ExpenseReportPage = () => {
     new Date(`${startDate}T00:00:00.000Z`).getTime();
 
   return (
-    <PageWithSidebar sideBarContent={<SidebarContent />} hasBackButton>
+    <PageWithSideBarNew sideBarContent={<SidebarContent />} hasBackButton>
       <Stack m={2} gap={3} alignContent="flex-start">
         <Typography level="body1">{t("expenseReport.summary")}</Typography>
         {hasFailed && (
@@ -161,13 +161,13 @@ export const ExpenseReportPage = () => {
           ))}
         </Stack>
       </Stack>
-    </PageWithSidebar>
+    </PageWithSideBarNew>
   );
 };
 
 function dateToISODateString(date?: Date | null): string {
-  return ISOStringtoISODateString((date||new Date()).toISOString());
+  return ISOStringtoISODateString((date || new Date()).toISOString());
 }
 function ISOStringtoISODateString(ISOString: string): string {
-  return (ISOString||new Date().toISOString()).split("T")[0];
+  return (ISOString || new Date().toISOString()).split("T")[0];
 }

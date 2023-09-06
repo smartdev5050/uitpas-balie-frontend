@@ -8,5 +8,5 @@ export * from "./uitpas/Card";
 export * from "./uitpas/DateInput";
 export * from "./uitpas/Link";
 export * from "./uitpas/Button";
-export * from "./uitpas/PageWithSideBar";
+export * from "./uitpas/PageWithSideBarNew";
 export * from "./uitpas/ListItem";

@@ -39,21 +39,21 @@ const navItemStyles = ({ theme }: { theme: Theme }) => ({
 export const NavLink = styled(Link)(({ theme }) => navItemStyles({ theme }));
 
 export const TriggerButton = styled(
-  forwardRef(
-    (
-      {
-        active,
-        ...buttonProps
-      }: HTMLProps<HTMLButtonElement> & { active: boolean },
-      ref: ForwardedRef<HTMLButtonElement>
-    ) => (
+  forwardRef(function ButtonWrapper(
+    {
+      active,
+      ...buttonProps
+    }: HTMLProps<HTMLButtonElement> & { active: boolean },
+    ref: ForwardedRef<HTMLButtonElement>
+  ) {
+    return (
       <button
         {...buttonProps}
         type={buttonProps.type as ButtonHTMLAttributes<unknown>["type"]}
         ref={ref}
       />
-    )
-  )
+    );
+  })
 )(({ theme, active }) => ({
   ...navItemStyles({ theme }),
   background: "none",

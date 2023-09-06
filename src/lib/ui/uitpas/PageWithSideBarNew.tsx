@@ -16,7 +16,7 @@ type Props = PropsWithChildren & {
   sideBarContent: ReactNode;
 };
 
-export const PageWithSidebar = ({
+export const PageWithSideBarNew = ({
   children,
   hasBackButton,
   sideBarContent,
@@ -26,20 +26,22 @@ export const PageWithSidebar = ({
     <Grid container sx={{ height: "100%", marginTop: "64px" }}>
       <SideBarContainer xs={12} sm={5} md={4} lg={3}>
         <Stack spacing={2}>
-          {hasBackButton && <>
-            <Link href={"/"}>
-              <Stack direction="row" alignItems="center">
-                <FontAwesomeIcon icon={faArrowLeft} /> {t("Terug")}
-              </Stack>
-            </Link>
-            <Divider />
-          </>}
+          {hasBackButton && (
+            <>
+              <Link href={"/"}>
+                <Stack direction="row" alignItems="center">
+                  <FontAwesomeIcon icon={faArrowLeft} /> {t("Terug")}
+                </Stack>
+              </Link>
+              <Divider />
+            </>
+          )}
           {sideBarContent}
         </Stack>
       </SideBarContainer>
       <Grid xs={12} sm={7} md={8} lg={9}>
         {children}
-        <Footer/>
+        <Footer />
       </Grid>
     </Grid>
   );
