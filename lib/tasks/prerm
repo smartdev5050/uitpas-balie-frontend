@@ -1,0 +1,3 @@
+#!/bin/bash
+
+service uitpas-balie stop || exit 0
