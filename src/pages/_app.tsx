@@ -10,6 +10,7 @@ import { CounterProvider } from "@/feature-counter/context/CounterProvider";
 import { UserProvider } from "@/lib/user";
 import { LegacyModeProvider } from "@/feature-legacy";
 import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/joy";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,9 +46,9 @@ const App = ({ Component, pageProps }: AppProps) => {
             iframe: {
               border: 0,
             },
-            a:{
-              color: theme.palette.info[500]
-            }
+            a: {
+              color: theme.palette.info[500],
+            },
           }}
         />
         <main className={openSansFont.className}>
