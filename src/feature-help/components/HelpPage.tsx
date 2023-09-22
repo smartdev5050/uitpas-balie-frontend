@@ -1,5 +1,12 @@
 import { useTranslation } from "next-i18next";
-import { PageWithSidebar, Stack, ListItem, Typography } from "@/lib/ui";
+import {
+  Stack,
+  ListItem,
+  PageWithSideBarNew,
+  SideBarTitle,
+  SideBarSubTitle,
+} from "@/lib/ui";
+import { List } from "@mui/joy";
 
 const helpLinks = [
   {
@@ -109,25 +116,29 @@ const helpLinks = [
 ];
 
 const SidebarContent = () => {
-    const {t} = useTranslation()
-return (
-  <Stack spacing={2}>
-    <Typography level="h1"> {t("help.title")}</Typography>
-    <Typography level="body1">{t("help.description")}</Typography>
-    <Typography level="body1">{t("help.subDescription")}</Typography>
-    <Stack>
-      {helpLinks.map(({ name, email }) => (
-        <ListItem>
-          <Stack display={"inline"} direction={"row"} gap={1}>
-            {name} <a href={`mailto:${email}`}> {email}</a>
-          </Stack>
-        </ListItem>
-      ))}
+  const { t } = useTranslation();
+  return (
+    <Stack spacing={2}>
+      <SideBarTitle>{t("help.title")}</SideBarTitle>
+      <SideBarSubTitle>{t("help.description")}</SideBarSubTitle>
+      <SideBarSubTitle>{t("help.subDescription")}</SideBarSubTitle>
+      <Stack>
+        <List>
+          {helpLinks.map(({ name, email }, index) => (
+            <ListItem key={index}>
+              <Stack display={"inline"} direction={"row"} gap={1}>
+                {name} <a href={`mailto:${email}`}> {email}</a>
+              </Stack>
+            </ListItem>
+          ))}
+        </List>
+      </Stack>
     </Stack>
-  </Stack>
-);
-}
+  );
+};
 
 export const HelpPage = () => {
-  return <PageWithSidebar sideBarContent={<SidebarContent />} hasBackButton />
+  return (
+    <PageWithSideBarNew sideBarContent={<SidebarContent />} hasBackButton />
+  );
 };
