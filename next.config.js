@@ -10,6 +10,9 @@ const nextConfig = {
   publicRuntimeConfig: {
     legacyAppUrl: process.env.NEXT_PUBLIC_LEGACY_APP_URL,
     basePath,
+    oauthPath: process.env.NEXT_PUBLIC_OAUTH_PATH,
+    oauthUserInfoPath: process.env.NEXT_PUBLIC_OAUTH_USERINFO_PATH,
+    legacyTokenEndpoint: process.env.NEXT_PUBLIC_LEGACY_TOKEN_ENDPOINT,
   },
 };
 

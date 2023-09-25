@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import getConfig from "next/config";
 
 export type UserInfo = {
   email: string;
@@ -19,12 +20,12 @@ type Props = {
   enabled?: boolean;
 };
 export const useGetUserInfo = ({ token, enabled = true }: Props) => {
+  const { publicRuntimeConfig } = getConfig();
+
   return useQuery(
     ["auth0", "userInfo"],
     () => {
-      return axios.get<UserInfo>(
-        process.env["NEXT_PUBLIC_OAUTH_USERINFO_PATH"] ?? ""
-      );
+      return axios.get<UserInfo>(publicRuntimeConfig.oauthUserInfoPath ?? "");
     },
     {
       enabled,

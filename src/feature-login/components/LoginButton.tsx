@@ -1,12 +1,16 @@
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/lib/ui";
 import { FC, PropsWithChildren } from "react";
+import getConfig from "next/config";
 
 export const LoginButton: FC<PropsWithChildren> = ({ children }) => {
   const search = useSearchParams();
+  const { publicRuntimeConfig } = getConfig();
 
-  const destination = search.get("redirectTo") ?? "/";
-  const href = `${process.env["NEXT_PUBLIC_OAUTH_PATH"]}?destination=${destination}`;
+  const destination = /*"/app_v1"; */ search.get("redirectTo") ?? "/";
+  const href = `${
+    publicRuntimeConfig.oauthPath ?? "/"
+  }?destination=${destination}`;
 
   return (
     <Button

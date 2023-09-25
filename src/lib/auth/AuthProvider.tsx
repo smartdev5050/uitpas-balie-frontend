@@ -13,6 +13,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
   const { fetchToken, removeToken } = useFetchToken();
   const logoutFromSilex = useSilexLogout();
+  console.log({ asPath });
   const isCurrentPathPrivate = !asPath.startsWith(LOGIN_PATH);
 
   const login = useCallback((token: string) => {
