@@ -6,7 +6,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/app";
 const nextConfig = {
   reactStrictMode: true,
   i18n,
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? basePath,
+  basePath,
   publicRuntimeConfig: {
     legacyAppUrl: process.env.NEXT_PUBLIC_LEGACY_APP_URL,
     basePath,
