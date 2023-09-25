@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import getConfig from "next/config";
 
 export const useSilexLogout = () => {
+  const { publicRuntimeConfig } = getConfig();
+
   const { refetch } = useQuery<{ data: { token: string } }>(
     ["logout"],
     () => {
-      const tokenEndpoint = process.env["NEXT_PUBLIC_LEGACY_LOGOUT_ENDPOINT"];
+      const tokenEndpoint = publicRuntimeConfig.legacyLogoutEndpoint;
       if (!tokenEndpoint)
         throw new Error(
           'Required env variable "NEXT_PUBLIC_LEGACY_LOGOUT_ENDPOINT" not set.'

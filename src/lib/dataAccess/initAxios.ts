@@ -1,6 +1,11 @@
 import axios from "axios";
+import getConfig from "next/config";
 
-axios.defaults.baseURL = process.env["NEXT_PUBLIC_API_PATH"];
+(function init() {
+  const { publicRuntimeConfig } = getConfig();
+
+  axios.defaults.baseURL = publicRuntimeConfig.apiPath;
+})();
 
 export const removeHeader = (headerKey: string) => {
   delete axios.defaults.headers[headerKey];

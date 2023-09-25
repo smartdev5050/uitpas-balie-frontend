@@ -8,10 +8,13 @@ import { useEffect, useState } from "react";
 import { saveAs } from "file-saver";
 import JsZip from "jszip";
 import { PeriodType, isSamePeriod } from "@/lib/utils";
+import getConfig from "next/config";
 //import { useGetOrganizersFinancialReportsReportIdZip } from "./useGetDownloadBlob";
 
-const zipUrl = (organizerId: string | number, reportId: string | number) =>
-  `${process.env.NEXT_PUBLIC_API_PATH}/organizers/${organizerId}/financial-reports/${reportId}.zip`;
+const zipUrl = (organizerId: string | number, reportId: string | number) => {
+  const { publicRuntimeConfig } = getConfig();
+  return `${publicRuntimeConfig.apiPath}/organizers/${organizerId}/financial-reports/${reportId}.zip`;
+};
 //const zipUrl = (organizerId: string | number, reportId: string | number) => `https://balie-test.uitpas.be/counters/active/expense-reports/${reportId}.zip`
 
 type ReturnType = {
