@@ -6,6 +6,7 @@ import { useLogout } from "@/lib/auth";
 import { useActiveCounter, useSetActiveCounter } from "@/feature-counter";
 import { Header, LogoLink, NavLink } from "./Navbar.Atoms";
 import { CounterMenu } from "./CounterMenu";
+import { getAssetUrl } from "@/lib/utils";
 
 export const Navbar = () => {
   const { t } = useTranslation();
@@ -17,12 +18,12 @@ export const Navbar = () => {
   if (!userInfo || !counter) return null;
 
   return (
-    <Header sx={{zIndex:1}}>
+    <Header sx={{ zIndex: 1 }}>
       <Stack direction="row" justifyContent="space-between" width="100%" px={1}>
         <Stack direction="row" alignItems="center" spacing={2}>
           <LogoLink href="/">
             <Image
-              src="images/svg/logo-uitpas.svg"
+              src={getAssetUrl(`images/svg/logo-uitpas.svg`)}
               width="90"
               height="25"
               alt="Logo UiTPAS"
