@@ -30,7 +30,11 @@ export const PageWithSideBarNew = ({
             <>
               <Link href={"/"}>
                 <Stack direction="row" alignItems="center">
-                  <FontAwesomeIcon icon={faArrowLeft} /> {t("Terug")}
+                  <FontAwesomeIcon
+                    icon={faArrowLeft}
+                    style={{ marginRight: "0.25rem" }}
+                  />{" "}
+                  {t("Terug")}
                 </Stack>
               </Link>
               <Divider />

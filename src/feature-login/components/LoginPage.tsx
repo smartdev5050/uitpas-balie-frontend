@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import { Box, Stack, Typography } from "@/lib/ui";
 import { SiteLoginIntro } from "./Atoms";
 import { LoginButton } from "./LoginButton";
+import { getAssetUrl } from "@/lib/utils";
 
 export const LoginPage = () => {
   const { t } = useTranslation();
@@ -12,7 +13,7 @@ export const LoginPage = () => {
       <Stack>
         <Box display="flex" flexDirection="column" alignItems="center">
           <Image
-            src={"/images/svg/logo-uitpas-full.svg"}
+            src={getAssetUrl("/images/svg/logo-uitpas-full.svg")}
             alt={"UiTPAS Logo"}
             width={280}
             height={84}

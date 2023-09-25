@@ -53,8 +53,8 @@ const DateInputWithRef = forwardRef<HTMLInputElement>(
             // @todo fix ts-ignore
             // @ts-ignore
             color={theme.vars.palette.neutral[700]}
-            fontSize={"xs"}
             icon={faCalendarDays}
+            fixedWidth
           />
         </StyledDateInputEndDecorator>
       </StyledInputContainer>
