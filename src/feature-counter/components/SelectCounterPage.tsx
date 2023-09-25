@@ -3,6 +3,7 @@ import { Box, Stack, Typography } from "@/lib/ui";
 import Image from "next/image";
 import { CounterPicker } from "./CounterPicker";
 import { useUserInfo } from "@/lib/user";
+import { getAssetUrl } from "@/lib/utils";
 
 export const SelectCounterPage = () => {
   const { t } = useTranslation();
@@ -13,7 +14,7 @@ export const SelectCounterPage = () => {
       <Stack>
         <Box display="flex" flexDirection="column" alignItems="center">
           <Image
-            src={"/images/svg/logo-uitpas-full.svg"}
+            src={getAssetUrl("/images/svg/logo-uitpas-full.svg")}
             alt={"UiTPAS Logo"}
             width={280}
             height={84}
