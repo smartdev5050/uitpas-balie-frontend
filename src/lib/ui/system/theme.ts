@@ -6,6 +6,7 @@ declare module "@mui/joy/styles" {
 export const openSansFont = Open_Sans({
   weight: "400",
   subsets: ["latin"],
+  variable: "--font-open-sans",
 });
 
 export const theme = extendTheme({
@@ -65,7 +66,7 @@ export const theme = extendTheme({
     },
   },
   fontFamily: {
-    body: '"Open Sans", Arial, sans-serif',
+    body: "var(--font-open-sans), Arial, sans-serif",
   },
   typography: {
     h1: {

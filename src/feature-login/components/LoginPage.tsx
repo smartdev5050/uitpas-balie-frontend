@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { Box, Stack, Typography } from "@/lib/ui";
-import { SiteLoginIntro } from "./Atoms";
+import { SiteLoginIntro } from "./Login.styles";
 import { LoginButton } from "./LoginButton";
 import { getAssetUrl } from "@/lib/utils";
 

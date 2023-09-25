@@ -4,7 +4,7 @@ import { Stack, Typography, Button } from "@/lib/ui";
 import { useUserInfo } from "@/lib/user";
 import { useLogout } from "@/lib/auth";
 import { useActiveCounter, useSetActiveCounter } from "@/feature-counter";
-import { Header, LogoLink, NavLink } from "./Navbar.Atoms";
+import { Header, LogoLink, NavLink } from "./Navbar.styles";
 import { CounterMenu } from "./CounterMenu";
 import { getAssetUrl } from "@/lib/utils";
 
