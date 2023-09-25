@@ -1,13 +1,13 @@
 import { extendTheme } from "@mui/joy/styles";
-import { Open_Sans } from 'next/font/google'
+import { Open_Sans } from "next/font/google";
 declare module "@mui/joy/styles" {
   // No custom tokens found, you can skip the theme augmentation.
 }
 export const openSansFont = Open_Sans({
-  weight: '400',
-  subsets: ['latin'],
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-open-sans",
 });
-
 
 export const theme = extendTheme({
   colorSchemes: {
@@ -48,9 +48,9 @@ export const theme = extendTheme({
           700: "#1A2E61",
           800: "#2f3b4d",
           900: "#1F2733",
-          softColor: '#31708f',
-          softBg: '#e4eef5',
-          softBorder: '#c1d1e1',
+          softColor: "#31708f",
+          softBg: "#e4eef5",
+          softBorder: "#c1d1e1",
         },
       },
     },
@@ -66,7 +66,7 @@ export const theme = extendTheme({
     },
   },
   fontFamily: {
-    body: '"Open Sans", Arial, sans-serif',
+    body: "var(--font-open-sans), Arial, sans-serif",
   },
   typography: {
     h1: {
@@ -87,7 +87,6 @@ export const theme = extendTheme({
     body2: {
       fontSize: 13,
     },
-
   },
   breakpoints: {
     values: {

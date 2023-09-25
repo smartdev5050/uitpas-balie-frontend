@@ -9,7 +9,7 @@ import {
   StyledListbox,
   StyledMenuItem,
   TriggerButton,
-} from "@/layouts/components/Navbar.Atoms";
+} from "@/layouts/components/Navbar.styles";
 import { useTranslation } from "next-i18next";
 
 const menuItems = [

@@ -51,7 +51,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             },
           }}
         />
-        <main className={openSansFont.className}>
+        <main>
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               <UserProvider>
