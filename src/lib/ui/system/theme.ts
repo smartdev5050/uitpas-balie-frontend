@@ -4,7 +4,7 @@ declare module "@mui/joy/styles" {
   // No custom tokens found, you can skip the theme augmentation.
 }
 export const openSansFont = Open_Sans({
-  weight: "400",
+  weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-open-sans",
 });
@@ -66,7 +66,7 @@ export const theme = extendTheme({
     },
   },
   fontFamily: {
-    body: "var(--font-open-sans), Arial, sans-serif",
+    body: `var(--font-open-sans), Arial, sans-serif`,
   },
   typography: {
     h1: {

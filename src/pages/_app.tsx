@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import Head from "next/head";
-import { theme, openSansFont } from "@/lib/ui";
+import { openSansFont, theme } from "@/lib/ui";
 import { Layout } from "@/layouts";
 import { AuthProvider } from "@/lib/auth";
 import { CounterProvider } from "@/feature-counter/context/CounterProvider";
@@ -11,6 +11,8 @@ import { UserProvider } from "@/lib/user";
 import { LegacyModeProvider } from "@/feature-legacy";
 import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/joy";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+import { createEmotionCache } from "@/lib/ui";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,9 +27,20 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = ({ Component, pageProps }: AppProps) => {
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
+
+export interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+const App = ({
+  Component,
+  emotionCache = clientSideEmotionCache,
+  pageProps,
+}: MyAppProps) => {
   return (
-    <>
+    <CacheProvider value={emotionCache}>
       <Head>
         <title>UiTPAS Beheer</title>
         <meta name="description" content="UiTPAS Beheer" />
@@ -39,6 +52,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <CssBaseline />
         <GlobalStyles
           styles={{
+            html: {
+              fontFamily: openSansFont.style.fontFamily,
+            },
             body: {
               color: "#333",
               fontSize: "15px",
@@ -51,7 +67,9 @@ const App = ({ Component, pageProps }: AppProps) => {
             },
           }}
         />
-        <main>
+        <main
+          className={[openSansFont.variable, openSansFont.className].join(" ")}
+        >
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               <UserProvider>
@@ -67,7 +85,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           </QueryClientProvider>
         </main>
       </ThemeProvider>
-    </>
+    </CacheProvider>
   );
 };
 
