@@ -13,6 +13,8 @@ import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/joy";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { createEmotionCache } from "@/lib/ui";
+import { useIsBlacklisted } from "@/lib/utils";
+import { FallbackPage } from "@/feature-legacy";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,6 +41,8 @@ const App = ({
   emotionCache = clientSideEmotionCache,
   pageProps,
 }: MyAppProps) => {
+  const isBlacklisted = useIsBlacklisted();
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -76,7 +80,11 @@ const App = ({
                 <CounterProvider>
                   <Layout>
                     <LegacyModeProvider>
-                      <Component {...pageProps} />
+                      {isBlacklisted ? (
+                        <FallbackPage />
+                      ) : (
+                        <Component {...pageProps} />
+                      )}
                     </LegacyModeProvider>
                   </Layout>
                 </CounterProvider>
