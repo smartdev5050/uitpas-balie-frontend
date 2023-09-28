@@ -88,23 +88,23 @@ pipeline {
             }
         }
 
-//        stage('Deploy to testing') {
-//            input { message "Deploy to Testing?" }
-//            agent { label 'ubuntu && 20.04' }
-//            options { skipDefaultCheckout() }
-//            environment {
-//                APPLICATION_ENVIRONMENT = 'testing'
-//            }
-//            steps {
-//                publishAptlySnapshot snapshotName: "${env.REPOSITORY_NAME}-${env.PIPELINE_VERSION}", publishTarget: "${env.REPOSITORY_NAME}-${env.APPLICATION_ENVIRONMENT}", distributions: 'focal'
-//                triggerDeployment nodeName: 'uitpas-balie-test01', timeout: 600
-//            }
-//            post {
-//                always {
-//                    sendBuildNotification to: '#ups-ops', message: "Pipeline <${env.RUN_DISPLAY_URL}|${env.JOB_NAME} [${currentBuild.displayName}]>: deployed to *${env.APPLICATION_ENVIRONMENT}*"
-//                }
-//            }
-//        }
+        stage('Deploy to testing') {
+            input { message "Deploy to Testing?" }
+            agent { label 'ubuntu && 20.04' }
+            options { skipDefaultCheckout() }
+            environment {
+                APPLICATION_ENVIRONMENT = 'testing'
+            }
+            steps {
+                publishAptlySnapshot snapshotName: "${env.REPOSITORY_NAME}-${env.PIPELINE_VERSION}", publishTarget: "${env.REPOSITORY_NAME}-${env.APPLICATION_ENVIRONMENT}", distributions: 'focal'
+                triggerDeployment nodeName: 'uitpas-balie-test01', timeout: 600
+            }
+            post {
+                always {
+                    sendBuildNotification to: '#ups-ops', message: "Pipeline <${env.RUN_DISPLAY_URL}|${env.JOB_NAME} [${currentBuild.displayName}]>: deployed to *${env.APPLICATION_ENVIRONMENT}*"
+                }
+            }
+        }
 
 //        stage('Deploy to production') {
 //            input { message "Deploy to Production?" }
