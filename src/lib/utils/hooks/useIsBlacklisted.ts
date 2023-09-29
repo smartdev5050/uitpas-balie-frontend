@@ -1,10 +1,12 @@
 import getConfig from "next/config";
 import { usePathname } from "next/navigation";
 
-export const useIsBlacklisted = () => {
+export const useIsBlacklisted = (): boolean => {
   const pathname = usePathname();
 
   const { publicRuntimeConfig } = getConfig();
+
+  if (!publicRuntimeConfig.blacklist) return false;
 
   const blacklistedPages = (
     publicRuntimeConfig.blacklist.split(",") as string[]
