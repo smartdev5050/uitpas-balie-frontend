@@ -103,9 +103,9 @@ pipeline {
                 always {
                     sendBuildNotification to: '#ups-ops', message: "Pipeline <${env.RUN_DISPLAY_URL}|${env.JOB_NAME} [${currentBuild.displayName}]>: deployed to *${env.APPLICATION_ENVIRONMENT}*"
                 }
-            }
-        }
-
+//            }
+//        }
+//
 //        stage('Deploy to production') {
 //            input { message "Deploy to Production?" }
 //            agent { label 'ubuntu && 20.04' }
@@ -121,11 +121,11 @@ pipeline {
 //                always {
 //                    sendBuildNotification to: '#ups-ops', message: "Pipeline <${env.RUN_DISPLAY_URL}|${env.JOB_NAME} [${currentBuild.displayName}]>: deployed to *${env.APPLICATION_ENVIRONMENT}*"
 //                }
-//                cleanup {
-//                    cleanupAptlySnapshots repository: env.REPOSITORY_NAME
-//                }
-//            }
-//        }
+                cleanup {
+                    cleanupAptlySnapshots repository: env.REPOSITORY_NAME
+                }
+            }
+        }
 //
 //        stage('Tag release') {
 //            agent { label 'ubuntu' }
