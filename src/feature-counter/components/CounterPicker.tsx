@@ -39,7 +39,13 @@ export const CounterPicker = () => {
 
   if (finishedAndHasData) {
     return (
-      <Card>
+      <Card
+        sx={{
+          //needs fixed height, for scroll and no overflow
+          maxHeight: "calc(100vh - 420px)",
+          overflowY: "scroll",
+        }}
+      >
         <CardContent>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {data?.data.map((permission) => (
