@@ -15,7 +15,6 @@ export const Header = styled("header")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.vars.palette.neutral["600"],
   color: theme.vars.palette.neutral[50],
-  position: "fixed",
   width: "100%",
 }));
 
