@@ -1,8 +1,4 @@
-import {
-  Organizer,
-  OrganizerPermissions,
-  useGetPermissions,
-} from "@/lib/dataAccess";
+import { Organizer, useGetPermissions } from "@/lib/dataAccess";
 import {
   Card,
   CardContent,
@@ -13,7 +9,11 @@ import {
 import { useCounter } from "@/feature-counter";
 import { useTranslation } from "next-i18next";
 
-export const CounterPicker = () => {
+interface CounterPickerProps {
+  searchString: string;
+}
+
+export const CounterPicker = ({ searchString }: CounterPickerProps) => {
   const { t } = useTranslation();
   const { data, isSuccess } = useGetPermissions();
   const { setActiveCounter, lastCounterUsed } = useCounter();
@@ -47,11 +47,91 @@ export const CounterPicker = () => {
       </>
     );
 
-  const filteredData = (dataToFilter: OrganizerPermissions[]) => {
-    if (!lastCounterUsed) return dataToFilter;
-    return dataToFilter.filter(
-      (permission) => permission.organizer.id !== lastCounterUsed?.id
+  const renderDataExcludingLastCounter = () => {
+    return data?.data
+      .filter((permission) => permission.organizer.id !== lastCounterUsed?.id)
+      .map((permission) => (
+        <li key={permission.organizer.id} style={{ marginBottom: 6 }}>
+          <Link onClick={createHandleClick(permission.organizer)}>
+            {permission.organizer.name}
+          </Link>
+        </li>
+      ));
+  };
+
+  const renderSearchFilteredData = () => {
+    const filteredData = data?.data!.filter((permission) =>
+      permission?.organizer?.name
+        ?.toLowerCase()
+        .includes(searchString.toLocaleLowerCase())
     );
+
+    return filteredData!.length > 0 ? (
+      filteredData?.map((permission) => (
+        <li key={permission.organizer.id} style={{ marginBottom: 6 }}>
+          <Link onClick={createHandleClick(permission.organizer)}>
+            {permission.organizer.name}
+          </Link>
+        </li>
+      ))
+    ) : (
+      <>
+        <Typography
+          sx={(theme) => ({
+            fontStyle: "italic",
+            color: theme.vars.palette.neutral[500],
+          })}
+        >
+          {t("counter.noCounterSearch", { searchTerm: searchString })}
+        </Typography>
+      </>
+    );
+  };
+
+  const renderData = () => {
+    if (searchString) {
+      return renderSearchFilteredData();
+    }
+
+    if (lastCounterUsed) {
+      return (
+        <>
+          <Typography
+            level="h3"
+            sx={{
+              borderBottom: "1px solid #8a8a8d",
+              pb: "0.5em",
+              mb: "1em",
+              textTransform: "uppercase",
+              fontSize: "1em",
+              fontWeight: 600,
+            }}
+          >
+            {t("counter.lastUsed")}
+          </Typography>
+          <li style={{ marginBottom: 6 }}>
+            <Link onClick={createHandleClick(lastCounterUsed)}>
+              {lastCounterUsed.name}
+            </Link>
+          </li>
+          <Typography
+            level="h3"
+            sx={{
+              borderBottom: "1px solid #8a8a8d",
+              pb: "0.5em",
+              mt: "24px",
+              mb: "1em",
+              textTransform: "uppercase",
+              fontSize: "1em",
+              fontWeight: 600,
+            }}
+          >
+            {t("counter.otherCounters")}
+          </Typography>
+          {renderDataExcludingLastCounter()}
+        </>
+      );
+    }
   };
 
   return (
@@ -73,51 +153,7 @@ export const CounterPicker = () => {
           }}
         >
           {finishedAndHasData ? (
-            <>
-              {lastCounterUsed && (
-                <>
-                  <Typography
-                    level="h3"
-                    sx={{
-                      borderBottom: "1px solid #8a8a8d",
-                      pb: "0.5em",
-                      mb: "1em",
-                      textTransform: "uppercase",
-                      fontSize: "1em",
-                      fontWeight: 600,
-                    }}
-                  >
-                    LAATST GEBRUIKT
-                  </Typography>
-                  <li style={{ marginBottom: 6 }}>
-                    <Link onClick={createHandleClick(lastCounterUsed)}>
-                      {lastCounterUsed.name}
-                    </Link>
-                  </li>
-                  <Typography
-                    level="h3"
-                    sx={{
-                      borderBottom: "1px solid #8a8a8d",
-                      pb: "0.5em",
-                      mt: "24px",
-                      mb: "1em",
-                      textTransform: "uppercase",
-                      fontSize: "1em",
-                      fontWeight: 600,
-                    }}
-                  >
-                    ANDERE BALIES
-                  </Typography>
-                </>
-              )}
-              {filteredData(data?.data!).map((permission) => (
-                <li key={permission.organizer.id} style={{ marginBottom: 6 }}>
-                  <Link onClick={createHandleClick(permission.organizer)}>
-                    {permission.organizer.name}
-                  </Link>
-                </li>
-              ))}
-            </>
+            renderData()
           ) : (
             <CircularProgress
               color="neutral"
