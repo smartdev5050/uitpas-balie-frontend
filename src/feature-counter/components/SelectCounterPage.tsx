@@ -13,6 +13,7 @@ export const SelectCounterPage = () => {
   const { t } = useTranslation();
   const userInfo = useUserInfo();
   const [searchString, setSearchString] = useState<string>("");
+  const [dataAvailable, setDataAvailable] = useState<boolean>(false);
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
@@ -37,7 +38,10 @@ export const SelectCounterPage = () => {
             flexDirection: "column",
           }}
         >
-          <Typography level="h1" sx={{ alignSelf: "center" }}>
+          <Typography
+            level="h1"
+            sx={{ alignSelf: "center", m: 0, pt: "0.3em", pb: "1.2em" }}
+          >
             {t("counter.welcome", { name: userInfo?.given_name ?? "" })}
           </Typography>
 
@@ -52,22 +56,27 @@ export const SelectCounterPage = () => {
             <Typography level="h2" sx={{ m: 0 }}>
               {t("counter.selectCounter")}
             </Typography>
-            <Input
-              placeholder="Zoek balie"
-              variant="plain"
-              startDecorator={<FontAwesomeIcon icon={faMagnifyingGlass} />}
-              sx={{
-                ml: "auto",
-                border: "1px #969ca5 solid",
-                "--Input-focusedHighlight": "#2f3b4d",
-                "--Input-focusedThickness": "1px",
-                fontWeight: 600,
-                letterSpacing: "4px",
-              }}
-              onChange={handleSearchInputChange}
-            />
+            {dataAvailable && (
+              <Input
+                placeholder="Zoek balie"
+                variant="plain"
+                startDecorator={<FontAwesomeIcon icon={faMagnifyingGlass} />}
+                sx={{
+                  ml: "auto",
+                  border: "1px #969ca5 solid",
+                  "--Input-focusedHighlight": "#2f3b4d",
+                  "--Input-focusedThickness": "1px",
+                  fontWeight: 600,
+                  letterSpacing: "4px",
+                }}
+                onChange={handleSearchInputChange}
+              />
+            )}
           </Box>
-          <CounterPicker searchString={searchString} />
+          <CounterPicker
+            searchString={searchString}
+            setDataAvailable={setDataAvailable}
+          />
         </Box>
       </Stack>
     </Box>

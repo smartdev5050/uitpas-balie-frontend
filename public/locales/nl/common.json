@@ -19,7 +19,7 @@
     "PREFER_LEGACY": "Legacy mode: Legacy"
   },
   "counter": {
-    "welcome": "Welkom {{name}}",
+    "welcome": "Welkom, {{name}}",
     "selectCounter": "Selecteer je balie",
     "noCounterP1": "Je bent nog geen lid van een UiTPAS-balie. Om deze applicatie te kunnen gebruiken, moet je lid zijn van een UiTPAS-balie.",
     "noCounterP2": "Stuur je e-mailadres en de naam van je organisatie naar de verantwoordelijke.",

@@ -8,12 +8,17 @@ import {
 } from "@/lib/ui";
 import { useCounter } from "@/feature-counter";
 import { useTranslation } from "next-i18next";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 interface CounterPickerProps {
   searchString: string;
+  setDataAvailable: Dispatch<SetStateAction<boolean>>;
 }
 
-export const CounterPicker = ({ searchString }: CounterPickerProps) => {
+export const CounterPicker = ({
+  searchString,
+  setDataAvailable,
+}: CounterPickerProps) => {
   const { t } = useTranslation();
   const { data, isSuccess } = useGetPermissions();
   const { setActiveCounter, lastCounterUsed } = useCounter();
@@ -25,7 +30,13 @@ export const CounterPicker = ({ searchString }: CounterPickerProps) => {
   const finishedAndHasData = isSuccess && data?.data?.length > 0;
   const finishedAndNoData = !finishedAndHasData && isSuccess;
 
-  if (finishedAndNoData)
+  useEffect(() => {
+    if (finishedAndHasData) {
+      setDataAvailable(true);
+    }
+  }, [finishedAndHasData, setDataAvailable]);
+
+  if (finishedAndNoData) {
     return (
       <>
         <Typography
@@ -46,6 +57,7 @@ export const CounterPicker = ({ searchString }: CounterPickerProps) => {
         </Typography>
       </>
     );
+  }
 
   const renderDataExcludingLastCounter = () => {
     return data?.data
@@ -128,10 +140,11 @@ export const CounterPicker = ({ searchString }: CounterPickerProps) => {
           >
             {t("counter.otherCounters")}
           </Typography>
-          {renderDataExcludingLastCounter()}
         </>
       );
     }
+
+    return renderDataExcludingLastCounter();
   };
 
   return (
