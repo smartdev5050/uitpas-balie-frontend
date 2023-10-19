@@ -43,7 +43,7 @@ export const CounterPicker = () => {
         sx={{
           //needs fixed height, for scroll and no overflow
           maxHeight: "calc(100vh - 420px)",
-          overflowY: "scroll",
+          overflowY: "auto",
         }}
       >
         <CardContent>
