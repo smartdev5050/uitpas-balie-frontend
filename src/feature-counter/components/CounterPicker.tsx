@@ -58,7 +58,7 @@ export const CounterPicker = ({
           {t("counter.noCounterP2")}
         </Typography>
 
-        <LoginButton>Aanmelden met een ander e-mailadres</LoginButton>
+        <LoginButton>{t("login.loginOtherAccountBtn")}</LoginButton>
       </>
     );
   }

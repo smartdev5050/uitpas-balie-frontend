@@ -3,6 +3,7 @@
   "login": {
     "intro": "Deze beheerapplicatie is gemaakt voor organisaties, verenigingen en balies om UiTPAS- en Paspartoe-leden te verwelkomen en te beheren.",
     "loginBtn": "Aanmelden",
+    "loginOtherAccountBtn": "Aanmelden met een ander e-mailadres",
     "moreInfoBtn": "Meer info",
     "other": "Andere UiTPAS-tools",
     "otherForSchools": "Voor scholen:",
