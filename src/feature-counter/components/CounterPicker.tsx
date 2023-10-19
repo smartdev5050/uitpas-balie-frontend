@@ -9,6 +9,7 @@ import {
 import { useCounter } from "@/feature-counter";
 import { useTranslation } from "next-i18next";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { LoginButton } from "@/feature-login/components/LoginButton";
 
 interface CounterPickerProps {
   searchString: string;
@@ -36,7 +37,7 @@ export const CounterPicker = ({
     }
   }, [finishedAndHasData, setDataAvailable]);
 
-  if (finishedAndNoData) {
+  if (!finishedAndNoData) {
     return (
       <>
         <Typography
@@ -51,10 +52,13 @@ export const CounterPicker = ({
           sx={(theme) => ({
             fontStyle: "italic",
             color: theme.vars.palette.neutral[500],
+            pb: "1em",
           })}
         >
           {t("counter.noCounterP2")}
         </Typography>
+
+        <LoginButton>Aanmelden met een ander e-mailadres</LoginButton>
       </>
     );
   }
