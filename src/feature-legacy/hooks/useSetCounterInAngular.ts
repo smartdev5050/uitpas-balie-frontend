@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useActiveCounter } from "@/feature-counter";
+import { useCounter } from "@/feature-counter";
 import {
   useHandleWindowMessage,
   WindowMessageSources,
@@ -7,7 +7,7 @@ import {
 } from "./useHandleWindowMessage";
 
 export const useSetCounterInAngular = () => {
-  const counter = useActiveCounter();
+  const { activeCounter } = useCounter();
   const [sendCounterWhenAvailable, setSendCounterWhenAvailable] =
     useState(false);
 
@@ -19,18 +19,18 @@ export const useSetCounterInAngular = () => {
 
   useEffect(() => {
     const iframe = document.querySelector("iframe");
-    if (iframe?.contentWindow && counter && sendCounterWhenAvailable) {
+    if (iframe?.contentWindow && activeCounter && sendCounterWhenAvailable) {
       iframe.contentWindow.postMessage(
         {
           source: WindowMessageSources.BALIE,
           type: WindowMessageTypes.SET_COUNTER,
           payload: {
-            counter,
+            activeCounter,
           },
         },
         "*"
       );
       setSendCounterWhenAvailable(false);
     }
-  }, [counter, sendCounterWhenAvailable]);
+  }, [activeCounter, sendCounterWhenAvailable]);
 };

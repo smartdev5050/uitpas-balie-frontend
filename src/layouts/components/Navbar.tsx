@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import { Stack, Typography, Button } from "@/lib/ui";
+import { Button, Stack, Typography } from "@/lib/ui";
 import { useUserInfo } from "@/lib/user";
 import { useLogout } from "@/lib/auth";
-import { useActiveCounter, useSetActiveCounter } from "@/feature-counter";
+import { useCounter } from "@/feature-counter";
 import { Header, LogoLink, NavLink } from "./Navbar.styles";
 import { CounterMenu } from "./CounterMenu";
 import { getAssetUrl } from "@/lib/utils";
@@ -11,11 +11,10 @@ import { getAssetUrl } from "@/lib/utils";
 export const Navbar = () => {
   const { t } = useTranslation();
   const userInfo = useUserInfo();
-  const counter = useActiveCounter();
-  const setActiveCounter = useSetActiveCounter();
+  const { activeCounter, setActiveCounter, setLastCounterUsed } = useCounter();
   const logout = useLogout();
 
-  if (!userInfo || !counter) return null;
+  if (!userInfo || !activeCounter) return null;
 
   return (
     <Header sx={{ zIndex: 1 }}>
@@ -29,11 +28,12 @@ export const Navbar = () => {
               alt="Logo UiTPAS"
             />
           </LogoLink>
-          <CounterMenu name={counter.name} />
+          <CounterMenu name={activeCounter.name} />
           <NavLink
             href="/counters"
             onClick={(e) => {
               e.preventDefault();
+              setLastCounterUsed(activeCounter);
               setActiveCounter(null);
             }}
           >
