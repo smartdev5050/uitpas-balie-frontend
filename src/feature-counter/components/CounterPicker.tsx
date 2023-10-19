@@ -1,5 +1,11 @@
 import { Organizer, useGetPermissions } from "@/lib/dataAccess";
-import { Card, CardContent, Link, Typography } from "@/lib/ui";
+import {
+  Card,
+  CardContent,
+  Link,
+  Typography,
+  CircularProgress,
+} from "@/lib/ui";
 import { useSetActiveCounter } from "@/feature-counter/context/useSetActiveCounter";
 import { useTranslation } from "next-i18next";
 
@@ -37,30 +43,46 @@ export const CounterPicker = () => {
       </>
     );
 
-  if (finishedAndHasData) {
-    return (
-      <Card
-        sx={{
-          //needs fixed height, for scroll and no overflow
-          maxHeight: "calc(100vh - 420px)",
-          overflowY: "auto",
-        }}
-      >
-        <CardContent>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {data?.data.map((permission) => (
+  return (
+    <Card
+      sx={{
+        //needs fixed height, for scroll and no overflow
+        maxHeight: "calc(100vh - 420px)",
+        overflowY: "auto",
+      }}
+    >
+      <CardContent>
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {finishedAndHasData ? (
+            data?.data.map((permission) => (
               <li key={permission.organizer.id} style={{ marginBottom: 6 }}>
                 <Link onClick={createHandleClick(permission.organizer)}>
                   {permission.organizer.name}
                 </Link>
               </li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
-    );
-  }
+            ))
+          ) : (
+            <CircularProgress
+              color="neutral"
+              determinate={false}
+              size="sm"
+              variant="plain"
+              sx={{ alignSelf: "center" }}
+            />
+          )}
+        </ul>
+      </CardContent>
+    </Card>
+  );
 
-  // TODO Loader, Error message?
+  // TODO port loader from ng app?, Error message?
   return null;
 };
