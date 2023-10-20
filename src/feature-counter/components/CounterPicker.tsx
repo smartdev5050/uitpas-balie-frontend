@@ -37,7 +37,7 @@ export const CounterPicker = ({
     }
   }, [finishedAndHasData, setDataAvailable]);
 
-  if (!finishedAndNoData) {
+  if (finishedAndNoData) {
     return (
       <>
         <Typography
