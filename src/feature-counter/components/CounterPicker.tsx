@@ -144,6 +144,7 @@ export const CounterPicker = ({
           >
             {t("counter.otherCounters")}
           </Typography>
+          {renderDataExcludingLastCounter()}
         </>
       );
     }
