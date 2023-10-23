@@ -67,7 +67,6 @@ export const CounterMenu = ({ name, isMobile, setOpen }: Props) => {
   return (
     <>
       <TriggerButton
-        id="triggerButton"
         type="button"
         onClick={onButtonClick}
         onKeyDown={onButtonKeyDown}
