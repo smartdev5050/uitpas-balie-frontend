@@ -1,7 +1,8 @@
 module.exports = {
   uitpas: {
     input: {
-      target: "./uitpas-api.json",
+      target:
+        "https://stoplight.io/api/v1/projects/publiq/uitpas/nodes/reference/uitpas.json?deref=optimizedBundle",
     },
     output: {
       mode: "tags-split",

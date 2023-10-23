@@ -29,6 +29,7 @@ import type {
   UnauthorizedResponse,
   ForbiddenResponse,
   GetTariffsParams,
+  GetTariffsStaticParams,
   TicketSale,
   TicketSalesPaginatedResponse,
   GetTicketSalesParams
@@ -86,6 +87,67 @@ export const useGetTariffs = <TData = Awaited<ReturnType<typeof getTariffs>>, TE
   
 
   const query = useQuery<Awaited<ReturnType<typeof getTariffs>>, TError, TData>({ queryKey, queryFn, ...queryOptions}) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryKey;
+
+  return query;
+}
+
+/**
+ * Returns the **static** UiTPAS discounted **tariffs for an event**.
+    
+<!-- theme: warning -->
+    
+> ##### Important
+> UiTPAS tariffs are different for each indiviual passholder, but this endpoint does NOT take the passholder into consideration. Use this endpoint only in specific cases, e.g. when listing the UiTPAS tariff before the passholder is known. The actual passholder tariffs might be different than this response. Use [GET /tariffs](/reference/uitpas.json/paths/~1tariffs/get) to retrieve indidivual tariffs for a passholder.
+  
+
+This UiTPAS tariffs are calculated based on:
+
+- **The regular price** of the ticket.
+This is the price your user would have to pay for the specific ticket without UiTPAS discount.
+- **The event id** of the UiTdatabank event. UiTPAS discounts are limited to specific UiTdatabank events, so it's important to specify the event id to retrieve a list of possible tariffs.
+
+Because the passholder is unknown, UiTPAS will return the tariffs for a passholder with social tariff, who lives in the same region as the event organizer.
+
+The caller of this request must have `TARIFFS_READ` permission for the organizer of the given event.
+ * @summary Get static tariffs without passholder
+ */
+export const getTariffsStatic = (
+    params: GetTariffsStaticParams, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<TariffsResponse>> => {
+    return axios.get(
+      `/tariffs/static`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+
+export const getGetTariffsStaticQueryKey = (params: GetTariffsStaticParams,) => [`/tariffs/static`, ...(params ? [params]: [])];
+
+    
+export type GetTariffsStaticQueryResult = NonNullable<Awaited<ReturnType<typeof getTariffsStatic>>>
+export type GetTariffsStaticQueryError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>
+
+export const useGetTariffsStatic = <TData = Awaited<ReturnType<typeof getTariffsStatic>>, TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>>(
+ params: GetTariffsStaticParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getTariffsStatic>>, TError, TData>, axios?: AxiosRequestConfig}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const {query: queryOptions, axios: axiosOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetTariffsStaticQueryKey(params);
+
+  
+
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTariffsStatic>>> = ({ signal }) => getTariffsStatic(params, { signal, ...axiosOptions });
+
+
+  
+
+  const query = useQuery<Awaited<ReturnType<typeof getTariffsStatic>>, TError, TData>({ queryKey, queryFn, ...queryOptions}) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryKey;
 

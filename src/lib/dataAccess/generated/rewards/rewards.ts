@@ -42,7 +42,7 @@ import type {
 /**
  * Search rewards.
 
-The caller of this request does not need special permissions permission except `REWARDS_PASSHOLDERS_READ` to use the `isRedeemableBy` query parameter.
+The caller of this request does not need special permissions permission except `REWARDS_PASSHOLDERS_READ` to use the `isRedeemableByPassholderId` and `isInterestingForPassholderId` query parameters.
 
 This endpoint allows authentication with [client identification](/docs/authentication/ZG9jOjExODE5NDY5-client-identification), [client access tokens](/docs/authentication/ZG9jOjExODE5NDY4-client-access-token), and [user access tokens](/docs/authentication/ZG9jOjExODE5NTM5-user-access-token).
  * @summary Search rewards

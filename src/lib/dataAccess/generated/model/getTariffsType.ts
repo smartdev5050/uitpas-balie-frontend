@@ -6,14 +6,12 @@
  * OpenAPI spec version: 4.0
  */
 
-/**
- * Type of discount being applied.
- */
-export type TariffType = typeof TariffType[keyof typeof TariffType];
+export type GetTariffsType = typeof GetTariffsType[keyof typeof GetTariffsType];
 
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const TariffType = {
+export const GetTariffsType = {
+  ANY: 'ANY',
   SOCIALTARIFF: 'SOCIALTARIFF',
   COUPON: 'COUPON',
 } as const;

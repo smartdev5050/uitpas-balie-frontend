@@ -26,6 +26,8 @@ export interface Passholder {
   firstName: string;
   /** Unique national (Belgian) INSZ number of an individual passholder to look up. */
   inszNumber?: string;
+  /** The UiTPAS number of this passholder. This field contains the UiTPAS number of the oldest, still active cardsystem membership, that has an active card. */
+  uitpasNumber?: string;
   /** This field is always available in responses. */
   readonly cardSystemMemberships?: CardSystemMembership[];
   /** Contact email address of the passholder. Not present for every passholder. Multiple passholders can have the same email address. */

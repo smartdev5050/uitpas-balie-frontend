@@ -6,6 +6,7 @@
  * OpenAPI spec version: 4.0
  */
 import type { TariffAvailibility } from './tariffAvailibility';
+import type { TariffsResponseEndUserMessage } from './tariffsResponseEndUserMessage';
 
 /**
  * Response object for tariffs
@@ -13,4 +14,6 @@ import type { TariffAvailibility } from './tariffAvailibility';
 export interface TariffsResponse {
   /** List of available tariffs. */
   available?: TariffAvailibility[];
+  /** Optional property that, if provided, contains information for the end-user about potentially unavailable tariffs (while the end user might expect otherwise). e.g. if no tariff of type `SOCIALTARIFF` is available, while the passholder has a valid social tariff, this field can contain a human-readable explanation of the problem, specifically for end-users, in one or more languages. An `nl` value is always provided, other languages may be provided. When this property is included, it is strongly encouraged to show this to the end-user. It is also important to note that this message is context-aware: e.g. when filtering tariffs on `type=SOCIALTARIFF`, this message won't include information about coupons. Furthermore keep in mind this 'end user message' does not necessarily contain a fatal error. A message might be relevant to show while there are still other tariffs available. */
+  endUserMessage?: TariffsResponseEndUserMessage;
 }

@@ -41,7 +41,7 @@ import type {
 
 Note: by default passholders in the response are alphabetically sorted by name.
 
-The caller of this request must have `PASSHOLDERS_SEARCH` permission.
+The caller of this request must have `PASSHOLDERS_SEARCH` or `PASSHOLDERS_SEARCH_ALL` permission.
  * @summary Search passholders
  */
 export const getPassholders = (

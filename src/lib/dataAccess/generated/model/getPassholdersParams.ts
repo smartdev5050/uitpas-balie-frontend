@@ -9,4 +9,4 @@ import type { StartParameter } from './startParameter';
 import type { LimitParameter } from './limitParameter';
 import type { GetPassholdersSortName } from './getPassholdersSortName';
 
-export type GetPassholdersParams = { inszNumber?: string; uitpasNumber?: string; chipNumber?: string; name?: string; firstName?: string; schoolId?: string; start?: StartParameter; limit?: LimitParameter; 'sort[name]'?: GetPassholdersSortName; organizerId?: string; dateOfBirthFrom?: string; dateOfBirthTo?: string };
+export type GetPassholdersParams = { inszNumber?: string; uitpasNumber?: string; chipNumber?: string; name?: string; firstName?: string; schoolId?: string; start?: StartParameter; limit?: LimitParameter; 'sort[name]'?: GetPassholdersSortName; organizerId?: string; dateOfBirthFrom?: string; dateOfBirthTo?: string; uitidId?: string };
