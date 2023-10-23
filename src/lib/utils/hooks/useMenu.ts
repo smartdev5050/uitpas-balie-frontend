@@ -3,14 +3,16 @@ import { MenuUnstyledActions } from "@mui/base/MenuUnstyled";
 
 export const useMenu = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const isOpen = Boolean(anchorEl);
+  const [isOpen, setOpen] = useState<boolean>(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuActions = useRef<MenuUnstyledActions>(null);
 
   const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (isOpen) {
+      setOpen(false);
       setAnchorEl(null);
     } else {
+      setOpen(true);
       setAnchorEl(event.currentTarget);
     }
   };
