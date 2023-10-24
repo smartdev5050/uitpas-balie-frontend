@@ -12,7 +12,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
   useUrlChanged();
   useSetCounterInAngular();
 
-  const renderNavBar = userInfo || counter;
+  const renderNavBar = userInfo && counter;
 
   const ChildrenWrapper = styled(Box)({
     paddingTop: renderNavBar ? 56.38 : 0,
@@ -20,7 +20,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Box height="100vh" width="100vw" overflow="hidden">
-      {renderNavBar && <Navbar userInfo={userInfo!} counter={counter!} />}
+      {renderNavBar && <Navbar userInfo={userInfo} counter={counter} />}
       <ChildrenWrapper>{children}</ChildrenWrapper>
     </Box>
   );

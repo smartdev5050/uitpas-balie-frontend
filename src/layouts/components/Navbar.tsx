@@ -15,7 +15,7 @@ import {
 } from "./Navbar.styles";
 import { CounterMenu } from "./CounterMenu";
 import { getAssetUrl } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Organizer, UserInfo } from "@/lib/dataAccess";
@@ -34,20 +34,20 @@ export const Navbar = ({ userInfo, counter }: NavbarProps) => {
     window.matchMedia("(max-width: 768px)").matches
   );
 
+  const handleWindowResize = useCallback(() => {
+    setMobile(window.matchMedia("(max-width: 768px)").matches);
+  }, []);
+
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-  }, []);
+  }, [handleWindowResize]);
 
   const handleToggle = () => {
     setOpen((prev) => !prev);
   };
-
-  function handleWindowResize() {
-    setMobile(window.innerWidth < 768);
-  }
 
   return (
     <Header sx={{ zIndex: 1 }}>
