@@ -2,7 +2,12 @@ import { extendTheme } from "@mui/joy/styles";
 import { Open_Sans } from "next/font/google";
 declare module "@mui/joy/styles" {
   // No custom tokens found, you can skip the theme augmentation.
+  interface PaletteNeutral {
+    solidBorder: string;
+  }
 }
+
+declare module "@mui/joy" {}
 export const openSansFont = Open_Sans({
   weight: ["400", "700"],
   subsets: ["latin"],
@@ -24,6 +29,7 @@ export const theme = extendTheme({
         neutral: {
           outlinedBorder: "#FFF",
           outlinedColor: "#FFF",
+          solidBorder: "#969ca5",
           50: "#FFF",
           200: "#f3f3f3",
           300: "#f5f5f5",

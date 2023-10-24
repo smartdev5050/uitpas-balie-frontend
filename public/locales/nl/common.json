@@ -27,7 +27,8 @@
     "noCounterSearch": "Er werden geen balies gevonden met de zoekterm '{{searchTerm}}'.",
     "changeCounter": "Balie wijzigen",
     "lastUsed": "Laatst gebruikt",
-    "otherCounters": "Andere balies"
+    "otherCounters": "Andere balies",
+    "searchCounter": "Zoek balie"
   },
   "expenseReport": {
     "title": "Onkostennota",

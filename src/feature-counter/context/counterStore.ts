@@ -1,6 +1,8 @@
 import { storeData, readData } from "@/lib/utils/localStorageUtils";
 import { Counter } from "@/feature-counter/context/CounterContext";
 
+// TODO: find an alternative way of reading/storing counter & prev counter
+// as JavaFX browser does not support localStorage
 const COUNTER_STORAGE_KEY = "@uitpas-balie/counter";
 const PREV_COUNTER_STORAGE_KEY = "@uitpas-balie/counter-prev";
 

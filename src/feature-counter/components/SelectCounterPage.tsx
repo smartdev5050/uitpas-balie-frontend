@@ -4,20 +4,31 @@ import Image from "next/image";
 import { CounterPicker } from "./CounterPicker";
 import { useUserInfo } from "@/lib/user";
 import { getAssetUrl } from "@/lib/utils";
-import { Input } from "@mui/joy";
+import { CircularProgress, Input } from "@mui/joy";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useGetPermissions } from "@/lib/dataAccess";
 
 export const SelectCounterPage = () => {
   const { t } = useTranslation();
   const userInfo = useUserInfo();
   const [searchString, setSearchString] = useState<string>("");
-  const [dataAvailable, setDataAvailable] = useState<boolean>(false);
+  const { data, isSuccess, isLoading } = useGetPermissions();
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
   };
+
+  const filteredData =
+    data?.data.filter((organizer) =>
+      organizer.organizer.name
+        ?.toLowerCase()
+        .includes(searchString.toLowerCase())
+    ) || [];
+
+  const finishedAndHasData =
+    isSuccess && data?.data?.length > 0 && data !== undefined;
 
   return (
     <Box sx={{ m: "40px auto;", pt: 12, maxWidth: 500 }}>
@@ -56,27 +67,35 @@ export const SelectCounterPage = () => {
             <Typography level="h2" sx={{ m: 0 }}>
               {t("counter.selectCounter")}
             </Typography>
-            {dataAvailable && (
+            {finishedAndHasData && (
               <Input
-                placeholder="Zoek balie"
+                placeholder={`${t("counter.searchCounter")}`}
                 variant="plain"
                 startDecorator={<FontAwesomeIcon icon={faMagnifyingGlass} />}
-                sx={{
+                sx={(theme) => ({
                   ml: "auto",
-                  border: "1px #969ca5 solid",
-                  "--Input-focusedHighlight": "#2f3b4d",
+                  border: `1px ${theme.vars.palette.neutral.solidBorder} solid`,
+                  "--Input-focusedHighlight":
+                    theme.vars.palette.primary.darkChannel,
                   "--Input-focusedThickness": "1px",
                   fontWeight: 600,
                   letterSpacing: "4px",
-                }}
+                })}
                 onChange={handleSearchInputChange}
               />
             )}
           </Box>
-          <CounterPicker
-            searchString={searchString}
-            setDataAvailable={setDataAvailable}
-          />
+          <CounterPicker data={filteredData} filterString={searchString}>
+            {isLoading && (
+              <CircularProgress
+                color="neutral"
+                determinate={false}
+                size="sm"
+                variant="plain"
+                sx={{ alignSelf: "center" }}
+              />
+            )}
+          </CounterPicker>
         </Box>
       </Stack>
     </Box>

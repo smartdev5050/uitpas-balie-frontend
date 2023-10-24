@@ -7,7 +7,7 @@ import {
   Button,
   ListItem,
 } from "@/lib/ui";
-import { useActiveCounter } from "@/feature-counter";
+import { useCounter } from "@/feature-counter";
 import { useGetOrganizersFinancialReportsPeriods } from "@/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
 import { Alert, Box, FormControl, FormLabel } from "@mui/joy";
@@ -24,7 +24,7 @@ export const ExpenseReportPage = () => {
   const [periodToDownload, setPeriodToDownload] = useState<PeriodType | null>();
 
   const { t } = useTranslation();
-  const activeCounter = useActiveCounter();
+  const { activeCounter } = useCounter();
   const { data: reportsPeriodFetchData } =
     useGetOrganizersFinancialReportsPeriods(activeCounter?.id || "");
   const {
