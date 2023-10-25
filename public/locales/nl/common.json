@@ -39,6 +39,19 @@
     "noReportsAvailable": "In deze periode werden geen kortingen geregistreerd, er is dan ook geen financieel rapport beschikbaar.",
     "download": "Onkostennota downloaden"
   },
+  "activities": {
+    "title": "Activiteiten",
+    "description": "Een overzicht van de activiteiten aan deze balie.",
+    "dateMenu": {
+      "today": "Vandaag",
+      "next7Days": "Volgende 7 dagen",
+      "next30Days": "Volgende 30 dagen",
+      "next12Months": "Volgende 12 maanden",
+      "unlimited": "Onbeperkt",
+      "pastActivities": "Afgelopen activiteiten",
+      "chooseDate": "Kies datum"
+    }
+  },
   "help": {
     "title": "Help",
     "description": "Snel naar",
