@@ -3,12 +3,12 @@ import { Box } from "@/lib/ui";
 import { useSetCounterInAngular, useUrlChanged } from "@/feature-legacy";
 import { Navbar } from "@/layouts/components/Navbar";
 import { useUserInfo } from "@/lib/user";
-import { useActiveCounter } from "@/feature-counter";
+import { useCounter } from "@/feature-counter";
 import { styled } from "@mui/joy";
 
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
   const userInfo = useUserInfo();
-  const counter = useActiveCounter();
+  const { activeCounter: counter } = useCounter();
   useUrlChanged();
   useSetCounterInAngular();
 

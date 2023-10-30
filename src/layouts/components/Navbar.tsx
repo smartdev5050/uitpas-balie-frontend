@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { Typography, Button } from "@/lib/ui";
 import { useLogout } from "@/lib/auth";
-import { useSetActiveCounter } from "@/feature-counter";
+import { useCounter } from "@/feature-counter";
 import {
   HamburgerButton,
   Header,
@@ -27,7 +27,7 @@ type NavbarProps = {
 
 export const Navbar = ({ userInfo, counter }: NavbarProps) => {
   const { t } = useTranslation();
-  const setActiveCounter = useSetActiveCounter();
+  const { setActiveCounter, setLastCounterUsed } = useCounter();
   const logout = useLogout();
   const [open, setOpen] = useState<boolean>(false);
   const [mobile, setMobile] = useState<boolean>(
@@ -44,6 +44,8 @@ export const Navbar = ({ userInfo, counter }: NavbarProps) => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, [handleWindowResize]);
+
+  if (!userInfo || !counter) return null;
 
   const handleToggle = () => {
     setOpen((prev) => !prev);
@@ -91,6 +93,7 @@ export const Navbar = ({ userInfo, counter }: NavbarProps) => {
                 href="/counters"
                 onClick={(e) => {
                   e.preventDefault();
+                  setLastCounterUsed(counter);
                   setActiveCounter(null);
                 }}
               >

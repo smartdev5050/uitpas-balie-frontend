@@ -1,20 +1,32 @@
+import { readCookie, storeCookie } from "@/lib/utils/cookieUtils";
+import { readData, storeData } from "@/lib/utils/localStorageUtils";
 import { Counter } from "@/feature-counter/context/CounterContext";
 
-const STORAGE_KEY = "@uitpas-balie/counter";
+const localstorageSupport = typeof localStorage !== "undefined";
+
+const COUNTER_STORAGE_KEY = "@uitpas-balie/counter";
+const PREV_COUNTER_STORAGE_KEY = "@uitpas-balie/counter-prev";
 
 export const storeCounter = (counter: Counter) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(counter));
-  } catch (e) {
-    console.debug("Could not set localStorage item", e);
-  }
+  localstorageSupport
+    ? storeData(COUNTER_STORAGE_KEY, counter)
+    : storeCookie(COUNTER_STORAGE_KEY, counter);
+};
+
+export const storePrevCounter = (counter: Counter) => {
+  localstorageSupport
+    ? storeData(PREV_COUNTER_STORAGE_KEY, counter)
+    : storeCookie(PREV_COUNTER_STORAGE_KEY, counter);
 };
 
 export const readCounter = (): Counter => {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "") ?? null;
-  } catch (e) {
-    console.debug("Could not parse localStorage item", e);
-    return null;
-  }
+  return localstorageSupport
+    ? readData(COUNTER_STORAGE_KEY)
+    : readCookie(COUNTER_STORAGE_KEY);
+};
+
+export const readPrevCounter = (): Counter => {
+  return localstorageSupport
+    ? readData(PREV_COUNTER_STORAGE_KEY)
+    : readCookie(PREV_COUNTER_STORAGE_KEY);
 };
