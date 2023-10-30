@@ -4,7 +4,7 @@ import { PageWithSideBarNew } from "@/lib/ui";
 import { useTranslation } from "react-i18next";
 import { DateMenu } from "./DateMenu";
 import { SearchInput } from "./SearchInput";
-import { useActiveCounter } from "@/feature-counter";
+
 import dayjs from "dayjs";
 import { EventName } from "@/lib/dataAccess/search/generated/model";
 import { useRouter } from "next/router";
@@ -26,15 +26,15 @@ import {
   getUitInVlaanderenUrl,
 } from "@/lib/utils";
 import { Pagination } from "./Pagination";
+import { useCounter } from "@/feature-counter";
 
 const RANGE_DATE_FORMAT = "YYYY-MM-DDTHH:mm:ssZ";
 const DATE_FORMAT = "DD MMMM YYYY";
-// TODO: raise this limit, currently using 1 since I don't get enough data from the API to test pagination
-const FETCH_LIMIT = 1;
+const FETCH_LIMIT = 5;
 
 export const ActivitiesPage = () => {
   const { t, i18n } = useTranslation();
-  const counter = useActiveCounter();
+  const { activeCounter: counter } = useCounter();
   const router = useRouter();
   const searchQuery = router.query.search;
   const rangeQuery = router.query.range ?? "next12Months";
@@ -123,6 +123,9 @@ export const ActivitiesPage = () => {
       delete query[queryKey];
     } else {
       query[queryKey] = queryValue;
+      if (queryKey === "search" && pageQuery !== 1) {
+        delete query["page"];
+      }
     }
 
     router.push(
