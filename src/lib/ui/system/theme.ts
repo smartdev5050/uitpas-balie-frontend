@@ -1,7 +1,6 @@
 import { extendTheme } from "@mui/joy/styles";
 import { Open_Sans } from "next/font/google";
 declare module "@mui/joy/styles" {
-  // No custom tokens found, you can skip the theme augmentation.
   interface PaletteNeutral {
     solidBorder: string;
   }

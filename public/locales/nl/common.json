@@ -42,6 +42,12 @@
   "activities": {
     "title": "Activiteiten",
     "description": "Een overzicht van de activiteiten aan deze balie.",
+    "dateRange": "Datumbereik",
+    "searchInputPlaceholder": "Zoek activiteit(en)",
+    "searchBtn": "Zoeken",
+    "viewUiTInVlaanderenBtn": "Bekijk op UiTInVlaanderen",
+    "viewUiTDatabaseBtn": "Bekijk in de UiTdatabank",
+    "downloadQrCodeBtn": "Download QR-spaarcode",
     "dateMenu": {
       "today": "Vandaag",
       "next7Days": "Volgende 7 dagen",
@@ -50,6 +56,10 @@
       "unlimited": "Onbeperkt",
       "pastActivities": "Afgelopen activiteiten",
       "chooseDate": "Kies datum"
+    },
+    "pagination": {
+      "previousBtn": "Vorige",
+      "nextBtn": "Volgende"
     }
   },
   "help": {
