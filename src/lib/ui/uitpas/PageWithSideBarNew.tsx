@@ -24,10 +24,7 @@ export const PageWithSideBarNew = ({
 }: Props) => {
   const { t } = useTranslation();
   return (
-    <Grid
-      container
-      sx={{ height: { xs: "max-content", sm: "100vh" }, marginTop: "64px" }}
-    >
+    <Grid container sx={{ height: "100%", marginTop: "56.38px" }}>
       <SideBarContainer xs={12} sm={5} md={4} lg={3}>
         <Stack spacing={2}>
           {hasBackButton && (
