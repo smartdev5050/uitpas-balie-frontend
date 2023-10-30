@@ -27,6 +27,7 @@ import {
 } from "@/lib/utils";
 import { Pagination } from "./Pagination";
 import { useCounter } from "@/feature-counter";
+import { CircularProgress } from "@mui/joy";
 
 const RANGE_DATE_FORMAT = "YYYY-MM-DDTHH:mm:ssZ";
 const DATE_FORMAT = "DD MMMM YYYY";
@@ -200,8 +201,13 @@ export const ActivitiesPage = () => {
             ))}
           </>
         ) : (
-          // TODO: replace with loading spinner
-          <div>Loading...</div>
+          <CircularProgress
+            color="neutral"
+            determinate={false}
+            size="sm"
+            variant="plain"
+            sx={{ alignSelf: "center", my: 10 }}
+          />
         )}
         {total && (
           <Pagination
