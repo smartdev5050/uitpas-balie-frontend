@@ -26,7 +26,7 @@ export const PageWithSideBarNew = ({
   return (
     <Grid
       container
-      sx={{ height: { xs: "max-content", sm: "100%" }, marginTop: "64px" }}
+      sx={{ height: { xs: "max-content", sm: "100vh" }, marginTop: "64px" }}
     >
       <SideBarContainer xs={12} sm={5} md={4} lg={3}>
         <Stack spacing={2}>
