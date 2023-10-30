@@ -1,60 +1,63 @@
-import { Organizer, useGetPermissions } from "@/lib/dataAccess";
-import { Card, CardContent, Link, Typography } from "@/lib/ui";
-import { useSetActiveCounter } from "@/feature-counter/context/useSetActiveCounter";
-import { useTranslation } from "next-i18next";
+import { Organizer, OrganizerPermissions } from "@/lib/dataAccess";
+import { Card, CardContent } from "@/lib/ui";
+import { useCounter } from "@/feature-counter";
+import { CounterPickerData } from "./CounterPickerData";
+import { LastCounterData } from "./LastCounterData";
+import { PropsWithChildren } from "react";
 
-export const CounterPicker = () => {
-  const { t } = useTranslation();
-  const { data, isSuccess } = useGetPermissions();
-  const setActiveCounter = useSetActiveCounter();
+type CounterPickerProps = PropsWithChildren & {
+  data: OrganizerPermissions[];
+  filterString: string;
+};
 
-  const createHandleClick = (organizer: Organizer) => () => {
+export const CounterPicker = ({
+  data,
+  children,
+  filterString,
+}: CounterPickerProps) => {
+  const { setActiveCounter, lastCounterUsed } = useCounter();
+
+  const handleCounterClick = (organizer: Organizer) => () => {
     setActiveCounter(organizer);
   };
 
-  const finishedAndHasData = isSuccess && data?.data?.length > 0;
-  const finishedAndNoData = !finishedAndHasData && isSuccess;
-
-  if (finishedAndNoData)
-    return (
-      <>
-        <Typography
-          sx={(theme) => ({
-            fontStyle: "italic",
-            color: theme.vars.palette.neutral[500],
-          })}
+  return (
+    <Card
+      sx={{
+        //needs fixed height, for scroll and no overflow
+        maxHeight: "calc(100vh - 420px)",
+        overflowY: "auto",
+      }}
+    >
+      <CardContent>
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          {t("counter.noCounterP1")}
-        </Typography>
-        <Typography
-          sx={(theme) => ({
-            fontStyle: "italic",
-            color: theme.vars.palette.neutral[500],
-          })}
-        >
-          {t("counter.noCounterP2")}
-        </Typography>
-      </>
-    );
+          {children || (
+            <>
+              <LastCounterData
+                lastCounter={lastCounterUsed}
+                handleCounterClick={handleCounterClick}
+              />
+              <CounterPickerData
+                data={data}
+                filterString={filterString}
+                excludeCounter={lastCounterUsed}
+                handleCounterClick={handleCounterClick}
+              />
+            </>
+          )}
+        </ul>
+      </CardContent>
+    </Card>
+  );
 
-  if (finishedAndHasData) {
-    return (
-      <Card>
-        <CardContent>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {data?.data.map((permission) => (
-              <li key={permission.organizer.id} style={{ marginBottom: 6 }}>
-                <Link onClick={createHandleClick(permission.organizer)}>
-                  {permission.organizer.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  // TODO Loader, Error message?
+  // TODO port loader from ng app?, Error message?
   return null;
 };
