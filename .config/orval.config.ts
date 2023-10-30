@@ -1,4 +1,6 @@
-module.exports = {
+import { defineConfig } from "orval";
+
+export default defineConfig({
   uitpas: {
     input: {
       target:
@@ -10,6 +12,7 @@ module.exports = {
       schemas: "../src/lib/dataAccess/uitpas/generated/model",
       client: "react-query",
       mock: false,
+      baseUrl: process.env.NEXT_PUBLIC_API_PATH,
     },
   },
   search: {
@@ -23,6 +26,7 @@ module.exports = {
       schemas: "../src/lib/dataAccess/search/generated/model",
       client: "react-query",
       mock: false,
+      baseUrl: process.env.NEXT_PUBLIC_SEARCH_API_PATH,
     },
   },
-};
+});
