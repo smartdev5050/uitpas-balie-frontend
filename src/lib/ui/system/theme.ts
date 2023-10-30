@@ -36,7 +36,7 @@ export const theme = extendTheme({
           400: "#ddd",
           500: "#8a8a8d",
           600: "#2f3b4d",
-
+          700: "#212a37",
           800: "#262626",
           900: "#090909",
         },
@@ -98,7 +98,7 @@ export const theme = extendTheme({
     values: {
       xs: 0,
       sm: 660,
-      md: 820,
+      md: 768,
       lg: 1200,
       xl: 1536,
     },
