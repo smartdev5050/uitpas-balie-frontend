@@ -40,7 +40,7 @@ export const PageWithSideBarNew = ({
                     <FontAwesomeIcon
                       icon={faArrowLeft}
                       style={{ marginRight: "0.25rem" }}
-                    />{" "}
+                    />
                     {t("Terug")}
                   </Stack>
                 </Link>
