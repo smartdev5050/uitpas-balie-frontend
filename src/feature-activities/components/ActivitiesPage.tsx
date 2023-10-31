@@ -121,7 +121,7 @@ export const ActivitiesPage = () => {
       delete query[queryKey];
     } else {
       query[queryKey] = queryValue;
-      if (queryKey === "search" && pageQuery !== 1) {
+      if (queryKey != "page" && pageQuery !== 1) {
         delete query["page"];
       }
     }
