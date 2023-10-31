@@ -29,7 +29,7 @@ export const PageWithSideBarNew = ({
         <Stack spacing={2}>
           {hasBackButton && (
             <>
-              <Link href={"/"}>
+              <Link href={"/app"}>
                 <Stack direction="row" alignItems="center">
                   <FontAwesomeIcon
                     icon={faArrowLeft}
