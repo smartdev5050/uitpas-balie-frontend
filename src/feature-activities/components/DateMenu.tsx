@@ -52,11 +52,13 @@ const menuItems: menuItem[] = [
     value: "chooseDate",
   },
 ];
+
 type DateMenuProps = {
   handleQuery: (queryKey: string, queryValue: string) => void;
   defaultRange?: string;
   disabled: boolean;
 };
+
 export const DateMenu = ({
   handleQuery,
   defaultRange,

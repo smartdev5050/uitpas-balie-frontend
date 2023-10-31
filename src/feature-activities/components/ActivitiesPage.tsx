@@ -104,10 +104,7 @@ export const ActivitiesPage = () => {
     ...(searchQuery && { q: searchQuery as string }),
     // @ts-expect-error Orval didn't include pagination in generated types
     limit: FETCH_LIMIT,
-    start:
-      (pageQuery as number) === 1
-        ? 0
-        : ((pageQuery as number) - 1) * FETCH_LIMIT,
+    start: pageQuery === 1 ? 0 : (pageQuery - 1) * FETCH_LIMIT,
   });
   useEffect(() => {
     if (isSuccess) {
@@ -146,12 +143,12 @@ export const ActivitiesPage = () => {
         <StyledUserInputStack>
           <DateMenu
             handleQuery={handleQuery}
-            defaultRange={rangeQuery && rangeQuery.toString()}
+            defaultRange={rangeQuery?.toString()}
             disabled={isLoading}
           />
           <SearchInput
             handleQuery={handleQuery}
-            defaultSearch={searchQuery && searchQuery.toString()}
+            defaultSearch={searchQuery?.toString()}
             disabled={isLoading}
           />
         </StyledUserInputStack>
@@ -161,9 +158,12 @@ export const ActivitiesPage = () => {
             {data.data.member.map((member, i) => (
               <StyledActivityStack
                 key={`activity-${member.name[LANG_KEY]?.substring(0, 10)}}`}
-                sx={{
-                  borderTop: i === 0 ? "1px solid #e5e5e5" : "1px solid #fff",
-                }}
+                sx={(theme) => ({
+                  borderTop:
+                    i === 0
+                      ? `1px solid ${theme.palette.neutral[400]}`
+                      : `1px solid ${theme.palette.neutral.outlinedBorder}`,
+                })}
               >
                 <StyledItemStack>
                   <StyledEventDate level="body2">

@@ -1,5 +1,5 @@
 import { Stack } from "@/lib/ui";
-import { Button, styled } from "@mui/joy";
+import { styled } from "@mui/joy";
 import { useTranslation } from "next-i18next";
 import {
   ButtonHTMLAttributes,
@@ -7,12 +7,7 @@ import {
   forwardRef,
   HTMLProps,
 } from "react";
-import {
-  mdiArrowLeftThin,
-  mdiMenuDown,
-  mdiMenuLeft,
-  mdiMenuRight,
-} from "@mdi/js";
+import { mdiMenuLeft, mdiMenuRight } from "@mdi/js";
 import Icon from "@mdi/react";
 
 const StyledPaginationButton = styled(
@@ -38,13 +33,13 @@ const StyledPaginationButton = styled(
   padding: "8px 12px",
   lineHeight: "1.3333333",
   fontSize: "15px",
-  border: "1px solid #ccc",
+  border: `1px solid ${theme.palette.neutral.plainBorder}`,
   marginLeft: "-1px",
-  color: "#2a4b9c",
+  color: theme.palette.primary.mainChannel,
   backgroundColor: theme.palette.primary.solidColor,
 
   "&:not(:disabled):hover": {
-    color: "#1a2e60",
+    color: theme.palette.primary.solidHoverBg,
     backgroundColor: theme.palette.neutral[200],
   },
 
@@ -52,7 +47,7 @@ const StyledPaginationButton = styled(
     ...(!active
       ? {
           cursor: "not-allowed",
-          color: "#cccccc",
+          color: theme.palette.neutral.plainBorder,
         }
       : {
           cursor: "auto",

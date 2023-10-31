@@ -32,22 +32,22 @@ export const StyledUserInputStack = styled(Stack)(({ theme }) => ({
 }));
 
 export const StyledActivityStack = styled(Stack)(({ theme }) => ({
-  borderBottom: "1px solid #e5e5e5",
+  borderBottom: `1px solid ${theme.palette.neutral[400]}`,
   justifyContent: "space-between",
   minHeight: "90px",
   "&:hover": {
     cursor: "pointer",
-    backgroundColor: "#e4eef5",
+    backgroundColor: theme.palette.info.softBg,
     transition: "background 150ms ease-in-out",
   },
 
   [theme.breakpoints.up("md")]: {
     flexDirection: "row",
     "> :last-child": {
-      backgroundColor: "#f3f3f3",
+      backgroundColor: theme.palette.neutral[200],
     },
     "&:hover > :last-child": {
-      backgroundColor: "#c1d1e1",
+      backgroundColor: theme.palette.info.softBorder,
       transition: "background 150ms ease-in-out",
     },
   },
@@ -68,16 +68,16 @@ export const StyledItemStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export const StyledEventDate = styled(Typography)({
-  color: "#8a8a8d",
-});
+export const StyledEventDate = styled(Typography)(({ theme }) => ({
+  color: theme.palette.neutral[500],
+}));
 
-export const StyledEventName = styled(Typography)({
-  color: "#2a4b9c",
+export const StyledEventName = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.mainChannel,
   fontSize: "16px",
   fontWeight: 700,
   lineHeight: "1.1",
-});
+}));
 
 export const StyledActionsStack = styled(Stack)(({ theme }) => ({
   flexDirection: "row",

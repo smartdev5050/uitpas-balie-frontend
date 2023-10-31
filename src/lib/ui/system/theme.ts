@@ -3,6 +3,10 @@ import { Open_Sans } from "next/font/google";
 declare module "@mui/joy/styles" {
   interface PaletteNeutral {
     solidBorder: string;
+    plainBorder: string;
+  }
+  interface PaletteInfo {
+    softBorder: string;
   }
 }
 
@@ -29,6 +33,7 @@ export const theme = extendTheme({
           outlinedBorder: "#FFF",
           outlinedColor: "#FFF",
           solidBorder: "#969ca5",
+          plainBorder: "#ccc",
           50: "#FFF",
           200: "#f3f3f3",
           300: "#f5f5f5",
@@ -44,8 +49,8 @@ export const theme = extendTheme({
         },
         info: {
           50: "#EEF7FC",
-          100: "#77A2CF",
-          200: "#daedf8",
+          100: "#daedf8",
+          200: "#66afe999",
           300: "#598ec5",
           400: "#4078B5",
           500: "#2a4b9c",

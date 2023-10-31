@@ -16,27 +16,13 @@ export const StyledListbox = styled("ul")(
     list-style: none;
     font-size: 15px;
     text-align: left;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: ${theme.palette.neutral[50]};
+    border: 1px solid ${theme.palette.neutral.plainBorder};
     border-radius: 0;
     box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
     background-clip: padding-box;
   `
 );
-
-const navItemStyles = ({ theme }: { theme: Theme }) => ({
-  cursor: "pointer",
-  padding: "16px 10px",
-  display: "inline-block",
-  color: theme.vars.palette.neutral[50],
-  // @ts-ignore
-  fontSize: theme.typography.body1.fontSize,
-  textDecoration: "underline",
-  "&:hover": {
-    textDecoration: "none",
-  },
-});
 
 export const TriggerButton = styled(
   forwardRef(function ButtonWrapper(
@@ -63,9 +49,9 @@ export const TriggerButton = styled(
   fontSize: "15px",
   lineHeight: "1.333333",
   userSelect: "none",
-  border: `1px #ccc solid`,
+  border: `1px solid ${theme.palette.neutral.plainBorder}`,
   backgroundColor: theme.palette.primary.solidColor,
-  color: "#333",
+  color: theme.palette.text.primary,
 
   "&:hover": {
     backgroundColor: theme.palette.neutral[200],
@@ -79,22 +65,6 @@ export const TriggerButton = styled(
     textDecoration: "none",
   }),
 }));
-
-export const StyledMenuItem = styled(MenuItemUnstyled)(
-  ({ theme }) => `
-      margin-bottom: 0.3em;
-      
-      &.${menuItemUnstyledClasses.focusVisible} {
-        outline: none;
-      }
-      
-      &.${menuItemUnstyledClasses.focusVisible} a {
-        text-decoration: none;
-        color: ${theme.vars.palette.neutral[800]};
-        background-color: ${theme.vars.palette.neutral[300]};
-      }
-  `
-);
 
 export const StyledDateItem = styled("a")(
   ({ theme }) => `
@@ -117,12 +87,12 @@ export const StyledDateItem = styled("a")(
   `
 );
 
-export const StyledDivider = styled("li")({
+export const StyledDivider = styled("li")(({ theme }) => ({
   height: "1px",
   margin: "8.5px 0",
-  backgroundColor: "#e5e5e5",
+  backgroundColor: theme.palette.neutral[400],
   overflow: "hidden",
-});
+}));
 
 export const Popper = styled(PopperUnstyled)`
   z-index: 1;

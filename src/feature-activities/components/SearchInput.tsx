@@ -1,4 +1,3 @@
-import { Stack } from "@/lib/ui";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
@@ -6,7 +5,9 @@ import {
   StyledSearchButton,
   StyledSearchForm,
   StyledSearchInput,
+  StyledSearchStack,
 } from "./SearchInput.styles";
+import { FormEvent } from "react";
 
 type SearchInputProps = {
   handleQuery: (queryKey: string, queryValue: string) => void;
@@ -21,24 +22,15 @@ export const SearchInput = ({
 }: SearchInputProps) => {
   const { t } = useTranslation();
 
-  const handleFormSubmission = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmission = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const query = formData.get("query-input");
-    handleQuery("search", query as string);
+    handleQuery("search", formData.get("query-input") as string);
   };
 
   return (
     <StyledSearchForm method="POST" onSubmit={handleFormSubmission}>
-      <Stack
-        sx={{
-          flexDirection: "row",
-          maxHeight: "37px",
-          "&:focus-within": {
-            boxShadow: "0 0 8px rgba(102,175,233,.6)",
-          },
-        }}
-      >
+      <StyledSearchStack>
         <StyledSearchInput
           name="query-input"
           variant="plain"
@@ -55,7 +47,7 @@ export const SearchInput = ({
         <StyledSearchButton type="submit" disabled={disabled}>
           {t("activities.searchBtn")}
         </StyledSearchButton>
-      </Stack>
+      </StyledSearchStack>
     </StyledSearchForm>
   );
 };

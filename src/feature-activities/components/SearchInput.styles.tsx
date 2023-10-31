@@ -1,18 +1,25 @@
 import { Input, styled } from "@mui/joy";
-import { Button } from "@/lib/ui";
+import { Button, Stack } from "@/lib/ui";
+
+export const StyledSearchStack = styled(Stack)(({ theme }) => ({
+  flexDirection: "row",
+  maxHeight: "37px",
+  "&:focus-within": {
+    boxShadow: `0 0 8px ${theme.palette.info[200]}`,
+  },
+}));
 
 export const StyledSearchInput = styled(Input)(({ theme }) => ({
-  ml: "auto",
-  border: `1px #ccc solid`,
+  border: `1px ${theme.palette.neutral.plainBorder} solid`,
   "--Input-placeholderOpacity": 0.4,
   "--Input-minHeight": "37px",
   "&:focus-within::before": {
-    borderColor: "#bababa",
+    borderColor: theme.palette.neutral.solidBorder,
     boxShadow: "none",
   },
   borderRadius: 0,
   fontSize: "15px",
-  color: "#555",
+  color: theme.palette.neutral[800],
   flex: 1,
 }));
 
@@ -26,10 +33,10 @@ export const StyledSearchButton = styled(Button)(({ theme }) => ({
   fontSize: "15px",
   lineHeight: "1.333333",
   userSelect: "none",
-  border: `1px #ccc solid`,
+  border: `1px solid ${theme.palette.neutral.plainBorder}`,
   borderLeft: "none",
   backgroundColor: theme.palette.primary.solidColor,
-  color: "#333",
+  color: theme.palette.text.primary,
 
   "&:hover": {
     backgroundColor: theme.palette.neutral[200],
