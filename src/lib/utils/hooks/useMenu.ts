@@ -27,9 +27,12 @@ export const useMenu = () => {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = (menuItemClicked: boolean) => {
     setAnchorEl(null);
     buttonRef.current!.focus();
+    if (menuItemClicked) {
+      setIsOpen(false);
+    }
   };
 
   return {

@@ -78,9 +78,9 @@ export const DateMenu = ({
   );
 
   const handleItemClick = (item: menuItem) => {
+    onClose(true);
     setCurrentItem(item);
     handleQuery("range", item.value!);
-    onClose();
   };
 
   return (
@@ -113,7 +113,7 @@ export const DateMenu = ({
       <MenuUnstyled
         actions={menuActions}
         open={isOpen}
-        onClose={onClose}
+        onClose={() => onClose(false)}
         anchorEl={menuAnchorEl}
         slots={{ root: Popper, listbox: StyledListbox }}
         slotProps={{
