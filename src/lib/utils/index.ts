@@ -2,4 +2,5 @@ export * from "./hooks";
 export * from "./isClient";
 export * from "./prefixWhenNotEmpty";
 export * from "./Periods";
-export * from "./getAssetUrl";
+export * from "./urlUtils";
+export * from "./getUuid";

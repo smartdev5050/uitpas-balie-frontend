@@ -3,16 +3,16 @@ import { MenuUnstyledActions } from "@mui/base/MenuUnstyled";
 
 export const useMenu = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuActions = useRef<MenuUnstyledActions>(null);
 
   const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (isOpen) {
-      setOpen(false);
+      setIsOpen(false);
       setAnchorEl(null);
     } else {
-      setOpen(true);
+      setIsOpen(true);
       setAnchorEl(event.currentTarget);
     }
   };
@@ -27,9 +27,12 @@ export const useMenu = () => {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = (menuItemClicked: boolean) => {
     setAnchorEl(null);
     buttonRef.current!.focus();
+    if (menuItemClicked) {
+      setIsOpen(false);
+    }
   };
 
   return {

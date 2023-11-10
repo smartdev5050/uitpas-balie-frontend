@@ -60,7 +60,7 @@ export const CounterMenu = ({ name, isMobile, setOpen }: Props) => {
   } = useMenu();
 
   const handleClose = () => {
-    onClose();
+    onClose(true);
     setOpen(false);
   };
 
@@ -81,7 +81,7 @@ export const CounterMenu = ({ name, isMobile, setOpen }: Props) => {
         <MenuUnstyled
           actions={menuActions}
           open={isOpen}
-          onClose={onClose}
+          onClose={() => onClose(false)}
           anchorEl={menuAnchorEl}
           slots={{
             root: Popper,
@@ -94,7 +94,7 @@ export const CounterMenu = ({ name, isMobile, setOpen }: Props) => {
         >
           {menuItems.map((menuItem) => (
             <StyledMenuItem key={menuItem.link}>
-              <StyledLink href={menuItem.link}>
+              <StyledLink href={menuItem.link} onClick={handleClose}>
                 {t(`nav.${menuItem.label}`)}
               </StyledLink>
             </StyledMenuItem>

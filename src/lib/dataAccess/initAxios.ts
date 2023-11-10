@@ -1,25 +1,18 @@
 import axios from "axios";
-import getConfig from "next/config";
-
-(function init() {
-  const { publicRuntimeConfig } = getConfig();
-
-  axios.defaults.baseURL = publicRuntimeConfig.apiPath;
-})();
 
 export const removeHeader = (headerKey: string) => {
   delete axios.defaults.headers[headerKey];
 };
 
 export const setHeaders = (headers: Record<string, string>) => {
-  axios.defaults.headers = {
+    axios.defaults.headers = {
     ...axios.defaults.headers,
     ...headers,
   };
 };
 
 export const addInterceptor = (callback: (status: number) => void) => {
-  axios.interceptors.response.use(
+    axios.interceptors.response.use(
     (response) => response,
     (error) => {
       callback(error.response.status);

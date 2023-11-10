@@ -70,9 +70,11 @@ export const Navbar = ({ userInfo, counter }: NavbarProps) => {
           </LogoLink>
           {mobile && (
             <HamburgerButton
-              sx={{
-                backgroundColor: open ? "#333" : "transparent",
-              }}
+              sx={(theme) => ({
+                backgroundColor: open
+                  ? theme.palette.text.primary
+                  : "transparent",
+              })}
               onClick={handleToggle}
               variant="solid"
               size="sm"
