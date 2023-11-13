@@ -39,6 +39,7 @@ export const SelectCounterPage = () => {
             alt={"UiTPAS Logo"}
             width={280}
             height={84}
+            priority
           />
         </Box>
 

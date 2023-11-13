@@ -17,6 +17,7 @@ export const LoginPage = () => {
             alt={"UiTPAS Logo"}
             width={280}
             height={84}
+            priority
           />
           <Typography>{t("appName")}</Typography>
         </Box>

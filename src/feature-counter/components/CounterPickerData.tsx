@@ -27,7 +27,10 @@ export const CounterPickerData = ({
     <>
       {dataWithoutPrevCounter.length > 0 ? (
         dataWithoutPrevCounter.map((permission) => (
-          <li key={permission.organizer.id} style={{ marginBottom: 6 }}>
+          <li
+            key={`${permission.organizer.name}${permission.organizer.id}`}
+            style={{ marginBottom: 6 }}
+          >
             <Link onClick={handleCounterClick(permission.organizer)}>
               {permission.organizer.name}
             </Link>
