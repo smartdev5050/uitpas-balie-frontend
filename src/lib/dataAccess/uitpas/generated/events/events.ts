@@ -62,7 +62,7 @@ export const putEventsCardSystems = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.put(
-      `https://api-test.uitpas.be/events/${eventId}/card-systems`,
+      `NEXT_PUBLIC_API_PATH/events/${eventId}/card-systems`,
       eventCardSystem,options
     );
   }
@@ -126,14 +126,14 @@ export const getEventsCardSystems = (
  ): Promise<AxiosResponse<EventCardSystem[]>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/events/${eventId}/card-systems`,options
+      `NEXT_PUBLIC_API_PATH/events/${eventId}/card-systems`,options
     );
   }
 
 
 export const getGetEventsCardSystemsQueryKey = (eventId: string,) => {
     
-    return [`https://api-test.uitpas.be/events/${eventId}/card-systems`] as const;
+    return [`NEXT_PUBLIC_API_PATH/events/${eventId}/card-systems`] as const;
     }
 
     

@@ -45,14 +45,14 @@ export const getOrganizersFinancialReportsPeriods = (
  ): Promise<AxiosResponse<ReportPeriod[]>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/organizers/${organizerId}/financial-reports/periods`,options
+      `NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/periods`,options
     );
   }
 
 
 export const getGetOrganizersFinancialReportsPeriodsQueryKey = (organizerId: string,) => {
     
-    return [`https://api-test.uitpas.be/organizers/${organizerId}/financial-reports/periods`] as const;
+    return [`NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/periods`] as const;
     }
 
     
@@ -107,7 +107,7 @@ export const postOrganizersFinancialReports = (
  ): Promise<AxiosResponse<Report>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/organizers/${organizerId}/financial-reports`,
+      `NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports`,
       reportPeriod,options
     );
   }
@@ -165,14 +165,14 @@ export const getOrganizersFinancialReports = (
  ): Promise<AxiosResponse<Report[]>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/organizers/${organizerId}/financial-reports`,options
+      `NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports`,options
     );
   }
 
 
 export const getGetOrganizersFinancialReportsQueryKey = (organizerId: string,) => {
     
-    return [`https://api-test.uitpas.be/organizers/${organizerId}/financial-reports`] as const;
+    return [`NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports`] as const;
     }
 
     
@@ -227,7 +227,7 @@ export const getOrganizersFinancialReportsReportId = (
  ): Promise<AxiosResponse<Report>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/organizers/${organizerId}/financial-reports/${reportId}`,options
+      `NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/${reportId}`,options
     );
   }
 
@@ -235,7 +235,7 @@ export const getOrganizersFinancialReportsReportId = (
 export const getGetOrganizersFinancialReportsReportIdQueryKey = (organizerId: string,
     reportId: number,) => {
     
-    return [`https://api-test.uitpas.be/organizers/${organizerId}/financial-reports/${reportId}`] as const;
+    return [`NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/${reportId}`] as const;
     }
 
     
@@ -292,7 +292,7 @@ export const getOrganizersFinancialReportsReportIdZip = (
  ): Promise<AxiosResponse<unknown>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/organizers/${organizerId}/financial-reports/${reportId}.zip`,options
+      `NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/${reportId}.zip`,options
     );
   }
 
@@ -300,7 +300,7 @@ export const getOrganizersFinancialReportsReportIdZip = (
 export const getGetOrganizersFinancialReportsReportIdZipQueryKey = (organizerId: string,
     reportId: number,) => {
     
-    return [`https://api-test.uitpas.be/organizers/${organizerId}/financial-reports/${reportId}.zip`] as const;
+    return [`NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/${reportId}.zip`] as const;
     }
 
     

@@ -57,7 +57,7 @@ export const getEvents = (
  ): Promise<AxiosResponse<GetEvents200>> => {
     
     return axios.get(
-      `https://search-test.uitdatabank.be/events`,{
+      `NEXT_PUBLIC_SEARCH_API_PATH/events`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -66,7 +66,7 @@ export const getEvents = (
 
 export const getGetEventsQueryKey = (params?: GetEventsParams,) => {
     
-    return [`https://search-test.uitdatabank.be/events`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_SEARCH_API_PATH/events`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -129,7 +129,7 @@ export const getOffers = (
  ): Promise<AxiosResponse<GetOffers200>> => {
     
     return axios.get(
-      `https://search-test.uitdatabank.be/offers`,{
+      `NEXT_PUBLIC_SEARCH_API_PATH/offers`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -138,7 +138,7 @@ export const getOffers = (
 
 export const getGetOffersQueryKey = (params?: GetOffersParams,) => {
     
-    return [`https://search-test.uitdatabank.be/offers`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_SEARCH_API_PATH/offers`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -204,7 +204,7 @@ export const getPlaces = (
  ): Promise<AxiosResponse<GetPlaces200>> => {
     
     return axios.get(
-      `https://search-test.uitdatabank.be/places`,{
+      `NEXT_PUBLIC_SEARCH_API_PATH/places`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -213,7 +213,7 @@ export const getPlaces = (
 
 export const getGetPlacesQueryKey = (params?: GetPlacesParams,) => {
     
-    return [`https://search-test.uitdatabank.be/places`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_SEARCH_API_PATH/places`, ...(params ? [params]: [])] as const;
     }
 
     

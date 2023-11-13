@@ -48,14 +48,14 @@ export const getUitidEmail = (
  ): Promise<AxiosResponse<GetUitidEmail200>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/uitid/emails/${email}`,options
+      `NEXT_PUBLIC_API_PATH/uitid/emails/${email}`,options
     );
   }
 
 
 export const getGetUitidEmailQueryKey = (email: string,) => {
     
-    return [`https://api-test.uitpas.be/uitid/emails/${email}`] as const;
+    return [`NEXT_PUBLIC_API_PATH/uitid/emails/${email}`] as const;
     }
 
     

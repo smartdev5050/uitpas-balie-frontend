@@ -37,14 +37,14 @@ export const getPermissions = (
  ): Promise<AxiosResponse<OrganizerPermissions[]>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/permissions`,options
+      `NEXT_PUBLIC_API_PATH/permissions`,options
     );
   }
 
 
 export const getGetPermissionsQueryKey = () => {
     
-    return [`https://api-test.uitpas.be/permissions`] as const;
+    return [`NEXT_PUBLIC_API_PATH/permissions`] as const;
     }
 
     

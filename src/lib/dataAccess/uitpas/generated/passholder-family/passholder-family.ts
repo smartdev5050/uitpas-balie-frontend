@@ -76,14 +76,14 @@ export const getPassholdersPassholderIdFamilyMembers = (
  ): Promise<AxiosResponse<FamilyMember[]>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/${passholderId}/family-members`,options
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/family-members`,options
     );
   }
 
 
 export const getGetPassholdersPassholderIdFamilyMembersQueryKey = (passholderId: string,) => {
     
-    return [`https://api-test.uitpas.be/passholders/${passholderId}/family-members`] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/${passholderId}/family-members`] as const;
     }
 
     
@@ -143,7 +143,7 @@ export const postPassholdersPassholderIdFamilyMembers = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/passholders/${passholderId}/family-members`,
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/family-members`,
       familyMember,options
     );
   }
@@ -199,7 +199,7 @@ export const putPassholdersPassholderIdFamilyMembersFamilyMemberId = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.put(
-      `https://api-test.uitpas.be/passholders/${passholderId}/family-members/${familyMemberId}`,
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/family-members/${familyMemberId}`,
       familyMember,options
     );
   }
@@ -256,7 +256,7 @@ export const deletePassholdersPassholderIdFamilyMembersFamilyMemberId = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.delete(
-      `https://api-test.uitpas.be/passholders/${passholderId}/family-members/${familyMemberId}`,options
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/family-members/${familyMemberId}`,options
     );
   }
 
@@ -309,14 +309,14 @@ export const getPassholdersPassholderIdFamilies = (
  ): Promise<AxiosResponse<GetPassholdersPassholderIdFamilies200Item[]>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/${passholderId}/families`,options
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/families`,options
     );
   }
 
 
 export const getGetPassholdersPassholderIdFamiliesQueryKey = (passholderId: string,) => {
     
-    return [`https://api-test.uitpas.be/passholders/${passholderId}/families`] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/${passholderId}/families`] as const;
     }
 
     

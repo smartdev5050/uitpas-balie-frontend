@@ -49,14 +49,14 @@ export const getPassholdersSchool = (
  ): Promise<AxiosResponse<Organizer>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/${passholderId}/school`,options
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/school`,options
     );
   }
 
 
 export const getGetPassholdersSchoolQueryKey = (passholderId: string,) => {
     
-    return [`https://api-test.uitpas.be/passholders/${passholderId}/school`] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/${passholderId}/school`] as const;
     }
 
     
@@ -116,7 +116,7 @@ export const putPassholdersSchool = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.put(
-      `https://api-test.uitpas.be/passholders/${passholderId}/school`,
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/school`,
       organizer,options
     );
   }
@@ -176,7 +176,7 @@ export const deletePassholdersSchool = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.delete(
-      `https://api-test.uitpas.be/passholders/${passholderId}/school`,options
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/school`,options
     );
   }
 

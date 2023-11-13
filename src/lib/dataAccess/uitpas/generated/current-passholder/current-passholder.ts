@@ -62,14 +62,14 @@ export const getUitidPassholderRegistrationToken = (
  ): Promise<AxiosResponse<GetUitidPassholderRegistrationToken200>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/me/uitid/registration-token`,options
+      `NEXT_PUBLIC_API_PATH/passholders/me/uitid/registration-token`,options
     );
   }
 
 
 export const getGetUitidPassholderRegistrationTokenQueryKey = () => {
     
-    return [`https://api-test.uitpas.be/passholders/me/uitid/registration-token`] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/me/uitid/registration-token`] as const;
     }
 
     
@@ -137,14 +137,14 @@ export const getUitidPassholderStatus = (
  ): Promise<AxiosResponse<GetUitidPassholderStatus200>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/me/uitid/status`,options
+      `NEXT_PUBLIC_API_PATH/passholders/me/uitid/status`,options
     );
   }
 
 
 export const getGetUitidPassholderStatusQueryKey = () => {
     
-    return [`https://api-test.uitpas.be/passholders/me/uitid/status`] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/me/uitid/status`] as const;
     }
 
     
@@ -199,7 +199,7 @@ export const registerUitidPassholder = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.put(
-      `https://api-test.uitpas.be/passholders/me/uitid`,undefined,options
+      `NEXT_PUBLIC_API_PATH/passholders/me/uitid`,undefined,options
     );
   }
 
@@ -252,14 +252,14 @@ export const getPassholdersMe = (
  ): Promise<AxiosResponse<Passholder>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/me`,options
+      `NEXT_PUBLIC_API_PATH/passholders/me`,options
     );
   }
 
 
 export const getGetPassholdersMeQueryKey = () => {
     
-    return [`https://api-test.uitpas.be/passholders/me`] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/me`] as const;
     }
 
     
@@ -320,7 +320,7 @@ export const postPassholdersMe = (
  ): Promise<AxiosResponse<Passholder>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/passholders/me`,
+      `NEXT_PUBLIC_API_PATH/passholders/me`,
       passholderSelfRegistration,options
     );
   }
@@ -374,7 +374,7 @@ export const postPassholdersMeCheckin = (
  ): Promise<AxiosResponse<PostPassholdersMeCheckin201>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/passholders/me/checkins`,
+      `NEXT_PUBLIC_API_PATH/passholders/me/checkins`,
       postPassholdersMeCheckinBody,options
     );
   }
@@ -428,7 +428,7 @@ export const getPassholdersMeTransactions = (
  ): Promise<AxiosResponse<TransactionsPaginatedCollection>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/me/transactions`,{
+      `NEXT_PUBLIC_API_PATH/passholders/me/transactions`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -437,7 +437,7 @@ export const getPassholdersMeTransactions = (
 
 export const getGetPassholdersMeTransactionsQueryKey = (params?: GetPassholdersMeTransactionsParams,) => {
     
-    return [`https://api-test.uitpas.be/passholders/me/transactions`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/me/transactions`, ...(params ? [params]: [])] as const;
     }
 
     

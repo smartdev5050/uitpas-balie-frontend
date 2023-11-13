@@ -11,8 +11,10 @@ const nextConfig = {
     legacyAppUrl: process.env.NEXT_PUBLIC_LEGACY_APP_URL,
     basePath,
     legacyApiPath: process.env.NEXT_PUBLIC_LEGACY_API_PATH,
-    apiPath: process.env.NEXT_PUBLIC_API_PATH,
-    searchApiPath: process.env.NEXT_PUBLIC_SEARCH_API_PATH,
+    apiPaths: {
+      NEXT_PUBLIC_API_PATH: process.env.NEXT_PUBLIC_API_PATH,
+      NEXT_PUBLIC_SEARCH_API_PATH: process.env.NEXT_PUBLIC_SEARCH_API_PATH,
+    },
     uitInVlaanderenUrl: process.env.NEXT_PUBLIC_UITINVLAANDEREN_URL,
     uitInDatabankUrl: process.env.NEXT_PUBLIC_UITDATABANK_URL,
     oauthPath: process.env.NEXT_PUBLIC_OAUTH_PATH,

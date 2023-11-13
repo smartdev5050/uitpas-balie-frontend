@@ -51,7 +51,7 @@ export const getOrganizers = (
  ): Promise<AxiosResponse<GetOrganizers200>> => {
     
     return axios.get(
-      `https://search-test.uitdatabank.be/organizers`,{
+      `NEXT_PUBLIC_SEARCH_API_PATH/organizers`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -60,7 +60,7 @@ export const getOrganizers = (
 
 export const getGetOrganizersQueryKey = (params?: GetOrganizersParams,) => {
     
-    return [`https://search-test.uitdatabank.be/organizers`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_SEARCH_API_PATH/organizers`, ...(params ? [params]: [])] as const;
     }
 
     

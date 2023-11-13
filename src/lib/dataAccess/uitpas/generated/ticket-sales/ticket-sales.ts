@@ -85,7 +85,7 @@ export const getTariffs = (
  ): Promise<AxiosResponse<TariffsResponse>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/tariffs`,{
+      `NEXT_PUBLIC_API_PATH/tariffs`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -94,7 +94,7 @@ export const getTariffs = (
 
 export const getGetTariffsQueryKey = (params: GetTariffsParams,) => {
     
-    return [`https://api-test.uitpas.be/tariffs`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/tariffs`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -161,7 +161,7 @@ export const getTariffsStatic = (
  ): Promise<AxiosResponse<TariffsResponse>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/tariffs/static`,{
+      `NEXT_PUBLIC_API_PATH/tariffs/static`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -170,7 +170,7 @@ export const getTariffsStatic = (
 
 export const getGetTariffsStaticQueryKey = (params: GetTariffsStaticParams,) => {
     
-    return [`https://api-test.uitpas.be/tariffs/static`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/tariffs/static`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -246,7 +246,7 @@ export const postTicketSales = (
  ): Promise<AxiosResponse<TicketSale[]>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/ticket-sales`,
+      `NEXT_PUBLIC_API_PATH/ticket-sales`,
       ticketSale,options
     );
   }
@@ -302,7 +302,7 @@ export const getTicketSales = (
  ): Promise<AxiosResponse<TicketSalesPaginatedResponse>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/ticket-sales`,{
+      `NEXT_PUBLIC_API_PATH/ticket-sales`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -311,7 +311,7 @@ export const getTicketSales = (
 
 export const getGetTicketSalesQueryKey = (params: GetTicketSalesParams,) => {
     
-    return [`https://api-test.uitpas.be/ticket-sales`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/ticket-sales`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -364,7 +364,7 @@ export const deleteTicketSales = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.delete(
-      `https://api-test.uitpas.be/ticket-sales/${ticketSaleId}`,options
+      `NEXT_PUBLIC_API_PATH/ticket-sales/${ticketSaleId}`,options
     );
   }
 

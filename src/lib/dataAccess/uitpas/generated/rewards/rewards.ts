@@ -80,7 +80,7 @@ export const getRewards = (
  ): Promise<AxiosResponse<RewardsPaginatedResponse>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/rewards`,{
+      `NEXT_PUBLIC_API_PATH/rewards`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -89,7 +89,7 @@ export const getRewards = (
 
 export const getGetRewardsQueryKey = (params?: GetRewardsParams,) => {
     
-    return [`https://api-test.uitpas.be/rewards`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/rewards`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -142,7 +142,7 @@ export const postRewards = (
  ): Promise<AxiosResponse<Reward>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/rewards`,
+      `NEXT_PUBLIC_API_PATH/rewards`,
       reward,options
     );
   }
@@ -196,14 +196,14 @@ export const getRewardsId = (
  ): Promise<AxiosResponse<Reward>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/rewards/${rewardId}`,options
+      `NEXT_PUBLIC_API_PATH/rewards/${rewardId}`,options
     );
   }
 
 
 export const getGetRewardsIdQueryKey = (rewardId: string,) => {
     
-    return [`https://api-test.uitpas.be/rewards/${rewardId}`] as const;
+    return [`NEXT_PUBLIC_API_PATH/rewards/${rewardId}`] as const;
     }
 
     
@@ -265,7 +265,7 @@ export const putRewardsId = (
  ): Promise<AxiosResponse<Reward>> => {
     
     return axios.put(
-      `https://api-test.uitpas.be/rewards/${rewardId}`,
+      `NEXT_PUBLIC_API_PATH/rewards/${rewardId}`,
       reward,options
     );
   }
@@ -321,7 +321,7 @@ export const getRewardsIdRedeemStatus = (
  ): Promise<AxiosResponse<GetRewardsIdRedeemStatus200>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/rewards/${rewardId}/redeem-status`,{
+      `NEXT_PUBLIC_API_PATH/rewards/${rewardId}/redeem-status`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -331,7 +331,7 @@ export const getRewardsIdRedeemStatus = (
 export const getGetRewardsIdRedeemStatusQueryKey = (rewardId: string,
     params: GetRewardsIdRedeemStatusParams,) => {
     
-    return [`https://api-test.uitpas.be/rewards/${rewardId}/redeem-status`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/rewards/${rewardId}/redeem-status`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -386,7 +386,7 @@ export const postRewardsRedeemed = (
  ): Promise<AxiosResponse<RedeemedReward>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/rewards/redeemed`,
+      `NEXT_PUBLIC_API_PATH/rewards/redeemed`,
       postRewardsRedeemedBody,options
     );
   }
@@ -440,7 +440,7 @@ export const getRewardsRedeemed = (
  ): Promise<AxiosResponse<RedeemedRewardsPaginatedResponse>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/rewards/redeemed`,{
+      `NEXT_PUBLIC_API_PATH/rewards/redeemed`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -449,7 +449,7 @@ export const getRewardsRedeemed = (
 
 export const getGetRewardsRedeemedQueryKey = (params: GetRewardsRedeemedParams,) => {
     
-    return [`https://api-test.uitpas.be/rewards/redeemed`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/rewards/redeemed`, ...(params ? [params]: [])] as const;
     }
 
     

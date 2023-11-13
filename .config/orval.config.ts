@@ -12,7 +12,7 @@ export default defineConfig({
       schemas: "../src/lib/dataAccess/uitpas/generated/model",
       client: "react-query",
       mock: false,
-      baseUrl: process.env.NEXT_PUBLIC_API_PATH,
+      baseUrl: "NEXT_PUBLIC_API_PATH",
     },
   },
   search: {
@@ -26,7 +26,7 @@ export default defineConfig({
       schemas: "../src/lib/dataAccess/search/generated/model",
       client: "react-query",
       mock: false,
-      baseUrl: process.env.NEXT_PUBLIC_SEARCH_API_PATH,
+      baseUrl: "NEXT_PUBLIC_SEARCH_API_PATH",
     },
   },
 });

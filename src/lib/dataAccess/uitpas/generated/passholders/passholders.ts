@@ -77,7 +77,7 @@ export const getPassholders = (
  ): Promise<AxiosResponse<PassholdersPaginatedResponse>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders`,{
+      `NEXT_PUBLIC_API_PATH/passholders`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -86,7 +86,7 @@ export const getPassholders = (
 
 export const getGetPassholdersQueryKey = (params?: GetPassholdersParams,) => {
     
-    return [`https://api-test.uitpas.be/passholders`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -145,7 +145,7 @@ export const postPassholders = (
  ): Promise<AxiosResponse<Passholder>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/passholders`,
+      `NEXT_PUBLIC_API_PATH/passholders`,
       passholder,options
     );
   }
@@ -199,7 +199,7 @@ export const deletePassholdersPassholderId = (
  ): Promise<AxiosResponse<void>> => {
     
     return axios.delete(
-      `https://api-test.uitpas.be/passholders/${passholderId}`,options
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}`,options
     );
   }
 
@@ -258,7 +258,7 @@ export const getPassholdersPassholderIdMembershipPrices = (
  ): Promise<AxiosResponse<MembershipPrice[]>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/membership-prices`,{
+      `NEXT_PUBLIC_API_PATH/passholders/membership-prices`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -267,7 +267,7 @@ export const getPassholdersPassholderIdMembershipPrices = (
 
 export const getGetPassholdersPassholderIdMembershipPricesQueryKey = (params?: GetPassholdersPassholderIdMembershipPricesParams,) => {
     
-    return [`https://api-test.uitpas.be/passholders/membership-prices`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/membership-prices`, ...(params ? [params]: [])] as const;
     }
 
     
@@ -326,14 +326,14 @@ export const getPassholdersMembershipPrices = (
  ): Promise<AxiosResponse<MembershipPrice[]>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passholders/${passholderId}/membership-prices`,options
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/membership-prices`,options
     );
   }
 
 
 export const getGetPassholdersMembershipPricesQueryKey = (passholderId: string,) => {
     
-    return [`https://api-test.uitpas.be/passholders/${passholderId}/membership-prices`] as const;
+    return [`NEXT_PUBLIC_API_PATH/passholders/${passholderId}/membership-prices`] as const;
     }
 
     
@@ -388,14 +388,14 @@ export const getPassesUitpasNumber = (
  ): Promise<AxiosResponse<Pass>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/passes/${uitpasNumber}`,options
+      `NEXT_PUBLIC_API_PATH/passes/${uitpasNumber}`,options
     );
   }
 
 
 export const getGetPassesUitpasNumberQueryKey = (uitpasNumber: string,) => {
     
-    return [`https://api-test.uitpas.be/passes/${uitpasNumber}`] as const;
+    return [`NEXT_PUBLIC_API_PATH/passes/${uitpasNumber}`] as const;
     }
 
     
@@ -450,14 +450,14 @@ export const getInszNumbersInszNumber = (
  ): Promise<AxiosResponse<Pass>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/insz-numbers/${inszNumber}`,options
+      `NEXT_PUBLIC_API_PATH/insz-numbers/${inszNumber}`,options
     );
   }
 
 
 export const getGetInszNumbersInszNumberQueryKey = (inszNumber: string,) => {
     
-    return [`https://api-test.uitpas.be/insz-numbers/${inszNumber}`] as const;
+    return [`NEXT_PUBLIC_API_PATH/insz-numbers/${inszNumber}`] as const;
     }
 
     
@@ -512,14 +512,14 @@ export const getChipNumbersChipNumber = (
  ): Promise<AxiosResponse<Pass>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/chip-numbers/${chipNumber}`,options
+      `NEXT_PUBLIC_API_PATH/chip-numbers/${chipNumber}`,options
     );
   }
 
 
 export const getGetChipNumbersChipNumberQueryKey = (chipNumber: string,) => {
     
-    return [`https://api-test.uitpas.be/chip-numbers/${chipNumber}`] as const;
+    return [`NEXT_PUBLIC_API_PATH/chip-numbers/${chipNumber}`] as const;
     }
 
     

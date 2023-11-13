@@ -72,7 +72,7 @@ export const postCheckins = (
  ): Promise<AxiosResponse<Checkin>> => {
     
     return axios.post(
-      `https://api-test.uitpas.be/checkins`,
+      `NEXT_PUBLIC_API_PATH/checkins`,
       checkin,options
     );
   }

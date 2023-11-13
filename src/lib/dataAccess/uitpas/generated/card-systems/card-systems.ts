@@ -41,7 +41,7 @@ export const getCardSystems = (
  ): Promise<AxiosResponse<CardSystemsPaginatedCollection>> => {
     
     return axios.get(
-      `https://api-test.uitpas.be/card-systems`,{
+      `NEXT_PUBLIC_API_PATH/card-systems`,{
     ...options,
         params: {...params, ...options?.params},}
     );
@@ -50,7 +50,7 @@ export const getCardSystems = (
 
 export const getGetCardSystemsQueryKey = (params?: GetCardSystemsParams,) => {
     
-    return [`https://api-test.uitpas.be/card-systems`, ...(params ? [params]: [])] as const;
+    return [`NEXT_PUBLIC_API_PATH/card-systems`, ...(params ? [params]: [])] as const;
     }
 
     
