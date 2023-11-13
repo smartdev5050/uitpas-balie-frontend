@@ -166,11 +166,13 @@ export const ActivitiesPage = () => {
                 })}
               >
                 <StyledItemStack>
-                  <StyledEventDate level="body2">
-                    {`Van ${dayjs(member.startDate).format(
-                      DATE_FORMAT
-                    )} tot ${dayjs(member.endDate).format(DATE_FORMAT)}`}
-                  </StyledEventDate>
+                  {member.startDate && member.endDate && (
+                    <StyledEventDate level="body2">
+                      {`Van ${dayjs(member.startDate).format(
+                        DATE_FORMAT
+                      )} tot ${dayjs(member.endDate).format(DATE_FORMAT)}`}
+                    </StyledEventDate>
+                  )}
 
                   <StyledEventName level="h3">
                     {member.name[LANG_KEY] ?? member.name.nl}
