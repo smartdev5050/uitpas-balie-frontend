@@ -211,10 +211,10 @@ export const ActivitiesPage = () => {
             sx={{ alignSelf: "center", my: 10 }}
           />
         )}
-        {total && (
+        {(total ?? 0) > 0 && (
           <Pagination
             currentPage={pageQuery}
-            total={total}
+            total={total!}
             limit={FETCH_LIMIT}
             handleQuery={handleQuery}
           />
