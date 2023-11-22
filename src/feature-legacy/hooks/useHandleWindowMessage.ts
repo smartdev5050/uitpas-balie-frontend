@@ -1,27 +1,43 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { isClient } from "@/lib/utils";
+import { Counter } from "@/feature-counter/context/CounterContext";
 
 export enum WindowMessageSources {
   BALIE = "BALIE",
 }
 
-export enum WindowMessageTypes {
+export enum WindowMessageTypesReceived {
   URL_CHANGED = "URL_CHANGED",
   URL_UNKNOWN = "URL_UNKNOWN",
   HTTP_ERROR_CODE = "HTTP_ERROR_CODE",
-  LOGIN = "LOGIN",
   LOGOUT = "LOGOUT",
   GET_COUNTER = "GET_COUNTER",
+}
+
+enum WindowMessageTypesSent {
   SET_COUNTER = "SET_COUNTER",
 }
 
+export const createCounterMessage = (counter: Counter) => {
+  return {
+    source: WindowMessageSources.BALIE,
+    type: WindowMessageTypesSent.SET_COUNTER,
+    payload: {
+      counter,
+    },
+  };
+};
+
 type TDataBase = {
-  type: WindowMessageTypes;
+  type: WindowMessageTypesReceived;
   source: WindowMessageSources;
   payload?: Record<string, string | number>;
 };
 type EventsMap<TData extends TDataBase> = Partial<
-  Record<WindowMessageTypes, (data: Omit<TData, "type" | "source">) => void>
+  Record<
+    WindowMessageTypesReceived,
+    (data: Omit<TData, "type" | "source">) => void
+  >
 >;
 
 export const useHandleWindowMessage = <TData extends TDataBase>(

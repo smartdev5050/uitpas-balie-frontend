@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import {
   useHandleWindowMessage,
-  WindowMessageTypes,
+  WindowMessageTypesReceived,
 } from "./useHandleWindowMessage";
 import getConfig from "next/config";
 import { useLogout } from "@/lib/auth";
@@ -14,7 +14,7 @@ export const useUrlChanged = () => {
   const legacyUrl = new URL(publicRuntimeConfig.legacyAppUrl);
 
   useHandleWindowMessage({
-    [WindowMessageTypes.URL_CHANGED]: ({ payload }) => {
+    [WindowMessageTypesReceived.URL_CHANGED]: ({ payload }) => {
       const pathWithoutLegacyPrefix = `${payload?.path}`.replace(
         legacyUrl.pathname,
         ""
@@ -27,7 +27,7 @@ export const useUrlChanged = () => {
 
       router.push({ pathname: url.pathname, query });
     },
-    [WindowMessageTypes.HTTP_ERROR_CODE]: ({ payload }) => {
+    [WindowMessageTypesReceived.HTTP_ERROR_CODE]: ({ payload }) => {
       if ([401, 403].includes(payload?.code as number)) {
         logout();
       }

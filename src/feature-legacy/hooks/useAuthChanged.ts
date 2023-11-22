@@ -1,7 +1,7 @@
 import { useAuth } from "@/lib/auth";
 import {
   useHandleWindowMessage,
-  WindowMessageTypes,
+  WindowMessageTypesReceived,
 } from "./useHandleWindowMessage";
 
 export const useAuthChanged = () => {
@@ -11,7 +11,7 @@ export const useAuthChanged = () => {
     // [WindowMessageTypes.LOGIN]: () => {
     //   fetchToken();
     // },
-    [WindowMessageTypes.LOGOUT]: () => {
+    [WindowMessageTypesReceived.LOGOUT]: () => {
       logout();
     },
   });

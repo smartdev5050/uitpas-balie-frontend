@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   useHandleWindowMessage,
-  WindowMessageTypes,
+  WindowMessageTypesReceived,
 } from "./useHandleWindowMessage";
 
 // Keep track of which paths were not found. Do not store as a single boolean
@@ -15,7 +15,7 @@ export const useNotFoundPaths = () => {
   const [notFoundPaths, setNotFoundPaths] = useState<string[]>([]);
 
   useHandleWindowMessage({
-    [WindowMessageTypes.URL_UNKNOWN]: () =>
+    [WindowMessageTypesReceived.URL_UNKNOWN]: () =>
       setNotFoundPaths([asPath, ...notFoundPaths]),
   });
 
