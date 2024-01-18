@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/lib/ui";
 import { useCounter } from "@/feature-counter";
 import { CounterPickerData } from "./CounterPickerData";
 import { LastCounterData } from "./LastCounterData";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 
 type CounterPickerProps = PropsWithChildren & {
   data: OrganizerPermissions[];
@@ -20,6 +20,12 @@ export const CounterPicker = ({
   const handleCounterClick = (organizer: Organizer) => () => {
     setActiveCounter(organizer);
   };
+
+  useEffect(() => {
+    if (data.length === 1 && !filterString) {
+      setActiveCounter(data[0].organizer);
+    }
+  }, [data, filterString, setActiveCounter]);
 
   return (
     <Card
