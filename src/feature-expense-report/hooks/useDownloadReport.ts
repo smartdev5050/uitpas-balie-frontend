@@ -104,27 +104,14 @@ export const useDownloadReport = (organizerId: string): ReturnType => {
     )
       return;
 
-    JsZip()
-      .loadAsync(reportZipData.data as ArrayBuffer)
-      .then((zip) => zip.generateAsync({ type: "arraybuffer" }))
-      .then((zip) =>
+    JsZip.loadAsync(reportZipData.data)
+      .then((zip) => zip.generateAsync({ type: "blob" }))
+      .then((blob) =>
         saveAs(
-          // @todo fix ts-ignore
-          // @ts-ignore
-          zip,
+          blob,
           `financialReport_${periodToDownload?.startDate}-${periodToDownload?.endDate}.zip`
         )
       );
-
-    // const element = document.createElement('a');
-    // element.setAttribute('href', zipUrl(organizerId, reportId));
-    // element.setAttribute('download', `financialReport_${periodToDownload?.startDate}-${periodToDownload?.endDate}.zip`);
-    // console.log(element)
-    // element.click();
-
-    //         //should work in production?
-    //window.location.href = zipUrl(organizerId, reportId)
-    // window.open(zipUrl(organizerId, reportId), '_blank')
 
     setHasStarted(false);
   }, [reportZipData, reportStatus, hasStarted]);

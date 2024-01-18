@@ -63,6 +63,8 @@ You will need:
 
 > Checking in a passholder is only possible during the opening hours of the event and a certain period before and after. A client will receive an error of type `https://api.publiq.be/probs/uitpas/checkin-not-allowed` when a check-in is not allowed. The `endUserMessage` field of that error response will also contain a user-readable error message.
 
+If you need to check-in a passholder based on a check-in code (e.g. a QR code), use [POST /passholders/passholderId/checkins](/reference/uitpas.json/paths/~1passholders~1passholderId~1  checkins/post) instead.
+
 The caller of this request must have `CHECKINS_WRITE` permission for the organizer of the given event.
 
  * @summary Check in passholder

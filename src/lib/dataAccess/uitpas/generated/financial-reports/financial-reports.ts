@@ -26,6 +26,7 @@ import type {
 import type {
   Error,
   ForbiddenResponse,
+  GetOrganizersFinancialReportsReportIdDownloadLink200,
   Report,
   ReportPeriod,
   UnauthorizedResponse
@@ -280,7 +281,76 @@ export const useGetOrganizersFinancialReportsReportId = <TData = Awaited<ReturnT
 }
 
 /**
+ * Retrieve a temporary download link of an `available` report.
+
+This endpoint allows you to obtain a short-lived, hassle-free download link for your reports. After generation, this link remains active for a limited time, enabling direct report downloads without the need for additional authentication. This is in particular convenient for applications that need to offer this link to users to start the download. If you wish to download the actual report in your client application, you can use [Download financial report](/reference/uitpas.json/paths/~1organizers~1{organizerId}~1financial-reports~1{reportId}.zip/get).
+
+The caller of this request must have `ORGANIZERS_REPORTS` permission for the given organizer.
+
+ * @summary Get financial report temporary download link
+ */
+export const getOrganizersFinancialReportsReportIdDownloadLink = (
+    organizerId: string,
+    reportId: number, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<GetOrganizersFinancialReportsReportIdDownloadLink200>> => {
+    
+    return axios.get(
+      `NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/${reportId}/download-link`,options
+    );
+  }
+
+
+export const getGetOrganizersFinancialReportsReportIdDownloadLinkQueryKey = (organizerId: string,
+    reportId: number,) => {
+    
+    return [`NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/${reportId}/download-link`] as const;
+    }
+
+    
+export const getGetOrganizersFinancialReportsReportIdDownloadLinkQueryOptions = <TData = Awaited<ReturnType<typeof getOrganizersFinancialReportsReportIdDownloadLink>>, TError = AxiosError<UnauthorizedResponse | ForbiddenResponse | Error>>(organizerId: string,
+    reportId: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getOrganizersFinancialReportsReportIdDownloadLink>>, TError, TData>, axios?: AxiosRequestConfig}
+) => {
+
+const {query: queryOptions, axios: axiosOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetOrganizersFinancialReportsReportIdDownloadLinkQueryKey(organizerId,reportId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getOrganizersFinancialReportsReportIdDownloadLink>>> = ({ signal }) => getOrganizersFinancialReportsReportIdDownloadLink(organizerId,reportId, { signal, ...axiosOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(organizerId && reportId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getOrganizersFinancialReportsReportIdDownloadLink>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetOrganizersFinancialReportsReportIdDownloadLinkQueryResult = NonNullable<Awaited<ReturnType<typeof getOrganizersFinancialReportsReportIdDownloadLink>>>
+export type GetOrganizersFinancialReportsReportIdDownloadLinkQueryError = AxiosError<UnauthorizedResponse | ForbiddenResponse | Error>
+
+/**
+ * @summary Get financial report temporary download link
+ */
+export const useGetOrganizersFinancialReportsReportIdDownloadLink = <TData = Awaited<ReturnType<typeof getOrganizersFinancialReportsReportIdDownloadLink>>, TError = AxiosError<UnauthorizedResponse | ForbiddenResponse | Error>>(
+ organizerId: string,
+    reportId: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getOrganizersFinancialReportsReportIdDownloadLink>>, TError, TData>, axios?: AxiosRequestConfig}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getGetOrganizersFinancialReportsReportIdDownloadLinkQueryOptions(organizerId,reportId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+/**
  * Retrieve the actual report zip file of an `available` report.
+
+If you need a download link for your users, you can use [Get financial report temporary download link](/reference/uitpas.json/paths/~1organizers~1{organizerId}~1financial-reports~1{reportId}~1download-link/get) instead.
 
 The caller of this request must have `ORGANIZERS_REPORTS` permission for the given organizer.
 
@@ -289,10 +359,12 @@ The caller of this request must have `ORGANIZERS_REPORTS` permission for the giv
 export const getOrganizersFinancialReportsReportIdZip = (
     organizerId: string,
     reportId: number, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
+ ): Promise<AxiosResponse<Blob>> => {
     
     return axios.get(
-      `NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/${reportId}.zip`,options
+      `NEXT_PUBLIC_API_PATH/organizers/${organizerId}/financial-reports/${reportId}.zip`,{
+        responseType: 'blob',
+    ...options,}
     );
   }
 

@@ -28,10 +28,14 @@ import type {
   ForbiddenResponse,
   GetPassholdersParams,
   GetPassholdersPassholderIdMembershipPricesParams,
+  GetPassholdersPassholderIdTransactionsParams,
   MembershipPrice,
   Pass,
   Passholder,
   PassholdersPaginatedResponse,
+  PostPassholdersPassholderIdCheckin201,
+  PostPassholdersPassholderIdCheckinBody,
+  TransactionsPaginatedCollection,
   UnauthorizedResponse
 } from '.././model'
 
@@ -367,6 +371,141 @@ export const useGetPassholdersMembershipPrices = <TData = Awaited<ReturnType<typ
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
 
   const queryOptions = getGetPassholdersMembershipPricesQueryOptions(passholderId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+/**
+ * Allow passholders to self check-in at an event using a check-in code (typically a QR code the passholder can scan). If you want to check-in a passholder based on an event id, use [POST /checkins](/reference/uitpas.json/paths/~1checkins/post) instead. 
+
+If a user access token of a passholder is used, you can specify the path parameter `passholderId` as:
+- the id of the passsholder of the access token (you can retrieve the id using `/passholders/me`)
+- `me` as a short form for the passholder of the access token
+- a passholder id of one of the passholder's family members
+
+If a user access token of an admin, or a client access token is used, `me` cannot be used as a passholder id.
+
+The caller of this method must have `PASSHOLDERS_SELF_CHECKIN` permission for the given passholder.
+ * @summary Check-in passholder using a check-in code
+ */
+export const postPassholdersPassholderIdCheckin = (
+    passholderId: string,
+    postPassholdersPassholderIdCheckinBody: PostPassholdersPassholderIdCheckinBody, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<PostPassholdersPassholderIdCheckin201>> => {
+    
+    return axios.post(
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/checkins`,
+      postPassholdersPassholderIdCheckinBody,options
+    );
+  }
+
+
+
+export const getPostPassholdersPassholderIdCheckinMutationOptions = <TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPassholdersPassholderIdCheckin>>, TError,{passholderId: string;data: PostPassholdersPassholderIdCheckinBody}, TContext>, axios?: AxiosRequestConfig}
+): UseMutationOptions<Awaited<ReturnType<typeof postPassholdersPassholderIdCheckin>>, TError,{passholderId: string;data: PostPassholdersPassholderIdCheckinBody}, TContext> => {
+ const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postPassholdersPassholderIdCheckin>>, {passholderId: string;data: PostPassholdersPassholderIdCheckinBody}> = (props) => {
+          const {passholderId,data} = props ?? {};
+
+          return  postPassholdersPassholderIdCheckin(passholderId,data,axiosOptions)
+        }
+
+        
+
+
+   return  { mutationFn, ...mutationOptions }}
+
+    export type PostPassholdersPassholderIdCheckinMutationResult = NonNullable<Awaited<ReturnType<typeof postPassholdersPassholderIdCheckin>>>
+    export type PostPassholdersPassholderIdCheckinMutationBody = PostPassholdersPassholderIdCheckinBody
+    export type PostPassholdersPassholderIdCheckinMutationError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>
+
+    /**
+ * @summary Check-in passholder using a check-in code
+ */
+export const usePostPassholdersPassholderIdCheckin = <TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPassholdersPassholderIdCheckin>>, TError,{passholderId: string;data: PostPassholdersPassholderIdCheckinBody}, TContext>, axios?: AxiosRequestConfig}
+) => {
+
+      const mutationOptions = getPostPassholdersPassholderIdCheckinMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
+ * Retrieve the transaction history of the passholder.
+
+If a user access token of a passholder is used, you can specify the path parameter `passholderId` as:
+- the id of the passsholder of the access token (you can retrieve the id using `/passholders/me`)
+- `me` as a short form for the passholder of the access token
+- a passholder id of one of the passholder's family members
+
+If a user access token of an admin, or a client access token is used, `me` cannot be used as a passholder id.
+
+The caller of this method must have `PASSHOLDERS_SELF_CHECKIN` permission for the given passholder.
+ * @summary Retrieve transaction history of a passholder
+ */
+export const getPassholdersPassholderIdTransactions = (
+    passholderId: string,
+    params?: GetPassholdersPassholderIdTransactionsParams, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<TransactionsPaginatedCollection>> => {
+    
+    return axios.get(
+      `NEXT_PUBLIC_API_PATH/passholders/${passholderId}/transactions`,{
+    ...options,
+        params: {...params, ...options?.params},}
+    );
+  }
+
+
+export const getGetPassholdersPassholderIdTransactionsQueryKey = (passholderId: string,
+    params?: GetPassholdersPassholderIdTransactionsParams,) => {
+    
+    return [`NEXT_PUBLIC_API_PATH/passholders/${passholderId}/transactions`, ...(params ? [params]: [])] as const;
+    }
+
+    
+export const getGetPassholdersPassholderIdTransactionsQueryOptions = <TData = Awaited<ReturnType<typeof getPassholdersPassholderIdTransactions>>, TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>>(passholderId: string,
+    params?: GetPassholdersPassholderIdTransactionsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getPassholdersPassholderIdTransactions>>, TError, TData>, axios?: AxiosRequestConfig}
+) => {
+
+const {query: queryOptions, axios: axiosOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetPassholdersPassholderIdTransactionsQueryKey(passholderId,params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPassholdersPassholderIdTransactions>>> = ({ signal }) => getPassholdersPassholderIdTransactions(passholderId,params, { signal, ...axiosOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(passholderId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getPassholdersPassholderIdTransactions>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetPassholdersPassholderIdTransactionsQueryResult = NonNullable<Awaited<ReturnType<typeof getPassholdersPassholderIdTransactions>>>
+export type GetPassholdersPassholderIdTransactionsQueryError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>
+
+/**
+ * @summary Retrieve transaction history of a passholder
+ */
+export const useGetPassholdersPassholderIdTransactions = <TData = Awaited<ReturnType<typeof getPassholdersPassholderIdTransactions>>, TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>>(
+ passholderId: string,
+    params?: GetPassholdersPassholderIdTransactionsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getPassholdersPassholderIdTransactions>>, TError, TData>, axios?: AxiosRequestConfig}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getGetPassholdersPassholderIdTransactionsQueryOptions(passholderId,params,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
