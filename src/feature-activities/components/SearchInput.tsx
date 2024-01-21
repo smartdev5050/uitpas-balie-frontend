@@ -8,19 +8,16 @@ import {
   StyledSearchStack,
 } from "./SearchInput.styles";
 import { FormEvent } from "react";
+import { usePageQuery } from "@/lib/utils/hooks/usePageQuery";
 
 type SearchInputProps = {
-  handleQuery: (queryKey: string, queryValue: string) => void;
   defaultSearch?: string;
   disabled: boolean;
 };
 
-export const SearchInput = ({
-  handleQuery,
-  defaultSearch,
-  disabled,
-}: SearchInputProps) => {
+export const SearchInput = ({ defaultSearch, disabled }: SearchInputProps) => {
   const { t } = useTranslation();
+  const { handleQuery } = usePageQuery();
 
   const handleFormSubmission = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

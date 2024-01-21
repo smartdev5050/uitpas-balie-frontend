@@ -19,82 +19,35 @@ import {
   StyledPageTitle,
   StyledUserInputStack,
 } from "./ActivitiesPages.styles";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   getQrCodeUrl,
   getUitInDatabankurl,
   getUitInVlaanderenUrl,
 } from "@/lib/utils";
-import { Pagination } from "./Pagination";
+import { Pagination } from "@/lib/ui/uitpas/Pagination";
 import { useCounter } from "@/feature-counter";
 import { CircularProgress } from "@mui/joy";
-
-const RANGE_DATE_FORMAT = "YYYY-MM-DDTHH:mm:ssZ";
-const DATE_FORMAT = "DD MMMM YYYY";
-const FETCH_LIMIT = 5;
+import {
+  DATE_FORMAT,
+  TDateSelection,
+  getRangeDateFromSelection,
+} from "@/lib/utils/dateUtils";
+import { usePageQuery } from "@/lib/utils/hooks/usePageQuery";
 
 export const ActivitiesPage = () => {
-  const { t, i18n } = useTranslation();
-  const { activeCounter: counter } = useCounter();
   const router = useRouter();
   const searchQuery = router.query.search;
-  const rangeQuery = router.query.range ?? "next12Months";
-  const pageQuery = router.query.page ? Number(router.query.page) : 1;
-  const [total, setTotal] = useState<number | undefined>(undefined);
+  const rangeQuery = (router.query.range ??
+    "next12Months") as keyof typeof TDateSelection;
+  const { t, i18n } = useTranslation();
+  const { activeCounter: counter } = useCounter();
+  const { fetchLimit, offset } = usePageQuery();
+
   const dateRange = useMemo(() => {
-    switch (rangeQuery) {
-      case "today": {
-        return {
-          from: dayjs().startOf("day").format(RANGE_DATE_FORMAT),
-          to: dayjs().endOf("day").format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "next7Days": {
-        return {
-          from: dayjs().startOf("day").format(RANGE_DATE_FORMAT),
-          to: dayjs(dayjs().add(7, "days"))
-            .endOf("day")
-            .format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "next30Days": {
-        return {
-          from: dayjs().startOf("day").format(RANGE_DATE_FORMAT),
-          to: dayjs(dayjs().add(30, "days"))
-            .endOf("day")
-            .format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "next12Months": {
-        return {
-          from: dayjs().startOf("day").format(RANGE_DATE_FORMAT),
-          to: dayjs(dayjs().add(12, "months"))
-            .endOf("day")
-            .format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "unlimited": {
-        return {
-          from: dayjs().subtract(100, "year").format(RANGE_DATE_FORMAT),
-          to: dayjs().add(100, "year").format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "pastActivities": {
-        return {
-          from: dayjs().subtract(100, "year").format(RANGE_DATE_FORMAT),
-          to: dayjs(dayjs().startOf("day").format(RANGE_DATE_FORMAT))
-            .subtract(1, "second")
-            .format(RANGE_DATE_FORMAT),
-        };
-      }
-      default: {
-        return {
-          from: dayjs().subtract(100, "year").format(RANGE_DATE_FORMAT),
-          to: dayjs().add(100, "year").format(RANGE_DATE_FORMAT),
-        };
-      }
-    }
+    return getRangeDateFromSelection(rangeQuery);
   }, [rangeQuery]);
+
   const { data, isSuccess, isLoading } = useGetEvents({
     organizerId: counter?.id,
     embed: true,
@@ -103,38 +56,11 @@ export const ActivitiesPage = () => {
     ...(rangeQuery && { dateFrom: dateRange.from, dateTo: dateRange.to }),
     ...(searchQuery && { q: searchQuery as string }),
     // @ts-expect-error Orval didn't include pagination in generated types
-    limit: FETCH_LIMIT,
-    start: pageQuery === 1 ? 0 : (pageQuery - 1) * FETCH_LIMIT,
+    limit: fetchLimit,
+    start: offset,
   });
-  useEffect(() => {
-    if (isSuccess) {
-      setTotal(data.data.totalItems);
-    }
-  }, [data?.data.totalItems, isSuccess]);
 
   const LANG_KEY = i18n.language as keyof EventName;
-
-  const handleQuery = (queryKey: string, queryValue: string) => {
-    const query = { ...router.query };
-
-    if (queryValue === "") {
-      delete query[queryKey];
-    } else {
-      query[queryKey] = queryValue;
-      if (queryKey != "page" && pageQuery !== 1) {
-        delete query["page"];
-      }
-    }
-
-    router.push(
-      {
-        pathname: "/activities",
-        query,
-      },
-      undefined,
-      { shallow: true }
-    );
-  };
 
   return (
     <PageWithSideBarNew sideBarContent={<SidebarContent />} hasBackButton>
@@ -142,12 +68,10 @@ export const ActivitiesPage = () => {
         <StyledPageTitle level="h2">{t("activities.title")}</StyledPageTitle>
         <StyledUserInputStack>
           <DateMenu
-            handleQuery={handleQuery}
             defaultRange={rangeQuery?.toString()}
             disabled={isLoading}
           />
           <SearchInput
-            handleQuery={handleQuery}
             defaultSearch={searchQuery?.toString()}
             disabled={isLoading}
           />
@@ -168,9 +92,10 @@ export const ActivitiesPage = () => {
                 <StyledItemStack>
                   {member.startDate && member.endDate && (
                     <StyledEventDate level="body2">
-                      {`Van ${dayjs(member.startDate).format(
-                        DATE_FORMAT
-                      )} tot ${dayjs(member.endDate).format(DATE_FORMAT)}`}
+                      {t("activities.fromStartToEndDate", {
+                        startDate: dayjs(member.startDate).format(DATE_FORMAT),
+                        endDate: dayjs(member.endDate).format(DATE_FORMAT),
+                      })}
                     </StyledEventDate>
                   )}
 
@@ -211,14 +136,7 @@ export const ActivitiesPage = () => {
             sx={{ alignSelf: "center", my: 10 }}
           />
         )}
-        {(total ?? 0) > 0 && (
-          <Pagination
-            currentPage={pageQuery}
-            total={total!}
-            limit={FETCH_LIMIT}
-            handleQuery={handleQuery}
-          />
-        )}
+        <Pagination totalItems={data?.data.totalItems ?? 0} />
       </StyledPageContainerStack>
     </PageWithSideBarNew>
   );

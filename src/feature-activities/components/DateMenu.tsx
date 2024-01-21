@@ -13,20 +13,22 @@ import Icon from "@mdi/react";
 import { mdiMenuDown } from "@mdi/js";
 import { StyledMenuItem } from "@/layouts/components/Navbar.styles";
 import { Stack, Typography } from "@/lib/ui";
+import { usePageQuery } from "@/lib/utils/hooks/usePageQuery";
+import { TDateSelection } from "@/lib/utils/dateUtils";
 
-type menuItem = {
+type dateMenuItem = {
   display: string | JSX.Element;
-  value?: string;
+  value?: keyof typeof TDateSelection;
 };
 
-const menuItems: menuItem[] = [
+const dateMenuItems: dateMenuItem[] = [
   {
     display: "activities.dateMenu.today",
     value: "today",
   },
   {
     display: "activities.dateMenu.next7Days",
-    value: "next7Days",
+    value: "next7days",
   },
   {
     display: "activities.dateMenu.next30Days",
@@ -54,16 +56,11 @@ const menuItems: menuItem[] = [
 ];
 
 type DateMenuProps = {
-  handleQuery: (queryKey: string, queryValue: string) => void;
   defaultRange?: string;
   disabled: boolean;
 };
 
-export const DateMenu = ({
-  handleQuery,
-  defaultRange,
-  disabled,
-}: DateMenuProps) => {
+export const DateMenu = ({ defaultRange, disabled }: DateMenuProps) => {
   const { t } = useTranslation();
   const {
     menuActions,
@@ -73,11 +70,13 @@ export const DateMenu = ({
     onButtonClick,
     onClose,
   } = useMenu();
-  const [currentItem, setCurrentItem] = useState<menuItem>(
-    menuItems.find((item) => item.value === defaultRange) ?? menuItems[3]
+  const { handleQuery } = usePageQuery();
+  const [currentItem, setCurrentItem] = useState<dateMenuItem>(
+    dateMenuItems.find((item) => item.value === defaultRange) ??
+      dateMenuItems[3]
   );
 
-  const handleItemClick = (item: menuItem) => {
+  const handleItemClick = (item: dateMenuItem) => {
     onClose(true);
     setCurrentItem(item);
     handleQuery("range", item.value!);
@@ -120,7 +119,7 @@ export const DateMenu = ({
           root: { placement: "bottom-start" },
         }}
       >
-        {menuItems.map((item, i) =>
+        {dateMenuItems.map((item, i) =>
           isValidElement(item.display) ? (
             <Fragment key={`menu-item-${i}`}>{item.display}</Fragment>
           ) : (

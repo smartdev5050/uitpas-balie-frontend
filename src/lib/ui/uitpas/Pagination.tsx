@@ -9,6 +9,7 @@ import {
 } from "react";
 import { mdiMenuLeft, mdiMenuRight } from "@mdi/js";
 import Icon from "@mdi/react";
+import { usePagination } from "@/lib/utils/hooks/usePagination";
 
 const StyledPaginationButton = styled(
   forwardRef(function ButtonWrapper(
@@ -60,56 +61,52 @@ const StyledPaginationButton = styled(
 }));
 
 type paginationProps = {
-  total: number;
-  limit: number;
-  currentPage: number;
-  handleQuery: (queryKey: string, queryValue: string) => void;
+  totalItems: number;
 };
-export const Pagination = ({
-  total,
-  limit,
-  currentPage,
-  handleQuery,
-}: paginationProps) => {
+export const Pagination = ({ totalItems }: paginationProps) => {
   const { t } = useTranslation();
-  const totalPages = Math.ceil(total / limit);
+  const { gotoPage, nextPage, prevPage, totalPages, currentPage } =
+    usePagination({
+      totalItems: totalItems,
+    });
   const pageButtons = [];
 
-  for (let page = 1; page <= totalPages; page++) {
-    pageButtons.push(
-      <StyledPaginationButton
-        key={`pagination-${page}`}
-        color="primary"
-        onClick={() => handleQuery("page", page.toString())}
-        disabled={page === currentPage}
-        active={page === currentPage}
-      >
-        {page}
-      </StyledPaginationButton>
-    );
-  }
+  if (totalPages > 1)
+    for (let page = 1; page <= totalPages; page++) {
+      pageButtons.push(
+        <StyledPaginationButton
+          key={`pagination-${page}`}
+          color="primary"
+          onClick={() => gotoPage(page)}
+          disabled={page === currentPage}
+          active={page === currentPage}
+        >
+          {page}
+        </StyledPaginationButton>
+      );
+    }
 
-  return (
+  return totalPages > 1 ? (
     <Stack sx={{ flexDirection: "row", pt: 3 }}>
       <StyledPaginationButton
         color="neutral"
-        onClick={() => handleQuery("page", (currentPage - 1).toString())}
+        onClick={() => prevPage()}
         disabled={currentPage === 1}
         active={false}
       >
         <Icon path={mdiMenuLeft} size={0.7} />
-        {t("activities.pagination.previousBtn")}
+        {t("pagination.previousBtn")}
       </StyledPaginationButton>
       {pageButtons}
       <StyledPaginationButton
         color="neutral"
-        onClick={() => handleQuery("page", (currentPage + 1).toString())}
+        onClick={() => nextPage()}
         active={false}
         disabled={currentPage === totalPages}
       >
-        {t("activities.pagination.nextBtn")}
+        {t("pagination.nextBtn")}
         <Icon path={mdiMenuRight} size={0.7} />
       </StyledPaginationButton>
     </Stack>
-  );
+  ) : null;
 };
