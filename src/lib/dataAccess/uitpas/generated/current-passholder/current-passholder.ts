@@ -26,14 +26,10 @@ import type {
 import type {
   Error,
   ForbiddenResponse,
-  GetPassholdersMeTransactionsParams,
   GetUitidPassholderRegistrationToken200,
   GetUitidPassholderStatus200,
   Passholder,
   PassholderSelfRegistration,
-  PostPassholdersMeCheckin201,
-  PostPassholdersMeCheckinBody,
-  TransactionsPaginatedCollection,
   UnauthorizedResponse
 } from '.././model'
 
@@ -363,119 +359,4 @@ export const usePostPassholdersMe = <TError = AxiosError<Error | UnauthorizedRes
 
       return useMutation(mutationOptions);
     }
-    /**
- * Allows users to self check-in at an event using a user access token and a check-in code.
-
-A user access token of a passholder, authenticated via a client with `PASSHOLDERS_SELF_CHECKIN` permission is mandatory.
- * @summary Check in the current passholder
- */
-export const postPassholdersMeCheckin = (
-    postPassholdersMeCheckinBody: PostPassholdersMeCheckinBody, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<PostPassholdersMeCheckin201>> => {
     
-    return axios.post(
-      `NEXT_PUBLIC_API_PATH/passholders/me/checkins`,
-      postPassholdersMeCheckinBody,options
-    );
-  }
-
-
-
-export const getPostPassholdersMeCheckinMutationOptions = <TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>,
-    
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPassholdersMeCheckin>>, TError,{data: PostPassholdersMeCheckinBody}, TContext>, axios?: AxiosRequestConfig}
-): UseMutationOptions<Awaited<ReturnType<typeof postPassholdersMeCheckin>>, TError,{data: PostPassholdersMeCheckinBody}, TContext> => {
- const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postPassholdersMeCheckin>>, {data: PostPassholdersMeCheckinBody}> = (props) => {
-          const {data} = props ?? {};
-
-          return  postPassholdersMeCheckin(data,axiosOptions)
-        }
-
-        
-
-
-   return  { mutationFn, ...mutationOptions }}
-
-    export type PostPassholdersMeCheckinMutationResult = NonNullable<Awaited<ReturnType<typeof postPassholdersMeCheckin>>>
-    export type PostPassholdersMeCheckinMutationBody = PostPassholdersMeCheckinBody
-    export type PostPassholdersMeCheckinMutationError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>
-
-    /**
- * @summary Check in the current passholder
- */
-export const usePostPassholdersMeCheckin = <TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>,
-    
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPassholdersMeCheckin>>, TError,{data: PostPassholdersMeCheckinBody}, TContext>, axios?: AxiosRequestConfig}
-) => {
-
-      const mutationOptions = getPostPassholdersMeCheckinMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    /**
- * Retrieve the transaction history of the current passholder.
-
-A user access token of a passholder, authenticated via a client with `PASSHOLDERS_TRANSACTION_HISTORY` permission is mandatory.
- * @summary Retrieve transaction history of the current passholder
- */
-export const getPassholdersMeTransactions = (
-    params?: GetPassholdersMeTransactionsParams, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<TransactionsPaginatedCollection>> => {
-    
-    return axios.get(
-      `NEXT_PUBLIC_API_PATH/passholders/me/transactions`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
-
-
-export const getGetPassholdersMeTransactionsQueryKey = (params?: GetPassholdersMeTransactionsParams,) => {
-    
-    return [`NEXT_PUBLIC_API_PATH/passholders/me/transactions`, ...(params ? [params]: [])] as const;
-    }
-
-    
-export const getGetPassholdersMeTransactionsQueryOptions = <TData = Awaited<ReturnType<typeof getPassholdersMeTransactions>>, TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>>(params?: GetPassholdersMeTransactionsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getPassholdersMeTransactions>>, TError, TData>, axios?: AxiosRequestConfig}
-) => {
-
-const {query: queryOptions, axios: axiosOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetPassholdersMeTransactionsQueryKey(params);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPassholdersMeTransactions>>> = ({ signal }) => getPassholdersMeTransactions(params, { signal, ...axiosOptions });
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getPassholdersMeTransactions>>, TError, TData> & { queryKey: QueryKey }
-}
-
-export type GetPassholdersMeTransactionsQueryResult = NonNullable<Awaited<ReturnType<typeof getPassholdersMeTransactions>>>
-export type GetPassholdersMeTransactionsQueryError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>
-
-/**
- * @summary Retrieve transaction history of the current passholder
- */
-export const useGetPassholdersMeTransactions = <TData = Awaited<ReturnType<typeof getPassholdersMeTransactions>>, TError = AxiosError<Error | UnauthorizedResponse | ForbiddenResponse>>(
- params?: GetPassholdersMeTransactionsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getPassholdersMeTransactions>>, TError, TData>, axios?: AxiosRequestConfig}
-
-  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-
-  const queryOptions = getGetPassholdersMeTransactionsQueryOptions(params,options)
-
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
