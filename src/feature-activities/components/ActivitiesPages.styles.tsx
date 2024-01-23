@@ -1,11 +1,6 @@
 import { styled } from "@mui/joy";
 import { Link, Stack, Typography } from "@/lib/ui";
-import {
-  ButtonHTMLAttributes,
-  ForwardedRef,
-  forwardRef,
-  HTMLProps,
-} from "react";
+import { AnchorHTMLAttributes, DetailedHTMLProps, MouseEvent } from "react";
 
 export const StyledPageContainerStack = styled(Stack)({
   margin: "24px 16px",
@@ -98,7 +93,7 @@ export const StyledActionsStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export const ActionLink = styled(Link)(({ theme }) => ({
+const StyledActionLink = styled(Link)(({ theme }) => ({
   textDecoration: "none",
   display: "flex",
   cursor: "pointer",
@@ -128,3 +123,30 @@ export const ActionLink = styled(Link)(({ theme }) => ({
     maxWidth: "auto",
   },
 }));
+
+type ActionLinkProps = {
+  allowPropagation?: boolean;
+  onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+};
+
+export const ActionLink = ({
+  allowPropagation = false,
+  ...props
+}: { allowPropagation?: boolean } & DetailedHTMLProps<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  HTMLAnchorElement
+>) => {
+  return (
+    <StyledActionLink
+      as={Link}
+      onClick={(e) => {
+        if (!allowPropagation) {
+          e.stopPropagation();
+        }
+      }}
+      {...props}
+    >
+      {props.children}
+    </StyledActionLink>
+  );
+};

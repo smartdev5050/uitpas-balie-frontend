@@ -107,6 +107,10 @@
       "unlimited": "Onbeperkt",
       "pastActivities": "Afgelopen activiteiten",
       "chooseDate": "Kies datum"
+    },
+    "activityModal": {
+      "when": "Wanneer",
+      "closeBtn": "Sluiten"
     }
   },
   "pagination": {

@@ -1,6 +1,5 @@
-import { MenuItemUnstyled, menuItemUnstyledClasses } from "@mui/base";
 import PopperUnstyled from "@mui/base/PopperUnstyled";
-import { Theme, styled } from "@mui/joy";
+import { styled } from "@mui/joy";
 import {
   forwardRef,
   HTMLProps,

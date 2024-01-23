@@ -1,12 +1,20 @@
 import { useGetEvents } from "@/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
-import { PageWithSideBarNew } from "@/lib/ui";
+import {
+  Grid,
+  Modal,
+  ModalActions,
+  ModalContent,
+  ModalHeader,
+  PageWithSideBarNew,
+  Typography,
+} from "@/lib/ui";
 import { useTranslation } from "react-i18next";
 import { DateMenu } from "./DateMenu";
 import { SearchInput } from "./SearchInput";
 
 import dayjs from "dayjs";
-import { EventName } from "@/lib/dataAccess/search/generated/model";
+import { EventAllOf, EventName } from "@/lib/dataAccess/search/generated/model";
 import { useRouter } from "next/router";
 import {
   ActionLink,
@@ -19,7 +27,7 @@ import {
   StyledPageTitle,
   StyledUserInputStack,
 } from "./ActivitiesPages.styles";
-import { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   getQrCodeUrl,
   getUitInDatabankurl,
@@ -34,6 +42,7 @@ import {
   getRangeDateFromSelection,
 } from "@/lib/utils/dateUtils";
 import { usePageQuery } from "@/lib/utils/hooks/usePageQuery";
+import { ActionButton } from "@/lib/ui/uitpas/ActionButton";
 
 export const ActivitiesPage = () => {
   const router = useRouter();
@@ -43,6 +52,9 @@ export const ActivitiesPage = () => {
   const { t, i18n } = useTranslation();
   const { activeCounter: counter } = useCounter();
   const { fetchLimit, offset } = usePageQuery();
+  const [selectedActivity, setSelectedActivity] = useState<
+    EventAllOf | undefined
+  >(undefined);
 
   const dateRange = useMemo(() => {
     return getRangeDateFromSelection(rangeQuery);
@@ -65,6 +77,47 @@ export const ActivitiesPage = () => {
   return (
     <PageWithSideBarNew sideBarContent={<SidebarContent />} hasBackButton>
       <StyledPageContainerStack>
+        <Modal
+          open={selectedActivity !== undefined}
+          onClose={() => setSelectedActivity(undefined)}
+        >
+          <ModalHeader>
+            <Typography level="h4" sx={{ fontSize: "15px", fontWeight: 600 }}>
+              {selectedActivity?.name[LANG_KEY] ?? selectedActivity?.name.nl}
+            </Typography>
+          </ModalHeader>
+
+          <ModalContent>
+            {selectedActivity?.startDate && selectedActivity?.endDate && (
+              <Grid container sx={{ flexGrow: 1 }}>
+                <Grid xs={3}>
+                  <Typography level="body2" fontStyle="italic">
+                    {t("activities.activityModal.when")}
+                  </Typography>
+                </Grid>
+                <Grid xs={9}>
+                  <Typography level="body2">
+                    {t("activities.fromStartToEndDate", {
+                      startDate: dayjs(selectedActivity.startDate).format(
+                        DATE_FORMAT
+                      ),
+                      endDate: dayjs(selectedActivity.endDate).format(
+                        DATE_FORMAT
+                      ),
+                    })}
+                  </Typography>
+                </Grid>
+              </Grid>
+            )}
+          </ModalContent>
+
+          <ModalActions>
+            <ActionButton onClick={() => setSelectedActivity(undefined)}>
+              {t("activities.activityModal.closeBtn")}
+            </ActionButton>
+          </ModalActions>
+        </Modal>
+
         <StyledPageTitle level="h2">{t("activities.title")}</StyledPageTitle>
         <StyledUserInputStack>
           <DateMenu
@@ -88,6 +141,7 @@ export const ActivitiesPage = () => {
                       ? `1px solid ${theme.palette.neutral[400]}`
                       : `1px solid ${theme.palette.neutral.outlinedBorder}`,
                 })}
+                onClick={() => setSelectedActivity(member)}
               >
                 <StyledItemStack>
                   {member.startDate && member.endDate && (
