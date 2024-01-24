@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 
 export const RANGE_DATE_FORMAT = "YYYY-MM-DDTHH:mm:ssZ";
 export const DATE_FORMAT = "DD MMMM YYYY";
+// Separate display format, because react datepicker uses date-fns
+export const DATE_FORMAT_SEPARATED_FNS = "dd/MM/yyyy";
 
 export const TDateSelection = {
   today: "today",
@@ -14,7 +16,8 @@ export const TDateSelection = {
 } as const;
 
 export const getRangeDateFromSelection = (
-  dateSelection: keyof typeof TDateSelection
+  dateSelection: keyof typeof TDateSelection,
+  chooseDateRange?: { from: string; to: string }
 ) => {
   const unlimited = {
     from: dayjs().subtract(100, "year").format(RANGE_DATE_FORMAT),
@@ -63,8 +66,21 @@ export const getRangeDateFromSelection = (
           .format(RANGE_DATE_FORMAT),
       };
     }
+    case "chooseDate": {
+      return {
+        from: dayjs(chooseDateRange?.from).format(RANGE_DATE_FORMAT),
+        to: dayjs(chooseDateRange?.to).endOf("day").format(RANGE_DATE_FORMAT),
+      };
+    }
     default: {
       return unlimited;
     }
   }
 };
+
+export function dateToISODateString(date?: Date | null): string {
+  return ISOStringToISODateString((date ?? new Date()).toISOString());
+}
+export function ISOStringToISODateString(ISOString: string): string {
+  return (ISOString ?? new Date().toISOString()).split("T")[0];
+}

@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import Head from "next/head";
-import { openSansFont, theme } from "@/lib/ui";
+import { openSansFont, theme, createEmotionCache } from "@/lib/ui";
 import { Layout } from "@/layouts";
 import { AuthProvider } from "@/lib/auth";
 import { CounterProvider } from "@/feature-counter/context/CounterProvider";
@@ -12,7 +12,6 @@ import { LegacyModeProvider } from "@/feature-legacy";
 import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/joy";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { CacheProvider, EmotionCache } from "@emotion/react";
-import { createEmotionCache } from "@/lib/ui";
 
 const queryClient = new QueryClient({
   defaultOptions: {

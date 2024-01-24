@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@/lib/ui";
 import { useTranslation } from "react-i18next";
-import { DateMenu } from "./DateMenu";
+import { RangeMenu } from "./RangeMenu";
 import { SearchInput } from "./SearchInput";
 
 import dayjs from "dayjs";
@@ -57,8 +57,17 @@ export const ActivitiesPage = () => {
   >(undefined);
 
   const dateRange = useMemo(() => {
-    return getRangeDateFromSelection(rangeQuery);
-  }, [rangeQuery]);
+    return (router.query.from || router.query.to) && rangeQuery === "chooseDate"
+      ? getRangeDateFromSelection(rangeQuery, {
+          from: router.query.from
+            ? String(router.query.from)
+            : dayjs().format(DATE_FORMAT),
+          to: router.query.to
+            ? String(router.query.to)
+            : dayjs().format(DATE_FORMAT),
+        })
+      : getRangeDateFromSelection(rangeQuery);
+  }, [rangeQuery, router.query.from, router.query.to]);
 
   const { data, isSuccess, isLoading } = useGetEvents({
     organizerId: counter?.id,
@@ -119,8 +128,8 @@ export const ActivitiesPage = () => {
         </Modal>
 
         <StyledPageTitle level="h2">{t("activities.title")}</StyledPageTitle>
-        <StyledUserInputStack>
-          <DateMenu
+        <StyledUserInputStack customInput={rangeQuery === "chooseDate"}>
+          <RangeMenu
             defaultRange={rangeQuery?.toString()}
             disabled={isLoading}
           />

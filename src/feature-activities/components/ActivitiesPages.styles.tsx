@@ -15,16 +15,28 @@ export const StyledPageTitle = styled(Typography)({
   paddingBottom: "12px",
 });
 
-export const StyledUserInputStack = styled(Stack)(({ theme }) => ({
-  flexDirection: "row",
-  justifyContent: "space-between",
-  marginBottom: "15px",
+export const StyledUserInputStack = styled(Stack)<{ customInput?: boolean }>(
+  ({ theme, customInput = false }) => ({
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: "15px",
+    columnGap: "24px",
 
-  [theme.breakpoints.down("md")]: {
-    flexDirection: "column",
-    rowGap: "24px",
-  },
-}));
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+      rowGap: "24px",
+    },
+
+    ...(customInput && {
+      [theme.breakpoints.down("lg")]: {
+        flexDirection: "column",
+        alignItems: "flex-start",
+        rowGap: "24px",
+      },
+    }),
+  })
+);
 
 export const StyledActivityStack = styled(Stack)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.neutral[400]}`,
@@ -123,11 +135,6 @@ const StyledActionLink = styled(Link)(({ theme }) => ({
     maxWidth: "auto",
   },
 }));
-
-type ActionLinkProps = {
-  allowPropagation?: boolean;
-  onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-};
 
 export const ActionLink = ({
   allowPropagation = false,

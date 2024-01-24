@@ -1,9 +1,11 @@
 import { Input, styled } from "@mui/joy";
 import { Button, Stack } from "@/lib/ui";
 
+const componentHeight = 40;
+
 export const StyledSearchStack = styled(Stack)(({ theme }) => ({
   flexDirection: "row",
-  maxHeight: "37px",
+  maxHeight: `${componentHeight}px`,
   "&:focus-within": {
     boxShadow: `0 0 8px ${theme.palette.info[200]}`,
   },
@@ -12,7 +14,7 @@ export const StyledSearchStack = styled(Stack)(({ theme }) => ({
 export const StyledSearchInput = styled(Input)(({ theme }) => ({
   border: `1px ${theme.palette.neutral.plainBorder} solid`,
   "--Input-placeholderOpacity": 0.4,
-  "--Input-minHeight": "37px",
+  "--Input-minHeight": `${componentHeight}px`,
   "&:focus-within::before": {
     borderColor: theme.palette.neutral.solidBorder,
     boxShadow: "none",
@@ -25,7 +27,7 @@ export const StyledSearchInput = styled(Input)(({ theme }) => ({
 
 export const StyledSearchButton = styled(Button)(({ theme }) => ({
   width: "100px",
-  "--Button-minHeight": "37px",
+  "--Button-minHeight": `${componentHeight}px`,
   display: "inline-block",
   cursor: "pointer",
   padding: "8px 12px",
@@ -50,12 +52,21 @@ export const StyledSearchButton = styled(Button)(({ theme }) => ({
     color: theme.palette.neutral[800],
   },
 }));
+export const StyledSearchForm = styled("form")<{ customInput?: boolean }>(
+  ({ theme, customInput = false }) => ({
+    alignSelf: "flex-end",
+    width: "50%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
 
-export const StyledSearchForm = styled("form")(({ theme }) => ({
-  alignSelf: "flex-end",
-  width: "50%",
-
-  [theme.breakpoints.down("md")]: {
-    width: "100%",
-  },
-}));
+    ...(customInput && {
+      maxWidth: "500px",
+      width: "100%",
+      [theme.breakpoints.down("lg")]: {
+        width: "100%",
+        maxWidth: "none",
+      },
+    }),
+  })
+);

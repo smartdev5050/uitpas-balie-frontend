@@ -19,6 +19,11 @@ export const usePageQuery = () => {
       if (queryKey !== "page" || (queryKey === "page" && queryValue === "1")) {
         delete query["page"];
       }
+      // Delete the 'from' and 'to' query params if we change the range option
+      if (queryKey === "range" && queryValue !== "chooseDate") {
+        delete query["from"];
+        delete query["to"];
+      }
     }
 
     return router.push(

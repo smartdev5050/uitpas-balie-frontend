@@ -99,7 +99,7 @@
     "viewUiTDatabaseBtn": "Bekijk in de UiTdatabank",
     "downloadQrCodeBtn": "Download QR-spaarcode",
     "fromStartToEndDate": "Van {{startDate}} tot {{endDate}}",
-    "dateMenu": {
+    "rangeMenu": {
       "today": "Vandaag",
       "next7Days": "Volgende 7 dagen",
       "next30Days": "Volgende 30 dagen",
@@ -108,6 +108,8 @@
       "pastActivities": "Afgelopen activiteiten",
       "chooseDate": "Kies datum"
     },
+    "startDate": "Startdatum",
+    "endDate": "Einddatum",
     "activityModal": {
       "when": "Wanneer",
       "closeBtn": "Sluiten"
