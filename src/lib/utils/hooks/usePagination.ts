@@ -1,11 +1,11 @@
-import { usePageQuery } from "./usePageQuery";
+import { usePaginationQuery } from "./usePaginationQuery";
 
 type usePaginationSettings = {
   totalItems: number;
 };
 
 export const usePagination = ({ totalItems }: usePaginationSettings) => {
-  const { handleQuery, currentPage, fetchLimit } = usePageQuery();
+  const { handleQuery, currentPage, fetchLimit } = usePaginationQuery();
 
   const prevPage = () => handleQuery("page", String(currentPage - 1));
   const nextPage = () => handleQuery("page", String(currentPage + 1));

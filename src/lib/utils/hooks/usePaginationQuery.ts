@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export const usePageQuery = () => {
+export const usePaginationQuery = () => {
   const router = useRouter();
 
   const fetchLimit = router.query.limit ? Number(router.query.limit) : 5;

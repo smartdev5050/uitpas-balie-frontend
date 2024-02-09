@@ -14,7 +14,7 @@ import {
 import { useState, isValidElement, Fragment } from "react";
 import { StyledMenuItem } from "@/layouts/components/Navbar.styles";
 import { DateInput, Stack, Typography } from "@/lib/ui";
-import { usePageQuery } from "@/lib/utils/hooks/usePageQuery";
+import { usePaginationQuery } from "@/lib/utils/hooks/usePaginationQuery";
 import { TDateSelection } from "@/lib/utils/dateUtils";
 import { RangeMenuButton } from "@/feature-activities/components/RangeMenuButton";
 import { useRouter } from "next/router";
@@ -74,7 +74,7 @@ export const RangeMenu = ({ defaultRange, disabled }: RangeMenuProps) => {
     onButtonClick,
     onClose,
   } = useMenu();
-  const { handleQuery } = usePageQuery();
+  const { handleQuery } = usePaginationQuery();
   const [currentItem, setCurrentItem] = useState<rangeMenuItem>(
     rangeMenuItems.find((item) => item.value === defaultRange) ??
       rangeMenuItems[3]

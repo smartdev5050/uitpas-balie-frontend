@@ -99,6 +99,7 @@
     "viewUiTDatabaseBtn": "Bekijk in de UiTdatabank",
     "downloadQrCodeBtn": "Download QR-spaarcode",
     "fromStartToEndDate": "Van {{startDate}} tot {{endDate}}",
+    "noActivities": "Geen activiteiten gepland.",
     "rangeMenu": {
       "today": "Vandaag",
       "next7Days": "Volgende 7 dagen",

@@ -8,7 +8,7 @@ import {
   StyledSearchStack,
 } from "./SearchInput.styles";
 import { FormEvent } from "react";
-import { usePageQuery } from "@/lib/utils/hooks/usePageQuery";
+import { usePaginationQuery } from "@/lib/utils/hooks/usePaginationQuery";
 import { useRouter } from "next/router";
 import { TDateSelection } from "@/lib/utils";
 
@@ -19,7 +19,7 @@ type SearchInputProps = {
 
 export const SearchInput = ({ defaultSearch, disabled }: SearchInputProps) => {
   const { t } = useTranslation();
-  const { handleQuery } = usePageQuery();
+  const { handleQuery } = usePaginationQuery();
   const router = useRouter();
   const rangeQuery = (router.query.range ??
     "next12Months") as keyof typeof TDateSelection;

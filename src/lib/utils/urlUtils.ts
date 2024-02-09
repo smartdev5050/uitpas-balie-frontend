@@ -12,14 +12,10 @@ export const getUitInVlaanderenUrl = (
   eventId: string
 ): string => {
   const { publicRuntimeConfig } = getConfig();
-  const eventNameEncoded = eventName
-    .replaceAll(" ", "-")
-    .substring(0, 50)
-    .toLowerCase();
 
-  return `${
-    publicRuntimeConfig.uitInVlaanderenUrl
-  }/agenda/e/${eventNameEncoded}/${getUuid(eventId)}`;
+  return `${publicRuntimeConfig.uitInVlaanderenUrl}/agenda/e/e/${getUuid(
+    eventId
+  )}`;
 };
 
 export const getUitInDatabankurl = (eventId: string): string => {
