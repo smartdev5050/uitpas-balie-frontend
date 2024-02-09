@@ -28,7 +28,57 @@
     "changeCounter": "Balie wijzigen",
     "lastUsed": "Laatst gebruikt",
     "otherCounters": "Andere balies",
-    "searchCounter": "Zoek balie"
+    "searchCounter": "Zoek balie",
+    "contact": [
+      {
+        "name": "Dender",
+        "email": "aalst@uitpas.be"
+      },
+      {
+        "name": "Gent",
+        "email": "uitpas@gent.be"
+      },
+      {
+        "name": "Kempen",
+        "email": "info@uitpaskempen.be"
+      },
+      {
+        "name": "Leuven",
+        "email": "uitpas@leuven.be"
+      },
+      {
+        "name": "Lier",
+        "email": "uitpas@lier.be"
+      },
+      {
+        "name": "Mechelen",
+        "email": "uitpas@mechelen.be"
+      },
+      {
+        "name": "Maasmechelen",
+        "email": "uitpas@maasmechelen.be"
+      },
+      {
+        "name": "Meetjesland",
+        "email": "uitpasmeetjesland@comeet.be"
+      },
+      {
+        "name": "Oostende",
+        "email": "uitpas@oostende.be"
+      },
+      {
+        "name": "Paspartoe",
+        "email": "paspartoe@vgc.be"
+      },
+      {
+        "name": "Zuidwest",
+        "email": "uitpas@zuidwest.be"
+      },
+      {
+        "name": "Westhoek",
+        "email": "info@uitinwesthoek.be"
+      }
+    ]
   },
   "expenseReport": {
     "title": "Onkostennota",
