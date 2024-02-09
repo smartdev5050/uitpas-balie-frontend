@@ -7,28 +7,38 @@ import { getAssetUrl } from "@/lib/utils";
 import { CircularProgress, Input } from "@mui/joy";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useGetPermissions } from "@/lib/dataAccess";
+import { useCounter } from "@/feature-counter";
 
 export const SelectCounterPage = () => {
   const { t } = useTranslation();
   const userInfo = useUserInfo();
   const [searchString, setSearchString] = useState<string>("");
-  const { data, isSuccess, isLoading } = useGetPermissions();
+  const { data: allData, isSuccess, isLoading } = useGetPermissions();
+  const { setActiveCounter, lastCounterUsed } = useCounter();
 
-  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const data = allData?.data?.filter(
+    (permission) => permission.organizer.id !== lastCounterUsed?.id
+  );
+
+  const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
   };
 
   const filteredData =
-    data?.data.filter((organizer) =>
+    data?.filter((organizer) =>
       organizer.organizer.name
         ?.toLowerCase()
         .includes(searchString.toLowerCase())
     ) || [];
 
-  const finishedAndHasData =
-    isSuccess && data?.data?.length > 0 && data !== undefined;
+  useEffect(() => {
+    const data = allData?.data || [];
+    if (data.length === 1) {
+      setActiveCounter(data[0].organizer);
+    }
+  }, [allData?.data, setActiveCounter]);
 
   return (
     <Box sx={{ m: "40px auto;", pt: 12, maxWidth: 500 }}>
@@ -57,18 +67,19 @@ export const SelectCounterPage = () => {
             {t("counter.welcome", { name: userInfo?.given_name ?? "" })}
           </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: "0.5em",
-            }}
-          >
-            <Typography level="h2" sx={{ m: 0 }}>
-              {t("counter.selectCounter")}
-            </Typography>
-            {finishedAndHasData && (
+          {(data || []).length > 0 && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                mb: "0.5em",
+              }}
+            >
+              <Typography level="h2" sx={{ m: 0 }}>
+                {t("counter.selectCounter")}
+              </Typography>
+
               <Input
                 placeholder={`${t("counter.searchCounter")}`}
                 variant="plain"
@@ -84,8 +95,8 @@ export const SelectCounterPage = () => {
                 })}
                 onChange={handleSearchInputChange}
               />
-            )}
-          </Box>
+            </Box>
+          )}
           <CounterPicker data={filteredData} filterString={searchString}>
             {isLoading && (
               <CircularProgress

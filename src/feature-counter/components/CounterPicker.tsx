@@ -21,12 +21,6 @@ export const CounterPicker = ({
     setActiveCounter(organizer);
   };
 
-  useEffect(() => {
-    if (data.length === 1 && !filterString) {
-      setActiveCounter(data[0].organizer);
-    }
-  }, [data, filterString, setActiveCounter]);
-
   return (
     <Card
       sx={{
@@ -47,14 +41,15 @@ export const CounterPicker = ({
         >
           {children || (
             <>
-              <LastCounterData
-                lastCounter={lastCounterUsed}
-                handleCounterClick={handleCounterClick}
-              />
+              {data.length > 0 && lastCounterUsed && (
+                <LastCounterData
+                  lastCounter={lastCounterUsed}
+                  handleCounterClick={handleCounterClick}
+                />
+              )}
               <CounterPickerData
                 data={data}
                 filterString={filterString}
-                excludeCounter={lastCounterUsed}
                 handleCounterClick={handleCounterClick}
               />
             </>
@@ -63,7 +58,4 @@ export const CounterPicker = ({
       </CardContent>
     </Card>
   );
-
-  // TODO port loader from ng app?, Error message?
-  return null;
 };
