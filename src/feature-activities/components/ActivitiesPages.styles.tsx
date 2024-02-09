@@ -1,11 +1,6 @@
 import { styled } from "@mui/joy";
 import { Link, Stack, Typography } from "@/lib/ui";
-import {
-  ButtonHTMLAttributes,
-  ForwardedRef,
-  forwardRef,
-  HTMLProps,
-} from "react";
+import { AnchorHTMLAttributes, DetailedHTMLProps, MouseEvent } from "react";
 
 export const StyledPageContainerStack = styled(Stack)({
   margin: "24px 16px",
@@ -20,16 +15,28 @@ export const StyledPageTitle = styled(Typography)({
   paddingBottom: "12px",
 });
 
-export const StyledUserInputStack = styled(Stack)(({ theme }) => ({
-  flexDirection: "row",
-  justifyContent: "space-between",
-  marginBottom: "15px",
+export const StyledUserInputStack = styled(Stack)<{ customInput?: boolean }>(
+  ({ theme, customInput = false }) => ({
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: "15px",
+    columnGap: "24px",
 
-  [theme.breakpoints.down("md")]: {
-    flexDirection: "column",
-    rowGap: "24px",
-  },
-}));
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+      rowGap: "24px",
+    },
+
+    ...(customInput && {
+      [theme.breakpoints.down("lg")]: {
+        flexDirection: "column",
+        alignItems: "flex-start",
+        rowGap: "24px",
+      },
+    }),
+  })
+);
 
 export const StyledActivityStack = styled(Stack)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.neutral[400]}`,
@@ -98,7 +105,7 @@ export const StyledActionsStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export const ActionLink = styled(Link)(({ theme }) => ({
+const StyledActionLink = styled(Link)(({ theme }) => ({
   textDecoration: "none",
   display: "flex",
   cursor: "pointer",
@@ -128,3 +135,25 @@ export const ActionLink = styled(Link)(({ theme }) => ({
     maxWidth: "auto",
   },
 }));
+
+export const ActionLink = ({
+  allowPropagation = false,
+  ...props
+}: { allowPropagation?: boolean } & DetailedHTMLProps<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  HTMLAnchorElement
+>) => {
+  return (
+    <StyledActionLink
+      as={Link}
+      onClick={(e) => {
+        if (!allowPropagation) {
+          e.stopPropagation();
+        }
+      }}
+      {...props}
+    >
+      {props.children}
+    </StyledActionLink>
+  );
+};

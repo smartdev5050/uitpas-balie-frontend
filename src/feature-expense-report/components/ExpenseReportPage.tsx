@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useDownloadReport } from "../hooks/useDownloadReport";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faRefresh } from "@fortawesome/free-solid-svg-icons";
-import { PeriodType, isSamePeriod } from "@/lib/utils";
+import { PeriodType, isSamePeriod, dateToISODateString } from "@/lib/utils";
 
 export const ExpenseReportPage = () => {
   const [startDate, setStartDate] = useState<string>(dateToISODateString());
@@ -164,10 +164,3 @@ export const ExpenseReportPage = () => {
     </PageWithSideBarNew>
   );
 };
-
-function dateToISODateString(date?: Date | null): string {
-  return ISOStringtoISODateString((date || new Date()).toISOString());
-}
-function ISOStringtoISODateString(ISOString: string): string {
-  return (ISOString || new Date().toISOString()).split("T")[0];
-}

@@ -8,19 +8,21 @@ import {
   StyledSearchStack,
 } from "./SearchInput.styles";
 import { FormEvent } from "react";
+import { usePageQuery } from "@/lib/utils/hooks/usePageQuery";
+import { useRouter } from "next/router";
+import { TDateSelection } from "@/lib/utils";
 
 type SearchInputProps = {
-  handleQuery: (queryKey: string, queryValue: string) => void;
   defaultSearch?: string;
   disabled: boolean;
 };
 
-export const SearchInput = ({
-  handleQuery,
-  defaultSearch,
-  disabled,
-}: SearchInputProps) => {
+export const SearchInput = ({ defaultSearch, disabled }: SearchInputProps) => {
   const { t } = useTranslation();
+  const { handleQuery } = usePageQuery();
+  const router = useRouter();
+  const rangeQuery = (router.query.range ??
+    "next12Months") as keyof typeof TDateSelection;
 
   const handleFormSubmission = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +31,11 @@ export const SearchInput = ({
   };
 
   return (
-    <StyledSearchForm method="POST" onSubmit={handleFormSubmission}>
+    <StyledSearchForm
+      method="POST"
+      onSubmit={handleFormSubmission}
+      customInput={rangeQuery === "chooseDate"}
+    >
       <StyledSearchStack>
         <StyledSearchInput
           name="query-input"

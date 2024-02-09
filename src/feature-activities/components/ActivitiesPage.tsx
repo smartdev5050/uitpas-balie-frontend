@@ -1,12 +1,20 @@
 import { useGetEvents } from "@/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
-import { PageWithSideBarNew } from "@/lib/ui";
+import {
+  Grid,
+  Modal,
+  ModalActions,
+  ModalContent,
+  ModalHeader,
+  PageWithSideBarNew,
+  Typography,
+} from "@/lib/ui";
 import { useTranslation } from "react-i18next";
-import { DateMenu } from "./DateMenu";
+import { RangeMenu } from "./RangeMenu";
 import { SearchInput } from "./SearchInput";
 
 import dayjs from "dayjs";
-import { EventName } from "@/lib/dataAccess/search/generated/model";
+import { EventAllOf, EventName } from "@/lib/dataAccess/search/generated/model";
 import { useRouter } from "next/router";
 import {
   ActionLink,
@@ -19,82 +27,48 @@ import {
   StyledPageTitle,
   StyledUserInputStack,
 } from "./ActivitiesPages.styles";
-import { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   getQrCodeUrl,
   getUitInDatabankurl,
   getUitInVlaanderenUrl,
 } from "@/lib/utils";
-import { Pagination } from "./Pagination";
+import { Pagination } from "@/lib/ui/uitpas/Pagination";
 import { useCounter } from "@/feature-counter";
 import { CircularProgress } from "@mui/joy";
-
-const RANGE_DATE_FORMAT = "YYYY-MM-DDTHH:mm:ssZ";
-const DATE_FORMAT = "DD MMMM YYYY";
-const FETCH_LIMIT = 5;
+import {
+  DATE_FORMAT,
+  TDateSelection,
+  getRangeDateFromSelection,
+} from "@/lib/utils/dateUtils";
+import { usePageQuery } from "@/lib/utils/hooks/usePageQuery";
+import { ActionButton } from "@/lib/ui/uitpas/ActionButton";
 
 export const ActivitiesPage = () => {
-  const { t, i18n } = useTranslation();
-  const { activeCounter: counter } = useCounter();
   const router = useRouter();
   const searchQuery = router.query.search;
-  const rangeQuery = router.query.range ?? "next12Months";
-  const pageQuery = router.query.page ? Number(router.query.page) : 1;
-  const [total, setTotal] = useState<number | undefined>(undefined);
+  const rangeQuery = (router.query.range ??
+    "next12Months") as keyof typeof TDateSelection;
+  const { t, i18n } = useTranslation();
+  const { activeCounter: counter } = useCounter();
+  const { fetchLimit, offset } = usePageQuery();
+  const [selectedActivity, setSelectedActivity] = useState<
+    EventAllOf | undefined
+  >(undefined);
+
   const dateRange = useMemo(() => {
-    switch (rangeQuery) {
-      case "today": {
-        return {
-          from: dayjs().startOf("day").format(RANGE_DATE_FORMAT),
-          to: dayjs().endOf("day").format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "next7Days": {
-        return {
-          from: dayjs().startOf("day").format(RANGE_DATE_FORMAT),
-          to: dayjs(dayjs().add(7, "days"))
-            .endOf("day")
-            .format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "next30Days": {
-        return {
-          from: dayjs().startOf("day").format(RANGE_DATE_FORMAT),
-          to: dayjs(dayjs().add(30, "days"))
-            .endOf("day")
-            .format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "next12Months": {
-        return {
-          from: dayjs().startOf("day").format(RANGE_DATE_FORMAT),
-          to: dayjs(dayjs().add(12, "months"))
-            .endOf("day")
-            .format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "unlimited": {
-        return {
-          from: dayjs().subtract(100, "year").format(RANGE_DATE_FORMAT),
-          to: dayjs().add(100, "year").format(RANGE_DATE_FORMAT),
-        };
-      }
-      case "pastActivities": {
-        return {
-          from: dayjs().subtract(100, "year").format(RANGE_DATE_FORMAT),
-          to: dayjs(dayjs().startOf("day").format(RANGE_DATE_FORMAT))
-            .subtract(1, "second")
-            .format(RANGE_DATE_FORMAT),
-        };
-      }
-      default: {
-        return {
-          from: dayjs().subtract(100, "year").format(RANGE_DATE_FORMAT),
-          to: dayjs().add(100, "year").format(RANGE_DATE_FORMAT),
-        };
-      }
-    }
-  }, [rangeQuery]);
+    return (router.query.from || router.query.to) && rangeQuery === "chooseDate"
+      ? getRangeDateFromSelection(rangeQuery, {
+          from: router.query.from
+            ? String(router.query.from)
+            : dayjs().format(DATE_FORMAT),
+          to: router.query.to
+            ? String(router.query.to)
+            : dayjs().format(DATE_FORMAT),
+        })
+      : getRangeDateFromSelection(rangeQuery);
+  }, [rangeQuery, router.query.from, router.query.to]);
+
   const { data, isSuccess, isLoading } = useGetEvents({
     organizerId: counter?.id,
     embed: true,
@@ -103,51 +77,63 @@ export const ActivitiesPage = () => {
     ...(rangeQuery && { dateFrom: dateRange.from, dateTo: dateRange.to }),
     ...(searchQuery && { q: searchQuery as string }),
     // @ts-expect-error Orval didn't include pagination in generated types
-    limit: FETCH_LIMIT,
-    start: pageQuery === 1 ? 0 : (pageQuery - 1) * FETCH_LIMIT,
+    limit: fetchLimit,
+    start: offset,
   });
-  useEffect(() => {
-    if (isSuccess) {
-      setTotal(data.data.totalItems);
-    }
-  }, [data?.data.totalItems, isSuccess]);
 
   const LANG_KEY = i18n.language as keyof EventName;
-
-  const handleQuery = (queryKey: string, queryValue: string) => {
-    const query = { ...router.query };
-
-    if (queryValue === "") {
-      delete query[queryKey];
-    } else {
-      query[queryKey] = queryValue;
-      if (queryKey != "page" && pageQuery !== 1) {
-        delete query["page"];
-      }
-    }
-
-    router.push(
-      {
-        pathname: "/activities",
-        query,
-      },
-      undefined,
-      { shallow: true }
-    );
-  };
 
   return (
     <PageWithSideBarNew sideBarContent={<SidebarContent />} hasBackButton>
       <StyledPageContainerStack>
+        <Modal
+          open={selectedActivity !== undefined}
+          onClose={() => setSelectedActivity(undefined)}
+        >
+          <ModalHeader>
+            <Typography level="h4" sx={{ fontSize: "15px", fontWeight: 600 }}>
+              {selectedActivity?.name[LANG_KEY] ?? selectedActivity?.name.nl}
+            </Typography>
+          </ModalHeader>
+
+          <ModalContent>
+            {selectedActivity?.startDate && selectedActivity?.endDate && (
+              <Grid container sx={{ flexGrow: 1 }}>
+                <Grid xs={3}>
+                  <Typography level="body2" fontStyle="italic">
+                    {t("activities.activityModal.when")}
+                  </Typography>
+                </Grid>
+                <Grid xs={9}>
+                  <Typography level="body2">
+                    {t("activities.fromStartToEndDate", {
+                      startDate: dayjs(selectedActivity.startDate).format(
+                        DATE_FORMAT
+                      ),
+                      endDate: dayjs(selectedActivity.endDate).format(
+                        DATE_FORMAT
+                      ),
+                    })}
+                  </Typography>
+                </Grid>
+              </Grid>
+            )}
+          </ModalContent>
+
+          <ModalActions>
+            <ActionButton onClick={() => setSelectedActivity(undefined)}>
+              {t("activities.activityModal.closeBtn")}
+            </ActionButton>
+          </ModalActions>
+        </Modal>
+
         <StyledPageTitle level="h2">{t("activities.title")}</StyledPageTitle>
-        <StyledUserInputStack>
-          <DateMenu
-            handleQuery={handleQuery}
+        <StyledUserInputStack customInput={rangeQuery === "chooseDate"}>
+          <RangeMenu
             defaultRange={rangeQuery?.toString()}
             disabled={isLoading}
           />
           <SearchInput
-            handleQuery={handleQuery}
             defaultSearch={searchQuery?.toString()}
             disabled={isLoading}
           />
@@ -164,13 +150,15 @@ export const ActivitiesPage = () => {
                       ? `1px solid ${theme.palette.neutral[400]}`
                       : `1px solid ${theme.palette.neutral.outlinedBorder}`,
                 })}
+                onClick={() => setSelectedActivity(member)}
               >
                 <StyledItemStack>
                   {member.startDate && member.endDate && (
                     <StyledEventDate level="body2">
-                      {`Van ${dayjs(member.startDate).format(
-                        DATE_FORMAT
-                      )} tot ${dayjs(member.endDate).format(DATE_FORMAT)}`}
+                      {t("activities.fromStartToEndDate", {
+                        startDate: dayjs(member.startDate).format(DATE_FORMAT),
+                        endDate: dayjs(member.endDate).format(DATE_FORMAT),
+                      })}
                     </StyledEventDate>
                   )}
 
@@ -211,14 +199,7 @@ export const ActivitiesPage = () => {
             sx={{ alignSelf: "center", my: 10 }}
           />
         )}
-        {(total ?? 0) > 0 && (
-          <Pagination
-            currentPage={pageQuery}
-            total={total!}
-            limit={FETCH_LIMIT}
-            handleQuery={handleQuery}
-          />
-        )}
+        <Pagination totalItems={data?.data.totalItems ?? 0} />
       </StyledPageContainerStack>
     </PageWithSideBarNew>
   );

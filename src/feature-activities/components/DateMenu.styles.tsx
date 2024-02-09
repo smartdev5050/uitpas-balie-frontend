@@ -1,6 +1,5 @@
-import { MenuItemUnstyled, menuItemUnstyledClasses } from "@mui/base";
 import PopperUnstyled from "@mui/base/PopperUnstyled";
-import { Theme, styled } from "@mui/joy";
+import { styled } from "@mui/joy";
 import {
   forwardRef,
   HTMLProps,
@@ -28,19 +27,21 @@ export const TriggerButton = styled(
   forwardRef(function ButtonWrapper(
     {
       active,
+      disabled,
       ...buttonProps
-    }: HTMLProps<HTMLButtonElement> & { active: boolean },
+    }: HTMLProps<HTMLButtonElement> & { active: boolean; disabled?: boolean },
     ref: ForwardedRef<HTMLButtonElement>
   ) {
     return (
       <button
         {...buttonProps}
         type={buttonProps.type as ButtonHTMLAttributes<unknown>["type"]}
+        disabled={disabled}
         ref={ref}
       />
     );
   })
-)(({ theme, active }) => ({
+)(({ theme, active, disabled = false }) => ({
   display: "inline-block",
   cursor: "pointer",
   padding: "8px 12px",
@@ -63,6 +64,13 @@ export const TriggerButton = styled(
   ...(active && {
     backgroundColor: theme.vars.palette.neutral[300],
     textDecoration: "none",
+  }),
+
+  ...(disabled && {
+    backgroundColor: theme.palette.neutral[200],
+    "&:hover": {
+      cursor: "not-allowed",
+    },
   }),
 }));
 

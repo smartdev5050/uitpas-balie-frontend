@@ -98,7 +98,8 @@
     "viewUiTInVlaanderenBtn": "Bekijk op UiTInVlaanderen",
     "viewUiTDatabaseBtn": "Bekijk in de UiTdatabank",
     "downloadQrCodeBtn": "Download QR-spaarcode",
-    "dateMenu": {
+    "fromStartToEndDate": "Van {{startDate}} tot {{endDate}}",
+    "rangeMenu": {
       "today": "Vandaag",
       "next7Days": "Volgende 7 dagen",
       "next30Days": "Volgende 30 dagen",
@@ -107,10 +108,16 @@
       "pastActivities": "Afgelopen activiteiten",
       "chooseDate": "Kies datum"
     },
-    "pagination": {
-      "previousBtn": "Vorige",
-      "nextBtn": "Volgende"
+    "startDate": "Startdatum",
+    "endDate": "Einddatum",
+    "activityModal": {
+      "when": "Wanneer",
+      "closeBtn": "Sluiten"
     }
+  },
+  "pagination": {
+    "previousBtn": "Vorige",
+    "nextBtn": "Volgende"
   },
   "help": {
     "title": "Help",
