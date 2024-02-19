@@ -18,20 +18,18 @@ export const SelectCounterPage = () => {
   const { data: allData, isSuccess, isLoading } = useGetPermissions();
   const { setActiveCounter, lastCounterUsed } = useCounter();
 
-  const data = allData?.data?.filter(
-    (permission) => permission.organizer.id !== lastCounterUsed?.id
-  );
+  const data =
+    allData?.data?.filter(
+      (permission) => permission.organizer.id !== lastCounterUsed?.id
+    ) ?? [];
 
   const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
   };
 
-  const filteredData =
-    data?.filter((organizer) =>
-      organizer.organizer.name
-        ?.toLowerCase()
-        .includes(searchString.toLowerCase())
-    ) || [];
+  const filteredData = data?.filter((organizer) =>
+    organizer.organizer.name?.toLowerCase().includes(searchString.toLowerCase())
+  );
 
   useEffect(() => {
     const data = allData?.data || [];
@@ -67,7 +65,7 @@ export const SelectCounterPage = () => {
             {t("counter.welcome", { name: userInfo?.given_name ?? "" })}
           </Typography>
 
-          {(data || []).length > 0 && (
+          {data.length > 0 && (
             <Box
               sx={{
                 display: "flex",
@@ -97,17 +95,11 @@ export const SelectCounterPage = () => {
               />
             </Box>
           )}
-          <CounterPicker data={filteredData} filterString={searchString}>
-            {isLoading && (
-              <CircularProgress
-                color="neutral"
-                determinate={false}
-                size="sm"
-                variant="plain"
-                sx={{ alignSelf: "center" }}
-              />
-            )}
-          </CounterPicker>
+          <CounterPicker
+            data={filteredData}
+            filterString={searchString}
+            isLoading={isLoading}
+          />
         </Box>
       </Stack>
     </Box>

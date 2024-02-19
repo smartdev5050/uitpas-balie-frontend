@@ -41,8 +41,6 @@ export const CounterNoData = () => {
           </li>
         ))}
       </ul>
-
-      <LoginButton>{t("login.loginOtherAccountBtn")}</LoginButton>
     </>
   );
 };
