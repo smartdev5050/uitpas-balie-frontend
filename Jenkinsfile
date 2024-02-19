@@ -103,42 +103,42 @@ pipeline {
                 always {
                     sendBuildNotification to: '#ups-ops', message: "Pipeline <${env.RUN_DISPLAY_URL}|${env.JOB_NAME} [${currentBuild.displayName}]>: deployed to *${env.APPLICATION_ENVIRONMENT}*"
                 }
-//            }
-//        }
-//
-//        stage('Deploy to production') {
-//            input { message "Deploy to Production?" }
-//            agent { label 'ubuntu && 20.04' }
-//            options { skipDefaultCheckout() }
-//            environment {
-//                APPLICATION_ENVIRONMENT = 'production'
-//            }
-//            steps {
-//                publishAptlySnapshot snapshotName: "${env.REPOSITORY_NAME}-${env.PIPELINE_VERSION}", publishTarget: "${env.REPOSITORY_NAME}-${env.APPLICATION_ENVIRONMENT}", distributions: 'focal'
-//                triggerDeployment nodeName: 'uitpas-balie-prod01', timeout: 600
-//            }
-//            post {
-//                always {
-//                    sendBuildNotification to: '#ups-ops', message: "Pipeline <${env.RUN_DISPLAY_URL}|${env.JOB_NAME} [${currentBuild.displayName}]>: deployed to *${env.APPLICATION_ENVIRONMENT}*"
-//                }
+            }
+        }
+
+        stage('Deploy to production') {
+            input { message "Deploy to Production?" }
+            agent { label 'ubuntu && 20.04' }
+            options { skipDefaultCheckout() }
+            environment {
+                APPLICATION_ENVIRONMENT = 'production'
+            }
+            steps {
+                publishAptlySnapshot snapshotName: "${env.REPOSITORY_NAME}-${env.PIPELINE_VERSION}", publishTarget: "${env.REPOSITORY_NAME}-${env.APPLICATION_ENVIRONMENT}", distributions: 'focal'
+                triggerDeployment nodeName: 'uitpas-balie-prod01', timeout: 600
+            }
+            post {
+                always {
+                    sendBuildNotification to: '#ups-ops', message: "Pipeline <${env.RUN_DISPLAY_URL}|${env.JOB_NAME} [${currentBuild.displayName}]>: deployed to *${env.APPLICATION_ENVIRONMENT}*"
+                }
                 cleanup {
                     cleanupAptlySnapshots repository: env.REPOSITORY_NAME
                 }
             }
         }
-//
-//        stage('Tag release') {
-//            agent { label 'ubuntu' }
-//            steps {
-//                copyArtifacts filter: 'pkg/*.deb', projectName: env.JOB_NAME, flatten: true, selector: specific(env.BUILD_NUMBER)
-//                tagRelease commitHash: artifact.metadata(artifactFilter: '*.deb', field: 'git-ref')
-//            }
-//            post {
-//                cleanup {
-//                    cleanWs()
-//                }
-//            }
-//        }
+
+        stage('Tag release') {
+            agent { label 'ubuntu' }
+            steps {
+                copyArtifacts filter: 'pkg/*.deb', projectName: env.JOB_NAME, flatten: true, selector: specific(env.BUILD_NUMBER)
+                tagRelease commitHash: artifact.metadata(artifactFilter: '*.deb', field: 'git-ref')
+            }
+            post {
+                cleanup {
+                    cleanWs()
+                }
+            }
+        }
     }
 
     post {
