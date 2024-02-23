@@ -43,33 +43,20 @@ import {
 } from "@/lib/utils/dateUtils";
 import { usePaginationQuery } from "@/lib/utils/hooks/usePaginationQuery";
 import { ActionButton } from "@/lib/ui/uitpas/ActionButton";
+import { useRangeQuery } from "@/lib/utils/hooks/useRangeQuery";
+import { useSearchQuery } from "@/lib/utils/hooks/useSearchQuery";
 
 export const ActivitiesPage = () => {
   const { t, i18n } = useTranslation();
   const { activeCounter: counter } = useCounter();
 
   const { fetchLimit, offset } = usePaginationQuery();
-  const router = useRouter();
-  const searchQuery = router.query.search;
-  const rangeQuery = (router.query.range ??
-    "next12Months") as keyof typeof TDateSelection;
+  const { rangeQuery, dateRange } = useRangeQuery();
+  const searchQuery = useSearchQuery();
 
   const [selectedActivity, setSelectedActivity] = useState<
     EventAllOf | undefined
   >(undefined);
-
-  const dateRange = useMemo(() => {
-    return (router.query.from || router.query.to) && rangeQuery === "chooseDate"
-      ? getRangeDateFromSelection(rangeQuery, {
-          from: router.query.from
-            ? String(router.query.from)
-            : dayjs().format(DATE_FORMAT),
-          to: router.query.to
-            ? String(router.query.to)
-            : dayjs().format(DATE_FORMAT),
-        })
-      : getRangeDateFromSelection(rangeQuery);
-  }, [rangeQuery, router.query.from, router.query.to]);
 
   const { data, isSuccess, isLoading } = useGetEvents({
     organizerId: counter?.id,
@@ -77,7 +64,7 @@ export const ActivitiesPage = () => {
     audienceType: "everyone",
     uitpas: true,
     ...(rangeQuery && { dateFrom: dateRange.from, dateTo: dateRange.to }),
-    ...(searchQuery && { q: searchQuery as string }),
+    ...(searchQuery && { q: searchQuery }),
     // @ts-expect-error Orval didn't include pagination in generated types
     limit: fetchLimit,
     start: offset,
@@ -93,14 +80,8 @@ export const ActivitiesPage = () => {
         <StyledPageContainerStack>
           <StyledPageTitle level="h2">{t("activities.title")}</StyledPageTitle>
           <StyledUserInputStack customInput={rangeQuery === "chooseDate"}>
-            <RangeMenu
-              defaultRange={rangeQuery?.toString()}
-              disabled={isLoading}
-            />
-            <SearchInput
-              defaultSearch={searchQuery?.toString()}
-              disabled={isLoading}
-            />
+            <RangeMenu defaultRange={rangeQuery} disabled={isLoading} />
+            <SearchInput defaultSearch={searchQuery} disabled={isLoading} />
           </StyledUserInputStack>
 
           {!isLoading && isSuccess ? (
