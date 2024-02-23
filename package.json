@@ -24,6 +24,7 @@
     "@mdi/react": "^1.6.1",
     "@mui/base": "^5.0.0-alpha.119",
     "@mui/joy": "^5.0.0-alpha.78",
+    "@mui/material": "^5.15.10",
     "@mui/system": "^5.11.11",
     "@tanstack/react-query": "^4.24.10",
     "@types/mousetrap": "^1.6.11",

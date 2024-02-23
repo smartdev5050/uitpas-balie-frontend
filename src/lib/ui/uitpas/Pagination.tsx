@@ -65,48 +65,76 @@ type paginationProps = {
 };
 export const Pagination = ({ totalItems }: paginationProps) => {
   const { t } = useTranslation();
-  const { gotoPage, nextPage, prevPage, totalPages, currentPage } =
+  const { gotoPage, nextPage, prevPage, totalPages, currentPage, items } =
     usePagination({
-      totalItems: totalItems,
+      totalItems,
     });
-  const pageButtons = [];
 
-  if (totalPages > 1)
-    for (let page = 1; page <= totalPages; page++) {
-      pageButtons.push(
-        <StyledPaginationButton
-          key={`pagination-${page}`}
-          color="primary"
-          onClick={() => gotoPage(page)}
-          disabled={page === currentPage}
-          active={page === currentPage}
-        >
-          {page}
-        </StyledPaginationButton>
-      );
-    }
+  if (totalPages <= 1) return null;
 
-  return totalPages > 1 ? (
+  return (
     <Stack sx={{ flexDirection: "row", pt: 3 }}>
-      <StyledPaginationButton
-        color="neutral"
-        onClick={() => prevPage()}
-        disabled={currentPage === 1}
-        active={false}
-      >
-        <Icon path={mdiMenuLeft} size={0.7} />
-        {t("pagination.previousBtn")}
-      </StyledPaginationButton>
-      {pageButtons}
-      <StyledPaginationButton
-        color="neutral"
-        onClick={() => nextPage()}
-        active={false}
-        disabled={currentPage === totalPages}
-      >
-        {t("pagination.nextBtn")}
-        <Icon path={mdiMenuRight} size={0.7} />
-      </StyledPaginationButton>
+      {items.map(({ type, page, onClick }) => {
+        if (type === "start-ellipsis" || type === "end-ellipsis") {
+          return (
+            <StyledPaginationButton
+              key={`pagination-${type}-${page}`}
+              active={false}
+              disabled
+            >
+              {"…"}
+            </StyledPaginationButton>
+          );
+        }
+        if (type === "page") {
+          return (
+            <StyledPaginationButton
+              key={`pagination-${type}-${page}`}
+              color="primary"
+              onClick={(event) => {
+                onClick(event);
+                return gotoPage(page ?? 0);
+              }}
+              disabled={page === currentPage}
+              active={page === currentPage}
+            >
+              {page}
+            </StyledPaginationButton>
+          );
+        }
+        if (type === "previous") {
+          return (
+            <StyledPaginationButton
+              key={`pagination-${type}-${page}`}
+              color="neutral"
+              onClick={(event) => {
+                onClick(event);
+                return prevPage();
+              }}
+              disabled={currentPage === 1}
+              active={false}
+            >
+              <Icon path={mdiMenuLeft} size={0.7} />
+              {t("pagination.previousBtn")}
+            </StyledPaginationButton>
+          );
+        }
+        return (
+          <StyledPaginationButton
+            key={`pagination-${type}-${page}`}
+            color="neutral"
+            onClick={(event) => {
+              onClick(event);
+              return nextPage();
+            }}
+            active={false}
+            disabled={currentPage === totalPages}
+          >
+            {t("pagination.nextBtn")}
+            <Icon path={mdiMenuRight} size={0.7} />
+          </StyledPaginationButton>
+        );
+      })}
     </Stack>
-  ) : null;
+  );
 };
