@@ -81,6 +81,8 @@ export const ActivitiesPage = () => {
     // @ts-expect-error Orval didn't include pagination in generated types
     limit: fetchLimit,
     start: offset,
+    availableFrom: "*",
+    availableTo: "*",
   });
 
   const LANG_KEY = i18n.language as keyof EventName;
