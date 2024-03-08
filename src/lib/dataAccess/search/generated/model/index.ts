@@ -18,6 +18,7 @@ export * from './boundsParameter';
 export * from './calendarTypeParameter';
 export * from './calendarTypeParameterItem';
 export * from './commonAddressLocalized';
+export * from './commonCompleteness';
 export * from './commonCopyrightHolder';
 export * from './commonDescriptionLocalized';
 export * from './commonFacet';

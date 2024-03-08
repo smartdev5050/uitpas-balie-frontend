@@ -40,10 +40,6 @@ Parameters that have the type `array[string]` and `[]` as a suffix in their name
 *  `?labels[]=uitpas` to only include results that have the label `uitpas`
 *  `?labels[]=uitpas&labels[]=paspartoe` to only include results that have both the labels `uitpas` and `paspartoe`
 
-Other `array[string]` parameters without the `[]` suffix support multiple comma-separated values for `OR` filtering. For example:
-
-*  `?workflowStatus=DRAFT` to return all results with the draft workflow status.
-*  `?workflowStatus=REJECTED,DELETED` to return results with the rejected or deleted workflow status.
  * @summary Search organizers
  */
 export const getOrganizers = (

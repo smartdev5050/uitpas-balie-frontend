@@ -14,6 +14,7 @@ import type { PlaceBookingInfo } from './placeBookingInfo';
 import type { PlaceCalendarSummary } from './placeCalendarSummary';
 import type { PlaceCalendarType } from './placeCalendarType';
 import type { PlaceCompletedLanguages } from './placeCompletedLanguages';
+import type { CommonCompleteness } from './commonCompleteness';
 import type { PlaceContactPoint } from './placeContactPoint';
 import type { PlaceContributors } from './placeContributors';
 import type { PlaceCreated } from './placeCreated';
@@ -50,6 +51,7 @@ export type PlaceAllOf = {
   calendarSummary?: PlaceCalendarSummary;
   calendarType: PlaceCalendarType;
   completedLanguages?: PlaceCompletedLanguages;
+  completeness?: CommonCompleteness;
   contactPoint?: PlaceContactPoint;
   contributors?: PlaceContributors;
   created?: PlaceCreated;

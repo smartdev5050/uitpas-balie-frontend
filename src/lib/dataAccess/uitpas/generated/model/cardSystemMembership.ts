@@ -14,7 +14,7 @@ import type { CardSystemMembershipStatus } from './cardSystemMembershipStatus';
  */
 export interface CardSystemMembership {
   cardSystem: CardSystem;
-  /** If the passholder has right to a social tariff, this object contains details like the end date. */
+  /** If the passholder has (or had) right to a social tariff, this object contains details like the  end date. Check the `status` of the `socialTariff`: the passholder is only currently entitled to a social tariff is `status` is `ACTIVE`.  */
   socialTariff?: CardSystemMembershipSocialTariff;
   /** Whether the membership is active or blocked. */
   readonly status?: CardSystemMembershipStatus;

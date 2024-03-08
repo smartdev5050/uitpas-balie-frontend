@@ -15,6 +15,7 @@ import type { EventBookingInfo } from './eventBookingInfo';
 import type { EventCalendarSummary } from './eventCalendarSummary';
 import type { EventCalendarType } from './eventCalendarType';
 import type { EventCompletedLanguages } from './eventCompletedLanguages';
+import type { CommonCompleteness } from './commonCompleteness';
 import type { EventContactPoint } from './eventContactPoint';
 import type { EventContributors } from './eventContributors';
 import type { EventCreated } from './eventCreated';
@@ -55,6 +56,7 @@ export type EventAllOf = {
   calendarSummary?: EventCalendarSummary;
   calendarType: EventCalendarType;
   completedLanguages?: EventCompletedLanguages;
+  completeness?: CommonCompleteness;
   contactPoint?: EventContactPoint;
   contributors?: EventContributors;
   created?: EventCreated;

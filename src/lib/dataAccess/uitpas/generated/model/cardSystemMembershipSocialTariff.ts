@@ -5,15 +5,26 @@
  * With UiTPAS API 4.0 you can retrieve ticket prices and register ticket sales for passholders. You can also save UiTPAS points and exchange them for rewards for a passholder, and much more.
  * OpenAPI spec version: 4.0
  */
+import type { CardSystemMembershipSocialTariffStatus } from './cardSystemMembershipSocialTariffStatus';
 
 /**
- * If the passholder has right to a social tariff, this object contains details like the end date.
+ * If the passholder has (or had) right to a social tariff, this object contains details like the  end date. Check the `status` of the `socialTariff`: the passholder is only currently entitled to a social tariff is `status` is `ACTIVE`. 
  */
 export type CardSystemMembershipSocialTariff = {
-  /** Exact moment that the passholder's right to a social tariff expires. */
+  /** Exact moment the passholder's right to a social tariff expires. */
   endDate: string;
-  /** If true, the passholder's right to a social tariff has completely expired (the end date has passed and the passholder is no longer in a grace period). */
+  /**
+   * If true, the passholder's right to a social tariff has completely expired (the end date has passed and the passholder is no longer in a grace period). **This property is deprecated.** Please use the `status` property instead.
+   * @deprecated
+   */
   expired?: boolean;
   /** When the end date of the right to a social tariff has passed, the passholder may still be in a grace period that they can buy tickets at a social tariff until their right to a social tariff has been renewed. */
   inGracePeriod?: boolean;
+  /** Status of the social tariff:
+- `ACTIVE`: the passholder is entitled to social tariff
+- `EXPIRED`: the passholder is NOT entitled to social tariff anymore
+- `SUSPENDED`: the passholder is temporarily NOT entitled to social tariff. In this case a extra property `suspendedUntilDate` will also be available. */
+  status: CardSystemMembershipSocialTariffStatus;
+  /** Date until this social tarif is suspended (only available when status is `SUSPENDED`) */
+  suspendedUntilDate?: string;
 };

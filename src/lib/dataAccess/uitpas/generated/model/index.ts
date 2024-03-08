@@ -11,6 +11,7 @@ export * from './cardSystemBranding';
 export * from './cardSystemLinks';
 export * from './cardSystemMembership';
 export * from './cardSystemMembershipSocialTariff';
+export * from './cardSystemMembershipSocialTariffStatus';
 export * from './cardSystemMembershipStatus';
 export * from './cardSystemsPaginatedCollection';
 export * from './checkin';
