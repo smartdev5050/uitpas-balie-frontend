@@ -38,14 +38,14 @@ import type {
 /**
  * This is step 1 of the process to register an UiTPAS passholder in UiTiD using their UiTPAS number and date of birth. It is used to retrieve an UiTiD registration token for the passholder. If the passholder already has a token via an email they received to register in UiTiD, this step can be skipped.
 
-This endpoint uses HTTP Basic Authentication using:
+This endpoint uses [HTTP Basic Authentication](https://datatracker.ietf.org/doc/html/rfc7617) using:
 * Username: uitpasNumber 
 * Password: dateOfBirth in the form yyyy-mm-dd
 
 In summary, this header should look like: 
 
 ```
-Authorization: Basic base64(uitpasNumber+dateOfBirth)
+Authorization: Basic base64(uitpasNumber:dateOfBirth)
 ```
 
 The response will contain a `token` property that can be used in step 2 of the process, [retrieving the UiTiD registration status](/reference/uitpas.json/paths/~1passholders~1me~1uitid~1status/get).

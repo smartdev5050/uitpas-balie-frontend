@@ -61,7 +61,7 @@ export const ActivitiesPage = () => {
   const { data, isSuccess, isLoading } = useGetEvents({
     organizerId: counter?.id,
     embed: true,
-    audienceType: "everyone",
+    audienceType: "*",
     uitpas: true,
     ...(rangeQuery && { dateFrom: dateRange.from, dateTo: dateRange.to }),
     ...(searchQuery && { q: searchQuery }),

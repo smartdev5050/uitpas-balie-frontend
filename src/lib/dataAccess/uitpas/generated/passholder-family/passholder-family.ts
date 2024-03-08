@@ -189,7 +189,8 @@ export const usePostPassholdersPassholderIdFamilyMembers = <TError = AxiosError<
     /**
  * Update information of a family member of the given passholder.
 
-The caller of this method must have `PASSHOLDERS_FAMILY_MEMBERS` permission for the given passholder.
+The caller of this method must have `PASSHOLDERS_FAMILY_MEMBERS` permission for the given passholder
+
  * @summary Update a family member
  */
 export const putPassholdersPassholderIdFamilyMembersFamilyMemberId = (
@@ -245,9 +246,16 @@ export const usePutPassholdersPassholderIdFamilyMembersFamilyMemberId = <TError 
     /**
  * Delete a family member of a given passholder.
 
-The given passholder is always a member of their family (boolean `mainFamilyMember` is `true`) and cannot be deleted.
+The main family member is always a member of their family (boolean `mainFamilyMember` is `true`) and cannot be deleted.
 
-The caller of this method must have `PASSHOLDERS_FAMILY_MEMBERS` permission for the given passholder.
+The caller of this method must have `PASSHOLDERS_FAMILY_MEMBERS` permission for the *main family member* or for the *to be deleted family member*, except for custom token authentication.
+
+
+<!-- theme: info -->
+
+> Custom tokens
+>
+> Next to regular client and user access tokens, this endpoint also supports 'custom tokens'. In this scenario, the custom token is sent out in an email to the passholder, who is added as a family member. This allows for the reversal of the add operation directly from that email, without further authentication. Unless your client is implementing this  flow, you can ignore custom tokens.
  * @summary Delete a family member
  */
 export const deletePassholdersPassholderIdFamilyMembersFamilyMemberId = (

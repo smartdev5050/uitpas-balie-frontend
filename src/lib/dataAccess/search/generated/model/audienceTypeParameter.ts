@@ -14,4 +14,5 @@ export const AudienceTypeParameter = {
   everyone: 'everyone',
   members: 'members',
   education: 'education',
+  '*': '*',
 } as const;

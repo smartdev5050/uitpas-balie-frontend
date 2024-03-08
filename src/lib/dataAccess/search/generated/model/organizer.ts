@@ -8,6 +8,7 @@
 import type { OrganizerId } from './organizerId';
 import type { OrganizerAddress } from './organizerAddress';
 import type { OrganizerCompletedLanguages } from './organizerCompletedLanguages';
+import type { CommonCompleteness } from './commonCompleteness';
 import type { OrganizerContactPoint } from './organizerContactPoint';
 import type { OrganizerContributors } from './organizerContributors';
 import type { OrganizerCreated } from './organizerCreated';
@@ -35,6 +36,7 @@ export interface Organizer {
   '@id'?: OrganizerId;
   address?: OrganizerAddress;
   completedLanguages?: OrganizerCompletedLanguages;
+  completeness?: CommonCompleteness;
   contactPoint?: OrganizerContactPoint;
   contributors?: OrganizerContributors;
   created?: OrganizerCreated;
