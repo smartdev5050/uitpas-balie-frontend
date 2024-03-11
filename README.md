@@ -79,9 +79,14 @@ This project is based on Next.js v13, utilizing the pages router. It also employ
 
 ### Main Concept
 
-The project is designed for a gradual migration from the AngularJS application to this Next.js application. Whenever a route is available in the Next.js app, it is used; otherwise, an iframe with the AngularJS application is rendered.
+The project is designed for a gradual migration from the AngularJS application to this Next.js application. 
+Whenever a route is available in the Next.js app, it is used; otherwise, an iframe with the AngularJS application is rendered.
 
-Communication between the Next.js and AngularJS apps is facilitated through EventListeners on the Window object. The logic for this is encapsulated in `src/feature-legacy`. Once the migration is complete, the `feature-legacy` can be safely removed along with any associated references.
+⚠️ Restart the dev server after adding a new path in NextJS!
+
+Communication between the Next.js and AngularJS apps is facilitated through EventListeners on the Window object. 
+The logic for this is encapsulated in `src/feature-legacy`. 
+Once the migration is complete, the `feature-legacy` can be safely removed along with any associated references.
 
 ### Internationalization (I18n)
 

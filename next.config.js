@@ -1,6 +1,9 @@
 const { i18n } = require("./next-i18next.config");
+const getPathsFromFolderStructure = require("./lib/getPathsFromFolderStructure");
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/app";
+
+const paths = getPathsFromFolderStructure("./src/pages");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,6 +18,7 @@ const nextConfig = {
       NEXT_PUBLIC_API_PATH: process.env.NEXT_PUBLIC_API_PATH,
       NEXT_PUBLIC_SEARCH_API_PATH: process.env.NEXT_PUBLIC_SEARCH_API_PATH,
     },
+    Routes: paths.map((path) => `${basePath}/${path}`),
     uitInVlaanderenUrl: process.env.NEXT_PUBLIC_UITINVLAANDEREN_URL,
     uitInDatabankUrl: process.env.NEXT_PUBLIC_UITDATABANK_URL,
     oauthPath: process.env.NEXT_PUBLIC_OAUTH_PATH,
