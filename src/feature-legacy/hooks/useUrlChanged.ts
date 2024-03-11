@@ -21,11 +21,15 @@ export const useUrlChanged = () => {
       );
 
       const url = new URL(
-        `${window.location.protocol}//${window.location.host}${pathWithoutLegacyPrefix}`
+        `${window.location.protocol}//${window.location.host}/${pathWithoutLegacyPrefix}`
       );
       const query = Object.fromEntries(url.searchParams.entries());
 
-      router.push({ pathname: url.pathname, query });
+      if (publicRuntimeConfig.Routes.includes(url.pathname)) {
+        router.push({ pathname: url.pathname, query });
+      } else {
+        history.pushState(null, "", url.pathname + url.search);
+      }
     },
     [WindowMessageTypesReceived.HTTP_ERROR_CODE]: ({ payload }) => {
       if ([401, 403].includes(payload?.code as number)) {
