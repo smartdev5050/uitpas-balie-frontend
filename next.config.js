@@ -1,5 +1,5 @@
 const { i18n } = require("./next-i18next.config");
-const getPathsFromFolderStructure = require("./lib/getPathsFromFolderStructure");
+const getPathsFromFolderStructure = require("./src/getPathsFromFolderStructure");
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/app";
 
