@@ -57,5 +57,6 @@
     "dotenv-cli": "^7.3.0",
     "orval": "^6.19.1",
     "prettier": "^2.8.4"
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }
