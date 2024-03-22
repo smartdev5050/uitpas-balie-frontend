@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "@emotion/styled";
 import { Typography, TypographyProps } from "@mui/joy";
 import { PropsWithChildren } from "react";

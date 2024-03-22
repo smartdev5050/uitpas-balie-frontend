@@ -3,28 +3,29 @@ import {
   getRangeDateFromSelection,
   TDateSelection,
 } from "@/lib/utils";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import dayjs from "dayjs";
 
 export function useRangeQuery() {
-  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const rangeQuery = (router.query.range ??
+  const rangeQuery = (searchParams.get("range") ??
     "next12Months") as keyof typeof TDateSelection;
 
   const dateRange = useMemo(() => {
-    return (router.query.from || router.query.to) && rangeQuery === "chooseDate"
+    return (searchParams.get("from") || searchParams.get("to")) &&
+      rangeQuery === "chooseDate"
       ? getRangeDateFromSelection(rangeQuery, {
-          from: router.query.from
-            ? String(router.query.from)
+          from: searchParams.get("from")
+            ? String(searchParams.get("from"))
             : dayjs().format(DATE_FORMAT),
-          to: router.query.to
-            ? String(router.query.to)
+          to: searchParams.get("to")
+            ? String(searchParams.get("to"))
             : dayjs().format(DATE_FORMAT),
         })
       : getRangeDateFromSelection(rangeQuery);
-  }, [rangeQuery, router.query.from, router.query.to]);
+  }, [rangeQuery, searchParams.get("from"), searchParams.get("to")]);
 
   return {
     rangeQuery,

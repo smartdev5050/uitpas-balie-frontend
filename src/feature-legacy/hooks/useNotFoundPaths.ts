@@ -1,4 +1,6 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   useHandleWindowMessage,
@@ -10,7 +12,7 @@ import {
 // another page that's handled by this same Fallback component and then the
 // boolean notFound state would not update.
 export const useNotFoundPaths = () => {
-  const { asPath } = useRouter();
+  const asPath = usePathname();
 
   const [notFoundPaths, setNotFoundPaths] = useState<string[]>([]);
 

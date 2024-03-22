@@ -1,7 +1,9 @@
+"use client";
+
 import { Organizer, OrganizerPermissions } from "@/lib/dataAccess";
 import { Link, Typography } from "@/lib/ui";
 import { CounterNoData } from "./CounterNoData";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/lib/i18n/client";
 
 type CounterPickerDataProps = {
   data: OrganizerPermissions[];

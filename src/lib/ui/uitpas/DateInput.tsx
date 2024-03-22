@@ -1,3 +1,5 @@
+"use client";
+
 import { ForwardedRef, forwardRef } from "react";
 import { styled, IconButton, Stack, Theme } from "@mui/joy";
 import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";

@@ -1,6 +1,8 @@
-import { useTranslation } from "next-i18next";
+"use client";
+
 import { Stack, Typography } from "@/lib/ui";
 import { Divider } from "@mui/joy";
+import { useTranslation } from "@/lib/i18n/client";
 
 export const SidebarContent = () => {
   const { t } = useTranslation();

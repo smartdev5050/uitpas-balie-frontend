@@ -1,4 +1,5 @@
-import { useTranslation } from "next-i18next";
+"use client";
+
 import {
   Stack,
   ListItem,
@@ -7,6 +8,7 @@ import {
   SideBarSubTitle,
 } from "@/lib/ui";
 import { List } from "@mui/joy";
+import { useTranslation } from "@/lib/i18n/client";
 
 const helpLinks = [
   {
@@ -123,7 +125,7 @@ const SidebarContent = () => {
       <SideBarSubTitle>{t("help.description")}</SideBarSubTitle>
       <SideBarSubTitle>{t("help.subDescription")}</SideBarSubTitle>
       <Stack>
-        <List>
+        <List sx={{ border: 0 }}>
           {helpLinks.map(({ name, email }, index) => (
             <ListItem key={index}>
               <Stack display={"inline"} direction={"row"} gap={1}>

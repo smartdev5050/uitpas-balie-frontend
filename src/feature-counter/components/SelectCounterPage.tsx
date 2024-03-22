@@ -1,16 +1,18 @@
-import { useTranslation } from "next-i18next";
+"use client";
+
 import { Box, Stack, Typography } from "@/lib/ui";
 import Image from "next/image";
 import { CounterPicker } from "./CounterPicker";
 import { useUserInfo } from "@/lib/user";
 import { getAssetUrl } from "@/lib/utils";
-import { CircularProgress, Input } from "@mui/joy";
+import { Input } from "@mui/joy";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useGetPermissions } from "@/lib/dataAccess";
 import { useCounter } from "@/feature-counter";
-
+import { useTranslation } from "@/lib/i18n/client";
+// const t = (text: string, options: any) => text;
 export const SelectCounterPage = () => {
   const { t } = useTranslation();
   const userInfo = useUserInfo();

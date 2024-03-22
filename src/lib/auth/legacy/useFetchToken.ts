@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import getConfig from "next/config";
+import { getConfig } from "@/lib/utils/getConfig";
 
 export const useFetchToken = () => {
   const { publicRuntimeConfig } = getConfig();

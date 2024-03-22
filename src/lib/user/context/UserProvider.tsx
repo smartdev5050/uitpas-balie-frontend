@@ -1,3 +1,5 @@
+"use client";
+
 import { useIsLoggedIn } from "@/lib/auth";
 import { FC, PropsWithChildren, useEffect } from "react";
 import { useGetUserInfo } from "@/lib/dataAccess";

@@ -1,3 +1,5 @@
+"use client";
+
 import { Organizer, OrganizerPermissions } from "@/lib/dataAccess";
 import { Card, CardContent } from "@/lib/ui";
 import { useCounter } from "@/feature-counter";
@@ -5,7 +7,7 @@ import { CounterPickerData } from "./CounterPickerData";
 import { LastCounterData } from "./LastCounterData";
 import { CircularProgress } from "@mui/joy";
 import { LoginButton } from "@/feature-login/components/LoginButton";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/lib/i18n/client";
 
 type CounterPickerProps = {
   data: OrganizerPermissions[];

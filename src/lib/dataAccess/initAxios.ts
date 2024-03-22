@@ -1,5 +1,5 @@
 import axios from "axios";
-import getConfig from "next/config";
+import { getConfig } from "@/lib/utils/getConfig";
 
 (function init() {
   const { publicRuntimeConfig } = getConfig();

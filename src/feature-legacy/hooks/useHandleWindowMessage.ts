@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useEffect, useMemo } from "react";
 import { isClient } from "@/lib/utils";
 import { Counter } from "@/feature-counter/context/CounterContext";

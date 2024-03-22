@@ -1,10 +1,12 @@
-import { useTranslation } from "next-i18next";
+"use client";
+
 import { Grid, Stack, Link, Box } from "@/lib/ui";
 import { Divider, styled } from "@mui/joy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { PropsWithChildren, ReactNode } from "react";
 import { Footer } from "./Footer";
+import { useTranslation } from "@/lib/i18n/client";
 
 const SideBarContainer = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),

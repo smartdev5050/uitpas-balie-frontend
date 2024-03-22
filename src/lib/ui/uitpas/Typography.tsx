@@ -1,3 +1,5 @@
+"use client";
+
 import { styled, TypographyProps } from "@mui/joy";
 import { Typography as MuiTypography } from "@mui/joy";
 

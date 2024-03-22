@@ -1,6 +1,8 @@
+"use client";
+
 import { LoginButton } from "@/feature-login/components/LoginButton";
 import { Typography } from "@/lib/ui";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/lib/i18n/client";
 
 export const CounterNoData = () => {
   const { t } = useTranslation();

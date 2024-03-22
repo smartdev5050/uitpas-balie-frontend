@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Modal as MuiModal,
   ModalProps as MuiModalProps,

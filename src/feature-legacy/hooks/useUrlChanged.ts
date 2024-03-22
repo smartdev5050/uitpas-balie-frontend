@@ -1,13 +1,20 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
 import {
   useHandleWindowMessage,
   WindowMessageTypesReceived,
 } from "./useHandleWindowMessage";
-import getConfig from "next/config";
+import { getConfig } from "@/lib/utils/getConfig";
 import { useLogout } from "@/lib/auth";
 
+function removeDoubleSlashesFromUrl(url: string): string {
+  return url.replace(/([^:\/])\/\//g, "$1/");
+}
+
 export const useUrlChanged = () => {
-  const { asPath, ...router } = useRouter();
+  const asPath = usePathname();
+  const router = useRouter();
   const logout = useLogout();
 
   const { publicRuntimeConfig } = getConfig();
@@ -21,12 +28,13 @@ export const useUrlChanged = () => {
       );
 
       const url = new URL(
-        `${window.location.protocol}//${window.location.host}/${pathWithoutLegacyPrefix}`
+        removeDoubleSlashesFromUrl(
+          `${window.location.protocol}//${window.location.host}/${pathWithoutLegacyPrefix}`
+        )
       );
-      const query = Object.fromEntries(url.searchParams.entries());
 
       if (publicRuntimeConfig.Routes.includes(url.pathname)) {
-        router.push({ pathname: url.pathname, query });
+        router.push(`${url.pathname}?${url.searchParams}`);
       } else {
         history.pushState(null, "", url.pathname + url.search);
       }

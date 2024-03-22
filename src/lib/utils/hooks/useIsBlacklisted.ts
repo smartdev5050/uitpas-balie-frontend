@@ -1,4 +1,4 @@
-import getConfig from "next/config";
+import { getConfig } from "@/lib/utils/getConfig";
 import { usePathname } from "next/navigation";
 
 export const useIsBlacklisted = (): boolean => {

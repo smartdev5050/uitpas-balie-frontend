@@ -17,7 +17,7 @@ import { DateInput, Stack, Typography } from "@/lib/ui";
 import { usePaginationQuery } from "@/lib/utils/hooks/usePaginationQuery";
 import { TDateSelection } from "@/lib/utils/dateUtils";
 import { RangeMenuButton } from "@/feature-activities/components/RangeMenuButton";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export type rangeMenuItem = {
   display: string | JSX.Element;
@@ -66,6 +66,7 @@ type RangeMenuProps = {
 export const RangeMenu = ({ defaultRange, disabled }: RangeMenuProps) => {
   const { t } = useTranslation();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const {
     menuActions,
     isOpen,
@@ -83,11 +84,11 @@ export const RangeMenu = ({ defaultRange, disabled }: RangeMenuProps) => {
     from: string;
     to: string;
   }>({
-    from: router.query.from
-      ? String(router.query.from)
+    from: searchParams.get("from")
+      ? String(searchParams.get("from"))
       : dateToISODateString(new Date()),
-    to: router.query.to
-      ? String(router.query.to)
+    to: searchParams.get("to")
+      ? String(searchParams.get("to"))
       : dateToISODateString(new Date()),
   });
 

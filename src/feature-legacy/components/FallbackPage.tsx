@@ -1,3 +1,5 @@
+"use client";
+
 import { NoSsr } from "@mui/base";
 import { useLegacyPath } from "../hooks/useLegacyPath";
 import { useNotFoundPaths } from "../hooks/useNotFoundPaths";

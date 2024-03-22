@@ -1,5 +1,7 @@
+"use client";
+
 import { FC, PropsWithChildren, useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import { addInterceptor, removeHeader, setHeaders } from "@/lib/dataAccess";
 import { AuthContext } from "./AuthContext";
 import { useFetchToken } from "./legacy/useFetchToken";
@@ -9,7 +11,8 @@ import { useSilexLogout } from "@/lib/auth/legacy/useSilexLogout";
 const LOGIN_PATH = "/login";
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { push, asPath } = useRouter();
+  const { push } = useRouter();
+  const asPath = usePathname();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
   const { fetchToken, removeToken } = useFetchToken();
   const logoutFromSilex = useSilexLogout();
@@ -53,10 +56,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     addInterceptor((status: number) => {
       if (status === 401) {
         logout();
-        push({
-          pathname: LOGIN_PATH,
-          query: `redirectTo=${asPath}`,
-        });
+        push(`${LOGIN_PATH}?redirectTo=${asPath}`);
       }
     });
   }, [asPath, push, logout]);
@@ -65,11 +65,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     // This is an initialization hook, if the token is already loaded, we can exit
     if (authTokenLoaded) return;
 
-    const redirectToLogin = () =>
-      push({
-        pathname: LOGIN_PATH,
-        query: `redirectTo=${asPath}`,
-      });
+    const redirectToLogin = () => push(`${LOGIN_PATH}?redirectTo=${asPath}`);
 
     if (isCurrentPathPrivate) {
       fetchToken()

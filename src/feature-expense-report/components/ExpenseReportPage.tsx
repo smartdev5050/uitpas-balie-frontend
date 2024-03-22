@@ -1,4 +1,4 @@
-import { useTranslation } from "next-i18next";
+"use client";
 import {
   PageWithSideBarNew,
   Stack,
@@ -17,6 +17,7 @@ import { useDownloadReport } from "../hooks/useDownloadReport";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { PeriodType, isSamePeriod, dateToISODateString } from "@/lib/utils";
+import { useTranslation } from "@/lib/i18n/client";
 
 export const ExpenseReportPage = () => {
   const [startDate, setStartDate] = useState<string>(dateToISODateString());

@@ -1,3 +1,5 @@
+"use client";
+
 import { styled } from "@mui/joy";
 import { Link } from "@/lib/ui";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { styled } from "@mui/joy";
 
 export const Link = styled("a")(({ theme }) => ({

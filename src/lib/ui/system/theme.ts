@@ -1,5 +1,6 @@
 import { extendTheme } from "@mui/joy/styles";
 import { Open_Sans } from "next/font/google";
+
 declare module "@mui/joy/styles" {
   interface PaletteNeutral {
     solidBorder: string;

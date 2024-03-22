@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useEffect } from "react";
 import { useIsLoggedIn } from "@/lib/auth";
 import { Counter } from "./CounterContext";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 
 const COUNTER_PATH = "/counters";
 const APP_PATH = "/";
@@ -10,7 +10,8 @@ export const RedirectWhenNoCounter: FC<
   PropsWithChildren<{ counter: Counter; clearCounter: () => void }>
 > = ({ children, counter, clearCounter }) => {
   const isLoggedIn = useIsLoggedIn();
-  const { push, asPath } = useRouter();
+  const { push } = useRouter();
+  const asPath = usePathname();
 
   const shouldRedirectToCounters = Boolean(
     isLoggedIn && !counter && asPath !== COUNTER_PATH

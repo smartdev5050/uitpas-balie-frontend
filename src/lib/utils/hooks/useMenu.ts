@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState, MouseEvent, KeyboardEvent } from "react";
 import { MenuUnstyledActions } from "@mui/base/MenuUnstyled";
 

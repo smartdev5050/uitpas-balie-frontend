@@ -1,5 +1,6 @@
+"use client";
+
 import Image from "next/image";
-import { useTranslation } from "next-i18next";
 import { Typography, Button } from "@/lib/ui";
 import { useLogout } from "@/lib/auth";
 import { useCounter } from "@/feature-counter";
@@ -19,6 +20,7 @@ import { useCallback, useEffect, useState } from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Organizer, UserInfo } from "@/lib/dataAccess";
+import { useTranslation } from "@/lib/i18n/client";
 
 type NavbarProps = {
   userInfo: UserInfo;

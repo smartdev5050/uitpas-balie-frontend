@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import getConfig from "next/config";
+import { getConfig } from "@/lib/utils/getConfig";
 
 export const useGetOrganizersFinancialReportsReportIdZip = (
   organizerId: string | number,
@@ -13,7 +13,7 @@ export const useGetOrganizersFinancialReportsReportIdZip = (
     [],
     async () => {
       const { data } = await axios.get(
-        `${publicRuntimeConfig.apiPath}/organizers/${organizerId}/financial-reports/${reportId}.zip`
+        `${publicRuntimeConfig.legacyApiPath}/organizers/${organizerId}/financial-reports/${reportId}.zip`
       );
       return new Blob([data]); //,{type:"application/zip"});
     },

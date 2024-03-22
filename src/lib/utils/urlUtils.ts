@@ -1,4 +1,4 @@
-import getConfig from "next/config";
+import { getConfig } from "@/lib/utils/getConfig";
 import { getUuid } from "@/lib/utils";
 
 export const getAssetUrl = (url: string): string => {

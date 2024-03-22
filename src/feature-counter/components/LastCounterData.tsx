@@ -1,6 +1,8 @@
+"use client";
+
 import { Link, Typography } from "@/lib/ui";
 import { Organizer } from "@/lib/dataAccess";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/lib/i18n/client";
 
 type LastCounterDataProps = {
   lastCounter: Organizer;

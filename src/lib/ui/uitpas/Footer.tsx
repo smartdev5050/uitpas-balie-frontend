@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Divider, Stack, Typography } from "@mui/joy";
 import { faExternalLink } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons";
@@ -26,12 +28,12 @@ const StyledFooter = styled.footer`
 `;
 
 export const Footer = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   return (
     <StyledFooter>
       <Stack direction="row" justifyContent="space-between" mb={2}>
         <Stack direction="row" alignItems="flex-end">
-          <StyledLink  replace href="/feedback">
+          <StyledLink replace href="/feedback">
             {t("footer.submitIssue")}
           </StyledLink>
           <StyledLink replace href="/help">

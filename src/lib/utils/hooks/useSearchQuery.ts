@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 
 export function useSearchQuery(): string | undefined {
-  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const searchQuery = router.query.search;
+  const searchQuery = searchParams.get("search");
 
   return searchQuery?.toString();
 }

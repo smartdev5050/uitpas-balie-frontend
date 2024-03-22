@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetEvents } from "@/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
 import {
@@ -15,7 +17,7 @@ import { SearchInput } from "./SearchInput";
 
 import dayjs from "dayjs";
 import { EventAllOf, EventName } from "@/lib/dataAccess/search/generated/model";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import {
   ActionLink,
   StyledActionsStack,
@@ -27,7 +29,7 @@ import {
   StyledPageTitle,
   StyledUserInputStack,
 } from "./ActivitiesPages.styles";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import {
   getQrCodeUrl,
   getUitInDatabankurl,
@@ -36,11 +38,7 @@ import {
 import { Pagination } from "@/lib/ui/uitpas/Pagination";
 import { useCounter } from "@/feature-counter";
 import { CircularProgress } from "@mui/joy";
-import {
-  DATE_FORMAT,
-  TDateSelection,
-  getRangeDateFromSelection,
-} from "@/lib/utils/dateUtils";
+import { DATE_FORMAT } from "@/lib/utils/dateUtils";
 import { usePaginationQuery } from "@/lib/utils/hooks/usePaginationQuery";
 import { ActionButton } from "@/lib/ui/uitpas/ActionButton";
 import { useRangeQuery } from "@/lib/utils/hooks/useRangeQuery";

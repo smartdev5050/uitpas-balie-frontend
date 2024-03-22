@@ -1,3 +1,5 @@
+"use client";
+
 import { Stack } from "@/lib/ui";
 import { StackProps } from "@mui/joy";
 

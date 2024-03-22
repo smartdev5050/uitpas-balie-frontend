@@ -1,6 +1,7 @@
+"use client";
+
 import { Stack } from "@/lib/ui";
 import { styled } from "@mui/joy";
-import { useTranslation } from "next-i18next";
 import {
   ButtonHTMLAttributes,
   ForwardedRef,
@@ -10,6 +11,7 @@ import {
 import { mdiMenuLeft, mdiMenuRight } from "@mdi/js";
 import Icon from "@mdi/react";
 import { usePagination } from "@/lib/utils/hooks/usePagination";
+import { useTranslation } from "@/lib/i18n/client";
 
 const StyledPaginationButton = styled(
   forwardRef(function ButtonWrapper(

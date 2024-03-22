@@ -1,20 +1,21 @@
-import getConfig from "next/config";
-import { useRouter } from "next/router";
+"use client";
+
+import { getConfig } from "@/lib/utils/getConfig";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { prefixWhenNotEmpty } from "@/lib/utils";
 
 export const useLegacyPath = () => {
   const { publicRuntimeConfig } = getConfig();
-  const {
-    query: { param = [], ...queryWithoutParams },
-    asPath,
-  } = useRouter();
+  const queryWithoutParams = useSearchParams();
+
+  const asPath = usePathname();
 
   return useMemo(() => {
     const path = new URL(`http://localhost${asPath}`).pathname;
 
     const queryString = prefixWhenNotEmpty(
-      new URLSearchParams(queryWithoutParams as Record<string, string>),
+      new URLSearchParams(queryWithoutParams),
       "?"
     );
 

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Children, PropsWithChildren } from "react";
 import { ModalCloseButton, Stack } from "@/lib/ui";
 

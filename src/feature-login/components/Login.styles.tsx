@@ -1,3 +1,5 @@
+"use client";
+
 import { styled } from "@mui/joy";
 import { Typography } from "@/lib/ui";
 
