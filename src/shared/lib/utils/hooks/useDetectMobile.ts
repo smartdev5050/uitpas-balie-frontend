@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useEffect } from "react";
+import { getConfig } from "@/shared/lib/utils/getConfig";
 
 export enum DEVICE {
   mobile = "mobile",
@@ -11,6 +12,8 @@ export enum DEVICE {
 }
 
 export const useDetectMobile = () => {
+  const { publicRuntimeConfig } = getConfig();
+  const disableMobile = publicRuntimeConfig.blacklist.includes("mobile");
   const path = usePathname();
   const { replace } = useRouter();
   const theme = useTheme();
@@ -21,7 +24,7 @@ export const useDetectMobile = () => {
   const shouldRedirectToWeb = !isMobilePath && isMobileScreen;
 
   useEffect(() => {
-    if (shouldRedirectToMobile) {
+    if (shouldRedirectToMobile && !disableMobile) {
       replace(path.replace("/mobile", ""));
     } else if (shouldRedirectToWeb) {
       replace(`/mobile${path}`);
@@ -31,6 +34,8 @@ export const useDetectMobile = () => {
   return shouldRedirectToMobile || shouldRedirectToWeb
     ? DEVICE.pending
     : isMobilePath
-    ? DEVICE.mobile
+    ? disableMobile
+      ? DEVICE.web
+      : DEVICE.mobile
     : DEVICE.web;
 };

@@ -20,7 +20,7 @@ process.env.NEXT_PUBLIC_RUNTIME_CONFIG = JSON.stringify({
   oauthUserInfoPath: process.env.NEXT_PUBLIC_OAUTH_USERINFO_PATH,
   legacyTokenEndpoint: process.env.NEXT_PUBLIC_LEGACY_TOKEN_ENDPOINT,
   legacyLogoutEndpoint: process.env.NEXT_PUBLIC_LEGACY_LOGOUT_ENDPOINT,
-  blacklist: process.env.NEXT_PUBLIC_BLACKLIST,
+  blacklist: process.env.NEXT_PUBLIC_BLACKLIST ?? "",
 });
 
 /** @type {import('next').NextConfig} */
