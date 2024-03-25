@@ -1,9 +1,7 @@
 import { ReactNode } from "react";
 import { Metadata, Viewport } from "next";
-import { mobile, openSansFont } from "@/lib/ui";
-import ThemeRegistry from "@/app/ThemeRegistry";
 import { Providers } from "@/app/Providers";
-import { MobileProviders } from "@/app/MobileProviders";
+import { palette } from "@/mobile/lib/ui";
 
 const APP_NAME = "UiTPAS Beheer";
 const APP_DEFAULT_TITLE = "UiTPAS Beheer";
@@ -20,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: mobile.palette.primary,
+  themeColor: palette.primary,
 };
 
 export default function RootLayout({
@@ -28,34 +26,11 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const isMobile = false;
-
-  if (isMobile)
-    return (
-      <html lang="en">
-        <head />
-        <body
-          className={[
-            mobile.poppinsFont.variable,
-            mobile.poppinsFont.className,
-          ].join(" ")}
-          style={{ overflowX: "hidden" }}
-        >
-          <MobileProviders>{children}</MobileProviders>
-        </body>
-      </html>
-    );
-
   return (
-    <html lang="en">
+    <html lang="nl">
       <head />
-      <body
-        className={[openSansFont.variable, openSansFont.className].join(" ")}
-        style={{ overflowX: "hidden" }}
-      >
-        <ThemeRegistry options={{ key: "joy" }}>
-          <Providers>{children}</Providers>
-        </ThemeRegistry>
+      <body style={{ overflowX: "hidden" }}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

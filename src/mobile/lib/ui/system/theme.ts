@@ -1,14 +1,7 @@
 "use client";
 
-import { Poppins } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
-
-export const poppinsFont = Poppins({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-poppins",
-});
+import { poppinsFont } from "./fonts";
 
 export const palette = {
   primary: "#168B8D",

@@ -6,8 +6,8 @@ import { AuthProvider } from "@/lib/auth";
 import { UserProvider } from "@/lib/user";
 import { CounterProvider } from "@/feature-counter/context/CounterProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { mobile } from "@/lib/ui";
 import { ThemeProvider, CssBaseline } from "@mui/material";
+import { theme } from "@/mobile/lib/ui";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,10 +25,10 @@ const queryClient = new QueryClient({
 export function MobileProviders({ children }: PropsWithChildren) {
   return (
     <AppRouterCacheProvider>
-      <ThemeProvider theme={mobile.theme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <QueryClientProvider client={queryClient}>
-          <AuthProvider>
+          <AuthProvider loginPath={"/mobile/login"}>
             <UserProvider>
               <CounterProvider>{children}</CounterProvider>
             </UserProvider>

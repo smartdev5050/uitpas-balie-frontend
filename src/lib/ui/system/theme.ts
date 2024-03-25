@@ -1,5 +1,4 @@
 import { extendTheme } from "@mui/joy/styles";
-import { Open_Sans } from "next/font/google";
 
 declare module "@mui/joy/styles" {
   interface PaletteNeutral {
@@ -12,11 +11,6 @@ declare module "@mui/joy/styles" {
 }
 
 declare module "@mui/joy" {}
-export const openSansFont = Open_Sans({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-open-sans",
-});
 
 export const theme = extendTheme({
   colorSchemes: {

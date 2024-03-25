@@ -8,16 +8,18 @@ import { useFetchToken } from "./legacy/useFetchToken";
 import { useSilexLogout } from "@/lib/auth/legacy/useSilexLogout";
 
 // const LS_KEY = "@uitpas-balie/token";
-const LOGIN_PATH = "/login";
 
-export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
+export const AuthProvider: FC<PropsWithChildren<{ loginPath: string }>> = ({
+  children,
+  loginPath,
+}) => {
   const { push } = useRouter();
   const asPath = usePathname();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
   const { fetchToken, removeToken } = useFetchToken();
   const logoutFromSilex = useSilexLogout();
 
-  const isCurrentPathPrivate = !asPath.startsWith(LOGIN_PATH);
+  const isCurrentPathPrivate = !asPath.startsWith(loginPath);
 
   const login = useCallback((token: string) => {
     // Init Axios
@@ -56,7 +58,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     addInterceptor((status: number) => {
       if (status === 401) {
         logout();
-        push(`${LOGIN_PATH}?redirectTo=${asPath}`);
+        push(`${loginPath}?redirectTo=${asPath}`);
       }
     });
   }, [asPath, push, logout]);
@@ -65,7 +67,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     // This is an initialization hook, if the token is already loaded, we can exit
     if (authTokenLoaded) return;
 
-    const redirectToLogin = () => push(`${LOGIN_PATH}?redirectTo=${asPath}`);
+    const redirectToLogin = () => push(`${loginPath}?redirectTo=${asPath}`);
 
     if (isCurrentPathPrivate) {
       fetchToken()
