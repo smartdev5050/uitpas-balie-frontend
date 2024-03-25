@@ -1,9 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Button } from "@/lib/ui";
+import { Button } from "@/web/lib/ui";
 import { FC, PropsWithChildren } from "react";
-import { getConfig } from "@/lib/utils/getConfig";
+import { getConfig } from "@/shared/lib/utils/getConfig";
 
 export const LoginButton: FC<PropsWithChildren> = ({ children }) => {
   const search = useSearchParams();

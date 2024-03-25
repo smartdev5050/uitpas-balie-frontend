@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useCounter } from "@/feature-counter";
+import { useCounter } from "@/shared/feature-counter/context/useCounter";
 import {
   createCounterMessage,
   useHandleWindowMessage,

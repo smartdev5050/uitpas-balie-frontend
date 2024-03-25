@@ -8,9 +8,9 @@ import {
   StyledSearchStack,
 } from "./SearchInput.styles";
 import { FormEvent } from "react";
-import { usePaginationQuery } from "@/lib/utils/hooks/usePaginationQuery";
+import { usePaginationQuery } from "@/shared/lib/utils/hooks/usePaginationQuery";
 import { useRouter, useSearchParams } from "next/navigation";
-import { TDateSelection } from "@/lib/utils";
+import { TDateSelection } from "@/shared/lib/utils";
 
 type SearchInputProps = {
   defaultSearch?: string;

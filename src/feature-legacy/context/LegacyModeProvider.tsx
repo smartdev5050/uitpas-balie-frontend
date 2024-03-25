@@ -9,7 +9,7 @@ import {
 import Mousetrap from "mousetrap";
 import { LegacyModeWindow } from "@/feature-legacy/components/LegacyModeWindow";
 import { LegacyModeDisplayModeOverlay } from "@/feature-legacy/components/LegacyModeDisplayModeOverlay";
-import { useIsBlacklisted, usePreviousRender } from "@/lib/utils";
+import { useIsBlacklisted, usePreviousRender } from "@/shared/lib/utils";
 
 const getFirstLegacyMode = (isBlacklisted: boolean): LegacyMode =>
   isBlacklisted ? LegacyMode.PREFER_LEGACY : LegacyMode.PREFER_NEXT;

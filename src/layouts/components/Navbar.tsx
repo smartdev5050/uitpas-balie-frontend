@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Typography, Button } from "@/lib/ui";
-import { useLogout } from "@/lib/auth";
-import { useCounter } from "@/feature-counter";
+import { Typography, Button } from "@/web/lib/ui";
+import { useLogout } from "../../shared/lib/auth";
+import { useCounter } from "@/shared/feature-counter/context/useCounter";
 import {
   HamburgerButton,
   Header,
@@ -15,12 +15,12 @@ import {
   UserStack,
 } from "./Navbar.styles";
 import { CounterMenu } from "./CounterMenu";
-import { getAssetUrl } from "@/lib/utils";
+import { getAssetUrl } from "@/shared/lib/utils";
 import { useCallback, useEffect, useState } from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Organizer, UserInfo } from "@/lib/dataAccess";
-import { useTranslation } from "@/lib/i18n/client";
+import { Organizer, UserInfo } from "@/shared/lib/dataAccess";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 type NavbarProps = {
   userInfo: UserInfo;

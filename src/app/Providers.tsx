@@ -1,10 +1,10 @@
 "use client";
 
 import { PropsWithChildren, useEffect } from "react";
-import { DEVICE, useDetectMobile } from "@/lib/utils";
+import { DEVICE, useDetectMobile } from "@/shared/lib/utils";
 import { MobileProviders } from "@/app/MobileProviders";
 import { WebProviders } from "@/app/WebProviders";
-import { openSansFont } from "@/lib/ui";
+import { openSansFont } from "@/web/lib/ui";
 import { poppinsFont } from "@/mobile/lib/ui";
 
 export function Providers({ children }: PropsWithChildren) {

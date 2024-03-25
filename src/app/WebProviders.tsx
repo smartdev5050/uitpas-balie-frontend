@@ -2,9 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
-import { AuthProvider } from "@/lib/auth";
-import { UserProvider } from "@/lib/user";
-import { CounterProvider } from "@/feature-counter/context/CounterProvider";
+import { AuthProvider } from "@/shared/lib/auth";
+import { UserProvider } from "@/shared/lib/user";
+import { CounterProvider } from "@/shared/feature-counter/context/CounterProvider";
 import { Layout } from "@/layouts";
 import { LegacyModeProvider } from "@/feature-legacy";
 import ThemeRegistry from "@/app/ThemeRegistry";

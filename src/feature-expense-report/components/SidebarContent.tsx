@@ -1,8 +1,8 @@
 "use client";
 
-import { Stack, Typography } from "@/lib/ui";
+import { Stack, Typography } from "@/web/lib/ui";
 import { Divider } from "@mui/joy";
-import { useTranslation } from "@/lib/i18n/client";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 export const SidebarContent = () => {
   const { t } = useTranslation();

@@ -1,5 +1,5 @@
 import { styled } from "@mui/joy";
-import { Link, Stack, Typography } from "@/lib/ui";
+import { Link, Stack, Typography } from "@/web/lib/ui";
 import { AnchorHTMLAttributes, DetailedHTMLProps, MouseEvent } from "react";
 
 export const StyledPageContainerStack = styled(Stack)({

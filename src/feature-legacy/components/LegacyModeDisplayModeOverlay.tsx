@@ -1,10 +1,10 @@
 "use client";
 
 import { useLegacyMode } from "../hooks/useLegacyMode";
-import { Box } from "@/lib/ui";
+import { Box } from "@/web/lib/ui";
 import { useEffect, useState } from "react";
 import { LegacyMode } from "@/feature-legacy";
-import { useTranslation } from "@/lib/i18n/client";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 export const LegacyModeDisplayModeOverlay = () => {
   const [show, setShow] = useState(false);

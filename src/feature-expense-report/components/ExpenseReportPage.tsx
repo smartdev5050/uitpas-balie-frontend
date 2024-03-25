@@ -6,18 +6,22 @@ import {
   DateInput,
   Button,
   ListItem,
-} from "@/lib/ui";
-import { useCounter } from "@/feature-counter";
-import { useGetOrganizersFinancialReportsPeriods } from "@/lib/dataAccess";
+} from "@/web/lib/ui";
+import { useCounter } from "@/shared/feature-counter/context/useCounter";
+import { useGetOrganizersFinancialReportsPeriods } from "@/shared/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
 import { Alert, Box, FormControl, FormLabel } from "@mui/joy";
-import { AnchorButton } from "@/lib/ui/uitpas/AnchorButton";
+import { AnchorButton } from "@/web/lib/ui/uitpas/AnchorButton";
 import { useState } from "react";
 import { useDownloadReport } from "../hooks/useDownloadReport";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faRefresh } from "@fortawesome/free-solid-svg-icons";
-import { PeriodType, isSamePeriod, dateToISODateString } from "@/lib/utils";
-import { useTranslation } from "@/lib/i18n/client";
+import {
+  PeriodType,
+  isSamePeriod,
+  dateToISODateString,
+} from "@/shared/lib/utils";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 export const ExpenseReportPage = () => {
   const [startDate, setStartDate] = useState<string>(dateToISODateString());

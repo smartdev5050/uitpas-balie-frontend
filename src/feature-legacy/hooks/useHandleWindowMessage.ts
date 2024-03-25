@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo } from "react";
-import { isClient } from "@/lib/utils";
-import { Counter } from "@/feature-counter/context/CounterContext";
+import { isClient } from "@/shared/lib/utils";
+import { Counter } from "@/shared/feature-counter/context/CounterContext";
 
 export enum WindowMessageSources {
   BALIE = "BALIE",

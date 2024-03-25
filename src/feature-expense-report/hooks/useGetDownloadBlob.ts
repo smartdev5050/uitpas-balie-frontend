@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { getConfig } from "@/lib/utils/getConfig";
+import { getConfig } from "@/shared/lib/utils/getConfig";
 
 export const useGetOrganizersFinancialReportsReportIdZip = (
   organizerId: string | number,

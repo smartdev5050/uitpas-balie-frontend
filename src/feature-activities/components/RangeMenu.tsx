@@ -10,12 +10,12 @@ import {
   DATE_FORMAT_SEPARATED_FNS,
   dateToISODateString,
   useMenu,
-} from "@/lib/utils";
+} from "@/shared/lib/utils";
 import { useState, isValidElement, Fragment } from "react";
 import { StyledMenuItem } from "@/layouts/components/Navbar.styles";
-import { DateInput, Stack, Typography } from "@/lib/ui";
-import { usePaginationQuery } from "@/lib/utils/hooks/usePaginationQuery";
-import { TDateSelection } from "@/lib/utils/dateUtils";
+import { DateInput, Stack, Typography } from "@/web/lib/ui";
+import { usePaginationQuery } from "@/shared/lib/utils/hooks/usePaginationQuery";
+import { TDateSelection } from "@/shared/lib/utils/dateUtils";
 import { RangeMenuButton } from "@/feature-activities/components/RangeMenuButton";
 import { useRouter, useSearchParams } from "next/navigation";
 

@@ -5,8 +5,8 @@ import {
   useHandleWindowMessage,
   WindowMessageTypesReceived,
 } from "./useHandleWindowMessage";
-import { getConfig } from "@/lib/utils/getConfig";
-import { useLogout } from "@/lib/auth";
+import { getConfig } from "@/shared/lib/utils/getConfig";
+import { useLogout } from "../../shared/lib/auth";
 
 function removeDoubleSlashesFromUrl(url: string): string {
   return url.replace(/([^:\/])\/\//g, "$1/");

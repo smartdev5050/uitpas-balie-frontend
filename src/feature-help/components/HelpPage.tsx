@@ -6,9 +6,9 @@ import {
   PageWithSideBarNew,
   SideBarTitle,
   SideBarSubTitle,
-} from "@/lib/ui";
+} from "@/web/lib/ui";
 import { List } from "@mui/joy";
-import { useTranslation } from "@/lib/i18n/client";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 const helpLinks = [
   {

@@ -1,7 +1,7 @@
 import { TriggerButton } from "@/feature-activities/components/DateMenu.styles";
 import Icon from "@mdi/react";
 import { mdiMenuDown } from "@mdi/js";
-import { Stack, Typography } from "@/lib/ui";
+import { Stack, Typography } from "@/web/lib/ui";
 import { rangeMenuItem } from "@/feature-activities/components/RangeMenu";
 import { MouseEvent, RefObject } from "react";
 import { useTranslation } from "react-i18next";

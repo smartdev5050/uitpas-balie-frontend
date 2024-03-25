@@ -1,9 +1,9 @@
 "use client";
 
-import { getConfig } from "@/lib/utils/getConfig";
+import { getConfig } from "@/shared/lib/utils/getConfig";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
-import { prefixWhenNotEmpty } from "@/lib/utils";
+import { prefixWhenNotEmpty } from "@/shared/lib/utils";
 
 export const useLegacyPath = () => {
   const { publicRuntimeConfig } = getConfig();

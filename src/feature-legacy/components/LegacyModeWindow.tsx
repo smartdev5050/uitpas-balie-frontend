@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import { Box, Stack } from "@/lib/ui";
+import { Box, Stack } from "@/web/lib/ui";
 import { FallbackPage } from "./FallbackPage";
 import { useLegacyMode } from "../hooks/useLegacyMode";
 import { LegacyMode } from "../context/LegacyModeContext";

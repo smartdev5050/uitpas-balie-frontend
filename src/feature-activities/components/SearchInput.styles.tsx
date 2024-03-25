@@ -1,5 +1,5 @@
 import { Input, styled } from "@mui/joy";
-import { Button, Stack } from "@/lib/ui";
+import { Button, Stack } from "@/web/lib/ui";
 
 const componentHeight = 40;
 

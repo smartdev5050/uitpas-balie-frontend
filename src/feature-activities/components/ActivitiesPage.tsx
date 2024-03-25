@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetEvents } from "@/lib/dataAccess";
+import { useGetEvents } from "@/shared/lib/dataAccess";
 import { SidebarContent } from "./SidebarContent";
 import {
   Grid,
@@ -10,13 +10,16 @@ import {
   ModalHeader,
   PageWithSideBarNew,
   Typography,
-} from "@/lib/ui";
+} from "@/web/lib/ui";
 import { useTranslation } from "react-i18next";
 import { RangeMenu } from "./RangeMenu";
 import { SearchInput } from "./SearchInput";
 
 import dayjs from "dayjs";
-import { EventAllOf, EventName } from "@/lib/dataAccess/search/generated/model";
+import {
+  EventAllOf,
+  EventName,
+} from "@/shared/lib/dataAccess/search/generated/model";
 import { useRouter } from "next/navigation";
 import {
   ActionLink,
@@ -34,15 +37,15 @@ import {
   getQrCodeUrl,
   getUitInDatabankurl,
   getUitInVlaanderenUrl,
-} from "@/lib/utils";
-import { Pagination } from "@/lib/ui/uitpas/Pagination";
-import { useCounter } from "@/feature-counter";
+} from "@/shared/lib/utils";
+import { Pagination } from "@/web/lib/ui/uitpas/Pagination";
+import { useCounter } from "@/shared/feature-counter/context/useCounter";
 import { CircularProgress } from "@mui/joy";
-import { DATE_FORMAT } from "@/lib/utils/dateUtils";
-import { usePaginationQuery } from "@/lib/utils/hooks/usePaginationQuery";
-import { ActionButton } from "@/lib/ui/uitpas/ActionButton";
-import { useRangeQuery } from "@/lib/utils/hooks/useRangeQuery";
-import { useSearchQuery } from "@/lib/utils/hooks/useSearchQuery";
+import { DATE_FORMAT } from "@/shared/lib/utils/dateUtils";
+import { usePaginationQuery } from "@/shared/lib/utils/hooks/usePaginationQuery";
+import { ActionButton } from "@/web/lib/ui/uitpas/ActionButton";
+import { useRangeQuery } from "@/shared/lib/utils/hooks/useRangeQuery";
+import { useSearchQuery } from "@/shared/lib/utils/hooks/useSearchQuery";
 
 export const ActivitiesPage = () => {
   const { t, i18n } = useTranslation();

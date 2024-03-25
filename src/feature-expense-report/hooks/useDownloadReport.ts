@@ -3,12 +3,12 @@ import {
   useGetOrganizersFinancialReportsReportId,
   useGetOrganizersFinancialReportsReportIdZip,
   usePostOrganizersFinancialReports,
-} from "@/lib/dataAccess";
+} from "@/shared/lib/dataAccess";
 import { useEffect, useState } from "react";
 import { saveAs } from "file-saver";
 import JsZip from "jszip";
-import { PeriodType, isSamePeriod } from "@/lib/utils";
-import { getConfig } from "@/lib/utils/getConfig";
+import { PeriodType, isSamePeriod } from "@/shared/lib/utils";
+import { getConfig } from "@/shared/lib/utils/getConfig";
 //import { useGetOrganizersFinancialReportsReportIdZip } from "./useGetDownloadBlob";
 
 const zipUrl = (organizerId: string | number, reportId: string | number) => {

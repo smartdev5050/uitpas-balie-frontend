@@ -5,7 +5,7 @@ import { CacheProvider } from "@emotion/react";
 import { CssVarsProvider } from "@mui/joy/styles";
 import CssBaseline from "@mui/joy/CssBaseline";
 import React from "react";
-import { openSansFont, theme } from "@/lib/ui";
+import { openSansFont, theme } from "@/web/lib/ui";
 import { GlobalStyles } from "@mui/joy";
 
 // This implementation is from emotion-js

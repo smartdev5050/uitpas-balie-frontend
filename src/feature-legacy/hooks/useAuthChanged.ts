@@ -1,4 +1,4 @@
-import { useAuth } from "@/lib/auth";
+import { useAuth } from "../../shared/lib/auth";
 import {
   useHandleWindowMessage,
   WindowMessageTypesReceived,

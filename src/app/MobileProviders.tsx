@@ -2,11 +2,11 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
-import { AuthProvider } from "@/lib/auth";
-import { UserProvider } from "@/lib/user";
-import { CounterProvider } from "@/feature-counter/context/CounterProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider, CssBaseline } from "@mui/material";
+import { AuthProvider } from "@/shared/lib/auth";
+import { UserProvider } from "@/shared/lib/user";
+import { CounterProvider } from "@/shared/feature-counter/context/CounterProvider";
 import { theme } from "@/mobile/lib/ui";
 
 const queryClient = new QueryClient({

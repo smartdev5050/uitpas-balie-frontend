@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Box } from "@/lib/ui";
+import { Box } from "@/web/lib/ui";
 
 type IFrameProps = {
   url: string;

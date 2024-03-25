@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { Box, Stack, Typography } from "@/lib/ui";
+import { Box, Stack, Typography } from "@/web/lib/ui";
 import { SiteLoginIntro } from "./Login.styles";
 import { LoginButton } from "./LoginButton";
-import { getAssetUrl } from "@/lib/utils";
-import { useTranslation } from "@/lib/i18n/client";
+import { getAssetUrl } from "@/shared/lib/utils";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 export const LoginPage = () => {
   const { t } = useTranslation();

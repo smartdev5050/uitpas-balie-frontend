@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@/lib/ui";
+import { Stack, Typography } from "@/web/lib/ui";
 import { Divider } from "@mui/joy";
 import { useTranslation } from "react-i18next";
 
