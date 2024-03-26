@@ -11,7 +11,12 @@
     "otherGroups": "Groepspas:",
     "otherGroupsLinkText": "bekijk het saldo van je groepspas",
     "loggedInAs": "Aangemeld als {{name}}",
-    "logoutBtn": "Afmelden"
+    "logoutBtn": "Afmelden",
+    "mobile": {
+      "title": "Mobiele balie",
+      "intro": "Met de mobiele balie kan je als UiTPAS-organisator makkelijk een aantal UiTPAS-acties uitvoeren zoals een korting toekennen, een punt sparen en een voordeel omruilen.",
+      "loginBtn": "Aanmelden"
+    }
   },
   "legacyMode": {
     "PREFER_NEXT": "Legacy mode: Next",

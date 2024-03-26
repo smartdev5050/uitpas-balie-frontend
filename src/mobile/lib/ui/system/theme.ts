@@ -23,5 +23,10 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: poppinsFont.style.fontFamily,
+    h1: {
+      fontSize: "18px",
+      fontWeight: 700,
+      color: "#127173",
+    },
   },
 });
