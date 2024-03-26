@@ -5,7 +5,7 @@ import {
   StyledListbox,
   StyledDivider,
 } from "./DateMenu.styles";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/shared/lib/i18n/client";
 import {
   DATE_FORMAT_SEPARATED_FNS,
   dateToISODateString,

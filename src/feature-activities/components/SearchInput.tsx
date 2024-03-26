@@ -1,6 +1,5 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslation } from "react-i18next";
 import {
   StyledSearchButton,
   StyledSearchForm,
@@ -11,6 +10,7 @@ import { FormEvent } from "react";
 import { usePaginationQuery } from "@/shared/lib/utils/hooks/usePaginationQuery";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TDateSelection } from "@/shared/lib/utils";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 type SearchInputProps = {
   defaultSearch?: string;

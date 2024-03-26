@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@/web/lib/ui";
 import { Divider } from "@mui/joy";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 export const SidebarContent = () => {
   const { t } = useTranslation();

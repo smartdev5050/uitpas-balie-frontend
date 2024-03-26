@@ -11,7 +11,7 @@ import {
   PageWithSideBarNew,
   Typography,
 } from "@/web/lib/ui";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/shared/lib/i18n/client";
 import { RangeMenu } from "./RangeMenu";
 import { SearchInput } from "./SearchInput";
 

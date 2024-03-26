@@ -4,7 +4,7 @@ import { mdiMenuDown } from "@mdi/js";
 import { Stack, Typography } from "@/web/lib/ui";
 import { rangeMenuItem } from "@/feature-activities/components/RangeMenu";
 import { MouseEvent, RefObject } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/shared/lib/i18n/client";
 
 type RangeMenuButtonProps = {
   currentItem: rangeMenuItem;

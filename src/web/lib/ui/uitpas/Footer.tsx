@@ -5,7 +5,7 @@ import { faExternalLink } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "@emotion/styled";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/shared/lib/i18n/client";
 import Link from "next/link";
 const footerLinks = [
   {
