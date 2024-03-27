@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useTranslation } from "@/shared/lib/i18n/client";
-import { Button } from "@/mobile/lib/ui/uitpas/Button";
+import { Button, Typography } from "@/mobile/lib/ui";
 import uitpasLogoGreen from "public/images/svg/logo-uitpas-green.svg";
 import uitpasHeart from "public/images/png/uitpas_heart.png";
 import { getConfig } from "@/shared/lib/utils/getConfig";
@@ -23,7 +23,6 @@ const MobileLogin = () => {
     <Stack
       sx={{
         height: "100vh",
-        flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-between",
         px: 2,
@@ -60,9 +59,7 @@ const MobileLogin = () => {
             height: "100%",
           }}
         />
-        <Typography sx={{ px: 2, textAlign: "center" }}>
-          {t("login.mobile.intro")}
-        </Typography>
+        <Typography>{t("login.mobile.intro")}</Typography>
       </Stack>
       <Button href={href} sx={{ mb: 1 }}>
         {t("login.loginBtn")}

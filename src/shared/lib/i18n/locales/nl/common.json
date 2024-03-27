@@ -83,7 +83,16 @@
         "name": "Westhoek",
         "email": "info@uitinwesthoek.be"
       }
-    ]
+    ],
+    "mobile": {
+      "title": "Mobiele balie",
+      "noCounterP1": "Je bent nog geen lid van een UiTPAS-balie.",
+      "noCounterP2": "Om deze applicatie te kunnen gebruiken, moet je lid zijn van een UiTPAS-balie.",
+      "noCounterLink": "Stuur je e-mailadres en de naam van je organisatie naar de verantwoordelijke.",
+      "intro": "Met de mobiele balie kan je als UiTPAS-organisator makkelijk een aantal UiTPAS-acties uitvoeren zoals een korting toekennen, een punt sparen en een voordeel omruilen.",
+      "loginBtn": "Aanmelden",
+      "loginOtherAccountBtn": "Aanmelden met ander e-mailadres"
+    }
   },
   "expenseReport": {
     "title": "Onkostennota",

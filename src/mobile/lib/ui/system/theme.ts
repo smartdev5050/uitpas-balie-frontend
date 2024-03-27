@@ -8,6 +8,7 @@ export const palette = {
   primaryDark: "#168B8D",
   secondary: "#149773",
   secondaryDark: "#149773",
+  errorMain: "#F82E58",
 };
 
 export const theme = createTheme({
@@ -19,6 +20,9 @@ export const theme = createTheme({
     secondary: {
       main: palette.secondary,
       dark: palette.secondaryDark,
+    },
+    error: {
+      main: palette.errorMain,
     },
   },
   typography: {

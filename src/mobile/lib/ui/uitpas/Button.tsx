@@ -8,7 +8,14 @@ export const Button = ({ ...props }: ButtonProps) => {
       variant="contained"
       fullWidth
       {...props}
-      sx={{ height: "48px", borderRadius: "16px", ...props.sx }}
+      sx={{
+        height: "48px",
+        borderRadius: "16px",
+        textTransform: "none",
+        fontWeight: 700,
+        fontSize: "16px",
+        ...props.sx,
+      }}
     >
       {props.children}
     </MuiButton>
