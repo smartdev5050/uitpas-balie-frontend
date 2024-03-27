@@ -10,7 +10,9 @@ import {
   storePrevCounter,
 } from "@/shared/feature-counter/context/counterStore";
 
-export const CounterProvider: FC<PropsWithChildren> = ({ children }) => {
+export const CounterProvider: FC<
+  { counterPath: string } & PropsWithChildren
+> = ({ counterPath, children }) => {
   const [activeCounter, setActiveCounter] = useState<Counter>(readCounter);
   const [lastCounterUsed, setLastCounterUsed] =
     useState<Counter>(readPrevCounter);
@@ -29,6 +31,7 @@ export const CounterProvider: FC<PropsWithChildren> = ({ children }) => {
       }}
     >
       <RedirectWhenNoCounter
+        counterPath={counterPath}
         counter={activeCounter}
         clearCounter={clearCounter}
       >

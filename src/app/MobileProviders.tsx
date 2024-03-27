@@ -30,7 +30,9 @@ export function MobileProviders({ children }: PropsWithChildren) {
         <QueryClientProvider client={queryClient}>
           <AuthProvider loginPath={"/mobile/login"}>
             <UserProvider>
-              <CounterProvider>{children}</CounterProvider>
+              <CounterProvider counterPath={"/mobile/counters"}>
+                {children}
+              </CounterProvider>
             </UserProvider>
           </AuthProvider>
         </QueryClientProvider>
