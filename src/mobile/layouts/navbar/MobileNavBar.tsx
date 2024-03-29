@@ -9,7 +9,12 @@ import { Settings } from "@mui/icons-material";
 import { Typography } from "@/mobile/lib/ui";
 
 export const MobileNavBar = ({ children }: PropsWithChildren) => {
-  const { activeCounter } = useCounter();
+  const { setLastCounterUsed, setActiveCounter, activeCounter } = useCounter();
+
+  const handleCurrentCounterClick = () => {
+    setLastCounterUsed(activeCounter);
+    setActiveCounter(null);
+  };
 
   return (
     <>
@@ -33,6 +38,7 @@ export const MobileNavBar = ({ children }: PropsWithChildren) => {
         />
         {activeCounter && (
           <Box
+            onClick={handleCurrentCounterClick}
             sx={{
               display: "flex",
               alignItems: "center",
