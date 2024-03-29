@@ -5,10 +5,10 @@ import {
   LegacyMode,
   LegacyModeContext,
   legacyModeOrder,
-} from "@/feature-legacy/context/LegacyModeContext";
+} from "@/web/feature-legacy/context/LegacyModeContext";
 import Mousetrap from "mousetrap";
-import { LegacyModeWindow } from "@/feature-legacy/components/LegacyModeWindow";
-import { LegacyModeDisplayModeOverlay } from "@/feature-legacy/components/LegacyModeDisplayModeOverlay";
+import { LegacyModeWindow } from "@/web/feature-legacy/components/LegacyModeWindow";
+import { LegacyModeDisplayModeOverlay } from "@/web/feature-legacy/components/LegacyModeDisplayModeOverlay";
 import { useIsBlacklisted, usePreviousRender } from "@/shared/lib/utils";
 
 const getFirstLegacyMode = (isBlacklisted: boolean): LegacyMode =>

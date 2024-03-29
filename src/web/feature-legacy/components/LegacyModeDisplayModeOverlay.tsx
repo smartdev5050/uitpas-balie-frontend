@@ -1,9 +1,9 @@
 "use client";
 
-import { useLegacyMode } from "../hooks/useLegacyMode";
+import { useLegacyMode } from "@/web/feature-legacy";
 import { Box } from "@/web/lib/ui";
 import { useEffect, useState } from "react";
-import { LegacyMode } from "@/feature-legacy";
+import { LegacyMode } from "@/web/feature-legacy";
 import { useTranslation } from "@/shared/lib/i18n/client";
 
 export const LegacyModeDisplayModeOverlay = () => {

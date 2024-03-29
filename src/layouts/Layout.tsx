@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { Box } from "@/web/lib/ui";
-import { useSetCounterInAngular, useUrlChanged } from "@/feature-legacy";
+import { useSetCounterInAngular, useUrlChanged } from "@/web/feature-legacy";
 import { Navbar } from "@/layouts/components/Navbar";
 import { useUserInfo } from "@/shared/lib/user";
 import { useCounter } from "@/shared/feature-counter/context/useCounter";

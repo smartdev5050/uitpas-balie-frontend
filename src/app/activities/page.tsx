@@ -1,4 +1,4 @@
-import { ActivitiesPage } from "@/feature-activities";
+import { ActivitiesPage } from "@/web/feature-activities";
 
 const Activities = () => {
   return <ActivitiesPage />;

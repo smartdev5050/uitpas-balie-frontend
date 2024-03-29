@@ -16,7 +16,7 @@ import { StyledMenuItem } from "@/layouts/components/Navbar.styles";
 import { DateInput, Stack, Typography } from "@/web/lib/ui";
 import { usePaginationQuery } from "@/shared/lib/utils/hooks/usePaginationQuery";
 import { TDateSelection } from "@/shared/lib/utils/dateUtils";
-import { RangeMenuButton } from "@/feature-activities/components/RangeMenuButton";
+import { RangeMenuButton } from "@/web/feature-activities/components/RangeMenuButton";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export type rangeMenuItem = {
