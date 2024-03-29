@@ -10,15 +10,30 @@ export const RedirectWhenNoCounter: FC<
     counterPath: string;
     counter: Counter;
     clearCounter: () => void;
+    whiteListedPages?: string | string[] | undefined;
   }>
-> = ({ counterPath, children, counter, clearCounter }) => {
+> = ({ counterPath, children, counter, clearCounter, whiteListedPages }) => {
   const isLoggedIn = useIsLoggedIn();
   const { push } = useRouter();
   const asPath = usePathname();
 
-  const shouldRedirectToCounters = Boolean(
-    isLoggedIn && !counter && asPath !== counterPath
-  );
+  const shouldRedirectToCounters =
+    whiteListedPages === undefined
+      ? Boolean(isLoggedIn && !counter && asPath !== counterPath)
+      : Array.isArray(whiteListedPages)
+      ? Boolean(
+          isLoggedIn &&
+            !counter &&
+            asPath !== counterPath &&
+            !whiteListedPages.includes(asPath)
+        )
+      : Boolean(
+          isLoggedIn &&
+            !counter &&
+            asPath !== counterPath &&
+            asPath !== whiteListedPages
+        );
+
   const shouldRedirectToApp = Boolean(
     isLoggedIn && counter && asPath === counterPath
   );

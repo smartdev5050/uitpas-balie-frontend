@@ -13,13 +13,14 @@ export const MobileLoginPage = () => {
 
   return (
     <Stack
-      sx={{
+      sx={(theme) => ({
         height: "100vh",
+        backgroundColor: theme.palette.background.primary,
         alignItems: "center",
         justifyContent: "space-between",
         px: 2,
         m: "auto",
-      }}
+      })}
     >
       <Stack
         sx={{

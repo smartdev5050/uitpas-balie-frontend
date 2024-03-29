@@ -91,7 +91,12 @@
       "noCounterLink": "Stuur je e-mailadres en de naam van je organisatie naar de verantwoordelijke.",
       "intro": "Met de mobiele balie kan je als UiTPAS-organisator makkelijk een aantal UiTPAS-acties uitvoeren zoals een korting toekennen, een punt sparen en een voordeel omruilen.",
       "loginBtn": "Aanmelden",
-      "loginOtherAccountBtn": "Aanmelden met ander e-mailadres"
+      "loginOtherAccountBtn": "Aanmelden met ander e-mailadres",
+      "selectCounter": "Selecteer je balie",
+      "searchCounter": "Zoek balie",
+      "lastUsed": "Laatst gebruikt",
+      "otherCounters": "Andere balies",
+      "noCounterSearch": "Er werden geen balies gevonden met de zoekterm '{{searchTerm}}'."
     }
   },
   "expenseReport": {

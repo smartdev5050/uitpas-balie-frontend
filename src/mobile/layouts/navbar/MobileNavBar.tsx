@@ -9,7 +9,7 @@ import { Settings } from "@mui/icons-material";
 import { Typography } from "@/mobile/lib/ui";
 
 export const MobileNavBar = ({ children }: PropsWithChildren) => {
-  const { setActiveCounter, lastCounterUsed } = useCounter();
+  const { activeCounter } = useCounter();
 
   return (
     <>
@@ -21,7 +21,7 @@ export const MobileNavBar = ({ children }: PropsWithChildren) => {
           width: "100%",
           backgroundColor: theme.palette.navigation.primary,
           alignItems: "center",
-          boxShadow: "0px 6px 9px rgba(0, 0, 0, 0.2)",
+          boxShadow: "0px 6px 9px rgba(0, 0, 0, 0.1)",
         })}
       >
         <Image
@@ -31,17 +31,16 @@ export const MobileNavBar = ({ children }: PropsWithChildren) => {
           height={25}
           style={{ marginLeft: "12px" }}
         />
-        {lastCounterUsed && (
+        {activeCounter && (
           <Box
             sx={{
               display: "flex",
-              gap: 1,
               alignItems: "center",
               mr: "8px",
             }}
           >
-            <Typography variant="h1" sx={{ color: "white" }}>
-              {lastCounterUsed.name}
+            <Typography variant="h1" sx={{ color: "white", paddingRight: 1 }}>
+              {activeCounter.name}
             </Typography>
             <Settings sx={{ fontSize: 24, color: "white" }} />
           </Box>

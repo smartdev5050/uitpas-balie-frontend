@@ -1,6 +1,5 @@
 "use client";
 
-import { LoginButton } from "@/feature-login/components/LoginButton";
 import { Typography } from "@/web/lib/ui";
 import { useTranslation } from "@/shared/lib/i18n/client";
 

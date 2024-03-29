@@ -30,7 +30,10 @@ export function MobileProviders({ children }: PropsWithChildren) {
         <QueryClientProvider client={queryClient}>
           <AuthProvider loginPath={"/mobile/login"}>
             <UserProvider>
-              <CounterProvider counterPath={"/mobile/counters"}>
+              <CounterProvider
+                counterPath={"/mobile/counters"}
+                whiteListedPages={"/mobile/counters/contact"}
+              >
                 {children}
               </CounterProvider>
             </UserProvider>

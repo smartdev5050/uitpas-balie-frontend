@@ -13,11 +13,12 @@ export const CounterNoData = () => {
 
   return (
     <Stack
-      sx={{
+      sx={(theme) => ({
         height: "100vh",
+        backgroundColor: theme.palette.background.primary,
         justifyContent: "space-between",
         padding: "49px 16px 0 16px",
-      }}
+      })}
     >
       <Stack sx={{ alignItems: "center", gap: 4 }}>
         <Image
@@ -44,7 +45,9 @@ export const CounterNoData = () => {
         <Typography sx={{ fontSize: "18px" }}>
           {t("counter.mobile.noCounterP2")}
         </Typography>
-        <Link href="">{t("counter.mobile.noCounterLink")}</Link>
+        <Link href="/mobile/counters/contact">
+          {t("counter.mobile.noCounterLink")}
+        </Link>
       </Stack>
       <LoginButton sx={{ mb: 1 }}>
         {t("counter.mobile.loginOtherAccountBtn")}

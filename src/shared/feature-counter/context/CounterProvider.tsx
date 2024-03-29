@@ -11,8 +11,11 @@ import {
 } from "@/shared/feature-counter/context/counterStore";
 
 export const CounterProvider: FC<
-  { counterPath: string } & PropsWithChildren
-> = ({ counterPath, children }) => {
+  {
+    counterPath: string;
+    whiteListedPages?: string | string[];
+  } & PropsWithChildren
+> = ({ counterPath, children, whiteListedPages }) => {
   const [activeCounter, setActiveCounter] = useState<Counter>(readCounter);
   const [lastCounterUsed, setLastCounterUsed] =
     useState<Counter>(readPrevCounter);
@@ -34,6 +37,7 @@ export const CounterProvider: FC<
         counterPath={counterPath}
         counter={activeCounter}
         clearCounter={clearCounter}
+        whiteListedPages={whiteListedPages}
       >
         {children}
       </RedirectWhenNoCounter>
