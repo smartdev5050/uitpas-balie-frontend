@@ -45,7 +45,7 @@ export const CounterNoData = () => {
         <Typography sx={{ fontSize: "18px" }}>
           {t("counter.mobile.noCounterP2")}
         </Typography>
-        <Link href="/mobile/counters/contact">
+        <Link color="secondary" href="/mobile/counters/contact">
           {t("counter.mobile.noCounterLink")}
         </Link>
       </Stack>

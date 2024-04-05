@@ -133,6 +133,13 @@
     "activityModal": {
       "when": "Wanneer",
       "closeBtn": "Sluiten"
+    },
+    "mobile": {
+      "chooseActivity": "Kies een activiteit",
+      "searchPlaceholder": "Zoek activiteit",
+      "continueNoActivity": "Verder gaan zonder activiteit",
+      "noActivities": "Geen activiteiten gepland.",
+      "noActivitiesSearch": "Geen activiteiten gevonden met de zoekterm '{{searchTerm}}'."
     }
   },
   "pagination": {

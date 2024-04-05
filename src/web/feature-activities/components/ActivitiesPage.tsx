@@ -53,7 +53,7 @@ export const ActivitiesPage = () => {
 
   const { fetchLimit, offset } = usePaginationQuery();
   const { rangeQuery, dateRange } = useRangeQuery();
-  const searchQuery = useSearchQuery();
+  const { searchQuery } = useSearchQuery();
 
   const [selectedActivity, setSelectedActivity] = useState<
     EventAllOf | undefined

@@ -35,6 +35,7 @@ export const MobileNavBar = ({ children }: PropsWithChildren) => {
           width={102}
           height={25}
           style={{ marginLeft: "12px" }}
+          priority={true}
         />
         {activeCounter && (
           <Box

@@ -8,6 +8,7 @@ import { AuthProvider } from "@/shared/lib/auth";
 import { UserProvider } from "@/shared/lib/user";
 import { CounterProvider } from "@/shared/feature-counter/context/CounterProvider";
 import { theme } from "@/mobile/lib/ui";
+import { ActivityProvider } from "@/mobile/feature-activities/context/ActivityProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,7 +35,7 @@ export function MobileProviders({ children }: PropsWithChildren) {
                 counterPath={"/mobile/counters"}
                 whiteListedPages={"/mobile/counters/contact"}
               >
-                {children}
+                <ActivityProvider>{children}</ActivityProvider>
               </CounterProvider>
             </UserProvider>
           </AuthProvider>
