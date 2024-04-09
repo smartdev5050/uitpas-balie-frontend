@@ -1967,6 +1967,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zxing/browser@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "@zxing/browser@npm:0.1.4"
+  dependencies:
+    "@zxing/text-encoding": "npm:^0.9.0"
+  peerDependencies:
+    "@zxing/library": ^0.20.0
+  dependenciesMeta:
+    "@zxing/text-encoding":
+      optional: true
+  checksum: 10c0/66ede4f4a8de28cede31501f2a815940f484b410b40861671c63625cf259998ba09a5464b30d83428357ce387c2ab31651fbb98a4e9beb9d830a090b9297d2b3
+  languageName: node
+  linkType: hard
+
+"@zxing/library@npm:^0.20.0":
+  version: 0.20.0
+  resolution: "@zxing/library@npm:0.20.0"
+  dependencies:
+    "@zxing/text-encoding": "npm:~0.9.0"
+    ts-custom-error: "npm:^3.2.1"
+  dependenciesMeta:
+    "@zxing/text-encoding":
+      optional: true
+  checksum: 10c0/466c75d893f6a830de9296d7403f75b192dbd704849fc1ae550856441b85f4108b9ba3e85004c5e1f56df16bb33813941d51dad2d230aa60ea3f799d44551c86
+  languageName: node
+  linkType: hard
+
+"@zxing/text-encoding@npm:^0.9.0, @zxing/text-encoding@npm:~0.9.0":
+  version: 0.9.0
+  resolution: "@zxing/text-encoding@npm:0.9.0"
+  checksum: 10c0/d15bff181d46c2ab709e7242801a8d40408aa8c19b44462e5f60e766bf59105b44957914ab6baab60d10d466a5e965f21fe890c67dfdb7d5c7f940df457b4d0d
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^2.0.0":
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
@@ -8116,6 +8150,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ts-custom-error@npm:^3.2.1":
+  version: 3.3.1
+  resolution: "ts-custom-error@npm:3.3.1"
+  checksum: 10c0/67cc807d03406d7eeb2b908408d455d253cc43b480d669e2e3ea028b9aaa2c78ad1b392425b86368bbbc3c43a15e4abe304312d87ed845091646ec1937bab982
+  languageName: node
+  linkType: hard
+
 "tsconfck@npm:^2.0.1":
   version: 2.0.3
   resolution: "tsconfck@npm:2.0.3"
@@ -8323,6 +8364,8 @@ __metadata:
     "@types/react-datepicker": "npm:^4.11.2"
     "@types/react-dom": "npm:18.0.11"
     "@types/react-transition-group": "npm:^4.4.10"
+    "@zxing/browser": "npm:^0.1.4"
+    "@zxing/library": "npm:^0.20.0"
     axios: "npm:^1.3.4"
     cookies-next: "npm:^4.0.0"
     dayjs: "npm:^1.11.10"
