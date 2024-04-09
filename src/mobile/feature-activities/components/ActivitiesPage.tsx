@@ -15,13 +15,15 @@ import { ChangeEvent, useState, useEffect } from "react";
 import { useSearchQuery } from "@/shared/lib/utils/hooks/useSearchQuery";
 import { ActivitiesPicker } from "@/mobile/feature-activities";
 import { useActivity } from "@/mobile/feature-activities/context/useActivity";
+import { useRouter } from "next/navigation";
 
 export const ActivitiesPage = () => {
   const { t } = useTranslation();
   const { activeCounter } = useCounter();
+  const router = useRouter();
   const { searchQuery, setSearchQuery } = useSearchQuery();
   const [scrollPosition, setScrollPosition] = useState<number>(0);
-  const { setSelectedActivity } = useActivity();
+  const { selectedActivity, setSelectedActivity } = useActivity();
 
   const FETCH_LIMIT = 10;
   const INITIAL_DATA = {
@@ -84,6 +86,15 @@ export const ActivitiesPage = () => {
     }
   }, [fetchedData?.data]);
 
+  // This effect ensures that the user is redirected to the next "step"
+  // if they previously had not completed the whole process and had already
+  // selected an activity.
+  useEffect(() => {
+    if (selectedActivity !== null && selectedActivity !== undefined) {
+      router.push("/mobile/identification");
+    }
+  }, [selectedActivity]);
+
   return (
     <MobileNavBar>
       <MobileContentStack>
@@ -114,7 +125,7 @@ export const ActivitiesPage = () => {
           <Link
             color="primary"
             href="/mobile/identification"
-            onClick={() => setSelectedActivity(null)}
+            onClick={() => setSelectedActivity(undefined)}
           >
             {t("activities.mobile.continueNoActivity")}
           </Link>

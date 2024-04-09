@@ -142,6 +142,25 @@
       "noActivitiesSearch": "Geen activiteiten gevonden met de zoekterm '{{searchTerm}}'."
     }
   },
+  "identification": {
+    "mobile": {
+      "chosenActivity": "Gekozen activiteit",
+      "noActivity": "Geen activiteit gekozen",
+      "identifyPassHolder": "Pashouder identificeren",
+      "scanBarcodeBtn": "Barcode scannen",
+      "or": "Of",
+      "manualInput": "Vul zelf een UiTPAS-nummer of rijkregisternummer in",
+      "placeholderTxt": "Kaartnummer of RRN",
+      "confirmBtn": "Bevestig",
+      "scan": {
+        "askForCameraPermission": "Toegang tot de camera van je smartphone is nodig om een barcode te scannen",
+        "permissionDenied": "Toegang tot de camera werd geweigerd",
+        "notSupported": "Barcode scannen wordt niet ondersteund op dit toestel",
+        "back": "Terug",
+        "scanOverlay": "Scan de barcode van de UiTPAS op de kaart of in de UiTPAS-app"
+      }
+    }
+  },
   "pagination": {
     "previousBtn": "Vorige",
     "nextBtn": "Volgende"
