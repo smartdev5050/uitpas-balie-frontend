@@ -7,7 +7,7 @@ import { useTranslation } from "@/shared/lib/i18n/client";
 import { Organizer, OrganizerPermissions } from "@/shared/lib/dataAccess";
 import { OutlinedButton } from "@/mobile/lib/ui/uitpas/OutlinedButton";
 import { Counter } from "@/shared/feature-counter/context/CounterContext";
-import { ChangeEvent } from "react";
+import { ChangeEvent, Fragment } from "react";
 
 type CounterPickerProps = {
   counters: OrganizerPermissions[];
@@ -70,14 +70,16 @@ export const CounterPicker = ({
               }}
             >
               {counters.map((counter) => (
-                <>
+                <Fragment
+                  key={`${counter.organizer.id} ${counter.organizer.name}`}
+                >
                   <OutlinedButton
                     key={counter.organizer.id}
                     onClick={onCounterClick(counter.organizer)}
                   >
                     {counter.organizer.name}
                   </OutlinedButton>
-                </>
+                </Fragment>
               ))}
             </Stack>
           </>

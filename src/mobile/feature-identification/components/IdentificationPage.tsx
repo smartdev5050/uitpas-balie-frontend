@@ -70,7 +70,7 @@ export const IdentificationPage = () => {
             onClick={handleChangeActivityClick}
             sx={(theme) => ({
               color: theme.palette.neutral[900],
-              fontSize: 40,
+              fontSize: 32,
             })}
           >
             <FontAwesomeIcon icon={faPenToSquare} />
