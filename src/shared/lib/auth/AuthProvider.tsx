@@ -70,8 +70,15 @@ export const AuthProvider: FC<PropsWithChildren<{ loginPath: string }>> = ({
     const redirectToLogin = () => push(`${loginPath}?redirectTo=${asPath}`);
 
     if (isCurrentPathPrivate) {
+      // UNCOMMENT WHEN YOU HAVE A TOKEN 👇
+      // login(
+      //   "YOUR_TOKEN"
+      // );
+
+      // COMMENT WHEN YOU HAVE A TOKEN 👇
       fetchToken()
         .then(({ data }) => {
+          console.log(data?.data.token);
           if (data?.data.token) login(data?.data.token);
           else redirectToLogin();
         })
