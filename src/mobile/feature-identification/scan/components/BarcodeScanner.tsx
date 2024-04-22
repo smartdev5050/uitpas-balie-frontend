@@ -13,7 +13,7 @@ import {
   BrowserMultiFormatReader,
   IScannerControls,
 } from "@zxing/browser";
-import { FlashlightOn, FlashlightOff } from "@mui/icons-material";
+import { FlashlightOn, FlashlightOff, Close } from "@mui/icons-material";
 import { DecodeHintType } from "@zxing/library";
 import { useRouter } from "next/navigation";
 import { PermissionBox } from "@/mobile/feature-identification/scan/components/PermissionBox";
@@ -26,6 +26,7 @@ export const BarcodeScanner = () => {
     useState<PermissionStateExtended>("unknown");
   const videoRef = useRef<ElementRef<"video">>(null);
   const [isFlashOn, setIsFlashOn] = useState<boolean>(false);
+  const streamRef = useRef<MediaStream | null>(null);
   const controlRef: MutableRefObject<IScannerControls | null> =
     useRef<IScannerControls>(null);
   const router = useRouter();
@@ -43,6 +44,7 @@ export const BarcodeScanner = () => {
             audio: false,
           })
           .then((stream) => {
+            streamRef.current = stream;
             navigator.permissions
               // @ts-expect-error 'camera' is not recognized by typescript, but is in the browser.
               .query({ name: "camera" })
@@ -92,6 +94,21 @@ export const BarcodeScanner = () => {
       controlRef.current.switchTorch(isFlashOn);
   };
 
+  useEffect(() => {
+    if (streamRef.current) {
+      streamRef.current.getVideoTracks().forEach((track) => {
+        track.applyConstraints({
+          // @ts-expect-error 'torch' is not recognized by typescript, but is in the browser.
+          advanced: [{ torch: isFlashOn }],
+        });
+      });
+    }
+  }, [isFlashOn]);
+
+  const handleClose = () => {
+    router.push("/mobile/identification");
+  };
+
   if (permission !== "granted") {
     return <PermissionBox permission={permission} />;
   }
@@ -104,6 +121,19 @@ export const BarcodeScanner = () => {
         overflow: "hidden",
       }}
     >
+      <IconButton
+        disableRipple
+        size="large"
+        sx={(theme) => ({
+          position: "absolute",
+          color: theme.palette.neutral[0],
+          left: "0%",
+          zIndex: 20,
+        })}
+        onClick={handleClose}
+      >
+        <Close sx={{ fontSize: 30 }} />
+      </IconButton>
       <IconButton
         disableRipple
         size="large"
