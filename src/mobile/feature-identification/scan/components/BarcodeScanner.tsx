@@ -31,6 +31,21 @@ export const BarcodeScanner = () => {
     useRef<IScannerControls>(null);
   const router = useRouter();
 
+  const stopStream = () => {
+    if (controlRef.current) {
+      controlRef.current.stop();
+    }
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => {
+        track.stop();
+      });
+    }
+  };
+
+  useEffect(() => {
+    return () => stopStream();
+  }, []);
+
   useEffect(() => {
     if (navigator && navigator.mediaDevices) {
       if (permission !== "denied") {
