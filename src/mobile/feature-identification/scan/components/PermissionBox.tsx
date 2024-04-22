@@ -42,10 +42,8 @@ export const PermissionBox = ({ permission }: PermissionBoxProps) => {
         src={uitpasHeart}
         alt="uitpas heart"
         style={{
-          maxWidth: "310px",
           maxHeight: "50vh",
           width: "auto",
-          height: "100%",
         }}
         priority
       />
