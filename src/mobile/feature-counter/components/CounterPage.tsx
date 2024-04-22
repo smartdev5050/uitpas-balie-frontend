@@ -50,6 +50,7 @@ export const CounterPage = () => {
   if (isSuccess && allData.data.length > 0)
     return (
       <CounterPicker
+        totalCounters={allData.data.length}
         counters={sortedData}
         prevCounter={lastCounterUsed}
         onSearch={handleSearchInputChange}

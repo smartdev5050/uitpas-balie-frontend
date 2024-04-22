@@ -10,6 +10,7 @@ import { Counter } from "@/shared/feature-counter/context/CounterContext";
 import { ChangeEvent, Fragment } from "react";
 
 type CounterPickerProps = {
+  totalCounters: number;
   counters: OrganizerPermissions[];
   prevCounter: Counter;
   onSearch: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -18,6 +19,7 @@ type CounterPickerProps = {
 };
 
 export const CounterPicker = ({
+  totalCounters,
   counters,
   prevCounter,
   onSearch,
@@ -32,7 +34,7 @@ export const CounterPicker = ({
         <Typography variant="h1">
           {t("counter.mobile.selectCounter")}
         </Typography>
-        {counters.length >= 10 && (
+        {totalCounters >= 10 && (
           <SearchInput
             placeholder={t("counter.mobile.searchCounter")}
             onChange={onSearch}
