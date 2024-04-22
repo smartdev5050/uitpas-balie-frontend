@@ -31,19 +31,17 @@ export const BarcodeScanner = () => {
     useRef<IScannerControls>(null);
   const router = useRouter();
 
-  const stopStream = () => {
-    if (controlRef.current) {
-      controlRef.current.stop();
-    }
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => {
-        track.stop();
-      });
-    }
-  };
-
   useEffect(() => {
-    return () => stopStream();
+    return () => {
+      if (controlRef.current) {
+        controlRef.current.stop();
+      }
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => {
+          track.stop();
+        });
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -103,12 +101,6 @@ export const BarcodeScanner = () => {
     }
   }, [permission, isFlashOn]);
 
-  const handleFlashToggle = () => {
-    setIsFlashOn((prev) => !prev);
-    controlRef.current?.switchTorch &&
-      controlRef.current.switchTorch(isFlashOn);
-  };
-
   useEffect(() => {
     if (streamRef.current) {
       streamRef.current.getVideoTracks().forEach((track) => {
@@ -119,6 +111,10 @@ export const BarcodeScanner = () => {
       });
     }
   }, [isFlashOn]);
+
+  const handleFlashToggle = () => {
+    setIsFlashOn((prev) => !prev);
+  };
 
   const handleClose = () => {
     router.push("/mobile/identification");
