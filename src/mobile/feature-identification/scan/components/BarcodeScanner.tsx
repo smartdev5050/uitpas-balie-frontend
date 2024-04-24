@@ -1,124 +1,94 @@
-import {
-  ElementRef,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Box, IconButton } from "@mui/material";
 import { Typography } from "@/mobile/lib/ui";
 import { useTranslation } from "@/shared/lib/i18n/client";
-import {
-  BarcodeFormat,
-  BrowserMultiFormatReader,
-  IScannerControls,
-} from "@zxing/browser";
 import { FlashlightOn, FlashlightOff, Close } from "@mui/icons-material";
-import { DecodeHintType } from "@zxing/library";
 import { useRouter } from "next/navigation";
 import { PermissionBox } from "@/mobile/feature-identification/scan/components/PermissionBox";
-
-type PermissionStateExtended = PermissionState | "unknown" | "not_supported";
+import Quagga, { QuaggaJSResultObject } from "@ericblade/quagga2";
+import { useCameraPermissions } from "@/shared/lib/utils/hooks/useCameraPermissions";
 
 export const BarcodeScanner = () => {
   const { t } = useTranslation();
-  const [permission, setPermission] =
-    useState<PermissionStateExtended>("unknown");
-  const videoRef = useRef<ElementRef<"video">>(null);
+  const permission = useCameraPermissions();
   const [isFlashOn, setIsFlashOn] = useState<boolean>(false);
-  const streamRef = useRef<MediaStream | null>(null);
-  const controlRef: MutableRefObject<IScannerControls | null> =
-    useRef<IScannerControls>(null);
   const router = useRouter();
-
-  useEffect(() => {
-    return () => {
-      if (controlRef.current) {
-        controlRef.current.stop();
-      }
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((track) => {
-          track.stop();
-        });
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (navigator && navigator.mediaDevices) {
-      if (permission !== "denied") {
-        navigator.mediaDevices
-          .getUserMedia({
-            video: {
-              facingMode: "environment",
-              width: screen.availWidth,
-              height: screen.availHeight,
-            },
-            audio: false,
-          })
-          .then((stream) => {
-            streamRef.current = stream;
-            navigator.permissions
-              // @ts-expect-error 'camera' is not recognized by typescript, but is in the browser.
-              .query({ name: "camera" })
-              .then((permissionResponse) =>
-                setPermission(permissionResponse.state)
-              );
-
-            if (videoRef.current) {
-              videoRef.current.srcObject = stream;
-            }
-          })
-          .catch(() => setPermission("not_supported"));
-      }
-    } else {
-      setPermission("not_supported");
-    }
-  }, [permission]);
-
-  useEffect(() => {
-    if (permission === "granted") {
-      if (videoRef.current) {
-        const hints = new Map();
-        hints.set(DecodeHintType.POSSIBLE_FORMATS, [BarcodeFormat.CODE_128]);
-        const codeReader = new BrowserMultiFormatReader(hints);
-        codeReader
-          .decodeFromVideoElement(videoRef.current, (result) => {
-            if (result) {
-              router.push(
-                `/mobile/identification/scan/result?code=${result.getText()}`
-              );
-            }
-          })
-          .then((control) => (controlRef.current = control))
-          .catch((err) => console.error("BarcodeScanner decoder error: ", err));
-      }
-
-      return () => {
-        BrowserMultiFormatReader.releaseAllStreams();
-        controlRef.current?.stop();
-      };
-    }
-  }, [permission, isFlashOn]);
-
-  useEffect(() => {
-    if (streamRef.current) {
-      streamRef.current.getVideoTracks().forEach((track) => {
-        track.applyConstraints({
-          // @ts-expect-error 'torch' is not recognized by typescript, but is in the browser.
-          advanced: [{ torch: isFlashOn }],
-        });
-      });
-    }
-  }, [isFlashOn]);
 
   const handleFlashToggle = () => {
     setIsFlashOn((prev) => !prev);
+    if (isFlashOn) {
+      Quagga.CameraAccess.disableTorch();
+    } else {
+      Quagga.CameraAccess.enableTorch();
+    }
   };
 
   const handleClose = () => {
     router.push("/mobile/identification");
   };
+
+  const handleValidScan = (code: string) => {
+    router.push(`/mobile/identification/scan/result?code=${code}`);
+  };
+
+  const handleResultErrorCheck = useCallback((result: QuaggaJSResultObject) => {
+    const errors = result.codeResult.decodedCodes
+      .flatMap((x) => x.error)
+      .filter((x): x is number => x !== undefined)
+      .sort((a, b) => a - b);
+
+    const mid = Math.floor(errors.length / 2);
+    const err =
+      errors.length % 2 === 0
+        ? (errors[mid - 1] + errors[mid]) / 2
+        : errors[mid];
+
+    if (err < 0.2 && result.codeResult.code) {
+      handleValidScan(result.codeResult.code);
+    }
+  }, []);
+
+  useEffect(() => {
+    // This useEffect is responsible for initializing Quagga (which should manage its own camera/picture) and starting the scanner
+    if (permission === "granted") {
+      Quagga.init(
+        {
+          inputStream: {
+            type: "LiveStream",
+            constraints: {
+              facingMode: "environment",
+              width: { ideal: window.innerHeight },
+              height: { ideal: window.innerWidth },
+              aspectRatio: { ideal: window.innerHeight / window.innerWidth },
+            },
+            target: document.getElementById("scanner") as HTMLElement,
+          },
+          locator: {
+            patchSize: "medium",
+            halfSample: true,
+          },
+          frequency: 10,
+          decoder: {
+            readers: ["code_128_reader"],
+          },
+          locate: true,
+        },
+        (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          Quagga.start();
+        }
+      );
+
+      Quagga.onDetected(handleResultErrorCheck);
+
+      return () => {
+        Quagga.stop();
+      };
+    }
+  }, [permission]);
 
   if (permission !== "granted") {
     return <PermissionBox permission={permission} />;
@@ -162,10 +132,20 @@ export const BarcodeScanner = () => {
           <FlashlightOff sx={{ fontSize: 30 }} />
         )}
       </IconButton>
-      <video
-        ref={videoRef}
-        muted
-        style={{ width: "100%", height: "100%", objectFit: "fill" }}
+      <Box
+        id="scanner"
+        sx={{
+          width: "100%",
+          height: "100%",
+          video: {
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          },
+          canvas: {
+            display: "none",
+          },
+        }}
       />
       {/* bottom-right and top-left corner borders */}
       <Box
