@@ -1,16 +1,26 @@
 import { useCallback, useEffect, useState } from "react";
 import { Box, IconButton } from "@mui/material";
-import { Typography } from "@/mobile/lib/ui";
+import { Typography, UitpasLoading } from "@/mobile/lib/ui";
 import { useTranslation } from "@/shared/lib/i18n/client";
-import { FlashlightOn, FlashlightOff, Close } from "@mui/icons-material";
+import {
+  FlashlightOn,
+  FlashlightOff,
+  Cameraswitch,
+  Close,
+} from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { PermissionBox } from "@/mobile/feature-identification/scan/components/PermissionBox";
 import Quagga, { QuaggaJSResultObject } from "@ericblade/quagga2";
-import { useCameraPermissions } from "@/shared/lib/utils/hooks/useCameraPermissions";
+import { useCamera } from "@/shared/lib/utils/hooks/useCamera";
 
 export const BarcodeScanner = () => {
   const { t } = useTranslation();
-  const permission = useCameraPermissions();
+  const {
+    permission,
+    currentVideoDevice,
+    toggleFrontBackCamera,
+    videoDevices,
+  } = useCamera();
   const [isFlashOn, setIsFlashOn] = useState<boolean>(false);
   const router = useRouter();
 
@@ -31,35 +41,42 @@ export const BarcodeScanner = () => {
     router.push(`/mobile/identification/scan/result?code=${code}`);
   };
 
-  const handleResultErrorCheck = useCallback((result: QuaggaJSResultObject) => {
-    const errors = result.codeResult.decodedCodes
-      .flatMap((x) => x.error)
-      .filter((x): x is number => x !== undefined)
-      .sort((a, b) => a - b);
+  const handleFlipCamera = () => {
+    toggleFrontBackCamera();
+  };
 
-    const mid = Math.floor(errors.length / 2);
-    const err =
-      errors.length % 2 === 0
-        ? (errors[mid - 1] + errors[mid]) / 2
-        : errors[mid];
+  const handleResultErrorCheck = useCallback(
+    (result: QuaggaJSResultObject) => {
+      const errors = result.codeResult.decodedCodes
+        .flatMap((x) => x.error)
+        .filter((x): x is number => x !== undefined)
+        .sort((a, b) => a - b);
 
-    if (err < 0.2 && result.codeResult.code) {
-      handleValidScan(result.codeResult.code);
-    }
-  }, []);
+      const mid = Math.floor(errors.length / 2);
+      const err =
+        errors.length % 2 === 0
+          ? (errors[mid - 1] + errors[mid]) / 2
+          : errors[mid];
+
+      // 80% confidence that the scan is correct
+      if (err < 0.2 && result.codeResult.code) {
+        handleValidScan(result.codeResult.code);
+      }
+    },
+    [handleValidScan]
+  );
 
   useEffect(() => {
-    // This useEffect is responsible for initializing Quagga (which should manage its own camera/picture) and starting the scanner
-    if (permission === "granted") {
+    if (permission === "granted" && currentVideoDevice) {
       Quagga.init(
         {
           inputStream: {
             type: "LiveStream",
             constraints: {
-              facingMode: "environment",
               width: { ideal: window.innerHeight },
               height: { ideal: window.innerWidth },
               aspectRatio: { ideal: window.innerHeight / window.innerWidth },
+              deviceId: currentVideoDevice.deviceId,
             },
             target: document.getElementById("scanner") as HTMLElement,
           },
@@ -88,13 +105,13 @@ export const BarcodeScanner = () => {
         Quagga.stop();
       };
     }
-  }, [permission]);
+  }, [permission, currentVideoDevice]);
 
   if (permission !== "granted") {
     return <PermissionBox permission={permission} />;
   }
 
-  return (
+  return currentVideoDevice ? (
     <Box
       sx={{
         position: "relative",
@@ -132,6 +149,21 @@ export const BarcodeScanner = () => {
           <FlashlightOff sx={{ fontSize: 30 }} />
         )}
       </IconButton>
+      {videoDevices.length > 1 && (
+        <IconButton
+          disableRipple
+          size="large"
+          sx={(theme) => ({
+            position: "absolute",
+            color: theme.palette.neutral[0],
+            right: "15%",
+            zIndex: 20,
+          })}
+          onClick={handleFlipCamera}
+        >
+          <Cameraswitch sx={{ fontSize: 30 }} />
+        </IconButton>
+      )}
       <Box
         id="scanner"
         sx={{
@@ -229,5 +261,7 @@ export const BarcodeScanner = () => {
         {t("identification.mobile.scan.scanOverlay")}
       </Typography>
     </Box>
+  ) : (
+    <UitpasLoading />
   );
 };

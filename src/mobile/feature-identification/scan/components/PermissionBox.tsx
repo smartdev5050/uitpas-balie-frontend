@@ -45,7 +45,7 @@ export const PermissionBox = ({ permission }: PermissionBoxProps) => {
           maxHeight: "50vh",
           width: "auto",
         }}
-        priority
+        priority={true}
       />
       {showBackLink && (
         <Link href={"/mobile/identification"} color="primary">
