@@ -6,6 +6,7 @@ import { addInterceptor, removeHeader, setHeaders } from "../dataAccess";
 import { AuthContext } from "./AuthContext";
 import { useFetchToken } from "./legacy/useFetchToken";
 import { useSilexLogout } from "@/shared/lib/auth/legacy/useSilexLogout";
+import { UitpasLoading } from "@/mobile/lib/ui";
 
 // const LS_KEY = "@uitpas-balie/token";
 
@@ -16,7 +17,7 @@ export const AuthProvider: FC<PropsWithChildren<{ loginPath: string }>> = ({
   const { push } = useRouter();
   const asPath = usePathname();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
-  const { fetchToken, removeToken } = useFetchToken();
+  const { fetchToken, removeToken, isLoading } = useFetchToken();
   const logoutFromSilex = useSilexLogout();
 
   const isCurrentPathPrivate = !asPath.startsWith(loginPath);
@@ -71,14 +72,12 @@ export const AuthProvider: FC<PropsWithChildren<{ loginPath: string }>> = ({
 
     if (isCurrentPathPrivate) {
       // UNCOMMENT WHEN YOU HAVE A TOKEN 👇
-      // login(
-      //   "YOUR_TOKEN"
-      // );
+      // login("YOUR_TOKEN");
 
       // COMMENT WHEN YOU HAVE A TOKEN 👇
       fetchToken()
         .then(({ data }) => {
-          console.log(data?.data.token);
+          // console.log(data?.data.token);
           if (data?.data.token) login(data?.data.token);
           else redirectToLogin();
         })
@@ -89,6 +88,8 @@ export const AuthProvider: FC<PropsWithChildren<{ loginPath: string }>> = ({
   }, [authTokenLoaded, isCurrentPathPrivate, fetchToken, login, asPath, push]);
 
   if (!authTokenLoaded && isCurrentPathPrivate) return null;
+
+  if (isLoading) return <UitpasLoading />;
 
   return (
     <AuthContext.Provider

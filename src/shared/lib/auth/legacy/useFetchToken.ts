@@ -5,7 +5,9 @@ import { getConfig } from "@/shared/lib/utils/getConfig";
 export const useFetchToken = () => {
   const { publicRuntimeConfig } = getConfig();
 
-  const { data, refetch, remove } = useQuery<{ data: { token: string } }>(
+  const { data, refetch, remove, isLoading } = useQuery<{
+    data: { token: string };
+  }>(
     ["token"],
     () => {
       const tokenEndpoint = publicRuntimeConfig.legacyTokenEndpoint;
@@ -28,6 +30,7 @@ export const useFetchToken = () => {
 
   return {
     token,
+    isLoading,
     fetchToken: refetch,
     removeToken: remove,
   };
