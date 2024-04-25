@@ -48,9 +48,19 @@ export const MobileNavBar = ({ children }: PropsWithChildren) => {
               alignItems: "center",
               mr: "8px",
               textDecoration: "none",
+              overflow: "hidden",
             }}
           >
-            <Typography variant="h1" sx={{ color: "white", paddingRight: 1 }}>
+            <Typography
+              variant="h1"
+              sx={(theme) => ({
+                color: theme.palette.neutral[0],
+                padding: "0 0 0 16px",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+              })}
+            >
               {activeCounter.name}
             </Typography>
             <Settings sx={{ fontSize: 24, color: "white" }} />
