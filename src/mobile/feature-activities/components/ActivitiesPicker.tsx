@@ -90,10 +90,8 @@ export const ActivitiesPicker = ({
     }
   }, [isFetching]);
 
-  const handleActivityClick = (activity: Search.Event) => {
+  const handleActivityClick = (activity: Search.Event) =>
     setSelectedActivity(activity);
-    router.push("/mobile/identification");
-  };
 
   if (isInitialLoading) {
     return <CircularProgress sx={{ m: "auto auto" }} />;
