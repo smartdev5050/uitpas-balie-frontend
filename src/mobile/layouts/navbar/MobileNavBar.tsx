@@ -7,6 +7,7 @@ import uitpasLogo from "public/images/svg/logo-uitpas.svg";
 import Image from "next/image";
 import { Settings } from "@mui/icons-material";
 import { Typography } from "@/mobile/lib/ui";
+import Link from "next/link";
 
 export const MobileNavBar = ({ children }: PropsWithChildren) => {
   const { setLastCounterUsed, setActiveCounter, activeCounter } = useCounter();
@@ -39,11 +40,14 @@ export const MobileNavBar = ({ children }: PropsWithChildren) => {
         />
         {activeCounter && (
           <Box
+            component={Link}
+            href="/mobile/counters"
             onClick={handleCurrentCounterClick}
             sx={{
               display: "flex",
               alignItems: "center",
               mr: "8px",
+              textDecoration: "none",
             }}
           >
             <Typography variant="h1" sx={{ color: "white", paddingRight: 1 }}>
