@@ -83,10 +83,24 @@ export const useCamera = () => {
     }
   }, [permission, videoDevices]);
 
+  const frontBackCameraAvailable = () => {
+    if (videoDevices.length <= 1) {
+      return false;
+    }
+
+    return (
+      videoDevices.some((device) =>
+        device.label.toLowerCase().includes("front")
+      ) &&
+      videoDevices.some((device) => device.label.toLowerCase().includes("back"))
+    );
+  };
+
   return {
     permission,
     videoDevices,
     currentVideoDevice,
+    frontBackCameraAvailable,
     toggleFrontBackCamera,
   };
 };

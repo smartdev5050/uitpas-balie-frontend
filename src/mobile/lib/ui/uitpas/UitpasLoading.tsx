@@ -1,8 +1,8 @@
-import { CircularProgress, Stack } from "@mui/material";
+import { CircularProgress, Stack, StackProps } from "@mui/material";
 import uitpasLogoGreen from "public/images/svg/logo-uitpas-green.svg";
 import Image from "next/image";
 
-export const UitpasLoading = () => {
+export const UitpasLoading = ({ ...props }: StackProps) => {
   return (
     <Stack
       sx={{
@@ -10,6 +10,7 @@ export const UitpasLoading = () => {
         alignItems: "center",
         justifyContent: "center",
         gap: 2,
+        ...props.sx,
       }}
     >
       <Image
@@ -22,6 +23,7 @@ export const UitpasLoading = () => {
           height: "100%",
           margin: "0 auto",
         }}
+        priority={true}
       />
       <CircularProgress />
     </Stack>
