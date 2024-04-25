@@ -5,7 +5,7 @@ import { getConfig } from "@/shared/lib/utils/getConfig";
 export const useFetchToken = () => {
   const { publicRuntimeConfig } = getConfig();
 
-  const { data, refetch, remove, isLoading } = useQuery<{
+  const { data, refetch, remove, isFetching } = useQuery<{
     data: { token: string };
   }>(
     ["token"],
@@ -30,7 +30,7 @@ export const useFetchToken = () => {
 
   return {
     token,
-    isLoading,
+    isFetching,
     fetchToken: refetch,
     removeToken: remove,
   };

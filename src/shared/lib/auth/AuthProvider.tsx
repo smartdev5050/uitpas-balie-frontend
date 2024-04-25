@@ -17,7 +17,7 @@ export const AuthProvider: FC<PropsWithChildren<{ loginPath: string }>> = ({
   const { push } = useRouter();
   const asPath = usePathname();
   const [authTokenLoaded, setAuthTokenLoaded] = useState(false);
-  const { fetchToken, removeToken, isLoading } = useFetchToken();
+  const { fetchToken, removeToken, isFetching } = useFetchToken();
   const logoutFromSilex = useSilexLogout();
 
   const isCurrentPathPrivate = !asPath.startsWith(loginPath);
@@ -77,7 +77,7 @@ export const AuthProvider: FC<PropsWithChildren<{ loginPath: string }>> = ({
       // COMMENT WHEN YOU HAVE A TOKEN 👇
       fetchToken()
         .then(({ data }) => {
-          // console.log(data?.data.token);
+          console.log(data?.data.token);
           if (data?.data.token) login(data?.data.token);
           else redirectToLogin();
         })
@@ -89,7 +89,8 @@ export const AuthProvider: FC<PropsWithChildren<{ loginPath: string }>> = ({
 
   if (!authTokenLoaded && isCurrentPathPrivate) return null;
 
-  if (isLoading) return <UitpasLoading />;
+  // Comment when developing on a mobile device with a hardcoded token 👇
+  if (isFetching) return <UitpasLoading />;
 
   return (
     <AuthContext.Provider
