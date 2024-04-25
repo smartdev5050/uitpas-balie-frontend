@@ -25,6 +25,7 @@ export const BarcodeScanner = () => {
   const router = useRouter();
   const scannerRef = useRef<HTMLDivElement>();
   const [scannerReady, setScannerReady] = useState<boolean>(false);
+  const [torchAvailable, setTorchAvailable] = useState<boolean>(false);
 
   const handleFlashToggle = () => {
     setIsFlashOn((prev) => !prev);
@@ -99,6 +100,10 @@ export const BarcodeScanner = () => {
           }
           Quagga.start();
           setScannerReady(true);
+          setTorchAvailable(
+            Quagga.CameraAccess.getActiveTrack()?.getCapabilities().torch ??
+              false
+          );
         }
       );
 
@@ -142,6 +147,7 @@ export const BarcodeScanner = () => {
         </IconButton>
         <IconButton
           disableRipple
+          disabled={!torchAvailable}
           size="large"
           sx={(theme) => ({
             position: "absolute",

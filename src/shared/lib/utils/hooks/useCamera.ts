@@ -84,9 +84,7 @@ export const useCamera = () => {
   }, [permission, videoDevices]);
 
   const frontBackCameraAvailable = () => {
-    if (videoDevices.length <= 1) {
-      return false;
-    }
+    if (videoDevices.length <= 1) return false;
 
     return (
       videoDevices.some((device) =>
