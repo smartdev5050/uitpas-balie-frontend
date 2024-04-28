@@ -23,6 +23,19 @@ declare module "@mui/material/styles" {
       1100: string;
       1200: string;
     };
+    brand: {
+      0: string;
+      100: string;
+      200: string;
+      300: string;
+      400: string;
+      500: string;
+      600: string;
+      700: string;
+      800: string;
+      900: string;
+      1000: string;
+    };
   }
   interface PaletteOptions {
     navigation?: {
@@ -43,6 +56,19 @@ declare module "@mui/material/styles" {
       1100?: string;
       1200?: string;
     };
+    brand: {
+      0?: string;
+      100?: string;
+      200?: string;
+      300?: string;
+      400?: string;
+      500?: string;
+      600?: string;
+      700?: string;
+      800?: string;
+      900?: string;
+      1000?: string;
+    };
   }
   interface TypeBackground {
     primary: string;
@@ -56,13 +82,21 @@ export const palette = {
   secondaryDark: "#149773",
   navigationPrimary: "#39AC8D",
   backgroundPrimary: "#EFF0F0",
-  errorMain: "#F82E58",
   // I'd like to import all of the colors from the figma design
   // however, I don't see a way to copy all of the colors (it does not let me)
   neutral: {
     0: "#FFFFFF",
     200: "#CFD3D3",
     900: "#2E3333",
+  },
+  brand: {
+    200: "#ABE3D4",
+    300: "#81D5BE",
+    900: "#0B5641",
+  },
+  error: {
+    errorMain: "#F82E58",
+    500: "#FA5273",
   },
 };
 
@@ -77,7 +111,8 @@ export const theme = createTheme({
       dark: palette.secondaryDark,
     },
     error: {
-      main: palette.errorMain,
+      main: palette.error.errorMain,
+      500: palette.error[500],
     },
     navigation: {
       primary: palette.navigationPrimary,
@@ -90,6 +125,11 @@ export const theme = createTheme({
       0: palette.neutral[0],
       200: palette.neutral[200],
       900: palette.neutral[900],
+    },
+    brand: {
+      200: palette.brand[200],
+      300: palette.brand[300],
+      900: palette.brand[900],
     },
   },
   typography: {

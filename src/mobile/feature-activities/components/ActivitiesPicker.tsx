@@ -14,9 +14,6 @@ import { useTranslation } from "@/shared/lib/i18n/client";
 import { Typography } from "@/mobile/lib/ui";
 import { useSearchQuery } from "@/shared/lib/utils/hooks/useSearchQuery";
 import { useActivity } from "@/mobile/feature-activities/context/useActivity";
-import { useRouter } from "next/navigation";
-import { ExpandMore } from "@mui/icons-material";
-import Icon from "@mdi/react";
 
 type ActivitiesPickerProps = {
   isInitialLoading: boolean;
@@ -42,7 +39,6 @@ export const ActivitiesPicker = ({
   isFetching,
 }: ActivitiesPickerProps) => {
   const { t, i18n } = useTranslation();
-  const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { searchQuery } = useSearchQuery();
   const { setSelectedActivity } = useActivity();

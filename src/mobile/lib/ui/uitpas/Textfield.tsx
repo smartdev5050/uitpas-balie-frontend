@@ -15,6 +15,11 @@ export const TextField = ({ ...props }: TextFieldProps) => {
       inputProps={{
         sx: ((theme: Theme): SxProps<Theme> => ({
           backgroundColor: theme.palette.neutral[0],
+          "&::placeholder": {
+            color: theme.palette.neutral[900],
+            opacity: 1,
+          },
+          color: theme.palette.neutral[900],
           fontSize: "18px",
           borderRadius: "8px",
           height: "44px",

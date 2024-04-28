@@ -1,4 +1,4 @@
-import { ElementRef, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Box, IconButton } from "@mui/material";
 import { Typography, UitpasLoading } from "@/mobile/lib/ui";
 import { useTranslation } from "@/shared/lib/i18n/client";
@@ -41,7 +41,7 @@ export const BarcodeScanner = () => {
   };
 
   const handleValidScan = (code: string) => {
-    router.push(`/mobile/identification/scan/result?code=${code}`);
+    router.push(`/mobile/saving?code=${code}`);
   };
 
   const handleFlipCamera = () => {
@@ -127,7 +127,7 @@ export const BarcodeScanner = () => {
       <Box
         sx={{
           position: "relative",
-          height: "100vh",
+          height: "100dvh",
           overflow: "hidden",
           ...(!scannerReady && { display: "none" }),
         }}

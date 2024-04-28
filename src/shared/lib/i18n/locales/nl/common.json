@@ -149,8 +149,15 @@
       "identifyPassHolder": "Pashouder identificeren",
       "scanBarcodeBtn": "Barcode scannen",
       "or": "Of",
-      "manualInput": "Vul zelf een UiTPAS-nummer of rijkregisternummer in",
-      "placeholderTxt": "Kaartnummer of RRN",
+      "manualInput": {
+        "manualInputParagraph": "Vul zelf een UiTPAS-nummer of rijkregisternummer in",
+        "placeholderTxt": "Kaartnummer of RRN",
+        "validation": {
+          "invalidInszNo": "Ongeldig rijkregisternummer",
+          "invalidCardNo": "Ongeldig kaartnummer",
+          "required": "Dit veld is verplicht"
+        }
+      },
       "confirmBtn": "Bevestig",
       "scan": {
         "askForCameraPermission": "Toegang tot de camera van je smartphone is nodig om een barcode te scannen",
@@ -159,6 +166,24 @@
         "back": "Terug",
         "scanOverlay": "Scan de barcode van de UiTPAS op de kaart of in de UiTPAS-app"
       }
+    }
+  },
+  "saving": {
+    "mobile": {
+      "chosenActivity": "Gekozen activiteit",
+      "noActivity": "Geen activiteit gekozen",
+      "passholder": "Pashouder",
+      "namePointsTxt": "{{firstName}} {{lastName}} ({{points}} punten)",
+      "opportunityState": "Kansenstatuut tot: {{endDate}}",
+      "opportunityStateExpired": "Kansenstatuut vervallen ({{endDate}})",
+      "failure": {
+        "tryAgainBtn": "Probeer opnieuw",
+        "inputCardNoBtn": "Een kaartnummer invullen"
+      },
+      "chooseTariffBtn": "Kies tarief",
+      "tradeBenefitBtn": "Voordeel omruilen",
+      "scanNextBtn": "Volgende UitPAS scannen",
+      "or": "Of"
     }
   },
   "pagination": {

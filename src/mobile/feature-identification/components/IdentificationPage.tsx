@@ -1,10 +1,5 @@
 import { MobileNavBar } from "@/mobile/layouts";
-import {
-  Button,
-  MobileContentStack,
-  TextField,
-  UitpasLoading,
-} from "@/mobile/lib/ui";
+import { Button, MobileContentStack, UitpasLoading } from "@/mobile/lib/ui";
 import { useTranslation } from "@/shared/lib/i18n/client";
 import { Box, IconButton, Typography } from "@mui/material";
 import { useActivity } from "@/mobile/feature-activities/context/useActivity";
@@ -13,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { OutlinedButton } from "@/mobile/lib/ui/uitpas/OutlinedButton";
+import { ManualCardInput } from "@/mobile/feature-identification/components/ManualCardInput";
 
 export const IdentificationPage = () => {
   const { t, i18n } = useTranslation();
@@ -93,20 +88,8 @@ export const IdentificationPage = () => {
         >
           {t("identification.mobile.or")}
         </Typography>
-        <Typography
-          variant="h1"
-          sx={(theme) => ({
-            color: theme.palette.neutral[900],
-            textAlign: "center",
-            fontWeight: 400,
-          })}
-        >
-          {t("identification.mobile.manualInput")}
-        </Typography>
-        <TextField placeholder={t("identification.mobile.placeholderTxt")} />
-        <OutlinedButton sx={{ mt: "-10px" }}>
-          {t("identification.mobile.confirmBtn")}
-        </OutlinedButton>
+
+        <ManualCardInput />
       </MobileContentStack>
     </MobileNavBar>
   );
