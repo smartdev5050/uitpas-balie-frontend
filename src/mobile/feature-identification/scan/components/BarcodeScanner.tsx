@@ -40,6 +40,7 @@ export const BarcodeScanner = () => {
 
   const handleClose = () => {
     router.push("/mobile/identification");
+    setScannerReady(false);
   };
 
   const handleValidScan = (code: string) => {

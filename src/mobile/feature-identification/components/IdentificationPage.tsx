@@ -1,5 +1,9 @@
 import { MobileNavBar } from "@/mobile/layouts";
-import { Button, MobileContentStack, UitpasLoading } from "@/mobile/lib/ui";
+import {
+  LoadingButton,
+  MobileContentStack,
+  UitpasLoading,
+} from "@/mobile/lib/ui";
 import { useTranslation } from "@/shared/lib/i18n/client";
 import { Box, IconButton, Typography } from "@mui/material";
 import { useActivity } from "@/mobile/feature-activities/context/useActivity";
@@ -7,13 +11,14 @@ import { Search } from "@/shared/lib/dataAccess";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ManualCardInput } from "@/mobile/feature-identification/components/ManualCardInput";
 
 export const IdentificationPage = () => {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const { selectedActivity, setSelectedActivity } = useActivity();
+  const [isNavigating, setIsNavigating] = useState<boolean>(false);
 
   const LANG_KEY = i18n.language as keyof Search.EventName;
 
@@ -29,6 +34,7 @@ export const IdentificationPage = () => {
 
   const handleScanBarcodeClick = () => {
     router.push("/mobile/identification/scan");
+    setIsNavigating(true);
   };
 
   if (selectedActivity === null) {
@@ -75,9 +81,9 @@ export const IdentificationPage = () => {
         <Typography variant="h1" sx={{ mt: 2 }}>
           {t("identification.mobile.identifyPassHolder")}
         </Typography>
-        <Button onClick={handleScanBarcodeClick}>
+        <LoadingButton onClick={handleScanBarcodeClick} loading={isNavigating}>
           {t("identification.mobile.scanBarcodeBtn")}
-        </Button>
+        </LoadingButton>
 
         <Typography
           variant="h1"

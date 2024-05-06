@@ -1,6 +1,7 @@
 export * from "./system/fonts";
 export * from "./system/theme";
 export * from "./uitpas/Button";
+export * from "./uitpas/LoadingButton";
 export * from "./uitpas/OutlinedButton";
 export * from "./uitpas/Link";
 export * from "./uitpas/Typography";
