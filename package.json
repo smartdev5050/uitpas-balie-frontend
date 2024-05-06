@@ -12,9 +12,10 @@
     "depcruise:archi": "depcruise --include-only \"^src|^@/\" --config ./.config/.dependency-cruiser.js -T archi src | dot -T svg | tee depgraphs/dependencygraph.svg | depcruise-wrap-stream-in-html > depgraphs/dependencygraph.html"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
+    "@emotion/react": "^11.11.4",
     "@emotion/server": "^11.11.0",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/styled": "^11.11.0",
+    "@ericblade/quagga2": "^1.8.4",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
@@ -23,8 +24,11 @@
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
     "@mui/base": "^5.0.0-alpha.119",
+    "@mui/icons-material": "^5.15.14",
     "@mui/joy": "^5.0.0-alpha.78",
+    "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.10",
+    "@mui/material-nextjs": "^5.15.11",
     "@mui/system": "^5.11.11",
     "@tanstack/react-query": "^4.24.10",
     "@types/mousetrap": "^1.6.11",
@@ -36,19 +40,19 @@
     "cookies-next": "^4.0.0",
     "dayjs": "^1.11.10",
     "eslint": "8.35.0",
-    "eslint-config-next": "13.2.3",
+    "eslint-config-next": "^14.1.3",
     "file-saver": "^2.0.5",
-    "i18next": "^22.4.10",
+    "i18next": "^23.10.1",
+    "i18next-resources-to-backend": "^1.2.0",
     "jszip": "^3.10.1",
     "mousetrap": "^1.6.5",
-    "next": "13.2.3",
-    "next-i18next": "^13.2.1",
-    "react": "18.2.0",
+    "next": "^14.1.3",
+    "react": "^18.2.0",
     "react-datepicker": "^4.11.0",
-    "react-dom": "18.2.0",
-    "react-i18next": "^12.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.1.0",
     "react-transition-group": "^4.4.5",
-    "typescript": "4.9.5"
+    "typescript": "^5"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
@@ -57,5 +61,6 @@
     "dotenv-cli": "^7.3.0",
     "orval": "^6.19.1",
     "prettier": "^2.8.4"
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }
