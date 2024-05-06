@@ -28,12 +28,14 @@ export const BarcodeScanner = () => {
   const [torchAvailable, setTorchAvailable] = useState<boolean>(false);
 
   const handleFlashToggle = () => {
-    setIsFlashOn((prev) => !prev);
-    if (isFlashOn) {
-      Quagga.CameraAccess.disableTorch();
-    } else {
-      Quagga.CameraAccess.enableTorch();
-    }
+    setIsFlashOn((flashWasOn) => {
+      if (flashWasOn) {
+        Quagga.CameraAccess.disableTorch();
+      } else {
+        Quagga.CameraAccess.enableTorch();
+      }
+      return !flashWasOn;
+    });
   };
 
   const handleClose = () => {
