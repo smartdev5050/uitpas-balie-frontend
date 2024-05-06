@@ -21,10 +21,7 @@ export const storePrevCounter = (counter: Counter) => {
 
 export const readCounter = (): Counter => {
   return localstorageSupport
-    ? readData(COUNTER_STORAGE_KEY, {
-        id: "28808C2F-0DB2-D2CF-F508ECB994D2505F",
-        name: "Muntpunt",
-      })
+    ? readData(COUNTER_STORAGE_KEY)
     : readCookie(COUNTER_STORAGE_KEY);
 };
 
